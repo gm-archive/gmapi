@@ -1,18 +1,18 @@
 /************************************************************************** 
   LICENSE:
 
-    This library is free software; you can redistribute it and/or
+    GMAPI is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
-    This library is distributed in the hope that it will be useful,
+    GMAPI is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
     You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
+    License along with GMAPI; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301 USA
 ***************************************************************************/
@@ -21,7 +21,7 @@
   GmapiDataStructures.cpp
   - Wrapped GM functions; Parser-generated code
 
-  Written by: Snake (http://gamebaseteam.eu)
+  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #include "GmapiDataStructures.h"
@@ -71,7 +71,7 @@ namespace gm {
     GM_ARGS{ id };
 
     GM_NORMAL_CALL( id_ds_list_empty );
-    return ((int) result.valueReal) & 1;
+    return ((int) result.real) & 1;
   }
 
   void ds_list_add( const int id, const CGMVariable& val ) {
@@ -149,10 +149,6 @@ namespace gm {
     GM_NORMAL_CALL( id_ds_list_read );
   }
 
-
-
-  // =====================================
-
   int ds_stack_create() {
     GM_NORMAL_RESULT;
 
@@ -194,7 +190,7 @@ namespace gm {
     GM_ARGS{ id };
 
     GM_NORMAL_CALL( id_ds_stack_empty );
-    return ((int) result.valueReal) & 1;
+    return ((int) result.real) & 1;
   }
 
   void ds_stack_push( const int id, const CGMVariable& val ) {
@@ -276,7 +272,7 @@ namespace gm {
     GM_ARGS{ id };
 
     GM_NORMAL_CALL( id_ds_queue_empty );
-    return ((int) result.valueReal) & 1;
+    return ((int) result.real) & 1;
   }
 
   void ds_queue_enqueue( const int id, const CGMVariable& val ) {
@@ -367,7 +363,7 @@ namespace gm {
     GM_ARGS{ id };
 
     GM_NORMAL_CALL( id_ds_map_empty );
-    return ((int) result.valueReal) & 1;
+    return ((int) result.real) & 1;
   }
 
   void ds_map_add( const int id, const CGMVariable& key, const CGMVariable& val ) {
@@ -495,7 +491,7 @@ namespace gm {
     GM_ARGS{ id };
 
     GM_NORMAL_CALL( id_ds_priority_empty );
-    return ((int) result.valueReal) & 1;
+    return ((int) result.real) & 1;
   }
 
   void ds_priority_add( const int id, const CGMVariable& val, const int prio ) {

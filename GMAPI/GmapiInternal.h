@@ -1,18 +1,18 @@
 /************************************************************************** 
   LICENSE:
 
-    This library is free software; you can redistribute it and/or
+    GMAPI is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
-    This library is distributed in the hope that it will be useful,
+    GMAPI is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
     You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
+    License along with GMAPI; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301 USA
 ***************************************************************************/
@@ -21,7 +21,7 @@
   GmapiInternal.h
   - Declarations of all GMAPI components, excluding wrapped gm functions
 
-  Written by: Snake (http://gamebaseteam.eu)
+  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #pragma once
@@ -48,8 +48,6 @@ namespace gm {
   ///
   class CGMVariable {
     public:
-      friend struct GMVARIABLE;
-
       /// Ctor( __in_opt const int aValue = 0 ) [also default]
       ///   Initializes the variable to specified int value 
       ///   (it'll be casted to double) and sets its type
@@ -115,6 +113,8 @@ namespace gm {
                                                         m_ppStr( NULL ),
                                                         m_stringType( false ),
                                                         m_disposeStr( aDeallocateString ) {}
+
+      CGMVariable( __in const GMVALUE& aValue );
 
       ~CGMVariable() {
         if ( m_stringType && m_ppStr && m_disposeStr )
@@ -231,7 +231,7 @@ namespace gm {
         return *this;
       }
 
-      CGMVariable& operator=( const GMVARIABLE& aValue );
+      CGMVariable& operator=( const GMVALUE& aValue );
       CGMVariable& operator=( const CGMVariable& aValue ) {
         if ( aValue.m_stringType )
           Set( *aValue.m_ppStr );
@@ -247,14 +247,14 @@ namespace gm {
 
       operator double() {
         if ( !m_stringType )
-          return this->m_real;
+          return m_real;
 
         return 0.0;
       }
 
       operator const char*() {
         if ( m_stringType )
-          return *this->m_ppStr;
+          return *m_ppStr;
 
         return NULL;
       }
@@ -319,50 +319,110 @@ namespace gm {
    *******************************************/
 
   std::ostream& operator<<( std::ostream& aStream, const CGMVariable& aValue );
+  std::ostream& operator<<( std::ostream& aStream, const GMVALUE& aValue );
 
  /********************************************
-   * CGMVariable
+   * Types
    *******************************************/
 
-  /// GMVARIABLE
-  /// That structure is used internally to specify
-  /// arguments in GM functions
+  typedef bool (*INSTANCEENUMPROC)( GMINSTANCE*, void* );
+  typedef void (*WITHPROC)( void* );
+
+  struct GMVARIABLESYMBOLID {
+    int symbolId;
+    __PADDING4 _padding0;
+  };
+
+  /// GMVALUE
+  ///   Represents internal GM value.
   ///
-  struct GMVARIABLE {
-    GMVARIABLE(): stringType( 0 ),
-                  propertyType( 0 ),
-                  valueReal( 0 ),
-                  valueString( NULL ),
-                  propertyPtr( 0 ) {}
+  ///   That structure is used internally to specify
+  ///   arguments in GM functions.
+  ///
+  struct GMVALUE {
+    GMVALUE(): type( VT_REAL ),
+               real( 0 ),
+               string( NULL ) {}
 
-    GMVARIABLE( __in const double aValue ): stringType( FALSE ),
-                                            propertyType( 0 ),
-                                            valueReal( aValue ),
-                                            valueString( NULL ) {}
+    GMVALUE( __in const double aValue ): type( VT_REAL ),
+                                         real( aValue ),
+                                         string( NULL ) {}
 
-    GMVARIABLE( __in char* aValue ): stringType( FALSE ),
-                                     propertyType( 0 ),
-                                     valueString( aValue ) {}
+    GMVALUE( __in char* aValue ): type( VT_REAL ),
+                                  string( aValue ) {}
 
-    GMVARIABLE( __in const CGMVariable& aValue ): propertyType( 0 ) {
-      stringType = aValue.m_stringType;
-      if ( aValue.m_stringType )
-        valueString = *aValue.m_ppStr;
-      else {
-        valueReal = aValue.m_real;
-        valueString = NULL;
-      }
+    GMVALUE( __in const CGMVariable& aValue ) {
+      *this = aValue;
+    }
+
+    GMVALUE& operator=( const double aValue );
+    GMVALUE& operator=( char* aValue );
+    GMVALUE& operator=( const CGMVariable& aValue );
+
+    operator double() {
+      if ( type == VT_REAL )
+        return real;
+
+      return 0.0;
+    }
+
+    operator const char*() {
+      if ( type == VT_STRING )
+        return string;
+
+      return NULL;
+    }
+
+    /// Type of the value
+    GMValueType type;
+
+    __PADDING4 _padding1;
+
+    /// GM holds real value here if its type is "real".
+    double real;
+    /// GM holds here pointer to string if value's type is "string".
+    char* string;
+
+    __PADDING4 _padding2;
+  };
+
+  struct GMVARIABLE: public GMVARIABLESYMBOLID, public GMVALUE {
+    /// GetFirstDimensionSize()
+    ///   If the variable is an array, method will return number
+    ///   of elements in the first dimension
+    ///
+    DWORD GetFirstDimensionSize() {
+      if ( values )
+        return (DWORD) values[-1];
+      
+      return 0;
+    }
+
+    /// GetSecondDimensionSize( DWORD aFirstIndex )
+    ///   If the variable is an array, method will return number
+    ///   of elements in the second dimension of specified array's first index
+    ///
+    DWORD GetSecondDimensionSize( DWORD aFirstIndex ) {
+      if ( values )
+        if ( values[aFirstIndex] )
+          return ((DWORD*) values[aFirstIndex])[-1];
+
+      return 0;
     }
 
     GMVARIABLE& operator=( const double aValue );
     GMVARIABLE& operator=( char* aValue );
     GMVARIABLE& operator=( const CGMVariable& aValue );
+	
+	/// Dereferences "values" component of the structure
+    GMVALUE* operator[]( const int aIndex ) {
+      return values[aIndex];
+    };
 
-    BOOL stringType;
-    int propertyType;
-    double valueReal;
-    char* valueString;
-    void* propertyPtr;
+    /// Pointer to 2D array which contains elements of GM array.
+    /// Contains NULL if variable is not an array.
+    GMVALUE** values;
+    __PADDING4 _padding3;
   };
 
  /********************************************
@@ -375,14 +435,14 @@ namespace gm {
       ///   Shows message box with error message
       ///
       virtual void ShowError() const {
-        MessageBox( 0, EXC_UNKNOWN, 0, MB_SYSTEMMODAL );
+        MessageBoxA( 0, EXC_UNKNOWN, 0, MB_SYSTEMMODAL );
       }
   };
 
   class EGMAPIResourceException: public EGMAPIException {
     public:
       /// GetResourceID()
-      ///   Returns ID of the resources that caused exception
+      ///   Returns ID of the resource that caused exception
       ///
       int GetResourceID() const {
         return m_resourceId;
@@ -472,7 +532,7 @@ namespace gm {
    *******************************************/
 
   /// ISpriteSubimage
-  /// Class that provides easy access to sprite subimages from game
+  /// Class that provides easy access to sprite subimages from the game
   ///
   /// You should access this class only from an instance of
   /// CGMAPI class
@@ -544,7 +604,7 @@ namespace gm {
   };
 
   /// ISpriteSubimages
-  /// Class that provides easy access to sprite subimages from game
+  /// Class that provides easy access to sprite subimages from the game
   ///
   /// You should access this class only from an instance of
   /// CGMAPI class
@@ -555,7 +615,7 @@ namespace gm {
 
     public:
       /// operator []
-      ///   Provides access to sprite's subimagese from ISpriteSubimage interface,
+      ///   Provides access to sprite's subimages from ISpriteSubimage interface,
       ///   setting current subimage number (an element) from int specified in brackets.
       ///
       /// Throws:
@@ -583,7 +643,7 @@ namespace gm {
   };
 
   /// ISprite
-  /// Class that provides easy access to sprites from game
+  /// Class that provides easy access to sprites from the game
   ///
   /// You should access this class only from an instance of
   /// CGMAPI class
@@ -820,7 +880,7 @@ namespace gm {
       /// Parameters:
       ///   aLeft: New left side of bbox.
       ///   aRight: New right side of bbox.
-      ///   aTop: New left side of bbox.
+      ///   aTop: New top side of bbox.
       ///   aBottom: New bottom side of bbox.
       ///
       static void SetBoundingBox( const int aLeft, const int aRight, const int aTop,
@@ -840,17 +900,17 @@ namespace gm {
       /// Returns:
       ///   Pointer to the GMSPRITE structure of this sprite
       ///
-      static LPGMSPRITE SpritePtr() {
+      static PGMSPRITE SpritePtr() {
         return m_sprite;
       }
 
     private:
-      static LPGMSPRITE m_sprite;
+      static PGMSPRITE m_sprite;
       static int m_spriteId;
   };
 
   /// ISprites
-  /// Class that provides easy access to sprites from game
+  /// Class that provides easy access to sprites from the game
   ///
   /// You should access this class only from an instance of
   /// CGMAPI class
@@ -923,7 +983,7 @@ namespace gm {
   };
 
   /// IBackground
-  /// Class that provides easy access to backgrounds from game
+  /// Class that provides easy access to backgrounds from the game
   ///
   /// You should access this class only from an instance of
   /// CGMAPI class
@@ -1069,11 +1129,11 @@ namespace gm {
 
     private:
       static int m_backgroundId;
-      static LPGMBACKGROUND m_background;
+      static PGMBACKGROUND m_background;
   };
 
   /// IBackgrounds
-  /// Class that provides easy access to backgrounds from game
+  /// Class that provides easy access to backgrounds from the game
   ///
   /// You should access this class only from an instance of
   /// CGMAPI class
@@ -1144,7 +1204,7 @@ namespace gm {
   };
 
   /// ISurface
-  /// Class that provides easy access to surfaces from game
+  /// Class that provides easy access to surfaces from the game
   ///
   /// You should access this class only from an instance of
   /// CGMAPI class
@@ -1203,7 +1263,7 @@ namespace gm {
   };
 
   /// ISurfaces
-  /// Class that provides easy access to surfaces from game
+  /// Class that provides easy access to surfaces from the game
   ///
   /// You should access this class only from an instance of
   /// CGMAPI class
@@ -1264,7 +1324,7 @@ namespace gm {
   };
 
   /// IScript
-  /// Class that provides easy access to scripts from game.
+  /// Class that provides easy access to scripts from the game.
   /// 
   /// You should access this class only from an instance of
   /// CGMAPI class
@@ -1313,7 +1373,7 @@ namespace gm {
   };
 
   /// IScripts
-  /// Class that provides easy access to scripts from game
+  /// Class that provides easy access to scripts from the game
   ///
   /// You should access this class only from an instance of
   /// CGMAPI class
@@ -1384,7 +1444,7 @@ namespace gm {
   };
 
   /// ISound
-  /// Class that provides easy access to sounds from game
+  /// Class that provides easy access to sounds from the game
   ///
   /// You should access this class only from an instance of
   /// CGMAPI class
@@ -1778,7 +1838,7 @@ namespace gm {
       /// Returns:
       ///   Pointer to GMFUNCTIONINFOSTORAGE structure.
       /// 
-      static LPGMFUNCTIONINFOSTORAGE FunctionData() {
+      static PGMFUNCTIONINFOSTORAGE FunctionData() {
         return m_functionData;
       }
 
@@ -1791,7 +1851,7 @@ namespace gm {
       /// Returns:
       ///   Pointer to GMBACKGROUNDSTORAGE structure.
       /// 
-      static LPGMBACKGROUNDSTORAGE BackgroundData() {
+      static PGMBACKGROUNDSTORAGE BackgroundData() {
         return m_backgroundData;
       }
 
@@ -1804,7 +1864,7 @@ namespace gm {
       /// Returns:
       ///   Pointer to GMSPRITESTORAGE structure.
       /// 
-      static LPGMSPRITESTORAGE SpriteData() {
+      static PGMSPRITESTORAGE SpriteData() {
         return m_spriteData;
       }
 
@@ -1817,7 +1877,7 @@ namespace gm {
       /// Returns:
       ///   Pointer to GMSCRIPTSTORAGE structure.
       /// 
-      static LPGMSCRIPTSTORAGE ScriptData() {
+      static PGMSCRIPTSTORAGE ScriptData() {
         return m_scriptData;
       }
 
@@ -1830,7 +1890,7 @@ namespace gm {
       /// Returns:
       ///   Pointer to GMSOUNDSTORAGE structure.
       /// 
-      static LPGMSOUNDSTORAGE SoundData() {
+      static PGMSOUNDSTORAGE SoundData() {
         return m_soundData;
       }
 
@@ -1843,7 +1903,7 @@ namespace gm {
       /// Returns:
       ///   Pointer to GMDIRECT3DINFO structure.
       /// 
-      static LPGMDIRECT3DINFO D3DData() {
+      static PGMDIRECT3DINFO D3DData() {
         return m_d3dInfo;
       }
 
@@ -1966,35 +2026,237 @@ namespace gm {
         return m_self;
       }
 
+      /// GetCurrentInstancePtr()
+      ///   Gets the pointer to current instance, that is,
+      ///   to instance with which the GM functions are called.
+      ///   ("self" instance)
+      ///
+      /// Parameters:
+      ///   None
+      /// 
+      /// Returns:
+      ///   Pointer to GMINSTANCE structure. If you try to
+      ///   get the pointer in the same function where the
+      ///   GMAPI has just been initialized, it'll return NULL.
+      ///
+      PGMINSTANCE GetCurrentInstancePtr() {
+        return *GMAPI_CURRENT_INSTANCE_PTR;
+      }
+
+      /// GetCurrentInstanceID()
+      ///   Gets the ID of the current instance. ("self" instance)
+      ///
+      /// Parameters:
+      ///   None
+      /// 
+      /// Returns:
+      ///   Current instance's ID. If you try to
+      ///   get the ID in the same function where the
+      ///   GMAPI has just been initialized, it'll return "noone" constant.
+      ///
+      int GetCurrentInstanceID() {
+        if ( !*GMAPI_CURRENT_INSTANCE_PTR )
+          return noone;
+        return (*GMAPI_CURRENT_INSTANCE_PTR)->id;
+      }
+
+      /// SetCurrentInstance( PGMINSTANCE aInstance )
+      ///   Sets the current instance. Changing current instance
+      ///   has impact on that with which instance GMAPI will call
+      ///   GM's functions.
+      ///
+      /// Parameters:
+      ///   aInstance: Pointer to instance that You want to set as current.
+      /// 
+      void SetCurrentInstance( PGMINSTANCE aInstance ) {
+        PGMINSTANCE& instance = (PGMINSTANCE) *GMAPI_CURRENT_INSTANCE_PTR;
+        instance = aInstance;
+      }
+
+      /// GetInstancePtr( int aInstanceId )
+      ///   Gets the pointer to specified GM's object instance.
+      ///
+      /// Parameters:
+      ///   aInstanceId: ID of an instance
+      /// 
+      /// Returns:
+      ///   Pointer to specified instance. If instance doesn't exists
+      ///   function will return NULL.
+      ///
+      PGMINSTANCE GetInstancePtr( int aInstanceId ) {
+        INSTANCEENUMGETID ieGetId = { aInstanceId, NULL };
+        EnumInstances( InstanceEnumGetID, &ieGetId );
+
+        return ieGetId.result;
+      }
+
+      /// EnumInstances( INSTANCEENUMPROC aInstanceEnumProc, void* aParam )
+      ///   Enumerates all instances in the room by passing pointer to each instance
+      ///   to specified callback function.
+      ///
+      /// Parameters:
+      ///   aInstanceEnumProc: Pointer to INSTANCEENUMPROC callback function.
+      ///   aParam: Optional value which will be passed to the callback fuction.
+      ///
+      /// Remarks:
+      ///   INSTANCEENUMPROC callback function should be defined like following:
+      ///     bool InstanceEnumProc( PGMINSTANCE aInstance, void* aParam );
+      ///
+      ///   EnumInstances method will pass pointer to instance to aInstance parameter
+      ///   and additional given value to aParam parameter. If Your callback function
+      ///   returns false then enumeration will be stopped.
+      /// 
+      void EnumInstances( INSTANCEENUMPROC aInstanceEnumProc, void* aParam );
+
+      /// With( int aId,
+      ///       bool aCheckInheritance,
+      ///       bool aIncludeDeactivated,
+      ///       WITHPROC aProc,
+      ///       void* aParam )
+      ///
+      ///   Executes given callback function with specified instance(s), that is,
+      ///   changes current instance pointer which GMAPI uses in calling GM's functions
+      ///   and calls Your callback function - for each instance.
+      ///
+      /// Parameters:
+      ///   aId: ID of an object/instance with which Your callback function will be executed.
+      ///        You can also use "all" and "self" constant here.
+      ///
+      ///   aCheckInheritance: Specifies whether the method should execute
+      ///                      callback function with objects that are descendants
+      ///                      of object given in aId parameter. This has no effect
+      ///                      if given aId parameter is not an object ID.
+      ///
+      ///   aIncludeDeactivated: Specifies whether function should call Your callback
+      ///                        function also with deactivated instances.
+      ///
+      ///   aProc: Pointer to Your WITHPROC procedure.
+      ///
+      ///   aParam: Optinal value which will be passed to Your callback function.
+      ///
+      /// Remarks:
+      ///   WITHPROC callback function should be defined like following:
+      ///     void WithProc( void* aParam );
+      ///
+      ///   "With" method will pass Your additional given value to aParam parameter.
+      /// 
+      void With( int aId, bool aCheckInheritance, bool aIncludeDeactivated, WITHPROC aProc, void* aParam );
+
+      /// GetSymbolID( const char* aSymbol )
+      ///   Gets ID of the specified symbol (variable name)
+      ///
+      /// Parameters:
+      ///   aSymbol: Name of the variable
+      ///
+      /// Returns:
+      ///   If specified variable symbol exists, function will returns its ID,
+      ///   otherwise 0.
+      ///
+      int GetSymbolID( const char* aSymbol );
+
+      /// GetLocalVariablePtr( int aInstanceId, int aSymbolId )
+      ///   Gets pointer to specified instance's variable.
+      ///
+      /// Parameters:
+      ///   aInstanceId: ID of the instance from which get pointer to variable.
+      ///                You can also use "self" constant here.
+      ///   aSymbolId: Variable's symbol ID to which pointer is to be retrieved.
+      ///
+      /// Returns:
+      ///   Pointer to the variable (GMVARIABLE structure). If variable doesn't
+      ///   exists, return value will be NULL.
+      ///   
+      PGMVARIABLE GetLocalVariablePtr( int aInstanceId, int aSymbolId );
+
+      /// GetLocalVariablePtr( PGMINSTANCE aInstancePtr, int aSymbolId )
+      ///   Gets pointer to specified instance's variable.
+      ///
+      /// Parameters:
+      ///   aInstanceId: Pointer to the instance from which get pointer to variable.
+      ///   aSymbolId: Variable's symbol ID to which pointer is to be retrieved.
+      ///
+      /// Returns:
+      ///   Pointer to the variable (GMVARIABLE structure). If variable doesn't
+      ///   exists, return value will be NULL.
+      ///
+      PGMVARIABLE GetLocalVariablePtr( PGMINSTANCE aInstancePtr, int aSymbolId );
+
+      /// GetGlobalVariablePtr( int aSymbolId )
+      ///   Gets pointer to specified global variable.
+      ///
+      /// Parameters:
+      ///   aSymbolId: Variable's symbol ID to which pointer is to be retrieved.
+      ///
+      /// Returns:
+      ///   Pointer to the variable (GMVARIABLE structure). If variable doesn't
+      ///   exists, return value will be NULL.
+      ///   
+      PGMVARIABLE GetGlobalVariablePtr( int aSymbolId );
+
+      /// Used internally
+      static int ResourceFindID( const char* aName, char** aResourceNames, int aArraySize );
+
+      /// Used internally
+      static int ResourceGetCount( void** aResourceInstances, int aArraySize );
+
     private:
       CGMAPI( bool* aSuccess );
       ~CGMAPI();
 
       static CGMAPI* m_self;
-
-      void RetrieveFunctionPointers();
-      void RetrieveDataPointers();
-
       unsigned long m_gmVersion;
 
-      static LPGMFUNCTIONINFOSTORAGE m_functionData;
-      static LPGMBACKGROUNDSTORAGE   m_backgroundData;
-      static LPGMSPRITESTORAGE       m_spriteData;
-      static LPGMSURFACE*            m_surfaces;
-      static LPGMTEXTURE*            m_textures;
-      static LPGMDIRECT3DINFO        m_d3dInfo;
-      static LPGMSCRIPTSTORAGE       m_scriptData;
-      static LPGMSOUNDSTORAGE        m_soundData;
+      static PGMFUNCTIONINFOSTORAGE m_functionData;
+      static PGMBACKGROUNDSTORAGE   m_backgroundData;
+      static PGMSPRITESTORAGE       m_spriteData;
+      static PGMSURFACE*            m_surfaces;
+      static PGMTEXTURE*            m_textures;
+      static PGMDIRECT3DINFO        m_d3dInfo;
+      static PGMSCRIPTSTORAGE       m_scriptData;
+      static PGMSOUNDSTORAGE        m_soundData;
 
       static HWND m_mainHwnd;
       static HWND m_debugHwnd;
       static HWND m_hScrHwnd;
 
       static char* m_scriptSwapTable;
+      static PGMVARIABLELIST* m_globalVarListPtr;
+      static void** m_currentRoomPtr;
       static int*  m_surfaceArraySize;
 
       static void* m_gmFunctions[1000];
+
+      struct INSTANCEENUMGETID {
+        int id;
+        GMINSTANCE* result;
+      };
+
+      static bool InstanceEnumGetID( GMINSTANCE* aInstance, void* aParam ) {
+        if ( aInstance->id == ((INSTANCEENUMGETID*) aParam)->id ) {
+          ((INSTANCEENUMGETID*) aParam)->result = aInstance;
+          return false;
+        }
+
+        return true;
+      }
+
+      void* GetCurrentRoomPtr() {
+        return *m_currentRoomPtr;
+      }
+
+      PGMVARIABLELIST GetGlobalVariableListPtr() {
+        return *m_globalVarListPtr;
+      }
+
+      void RetrieveFunctionPointers();
+      void RetrieveDataPointers();
+
   };
+
+
+  /********************************************
+   * Inlined methods
+   ********************************************/
 
   /********************************************
    * ISprites inlined methods
@@ -2100,7 +2362,6 @@ namespace gm {
   inline unsigned char* IBackground::GetBitmap() {
     return m_background->bitmap->bitmapData;
   }
-
 
   inline unsigned long IBackground::GetBitmapSize() {
     return CGMAPI::GetBitmapSize( m_background->bitmap );

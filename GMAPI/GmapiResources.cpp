@@ -1,18 +1,18 @@
 /************************************************************************** 
   LICENSE:
 
-    This library is free software; you can redistribute it and/or
+    GMAPI is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
-    This library is distributed in the hope that it will be useful,
+    GMAPI is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
     You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
+    License along with GMAPI; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301 USA
 ***************************************************************************/
@@ -21,7 +21,7 @@
   GmapiResources.cpp
   - Wrapped GM functions; Parser-generated code
 
-  Written by: Snake (http://gamebaseteam.eu)
+  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #include "GmapiResources.h"
@@ -36,8 +36,8 @@ namespace gm {
     GM_VAR_RESULT;
     GM_PRESERVE_INSTANCE_DATA;
 
-    GMVARIABLE* argument = new GMVARIABLE[aArgCount + 1];
-    ZeroMemory( argument, sizeof( GMVARIABLE ) * (aArgCount + 1) );
+    GMVALUE* argument = new GMVALUE[aArgCount + 1];
+    ZeroMemory( argument, sizeof( GMVALUE ) * (aArgCount + 1) );
 
     argument[0] = ind;
 
@@ -56,8 +56,8 @@ namespace gm {
     GM_VAR_RESULT;
     GM_PRESERVE_INSTANCE_DATA;
 
-    GMVARIABLE* argument = new GMVARIABLE[aArgCount + 1];
-    ZeroMemory( argument, sizeof( GMVARIABLE ) * (aArgCount + 1) );
+    GMVALUE* argument = new GMVALUE[aArgCount + 1];
+    ZeroMemory( argument, sizeof( GMVALUE ) * (aArgCount + 1) );
 
     argument[0] = str;
 
@@ -76,8 +76,8 @@ namespace gm {
     GM_VAR_RESULT;
     GM_PRESERVE_INSTANCE_DATA;
 
-    GMVARIABLE* argument = new GMVARIABLE[aArgCount + 1];
-    ZeroMemory( argument, sizeof( GMVARIABLE ) * (aArgCount + 1) );
+    GMVALUE* argument = new GMVALUE[aArgCount + 1];
+    ZeroMemory( argument, sizeof( GMVALUE ) * (aArgCount + 1) );
 
     argument[0] = fname;
 
@@ -97,8 +97,8 @@ namespace gm {
     GM_NORMAL_RESULT;
     GM_PRESERVE_INSTANCE_DATA;
 
-    GMVARIABLE* argument = new GMVARIABLE[argnumb + 5];
-    ZeroMemory( argument, sizeof( GMVARIABLE ) * (argnumb + 5) );
+    GMVALUE* argument = new GMVALUE[argnumb + 5];
+    ZeroMemory( argument, sizeof( GMVALUE ) * (argnumb + 5) );
 
     argument[0] = dll;
     argument[1] = name;
@@ -121,8 +121,8 @@ namespace gm {
     GM_VAR_RESULT;
     GM_PRESERVE_INSTANCE_DATA;
 
-    GMVARIABLE* argument = new GMVARIABLE[aArgCount + 1];
-    ZeroMemory( argument, sizeof( GMVARIABLE ) * (aArgCount + 1) );
+    GMVALUE* argument = new GMVALUE[aArgCount + 1];
+    ZeroMemory( argument, sizeof( GMVALUE ) * (aArgCount + 1) );
 
     argument[0] = id;
 

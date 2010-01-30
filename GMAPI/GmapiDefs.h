@@ -1,43 +1,52 @@
 /************************************************************************** 
   LICENSE:
 
-    This library is free software; you can redistribute it and/or
+    GMAPI is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
-    This library is distributed in the hope that it will be useful,
+    GMAPI is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
     You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
+    License along with GMAPI; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301 USA
 ***************************************************************************/
 
 /*************************************************************************
   GmapiDefs.h
-  - Definitions and declarations of GM's strucctures used by GMAPI
+  - Definitions and declarations of types used by GMAPI.
 
-  Written by: Snake (http://gamebaseteam.eu)
+  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #pragma once
 
-#ifndef GMAPI_NO_D3D
+#ifdef GMAPI_USE_D3D
   #include <d3d8.h>
 #else
+  #include <windows.h>
   typedef void IDirect3D8, IDirect3DDevice8, IDirect3DTexture8;
 #endif
 
 namespace gm {
 
+  struct GMVALUE;
+  typedef GMVALUE* PGMVALUE;
+
+  struct GMVARIABLE;
+  typedef GMVARIABLE* PGMVARIABLE;
+
+  typedef char __PADDING1;
+  typedef long __PADDING4;
+
   enum BoundingBoxType { BBOX_UNKNOWN = -1, BBOX_AUTOMATIC, BBOX_FULLIMAGE, BBOX_MANUAL };
   enum SoundType { SND_UNKNOWN = -1, SND_NORMAL, SND_BGMUSIC, SND_3DSOUND, SND_MULTIMEDIA };
-
-// 0 = normal snd; 1 = bg music; 2 = 3d sound; 3 = mmedia snd
+  enum GMValueType { VT_REAL, VT_STRING };
 
   typedef struct __GMDIRECT3DINFO {
     IDirect3D8* d3dInterface;
@@ -45,33 +54,33 @@ namespace gm {
 
     int renderWidth;
     int renderHeight;
-  } GMDIRECT3DINFO, *LPGMDIRECT3DINFO;
+  } GMDIRECT3DINFO, *PGMDIRECT3DINFO;
 
   typedef struct __GMBITMAP {
-    void* rttiData;
+    void* _rttiData;
 
     BOOL exists;
 
-    unsigned long width;
-    unsigned long height;
+    DWORD width;
+    DWORD height;
 
-    unsigned char* bitmapData;
-  } GMBITMAP, *LPGMBITMAP;
+    BYTE* bitmapData;
+  } GMBITMAP, *PGMBITMAP;
 
   typedef struct __GMTEXTURE {
     IDirect3DTexture8* texture;
 
-    unsigned long imageWidth;
-    unsigned long imageHeight;
+    DWORD imageWidth;
+    DWORD imageHeight;
 
-    unsigned long textureWidth;
-    unsigned long textureHeight;
+    DWORD textureWidth;
+    DWORD textureHeight;
 
     BOOL isValid;
-  } GMTEXTURE, *LPGMTEXTURE;
+  } GMTEXTURE, *PGMTEXTURE;
 
   typedef __declspec( align( 4 ) ) struct __GMSPRITE {
-    void* rttiData;
+    void* _rttiData;
 
     BoundingBoxType bboxType;
     int bboxLeft;
@@ -79,36 +88,36 @@ namespace gm {
     int bboxRight;
     int bboxBottom;
 
-    unsigned long nSubimages;
+    DWORD nSubimages;
 
-    unsigned long width;
-    unsigned long height;
+    DWORD width;
+    DWORD height;
 
     int originX;
     int originY;
 
     BOOL maskExists;
-    void* collisionMask; 
+    void* _collisionMask;
     BOOL preciseCollision;
 
-    LPGMBITMAP* bitmaps;
+    PGMBITMAP* bitmaps;
 
     bool transparent;
     bool smoothEdges;
     bool preload;
 
-    unsigned long* textureIDs;
-  } GMSPRITE, *LPGMSPRITE;
+    DWORD* textureIDs;
+  } GMSPRITE, *PGMSPRITE;
 
   typedef struct __GMSPRITESTORAGE {
-    LPGMSPRITE* sprites;
+    PGMSPRITE* sprites;
     char** names;
 
     int arraySize;
-  } GMSPRITESTORAGE, *LPGMSPRITESTORAGE;
+  } GMSPRITESTORAGE, *PGMSPRITESTORAGE;
 
   typedef __declspec( align( 4 ) ) struct __GMBACKGROUND {
-    void* rttiData;
+    void* _rttiData;
 
     int width;
     int height;
@@ -120,15 +129,15 @@ namespace gm {
     bool preload;
 
     int textureId;
-    unsigned long unknown;
-  } GMBACKGROUND, *LPGMBACKGROUND;
+    __PADDING4 _padding;
+  } GMBACKGROUND, *PGMBACKGROUND;
 
   typedef struct __GMBACKGROUNDSTORAGE {
-    LPGMBACKGROUND* backgrounds;
+    PGMBACKGROUND* backgrounds;
     char** names;
 
     int arraySize;
-  } GMBACKGROUNDSTORAGE, *LPGMBACKGROUNDSTORAGE;
+  } GMBACKGROUNDSTORAGE, *PGMBACKGROUNDSTORAGE;
 
   typedef struct __GMSURFACE {
     int textureId;
@@ -137,68 +146,66 @@ namespace gm {
     int height;
 
     BOOL exists;
-  } GMSURFACE, *LPGMSURFACE;
+  } GMSURFACE, *PGMSURFACE;
 
 
   typedef __declspec( align( 1 ) ) struct __GMFUNCTIONINFO {
-    unsigned char nameLength;
+    BYTE nameLength;
     char name[67];
 
     void* address;
-    char padding[8];
-  } GMFUNCTIONINFO, *LPGMFUNCTIONINFO;
+    char _padding[8];
+  } GMFUNCTIONINFO, *PGMFUNCTIONINFO;
 
   typedef struct __GMFUNCTIONINFOSTORAGE {
     GMFUNCTIONINFO* functions;
-    unsigned long nFunctions;
-  } GMFUNCTIONINFOSTORAGE, *LPGMFUNCTIONINFOSTORAGE;
+    DWORD nFunctions;
+  } GMFUNCTIONINFOSTORAGE, *PGMFUNCTIONINFOSTORAGE;
 
   typedef struct __GMSCRIPTCONTENT {
-    void* rttiData;
+    void* _rttiData;
     char* code;
     
-    unsigned long unknown1;
-    unsigned long unknown2;
-    unsigned long unknown3;
-  } GMSCRIPTCONTENT, *LPGMSCRIPTCONTENT;
+    __PADDING4 _padding[3];
+  } GMSCRIPTCONTENT, *PGMSCRIPTCONTENT;
 
   typedef struct __GMSCRIPTDEBUGINFO {
-    void* rttiData;
-    unsigned long unknown;
+    void* _rttiData;
+    __PADDING4 _padding;
 
     BOOL isCompiled;
 
     char* code;
 
-    unsigned long type;
-  } GMSCRIPTDEBUGINFO, *LPGMSCRIPTDEBUGINFO;
+    DWORD type;
+  } GMSCRIPTDEBUGINFO, *PGMSCRIPTDEBUGINFO;
 
   typedef struct __GMSCRIPT {
-    void* rttiData;
+    void* _rttiData;
 
     GMSCRIPTCONTENT* pScriptContent;
     GMSCRIPTDEBUGINFO* debugInfo;
-  } GMSCRIPT, *LPGMSCRIPT;
+  } GMSCRIPT, *PGMSCRIPT;
 
   typedef struct __GMSCRIPTSTORAGE {
     char** symbols;
-    unsigned long nSymbols;
+    int symbolCount;
 
-    LPGMSCRIPT* scripts;
+    PGMSCRIPT* scripts;
     char** names;
 
     int arraySize;
-  } GMSCRIPTSTORAGE, *LPGMSCRIPTSTORAGE;
+  } GMSCRIPTSTORAGE, *PGMSCRIPTSTORAGE;
 
   typedef struct __GMSOUNDDATA {
-    void* rttiData;
+    void* _rttiData;
 
-    unsigned char* file;
-    unsigned long fileSize;
-  } GMSOUNDDATA, *LPGMSOUNDDATA;
+    BYTE* file;
+    DWORD fileSize;
+  } GMSOUNDDATA, *PGMSOUNDDATA;
 
   typedef struct __GMSOUND {
-    void* rttiData;
+    void* _rttiData;
 
     SoundType type;
 
@@ -208,9 +215,9 @@ namespace gm {
     GMSOUNDDATA* sndData;
 
     BOOL preload;
-    unsigned long effectsBitmask;
+    DWORD effectsBitmask;
 
-    unsigned long unknown;
+    DWORD unknown;
 
     double volume;
     double pan;
@@ -218,13 +225,85 @@ namespace gm {
     int sndId;
 
     char* filePath;
-  } GMSOUND, *LPGMSOUND;
+  } GMSOUND, *PGMSOUND;
 
   typedef struct __GMSOUNDSTORAGE {
-    LPGMSOUND* sounds;
+    PGMSOUND* sounds;
     char** names;
 
     int arraySize;
-  } GMSOUNDSTORAGE, *LPGMSOUNDSTORAGE;
+  } GMSOUNDSTORAGE, *PGMSOUNDSTORAGE;
+
+  typedef struct __GMVARIABLELIST {
+    void* _rttiData;
+
+    GMVARIABLE* variables;
+    int count;
+  } GMVARIABLELIST, *PGMVARIABLELIST;
+
+  typedef struct __GMINSTANCE {
+    void* _rttiData;
+    int id;
+    int sprite_index;
+    double image_index;
+    double image_speed;
+    double image_xscale;
+    double image_yscale;
+    double image_angle;
+    double image_alpha;
+    int image_blend;
+    int mask_index;
+    double depth;
+
+    __PADDING4 _padding1[2];
+
+    double x;
+    double y;
+    double xstart;
+    double ystart;
+    double xprevious;
+    double yprevious;
+    double direction;
+    double speed;
+    double friction;
+    double gravity_direction;
+    double gravity;
+    double hspeed;
+    double vspeed;
+    int bbox_left;
+    int bbox_top;
+    int bbox_right;
+    int bbox_bottom;
+    bool visible;
+    bool solid;
+    bool persistent;
+    int object_index;
+
+    __PADDING4 _padding2;
+
+    int alarm[12];
+    PGMVARIABLELIST variableListPtr;
+
+    __PADDING1 _padding3;
+    bool deactivated;
+    __PADDING1 _padding4[2];
+
+    int path_index;
+    double path_position;
+    double path_positionprevious;
+    double path_speed;
+    double path_scale;
+    double path_orientation;
+    int path_endaction;
+
+    __PADDING4 _padding5[5];
+
+    int timeline_index;
+
+    __PADDING4 _padding6;
+
+    double timeline_position;
+    double timeline_speed;
+  } GMINSTANCE, *PGMINSTANCE;
 
 }

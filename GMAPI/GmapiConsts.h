@@ -1,18 +1,18 @@
 /************************************************************************** 
   LICENSE:
 
-    This library is free software; you can redistribute it and/or
+    GMAPI is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
-    This library is distributed in the hope that it will be useful,
+    GMAPI is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
     You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
+    License along with GMAPI; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301 USA
 ***************************************************************************/
@@ -21,7 +21,7 @@
   GmapiConsts.h
   - Constants used by GMAPI
 
-  Written by: Snake (http://gamebaseteam.eu)
+  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #pragma once
@@ -49,31 +49,37 @@ namespace gm {
   extern const char* EXC_INVALIDSUBIMAGE;
 
   extern const char* GM70_ADDRESS_ARRAY_SWAP_BYTES;
-  extern const LPGMFUNCTIONINFOSTORAGE GM61_ADDRESS_ARRAY_GMFUNCTIONS;
-  extern const LPGMFUNCTIONINFOSTORAGE GM70_ADDRESS_ARRAY_GMFUNCTIONS;
-  extern const LPGMSURFACE* GM61_ADDRESS_ARRAY_SURFACES;
-  extern const LPGMSURFACE* GM70_ADDRESS_ARRAY_SURFACES;
-  extern const LPGMTEXTURE* GM61_ADDRESS_ARRAY_TEXTURES;
-  extern const LPGMTEXTURE* GM70_ADDRESS_ARRAY_TEXTURES;
+  extern const void* GM61_ADDRESS_CURRENT_ROOM_PTR;
+  extern const void* GM70_ADDRESS_CURRENT_ROOM_PTR;
+  extern const PGMVARIABLELIST* GM61_ADDRESS_GLOBAL_VARIABLE_LIST_PTR;
+  extern const PGMVARIABLELIST* GM70_ADDRESS_GLOBAL_VARIABLE_LIST_PTR;
+  extern const PGMFUNCTIONINFOSTORAGE GM61_ADDRESS_ARRAY_GMFUNCTIONS;
+  extern const PGMFUNCTIONINFOSTORAGE GM70_ADDRESS_ARRAY_GMFUNCTIONS;
+  extern const PGMSURFACE* GM61_ADDRESS_ARRAY_SURFACES;
+  extern const PGMSURFACE* GM70_ADDRESS_ARRAY_SURFACES;
+  extern const PGMTEXTURE* GM61_ADDRESS_ARRAY_TEXTURES;
+  extern const PGMTEXTURE* GM70_ADDRESS_ARRAY_TEXTURES;
   extern const int* GM61_ADDRESS_ARRAYSIZE_SURFACES;
   extern const int* GM70_ADDRESS_ARRAYSIZE_SURFACES;
-  extern const LPGMSPRITESTORAGE GM61_ADDRESS_STORAGE_SPRITES;
-  extern const LPGMSPRITESTORAGE GM70_ADDRESS_STORAGE_SPRITES;
-  extern const LPGMBACKGROUNDSTORAGE GM61_ADDRESS_STORAGE_BACKGROUNDS;
-  extern const LPGMBACKGROUNDSTORAGE GM70_ADDRESS_STORAGE_BACKGROUNDS;
-  extern const LPGMSCRIPTSTORAGE GM61_ADDRESS_STORAGE_SCRIPTS;
-  extern const LPGMSCRIPTSTORAGE GM70_ADDRESS_STORAGE_SCRIPTS;
-  extern const LPGMDIRECT3DINFO GM61_ADDRESS_STORAGE_D3D;
-  extern const LPGMDIRECT3DINFO GM70_ADDRESS_STORAGE_D3D;
+  extern const PGMSPRITESTORAGE GM61_ADDRESS_STORAGE_SPRITES;
+  extern const PGMSPRITESTORAGE GM70_ADDRESS_STORAGE_SPRITES;
+  extern const PGMBACKGROUNDSTORAGE GM61_ADDRESS_STORAGE_BACKGROUNDS;
+  extern const PGMBACKGROUNDSTORAGE GM70_ADDRESS_STORAGE_BACKGROUNDS;
+  extern const PGMSCRIPTSTORAGE GM61_ADDRESS_STORAGE_SCRIPTS;
+  extern const PGMSCRIPTSTORAGE GM70_ADDRESS_STORAGE_SCRIPTS;
+  extern const PGMDIRECT3DINFO GM61_ADDRESS_STORAGE_D3D;
+  extern const PGMDIRECT3DINFO GM70_ADDRESS_STORAGE_D3D;
 
-  extern const LPGMSOUNDSTORAGE GM61_ADDRESS_SOUND_STORAGE; 
-  extern const LPGMSOUNDSTORAGE GM70_ADDRESS_SOUND_STORAGE;
+  extern const PGMSOUNDSTORAGE GM61_ADDRESS_SOUND_STORAGE; 
+  extern const PGMSOUNDSTORAGE GM70_ADDRESS_SOUND_STORAGE;
 
   extern const DWORD* GM61_ADDRESS_TRUNNER_INSTANCE;
   extern const DWORD* GM61_ADDRESS_TDEBUG_INSTANCE;
   extern const DWORD* GM70_ADDRESS_TRUNNER_INSTANCE;
   extern const DWORD* GM70_ADDRESS_TDEBUG_INSTANCE;
   extern const DWORD* GM70_ADDRESS_TSCORE_INSTANCE;
+
+  extern const PGMINSTANCE* GMAPI_CURRENT_INSTANCE_PTR;
 
   extern const char* GM_FUNCTION_NAMES[];
   extern const int GM_FUNCTION_COUNT;

@@ -1,24 +1,24 @@
 ;************************************************************************** 
 ;  LICENSE:
 ;
-;    This library is free software; you can redistribute it and/or
+;    GMAPI is free software; you can redistribute it and/or
 ;    modify it under the terms of the GNU Lesser General Public
 ;    License as published by the Free Software Foundation; either
 ;    version 2.1 of the License, or (at your option) any later version.
 ;
-;    This library is distributed in the hope that it will be useful,
+;    GMAPI is distributed in the hope that it will be useful,
 ;    but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 ;    Lesser General Public License for more details.
 ;
 ;    You should have received a copy of the GNU Lesser General Public
-;    License along with this library; if not, write to the Free Software
+;    License along with GMAPI; if not, write to the Free Software
 ;    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 ;    02110-1301 USA
 ;***************************************************************************
 ; main.asm
 ;
-; Written by: Snake (http://gamebaseteam.eu/)
+; Copyright 2009 (C) Snake (http://sgames.ovh.org/)
 ;***************************************************************************
 
 .386
@@ -49,6 +49,7 @@ GM61_RUNNER_DEALLOCATE_RESULT equ 00405A08h
 GM61_RUNNER_DEALLOCATE_BITMAP equ 0040274Ch
 GM61_RUNNER_EXTERNAL_CALL     equ 0051C3A0h
 GM61_RUNNER_EXTERNAL_CALL_RET equ 0051C3A9h
+GM61_RUNNER_FIND_SYMBOL_ID    equ 004D4E88h
 
 GMAPI_HOOK_DATA_BASE          equ 00400800h
 GMAPI_HOOK_DATA_CODE          equ 00400900h
@@ -71,16 +72,7 @@ RUNNER_DEALLOCATE_RESULT dd 00405A58h
 RUNNER_DEALLOCATE_BITMAP dd 00402794h
 RUNNER_EXTERNAL_CALL     dd 00569328h
 RUNNER_EXTERNAL_CALL_RET dd 00569331h
-RUNNER_FUNCTION_INDEX    dd 0052D334h
-RUNNER_FUNCTION_ARRAY    dd 00589E64h
-
-.data?
-
-ptrWithInstance          dd ?
-ptrThisInstance          dd ?
-
-gmVersion                dd ?
-processHandle            dd ?
+RUNNER_FIND_SYMBOL_ID    dd 0052A310h
 
 .code
 
@@ -115,7 +107,8 @@ CheckGM61:
   mov    dword ptr ds:[eax+1Ch], GM61_RUNNER_DEALLOCATE_BITMAP  
   mov    dword ptr ds:[eax+20h], GM61_RUNNER_EXTERNAL_CALL
   mov    dword ptr ds:[eax+24h], GM61_RUNNER_EXTERNAL_CALL_RET
-  
+  mov    dword ptr ds:[eax+28h], GM61_RUNNER_FIND_SYMBOL_ID
+
   mov    eax, 61
 
 ProcExit:
@@ -211,13 +204,25 @@ GMCallFunction proc uses ecx aFunctionPtr:DWORD, aArgArr:DWORD, aArgCount:DWORD,
   mov     edx, [eax].thisInstance    ; Get instance from which dll function was called
   mov     eax, [eax].withInstance    ; Get instance with which the code will be executed
   mov     ecx, aArgCount             ; Number of arguments passed to function
-  push    aArgArr                    ; Pointer to argument array
+  push    aArgArr                    ; Pointer to array which stores parameters for called function
   push    0Fh                        ; Max number of arguments - always set to 15, cause' there's no need for any checks
   push    aPtrResult                 ; Pointer to structure that'll receive function result 
   call    aFunctionPtr               ; Call GM function
 
   ret
 GMCallFunction endp
+
+;******************************************
+; GMFindSymbolID
+; - Finds symbol identifier by which the variables are identified
+;******************************************
+
+GMFindSymbolID proc uses ecx edx aVariableName:DWORD
+  mov     eax, aVariableName
+  call    RUNNER_FIND_SYMBOL_ID
+
+  ret
+GMFindSymbolID EndP
 
 ;******************************************
 ; FlushCache
@@ -326,8 +331,8 @@ ProcExit:
   Skip:
   
     ; Save current instance pointers
-    xchg   dword ptr ds:[GMAPI_HOOK_DATA_BASE+08h], eax ; Instance set by "with" statement or sth
-    xchg   dword ptr ds:[GMAPI_HOOK_DATA_BASE+04h], edx ; "This" instance
+    mov    dword ptr ds:[GMAPI_HOOK_DATA_BASE+08h], eax ; Instance set by "with" statement or sth
+    mov    dword ptr ds:[GMAPI_HOOK_DATA_BASE+04h], edx ; "This" instance
     jmp    dword ptr ds:[GMAPI_HOOK_DATA_BASE+0Ch]      ; jmp to returnAddress
     
   ;******************************************
@@ -342,7 +347,7 @@ GMAPIHookInstall endp
 GMAPIHookUninstall proc uses ecx
   dec    dword ptr ds:[GMAPI_HOOK_DATA_BASE]
   jnz    ProcExit ; if there's still references then exit. Otherwise, restore modified data in runner.
-  
+
   push   esi
   push   edi
 

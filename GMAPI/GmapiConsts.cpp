@@ -1,18 +1,18 @@
 /************************************************************************** 
   LICENSE:
 
-    This library is free software; you can redistribute it and/or
+    GMAPI is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
-    This library is distributed in the hope that it will be useful,
+    GMAPI is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
     You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
+    License along with GMAPI; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301 USA
 ***************************************************************************/
@@ -21,7 +21,7 @@
   GmapiConsts.cpp
   - Constants used by GMAPI
 
-  Written by: Snake (http://gamebaseteam.eu)
+  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 
@@ -36,31 +36,37 @@ namespace gm {
   const unsigned long GMAPI_INITIALIZATION_FAILED  = 1;
   const unsigned long GMAPI_ALREADY_INITIALIZED    = 2;
 
-  const char* GM70_ADDRESS_ARRAY_SWAP_BYTES                    = (char*) 0x005CA768;
-  const LPGMFUNCTIONINFOSTORAGE GM61_ADDRESS_ARRAY_GMFUNCTIONS = (LPGMFUNCTIONINFOSTORAGE) 0x00538550;
-  const LPGMFUNCTIONINFOSTORAGE GM70_ADDRESS_ARRAY_GMFUNCTIONS = (LPGMFUNCTIONINFOSTORAGE) 0x00589744;
-  const LPGMSURFACE* GM61_ADDRESS_ARRAY_SURFACES               = (LPGMSURFACE*) 0x0055D148;
-  const LPGMSURFACE* GM70_ADDRESS_ARRAY_SURFACES               = (LPGMSURFACE*) 0x005AF14C;
-  const LPGMTEXTURE* GM61_ADDRESS_ARRAY_TEXTURES               = (LPGMTEXTURE*) 0x0055D228;
-  const LPGMTEXTURE* GM70_ADDRESS_ARRAY_TEXTURES               = (LPGMTEXTURE*) 0x005AF22C;
-  const int* GM61_ADDRESS_ARRAYSIZE_SURFACES                   = (int*) 0x005379E4;
-  const int* GM70_ADDRESS_ARRAYSIZE_SURFACES                   = (int*) 0x00587A54;
-  const LPGMSPRITESTORAGE GM61_ADDRESS_STORAGE_SPRITES         = (LPGMSPRITESTORAGE) 0x00537A40;
-  const LPGMSPRITESTORAGE GM70_ADDRESS_STORAGE_SPRITES         = (LPGMSPRITESTORAGE) 0x00587AB0;
-  const LPGMBACKGROUNDSTORAGE GM61_ADDRESS_STORAGE_BACKGROUNDS = (LPGMBACKGROUNDSTORAGE) 0x00537A4C;
-  const LPGMBACKGROUNDSTORAGE GM70_ADDRESS_STORAGE_BACKGROUNDS = (LPGMBACKGROUNDSTORAGE) 0x00587ABC;
-  const LPGMSCRIPTSTORAGE GM61_ADDRESS_STORAGE_SCRIPTS         = (LPGMSCRIPTSTORAGE) 0x0053853C;
-  const LPGMSCRIPTSTORAGE GM70_ADDRESS_STORAGE_SCRIPTS         = (LPGMSCRIPTSTORAGE) 0x00589730;
-  const LPGMDIRECT3DINFO GM61_ADDRESS_STORAGE_D3D              = (LPGMDIRECT3DINFO) 0x005379F0;
-  const LPGMDIRECT3DINFO GM70_ADDRESS_STORAGE_D3D              = (LPGMDIRECT3DINFO) 0x00587A60;
-  const LPGMSOUNDSTORAGE GM61_ADDRESS_SOUND_STORAGE            = (LPGMSOUNDSTORAGE) 0x00537850;
-  const LPGMSOUNDSTORAGE GM70_ADDRESS_SOUND_STORAGE            = (LPGMSOUNDSTORAGE) 0x005878C0;
+  const char* GM70_ADDRESS_ARRAY_SWAP_BYTES                     = (char*) 0x005CA768;
+  const void* GM61_ADDRESS_CURRENT_ROOM_PTR                     = (void*) 0x0055D2F0;
+  const void* GM70_ADDRESS_CURRENT_ROOM_PTR                     = (void*) 0x005AF2F4;
+  const PGMVARIABLELIST* GM61_ADDRESS_GLOBAL_VARIABLE_LIST_PTR = (PGMVARIABLELIST*) 0x0055DBF8;
+  const PGMVARIABLELIST* GM70_ADDRESS_GLOBAL_VARIABLE_LIST_PTR = (PGMVARIABLELIST*) 0x00589720;
+  const PGMFUNCTIONINFOSTORAGE GM61_ADDRESS_ARRAY_GMFUNCTIONS  = (PGMFUNCTIONINFOSTORAGE) 0x00538550;
+  const PGMFUNCTIONINFOSTORAGE GM70_ADDRESS_ARRAY_GMFUNCTIONS  = (PGMFUNCTIONINFOSTORAGE) 0x00589744;
+  const PGMSURFACE* GM61_ADDRESS_ARRAY_SURFACES                = (PGMSURFACE*) 0x0055D148;
+  const PGMSURFACE* GM70_ADDRESS_ARRAY_SURFACES                = (PGMSURFACE*) 0x005AF14C;
+  const PGMTEXTURE* GM61_ADDRESS_ARRAY_TEXTURES                = (PGMTEXTURE*) 0x0055D228;
+  const PGMTEXTURE* GM70_ADDRESS_ARRAY_TEXTURES                = (PGMTEXTURE*) 0x005AF22C;
+  const int* GM61_ADDRESS_ARRAYSIZE_SURFACES                    = (int*) 0x005379E4;
+  const int* GM70_ADDRESS_ARRAYSIZE_SURFACES                    = (int*) 0x00587A54;
+  const PGMSPRITESTORAGE GM61_ADDRESS_STORAGE_SPRITES          = (PGMSPRITESTORAGE) 0x00537A40;
+  const PGMSPRITESTORAGE GM70_ADDRESS_STORAGE_SPRITES          = (PGMSPRITESTORAGE) 0x00587AB0;
+  const PGMBACKGROUNDSTORAGE GM61_ADDRESS_STORAGE_BACKGROUNDS  = (PGMBACKGROUNDSTORAGE) 0x00537A4C;
+  const PGMBACKGROUNDSTORAGE GM70_ADDRESS_STORAGE_BACKGROUNDS  = (PGMBACKGROUNDSTORAGE) 0x00587ABC;
+  const PGMSCRIPTSTORAGE GM61_ADDRESS_STORAGE_SCRIPTS          = (PGMSCRIPTSTORAGE) 0x0053853C;
+  const PGMSCRIPTSTORAGE GM70_ADDRESS_STORAGE_SCRIPTS          = (PGMSCRIPTSTORAGE) 0x00589730;
+  const PGMDIRECT3DINFO GM61_ADDRESS_STORAGE_D3D               = (PGMDIRECT3DINFO) 0x005379F0;
+  const PGMDIRECT3DINFO GM70_ADDRESS_STORAGE_D3D               = (PGMDIRECT3DINFO) 0x00587A60;
+  const PGMSOUNDSTORAGE GM61_ADDRESS_SOUND_STORAGE             = (PGMSOUNDSTORAGE) 0x00537850;
+  const PGMSOUNDSTORAGE GM70_ADDRESS_SOUND_STORAGE             = (PGMSOUNDSTORAGE) 0x005878C0;
 
-  const DWORD* GM61_ADDRESS_TRUNNER_INSTANCE                   = (DWORD*) 0x00535414;
-  const DWORD* GM61_ADDRESS_TDEBUG_INSTANCE                    = (DWORD*) 0x005678C4;
-  const DWORD* GM70_ADDRESS_TRUNNER_INSTANCE                   = (DWORD*) 0x00585414;
-  const DWORD* GM70_ADDRESS_TDEBUG_INSTANCE                    = (DWORD*) 0x005BAB04;
-  const DWORD* GM70_ADDRESS_TSCORE_INSTANCE                    = (DWORD*) 0x005AF49C;
+  const DWORD* GM61_ADDRESS_TRUNNER_INSTANCE                    = (DWORD*) 0x00535414;
+  const DWORD* GM61_ADDRESS_TDEBUG_INSTANCE                     = (DWORD*) 0x005678C4;
+  const DWORD* GM70_ADDRESS_TRUNNER_INSTANCE                    = (DWORD*) 0x00585414;
+  const DWORD* GM70_ADDRESS_TDEBUG_INSTANCE                     = (DWORD*) 0x005BAB04;
+  const DWORD* GM70_ADDRESS_TSCORE_INSTANCE                     = (DWORD*) 0x005AF49C;
+
+  const PGMINSTANCE* GMAPI_CURRENT_INSTANCE_PTR                = (PGMINSTANCE*) 0x00400804;
 
   const char* STR_GMAPI_ERROR = "GMAPI error";
   const char* STR_GMAPI_DEBUG = "Debug info";
