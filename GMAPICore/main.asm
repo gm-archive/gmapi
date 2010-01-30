@@ -46,6 +46,7 @@ GM61_RUNNER_SET_STRING        equ 00405150h
 GM61_RUNNER_CLEAR_STRING      equ 00404F58h
 GM61_RUNNER_DEALLOCATE        equ 00405E90h
 GM61_RUNNER_DEALLOCATE_RESULT equ 00405A08h
+GM61_RUNNER_DEALLOCATE_BITMAP equ 0040274Ch
 GM61_RUNNER_EXTERNAL_CALL     equ 0051C3A0h
 GM61_RUNNER_EXTERNAL_CALL_RET equ 0051C3A9h
 
@@ -62,11 +63,12 @@ GM61_ID                       equ 07h
 RUNNER_STRING_CLASS      dd 004010D0h
 RUNNER_RVALUE_CLASS      dd 005457F8h
 
-RUNNER_ALLOCATE          dd 00405ECCh
+RUNNER_ALLOCATE_STRING   dd 00405ECCh
 RUNNER_SET_STRING        dd 004051A0h
 RUNNER_CLEAR_STRING      dd 00404FA8h
-RUNNER_DEALLOCATE        dd 00405EE0h
+RUNNER_DEALLOCATE_STRING dd 00405EE0h
 RUNNER_DEALLOCATE_RESULT dd 00405A58h
+RUNNER_DEALLOCATE_BITMAP dd 00402794h
 RUNNER_EXTERNAL_CALL     dd 00569328h
 RUNNER_EXTERNAL_CALL_RET dd 00569331h
 RUNNER_FUNCTION_INDEX    dd 0052D334h
@@ -110,8 +112,9 @@ CheckGM61:
   mov    dword ptr ds:[eax+10h], GM61_RUNNER_CLEAR_STRING
   mov    dword ptr ds:[eax+14h], GM61_RUNNER_DEALLOCATE
   mov    dword ptr ds:[eax+18h], GM61_RUNNER_DEALLOCATE_RESULT
-  mov    dword ptr ds:[eax+1Ch], GM61_RUNNER_EXTERNAL_CALL
-  mov    dword ptr ds:[eax+20h], GM61_RUNNER_EXTERNAL_CALL_RET
+  mov    dword ptr ds:[eax+1Ch], GM61_RUNNER_DEALLOCATE_BITMAP  
+  mov    dword ptr ds:[eax+20h], GM61_RUNNER_EXTERNAL_CALL
+  mov    dword ptr ds:[eax+24h], GM61_RUNNER_EXTERNAL_CALL_RET
   
   mov    eax, 61
 
@@ -128,7 +131,7 @@ GMAPIInitialize endp
 GMAllocateString proc uses edx ebx
   mov     edx, RUNNER_STRING_CLASS
   mov     eax, 4h
-  call    RUNNER_ALLOCATE
+  call    RUNNER_ALLOCATE_STRING
 
   ret
 GMAllocateString endp
@@ -141,7 +144,7 @@ GMAllocateString endp
 GMDeallocateString proc uses edx aPtrString:DWORD 
   mov     edx, RUNNER_STRING_CLASS
   mov     eax, aPtrString
-  call    RUNNER_DEALLOCATE
+  call    RUNNER_DEALLOCATE_STRING
 
   ret
 GMDeallocateString endp
@@ -158,6 +161,17 @@ GMDeallocateResult proc uses edx aPtrResultStruct:DWORD
 
   ret
 GMDeallocateResult endp
+
+;******************************************
+; GMDeallocateBitmap
+; - Releases GM bitmap from memory
+;******************************************
+
+GMDeallocateBitmap proc uses ecx edx aPtrBitmap:DWORD
+  mov     eax, aPtrBitmap
+  call    RUNNER_DEALLOCATE_BITMAP
+  ret
+GMDeallocateBitmap EndP
 
 ;******************************************
 ; GMSetString

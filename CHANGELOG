@@ -1,3 +1,6 @@
+V0.3 (5, Apr 2009)
+  - Added ReleaseBitmap method to ISpriteSubimage & IBackground classes, which deallocates image's bitmap from memory
+
 V0.2 (4, Apr 2009)
   - Added ISounds (CGMAPI::Sounds) & ISound classes, which gives access to sound resources
   - Several small fixes in resource accessors classes (IBackgrounds, IScripts...)

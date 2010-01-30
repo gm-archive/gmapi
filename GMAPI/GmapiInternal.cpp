@@ -378,6 +378,19 @@ namespace gm {
   }
 
   /********************************************
+   * ISpriteSubimage interface implementation
+   ********************************************/
+
+  void ISpriteSubimage::ReleaseBitmap() {
+    BYTE* pBmp = GetBitmap();
+
+    if ( pBmp ) {
+      core::GMDeallocateBitmap( pBmp );
+      ISprite::SpritePtr()->bitmaps[m_subimage]->bitmapData = NULL;
+    }
+  }
+
+  /********************************************
    * IBackgrounds interface implementation
    ********************************************/
 
@@ -424,6 +437,19 @@ namespace gm {
     return count;
   }
 
+  /********************************************
+   * IBackground interface implementation
+   ********************************************/
+
+  void IBackground::ReleaseBitmap() {
+    BYTE* pBmp = GetBitmap();
+
+    if ( pBmp ) {
+      core::GMDeallocateBitmap( pBmp );
+      m_background->bitmap->bitmapData = NULL;
+    }
+  }
+  
   /********************************************
    * ISurfaces interface implementation
    ********************************************/

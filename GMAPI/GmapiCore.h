@@ -27,11 +27,11 @@
 #pragma once
 
 namespace gm {
-
   namespace core {
     extern "C" inline char** __stdcall GMAllocateString();
     extern "C" inline void __stdcall GMDeallocateString( __in char** aPtrString );
     extern "C" inline void __stdcall GMDeallocateResult( __deref_inout void* aPtrResult );
+    extern "C" inline void __stdcall GMDeallocateBitmap( __deref_in void* aPtrBitmap );
 
     extern "C" void __stdcall GMCallFunction( __in const void* aPtrFunction,
                                               __in void* aArgArray,

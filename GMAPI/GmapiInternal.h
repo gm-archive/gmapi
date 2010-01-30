@@ -493,6 +493,18 @@ namespace gm {
       ///
       inline static unsigned char* GetBitmap();
 
+      /// ReleaseBitmap()
+      ///   Deallocates subimage's bitmap from memory (not video memory, so
+      ///   it still can be used in drawing). After that, sprite/subimage cannot be
+      ///   used in functions like sprite_save, sprite_duplicate etc.
+      ///   Be careful, if sprite was not loaded to video memory (preload option)
+      ///   game may crash while trying to access subimage's deallocated bitmap.
+      ///   
+      ///  Parameters:
+      ///    None
+      ///
+      static void ReleaseBitmap();
+
       /// GetBitmapSize()
       ///   Returns size of sprite's subimage bitmap in bytes.
       ///
@@ -975,6 +987,18 @@ namespace gm {
       ///  Pointer to bitmap.
       ///
       inline static unsigned char* GetBitmap();
+
+      /// ReleaseBitmap()
+      ///   Deallocates background's bitmap from memory (not video memory, so
+      ///   background still can be used in drawing). After that, bitmap cannot be
+      ///   used as background in highscore tables, messages etc.
+      ///   Be careful, if background was not loaded to video memory (preload texture option)
+      ///   game may crash while trying to access deallocated bitmap.
+      ///
+      ///  Parameters:
+      ///    None
+      ///
+      static void ReleaseBitmap();
 
       /// GetBitmapSize()
       ///   Returns size of background's image bitmap in bytes.
@@ -2076,6 +2100,7 @@ namespace gm {
   inline unsigned char* IBackground::GetBitmap() {
     return m_background->bitmap->bitmapData;
   }
+
 
   inline unsigned long IBackground::GetBitmapSize() {
     return CGMAPI::GetBitmapSize( m_background->bitmap );
