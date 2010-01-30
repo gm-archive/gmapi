@@ -29,6 +29,9 @@
 
 #include "GmapiResources.h"
 
+#ifdef __GNUC__
+#define sprintf_s snprintf
+#endif
 
 using namespace gm::core;
 
@@ -89,16 +92,15 @@ namespace gm {
   CGMAPI::CGMAPI( bool* aSuccess ): m_gmVersion( 0 ) {
     m_gmVersion = GMAPIInitialize();
 
-    if ( !m_gmVersion ) {
+    if ( !m_gmVersion )
       *aSuccess = false;
-      return;
+    else {
+      GMAPIHookInstall();
+      RetrieveDataPointers();
+      RetrieveFunctionPointers();
+
+      *aSuccess = true;
     }
-
-    GMAPIHookInstall();
-    RetrieveDataPointers();
-    RetrieveFunctionPointers();
-
-    *aSuccess = true;
   }
 
   void CGMAPI::Destroy() {
@@ -109,7 +111,8 @@ namespace gm {
   }
 
   CGMAPI::~CGMAPI() {
-    GMAPIHookUninstall();
+    if ( m_gmVersion != GM_VERSION_INCOMPATIBLE )
+      GMAPIHookUninstall();
   }
 
   void CGMAPI::RetrieveDataPointers() {
@@ -309,6 +312,36 @@ namespace gm {
     return NULL;
   }
 
+  bool CGMAPI::SetGMFunctionAddress( const char* aFunctionName, GMFunction aNewFunction ) {
+    GMFUNCTIONINFO* functions = m_functionData->functions;
+    int functionCount = m_functionData->nFunctions;
+    int requestedLength = strlen( aFunctionName );
+
+    for ( int i = 0; i < functionCount; i++ ) {
+      if ( requestedLength != functions[i].nameLength )
+        continue;
+
+      if ( strcmp( aFunctionName, functions[i].name ) == 0 ) {
+        m_functionData->functions[i].address = aNewFunction;
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  GMFUNCTIONINFO* CGMAPI::PreserveFunctionData() {
+    GMFUNCTIONINFO* data = new GMFUNCTIONINFO[m_functionData->nFunctions];
+    memcpy( data, m_functionData->functions, sizeof( GMFUNCTIONINFO ) * m_functionData->nFunctions );
+
+    return data;
+  }
+
+  void CGMAPI::RestoreFunctionData( GMFUNCTIONINFO* aData ) {
+    memcpy( m_functionData->functions, aData, sizeof( GMFUNCTIONINFO ) * m_functionData->nFunctions );
+    delete [] aData;
+  }
+
   int CGMAPI::ResourceFindID( const char* aName, char** aResourceNames, int aArraySize ) {
     if ( aResourceNames ) {
       int nameLength = strlen( aName );
@@ -443,14 +476,14 @@ namespace gm {
    * CGMVariable class implementation
    ********************************************/
 
-  CGMVariable::CGMVariable( __in const GMVALUE& aValue ): m_real( 0.0 ),
+  CGMVariable::CGMVariable( const GMVALUE& aValue ): m_real( 0.0 ),
                                                           m_ppStr( NULL ),
                                                           m_disposeStr( true ) {
     m_stringType = ( aValue.type == VT_STRING );
     *this = aValue;
   }
 
-  void CGMVariable::StringSet( __in const char* aValue ) {
+  void CGMVariable::StringSet( const char* aValue ) {
     if ( !m_ppStr ) 
       m_ppStr = GMAllocateString();
 
@@ -539,8 +572,7 @@ namespace gm {
    ********************************************/
 
   bool ISprites::Exists( const int aSpriteId ) {
-    if ( aSpriteId >= GetArraySize() || aSpriteId < 0 ||
-         !CGMAPI::SpriteData()->sprites )
+    if ( aSpriteId >= GetArraySize() || aSpriteId < 0 || !CGMAPI::SpriteData()->sprites )
       return false;
     else
       return ( CGMAPI::SpriteData()->sprites[aSpriteId] != NULL );
@@ -572,8 +604,7 @@ namespace gm {
    ********************************************/
 
   bool IBackgrounds::Exists( const int aBackgroundId ) {
-    if ( aBackgroundId >= GetArraySize() || aBackgroundId < 0 ||
-         !CGMAPI::BackgroundData()->backgrounds )
+    if ( aBackgroundId >= GetArraySize() || aBackgroundId < 0 || !CGMAPI::BackgroundData()->backgrounds )
       return false;
     else
       return ( CGMAPI::BackgroundData()->backgrounds[aBackgroundId] != NULL );

@@ -41,12 +41,12 @@ namespace gm {
   struct GMVARIABLE;
   typedef GMVARIABLE* PGMVARIABLE;
 
-  typedef char __PADDING1;
-  typedef long __PADDING4;
-
   enum BoundingBoxType { BBOX_UNKNOWN = -1, BBOX_AUTOMATIC, BBOX_FULLIMAGE, BBOX_MANUAL };
   enum SoundType { SND_UNKNOWN = -1, SND_NORMAL, SND_BGMUSIC, SND_3DSOUND, SND_MULTIMEDIA };
   enum GMValueType { VT_REAL, VT_STRING };
+
+  typedef char __PADDING1;
+  typedef long __PADDING4;
 
   typedef struct __GMDIRECT3DINFO {
     IDirect3D8* d3dInterface;
@@ -306,4 +306,5 @@ namespace gm {
     double timeline_speed;
   } GMINSTANCE, *PGMINSTANCE;
 
+  typedef void (__fastcall* GMFunction)( int, PGMINSTANCE, PGMVALUE, int, GMVALUE* );
 }

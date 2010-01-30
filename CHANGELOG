@@ -1,3 +1,8 @@
+V0.5 (26, Nov 2009)
+  - Some bugs has been fixed
+  - Several small fixes in comments
+  - New methods in CGMAPI class: SetGMFunctionAddress, SetGMFunctionResult, PreserveFunctionData and RestoreFunctionData, which are helpful in manipulating GM's function table (replacing GM functions with user-defined)
+
 V0.4 (17, May 2009)
   - From now to use D3D8 with GMAPI You have to define GMAPI_USE_D3D, "GMAPI_NO_D3D" has been removed
   - GMVARIABLE structure: renamed to GMVALUE, added << operator overload with std::ostream, member names changed

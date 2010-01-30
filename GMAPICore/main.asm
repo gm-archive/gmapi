@@ -55,9 +55,9 @@ GMAPI_HOOK_DATA_BASE          equ 00400800h
 GMAPI_HOOK_DATA_CODE          equ 00400900h
 GMAPI_HOOK_DATA_PREVCODE      equ 00400A00h
 
-GM_SIGNATURE                  equ 00401041h
-GM70_ID                       equ 08h
-GM61_ID                       equ 07h
+GM_SIGNATURE                  equ 00500000h
+GM70_ID                       equ 00589A24h
+GM61_ID                       equ 0E8005386h
 
 .data
 
@@ -77,12 +77,11 @@ RUNNER_FIND_SYMBOL_ID    dd 0052A310h
 .code
 
 GMAPIInitialize proc
-
   xor    eax, eax
-  mov    dl, byte ptr ds:[GM_SIGNATURE]
+  mov    edx, dword ptr ds:[GM_SIGNATURE]
   
-  ; Check GM7 sig
-  cmp    dl, GM70_ID
+  ; Check GM7 signature
+  cmp    edx, GM70_ID
   jne    CheckGM61
   
   ; All contants are already initialized to GM7 so set return value only
@@ -92,7 +91,7 @@ GMAPIInitialize proc
 
 CheckGM61:
 
-  cmp    dl, GM61_ID
+  cmp    edx, GM61_ID
   jne    ProcExit
   
   ; Modify addresses
@@ -203,10 +202,10 @@ GMCallFunction proc uses ecx aFunctionPtr:DWORD, aArgArr:DWORD, aArgCount:DWORD,
   mov     eax, GMAPI_HOOK_DATA_BASE
   mov     edx, [eax].thisInstance    ; Get instance from which dll function was called
   mov     eax, [eax].withInstance    ; Get instance with which the code will be executed
-  mov     ecx, aArgCount             ; Number of arguments passed to function
+  mov     ecx, aArgCount             ; Number of arguments passed to the function
   push    aArgArr                    ; Pointer to array which stores parameters for called function
-  push    0Fh                        ; Max number of arguments - always set to 15, cause' there's no need for any checks
-  push    aPtrResult                 ; Pointer to structure that'll receive function result 
+  push    0Fh                        ; Maximal allowed number of arguments for a function - always set to 15
+  push    aPtrResult                 ; Pointer to structure that'll receive function result
   call    aFunctionPtr               ; Call GM function
 
   ret
@@ -259,14 +258,14 @@ GMAPIHookInstall proc uses ecx esi edi
   push   esp                    ; Arg4 - oldProtect; (push address of oldProtect variable)
   push   40h                    ; Arg3 - newProtect; (PAGE_EXECUTE_READWRITE)
   push   09h                    ; Arg2 - memory block size
-  push   RUNNER_EXTERNAL_CALL   ; Arg4 - address; (external_call address)
+  push   RUNNER_EXTERNAL_CALL   ; Arg1 - address; (external_call address)
   call   [VirtualProtect]
   
   ; to cave in PE header
   push   esp                    ; Arg4 - oldProtect; (push address of oldProtect variable)
   push   40h                    ; Arg3 - newProtect; (PAGE_EXECUTE_READWRITE)
   push   200h                   ; Arg2 - memory block size
-  push   GMAPI_HOOK_DATA_BASE   ; Arg4 - address
+  push   GMAPI_HOOK_DATA_BASE   ; Arg1 - address
   call   [VirtualProtect]
 
   pop    eax
@@ -322,7 +321,7 @@ ProcExit:
     add    esp, -1A0h ; GM7 local data storage
 
     ; Check if it's GM6
-    cmp    byte ptr ds:[GM_SIGNATURE], GM61_ID
+    cmp    dword ptr ds:[GM_SIGNATURE], GM61_ID
     jne    Skip
   
     add    esp, 60    ; GM6.1 local variable space == 140h

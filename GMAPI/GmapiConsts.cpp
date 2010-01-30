@@ -24,7 +24,6 @@
   Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
-
 #include "GmapiConsts.h"
 
 namespace gm {

@@ -29,19 +29,19 @@
 namespace gm {
   namespace core {
     extern "C" char** __stdcall GMAllocateString();
-    extern "C" void __stdcall GMDeallocateString( __in char** aPtrString );
-    extern "C" void __stdcall GMDeallocateResult( __deref_inout void* aPtrResult );
-    extern "C" void __stdcall GMDeallocateBitmap( __deref_in void* aPtrBitmap );
+    extern "C" void __stdcall GMDeallocateString( char** aPtrString );
+    extern "C" void __stdcall GMDeallocateResult( void* aPtrResult );
+    extern "C" void __stdcall GMDeallocateBitmap( void* aPtrBitmap );
 
-    extern "C" void __stdcall GMCallFunction( __in const void* aPtrFunction,
-                                              __in void* aArgArray,
-                                              __in const int aArgCount,
-                                              __inout void* aPtrResult );
+    extern "C" void __stdcall GMCallFunction( const void* aPtrFunction,
+                                              void* aArgArray,
+                                              const int aArgCount,
+                                              void* aPtrResult );
 
-    extern "C" void __stdcall GMSetString( __in const char* aString, __inout char** aPtrString );
-    extern "C" void __stdcall GMClearString( __deref_inout char** aPtrString );
+    extern "C" void __stdcall GMSetString( const char* aString, char** aPtrString );
+    extern "C" void __stdcall GMClearString( char** aPtrString );
 
-    extern "C" int __stdcall GMFindSymbolID( __in const char* aString );
+    extern "C" int __stdcall GMFindSymbolID( const char* aString );
 
     extern "C" unsigned long __stdcall GMAPIInitialize();
 

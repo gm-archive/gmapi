@@ -28,8 +28,8 @@
 
 #define GMVAR_LEN( aArray ) (sizeof( aArray )/sizeof(gm::GMVALUE))
 
-#define GM_NORMAL_CALL( aFunctionID ) gm::core::GMCallFunction(gm::CGMAPI::GMAPIFunctionArray(gm:: aFunctionID ),&argument,GMVAR_LEN(argument),&result)
-#define GM_VOID_CALL( aFunctionID ) gm::core::GMCallFunction(gm::CGMAPI::GMAPIFunctionArray(gm:: aFunctionID ),NULL,0,&result)
+#define GM_NORMAL_CALL( aFunctionID ) gm::core::GMCallFunction(gm::CGMAPI::GMAPIGMFunctionTable(gm:: aFunctionID ),&argument,GMVAR_LEN(argument),&result)
+#define GM_VOID_CALL( aFunctionID ) gm::core::GMCallFunction(gm::CGMAPI::GMAPIGMFunctionTable(gm:: aFunctionID ),NULL,0,&result)
 
 #define GM_ARGS GMVALUE argument[]=
 #define GM_NORMAL_RESULT gm::GMVALUE result;

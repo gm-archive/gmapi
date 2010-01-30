@@ -19,7 +19,7 @@
 
 /*************************************************************************
   GmapiInternal.h
-  - Declarations of all GMAPI components, excluding wrapped gm functions
+  - Declarations of all GMAPI components, excluding wrapped GM functions
 
   Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
@@ -43,12 +43,12 @@ namespace gm {
   /// CGMVariable
   /// Class that mimics GM's variable. It is used in few
   /// GM functions as string/unspecified (i.e. that ones which
-  /// can be both "real" or "string") arguments and
+  /// can be either "real" or "string") arguments and
   /// string/unspecified return values.
   ///
   class CGMVariable {
     public:
-      /// Ctor( __in_opt const int aValue = 0 ) [also default]
+      /// Ctor( const int aValue ) [also default]
       ///   Initializes the variable to specified int value 
       ///   (it'll be casted to double) and sets its type
       ///   to "real".
@@ -56,80 +56,87 @@ namespace gm {
       /// Parameters:
       ///   aValue: [optional] Initializing value. 
       ///
-      CGMVariable( __in_opt const int aValue = 0 ): m_real( aValue ),
-                                                    m_ppStr( NULL ),
-                                                    m_stringType( false ),
-                                                    m_disposeStr( true ) {}
+      CGMVariable( const int aValue = 0 ): m_real( aValue ),
+                                           m_ppStr( NULL ),
+                                           m_stringType( false ),
+                                           m_disposeStr( true ) {}
 
-      /// Ctor( __in const double aValue )
+      /// Ctor( const double aValue )
       ///   Initializes the variable to specified value 
       ///   and sets its type to "real".
       ///
       /// Parameters:
       ///   aValue: Initializing value.
       ///
-      CGMVariable( __in const double aValue ): m_real( aValue ),
-                                               m_ppStr( NULL ),
-                                               m_stringType( false ),
-                                               m_disposeStr( true ) {}
+      CGMVariable( const double aValue ): m_real( aValue ),
+                                          m_ppStr( NULL ),
+                                          m_stringType( false ),
+                                          m_disposeStr( true ) {}
 
-      /// Ctor( __in const char* aValue )
+      /// Ctor( const char* aValue )
       ///   Initializes the variable with specified string 
       ///   and sets its type to "string".
       ///
       /// Parameters:
       ///   aValue: Initializing string.
       ///
-      CGMVariable( __in const char* aValue ): m_real( 0.0 ),
-                                              m_ppStr( NULL ), m_stringType( true ),
-                                              m_disposeStr( true ) {
+      CGMVariable( const char* aValue ): m_real( 0.0 ),
+                                         m_ppStr( NULL ),
+                                         m_stringType( true ),
+                                         m_disposeStr( true ) {
         StringSet( aValue );
       }
 
-      /// Ctor( __in const std::string& aValue )
+      /// Ctor( const std::string& aValue )
       ///   Initializes the variable with specified string 
       ///   and sets its type to "string".
       ///
       /// Parameters:
       ///   aValue: Initializing string.
       ///
-      CGMVariable( __in const std::string& aValue ): m_real( 0.0 ),
-                                                     m_ppStr( NULL ),
-                                                     m_stringType( true ),
-                                                     m_disposeStr( true ) {
+      CGMVariable( const std::string& aValue ): m_real( 0.0 ),
+                                                m_ppStr( NULL ),
+                                                m_stringType( true ),
+                                                m_disposeStr( true ) {
         StringSet( aValue.c_str() );
       }
 
-      /// Ctor( __in const bool aDeallocateString )
+      /// Ctor( const bool aDeallocateString )
       ///   This constructor is used internally, its purpose is
       ///   to specify that variable should not dispose the memory
-      ///   allocated for string. Thus, variable can be returned in 
+      ///   allocated for the string. Thus, variable can be returned in 
       ///   functions as string type.
       ///
       /// Parameters:
       ///   aValue: Initializing string.
       ///
-      CGMVariable( __in const bool aDeallocateString ): m_real( 0.0 ),
-                                                        m_ppStr( NULL ),
-                                                        m_stringType( false ),
-                                                        m_disposeStr( aDeallocateString ) {}
+      CGMVariable( const bool aDeallocateString ): m_real( 0.0 ),
+                                                   m_ppStr( NULL ),
+                                                   m_stringType( false ),
+                                                   m_disposeStr( aDeallocateString ) {}
 
-      CGMVariable( __in const GMVALUE& aValue );
+      /// Ctor( const GMVALUE& aValue )
+      ///   Initializes the variables using the GMVALUE structure
+      ///
+      /// Parameter:
+      ///   aValue: GMVALUE that'll be used to initialize the variable
+      ///
+      CGMVariable( const GMVALUE& aValue );
 
       ~CGMVariable() {
         if ( m_stringType && m_ppStr && m_disposeStr )
           StringDeallocate();
       }
 
-      /// Set( __in const double aValue )
-      ///   Sets the variable to specified double value, thus
+      /// Set( const double aValue )
+      ///   Sets the variable to specified value of type "double", thus
       ///   changing its type to "real". If the variable was previously
       ///   a "string" type - the string will be deallocated.
       ///
       /// Parameters:
       ///   aValue: New value
       ///
-      void Set( __in const double aValue ) {
+      void Set( const double aValue ) {
         if ( m_stringType ) {
           StringClear();
           m_stringType = false;
@@ -138,7 +145,7 @@ namespace gm {
         m_real = aValue;
       }
 
-      /// Set( __in const char* aValue )
+      /// Set( const char* aValue )
       ///   Sets variable to specified string. Thus, changes its type
       ///   to "string". If previously variable was "real" type - it'll
       ///   be set to zero.
@@ -146,7 +153,7 @@ namespace gm {
       /// Parameters:
       ///   aValue: New value
       ///
-      void Set( __in const char* aValue ) {
+      void Set( const char* aValue ) {
         if ( !m_stringType ) {
           m_real = 0.0;
           m_stringType = true;
@@ -158,7 +165,7 @@ namespace gm {
           StringClear();
       }
 
-      /// void Set( __in const std::string& aValue )
+      /// void Set( const std::string& aValue )
       ///   Sets variable to specified string. Thus, changes its type
       ///   to "string". If previously variable was "real" type - it'll
       ///   be set to zero.
@@ -166,7 +173,7 @@ namespace gm {
       /// Parameters:
       ///   aValue: New value
       ///
-      void Set( __in const std::string& aValue ) {
+      void Set( const std::string& aValue ) {
         Set( aValue.c_str() );
       }
 
@@ -180,10 +187,7 @@ namespace gm {
       ///   C-style string if variable's type is string, otherwise NULL.
       ///
       const char* c_str() const {
-        if ( m_ppStr && m_stringType )
-          return *m_ppStr;
-        else
-          return NULL;
+        return ( m_ppStr && m_stringType ? *m_ppStr : NULL );
       }
 
       /// real()
@@ -305,7 +309,7 @@ namespace gm {
       }
 
     private:
-      void StringSet( __in const char* aValue );
+      void StringSet( const char* aValue );
       void StringClear();
       void StringDeallocate();
 
@@ -344,14 +348,14 @@ namespace gm {
                real( 0 ),
                string( NULL ) {}
 
-    GMVALUE( __in const double aValue ): type( VT_REAL ),
-                                         real( aValue ),
-                                         string( NULL ) {}
+    GMVALUE( const double aValue ): type( VT_REAL ),
+                                    real( aValue ),
+                                    string( NULL ) {}
 
-    GMVALUE( __in char* aValue ): type( VT_REAL ),
-                                  string( aValue ) {}
+    GMVALUE( char* aValue ): type( VT_REAL ),
+                             string( aValue ) {}
 
-    GMVALUE( __in const CGMVariable& aValue ) {
+    GMVALUE( const CGMVariable& aValue ) {
       *this = aValue;
     }
 
@@ -414,7 +418,7 @@ namespace gm {
     GMVARIABLE& operator=( char* aValue );
     GMVARIABLE& operator=( const CGMVariable& aValue );
 	
-	/// Dereferences "values" component of the structure
+	  /// Dereferences "values" component of the structure
     GMVALUE* operator[]( const int aIndex ) {
       return values[aIndex];
     };
@@ -566,7 +570,7 @@ namespace gm {
       static void ReleaseBitmap();
 
       /// GetBitmapSize()
-      ///   Returns size of sprite's subimage bitmap in bytes.
+      ///   Returns the size of sprite's subimage bitmap in bytes.
       ///
       /// Parameters:
       ///   None
@@ -588,7 +592,7 @@ namespace gm {
       inline static int GetTextureID();
 
       /// GetTexture()
-      ///  Retrives a pointer to an Direct3DTexture interface
+      ///  Retrieves a pointer to a Direct3DTexture interface
       ///  associated with this subimage's texture
       ///
       /// Parameters:
@@ -618,8 +622,8 @@ namespace gm {
       ///   Provides access to sprite's subimages from ISpriteSubimage interface,
       ///   setting current subimage number (an element) from int specified in brackets.
       ///
-      /// Throws:
-      ///   EGMAPIInvalidSubimage object in case when number of subimage
+      /// Exceptions:
+      ///   Throws EGMAPIInvalidSubimage object in case when number of subimage
       ///   is not valid.
       ///
       /// Returns:
@@ -657,7 +661,7 @@ namespace gm {
       ISpriteSubimages Subimages;
 
       /// GetName()
-      ///   Gets name of this sprite.
+      ///   Gets the name of this sprite.
       ///
       /// Parameters:
       ///   None
@@ -667,7 +671,7 @@ namespace gm {
       ///
       inline static const char* GetName();
 
-      /// GetHeight()
+      /// GetWidth()
       ///   Returns width of the sprite.
       ///
       /// Parameters:
@@ -720,13 +724,13 @@ namespace gm {
       }
 
       /// SetOffset( const int aOffsetX, const int aOffsetY )
-      ///   Sets sprite's origins.
+      ///   Sets the sprite's origins.
       ///
       /// Parameters:
       ///   aOffsetX: New X origin
       ///   aOffsetY: New Y origin
       ///
-      static void SetOffset( __in const int aOffsetX, __in const int aOffsetY ) {
+      static void SetOffset( const int aOffsetX, const int aOffsetY ) {
         m_sprite->originX = aOffsetX;
         m_sprite->originY = aOffsetY;
       }
@@ -744,14 +748,14 @@ namespace gm {
         return m_sprite->preciseCollision & 1;
       }
 
-      /// SetPreciseCollision( __in const bool aEnable )
+      /// SetPreciseCollision( const bool aEnable )
       ///   Enables or disables precise collision checking.
       ///
       /// Parameters:
       ///   aEnable: Specifies whether to enable or disable precise
       ///   collision checking
       ///
-      static void SetPreciseCollision( __in const bool aEnable ) {
+      static void SetPreciseCollision( const bool aEnable ) {
         m_sprite->preciseCollision = (BOOL) aEnable;
       }
 
@@ -859,21 +863,21 @@ namespace gm {
         return m_sprite->bboxBottom;
       }
 
-      /// SetBoundingBoxType( __in const BoundingBoxType aType )
+      /// SetBoundingBoxType( const BoundingBoxType aType )
       ///   Changes type of sprite's bounding box.
       ///
       /// Parameters:
       ///   aType: New type.
       ///
-      static void SetBoundingBoxType( __in const BoundingBoxType aType ) {
+      static void SetBoundingBoxType( const BoundingBoxType aType ) {
         m_sprite->bboxType = aType;
       }
 
       /// SetBoundingBox(
-      ///   __in const int aLeft, 
-      ///   __in const int aRight,
-      ///   __in const int aTop,
-      ///   __in const int aBottom
+      ///    const int aLeft, 
+      ///    const int aRight,
+      ///    const int aTop,
+      ///    const int aBottom
       /// )
       ///   Sets sprite's bounding box.
       ///
@@ -923,8 +927,8 @@ namespace gm {
       ///   Provides access to sprite resource from ISprite interface,
       ///   setting current sprite ID (an element) from int specified in brackets.
       ///
-      /// Throws:
-      ///   EGMAPISpriteNotExists object in case when sprite of ID
+      /// Exceptions:
+      ///   Throws EGMAPISpriteNotExists object in case when sprite of ID
       ///   specified in brackets does not exist.
       ///
       /// Returns:
@@ -932,7 +936,7 @@ namespace gm {
       ///
       inline ISprite& operator[]( const int aSpriteId );
 
-      /// GetID( __in const char* aSpriteName )
+      /// GetID( const char* aSpriteName )
       ///   Gets ID of given sprite (by name).
       ///
       /// Parameters:
@@ -942,10 +946,10 @@ namespace gm {
       ///   Given sprite's ID. If sprite with specified name doesn't
       ///   exists, then return valuie will be -1.
       ///
-      static int GetID( __in const char* aSpriteName );
+      static int GetID(  const char* aSpriteName );
 
-      /// Exists( __in const int aSpriteId )
-      ///   Checks whether specified sprite (an ID) exists. 
+      /// Exists( const int aSpriteId )
+      ///   Checks whether specified sprite exists (by ID). 
       ///
       /// Parameters:
       ///   aSpriteId: ID of the sprite
@@ -953,7 +957,7 @@ namespace gm {
       /// Returns:
       ///   true if sprite exists.
       ///
-      static bool Exists( __in const int aSpriteId );
+      static bool Exists( const int aSpriteId );
 
       /// GetCount()
       ///   Returns total number of sprites in the game.
@@ -993,7 +997,7 @@ namespace gm {
 
     public:
       /// GetName()
-      ///   Gets name of this background.
+      ///   Gets the name of this background.
       ///
       /// Parameters:
       ///   None
@@ -1083,8 +1087,8 @@ namespace gm {
       inline static int GetTextureID();
 
       /// GetTexture()
-      ///  Retrives a pointer to an Direct3DTexture interface
-      ///  associated with this background's texture
+      ///  Retrieves a pointer to an Direct3DTexture interface
+      ///  associated with the background's texture
       ///
       /// Parameters:
       ///   None
@@ -1144,8 +1148,8 @@ namespace gm {
       ///   Provides access to background resource from IBackground interface,
       ///   setting current background ID (an element) from int specified in brackets.
       ///
-      /// Throws:
-      ///   EGMAPIBackgroundNotExists object in case when background of ID
+      /// Exceptions:
+      ///   Throws EGMAPIBackgroundNotExists object in case when background of ID
       ///   specified in brackets does not exist.
       ///
       /// Returns:
@@ -1153,7 +1157,7 @@ namespace gm {
       ///
       inline IBackground& operator[]( int aBackgroundId );
 
-      /// GetID( __in const char* aBackgroundName )
+      /// GetID( const char* aBackgroundName )
       ///   Gets ID of given background (by name).
       ///
       /// Parameters:
@@ -1163,9 +1167,9 @@ namespace gm {
       ///   Given background's ID. If background with specified name doesn't
       ///   exists, then return valuie will be -1.
       ///
-      static int GetID( __in const char* aBackgroundName );
+      static int GetID( const char* aBackgroundName );
 
-      /// Exists( __in const int aBackgroundId )
+      /// Exists(  const int aBackgroundId )
       ///   Checks whether specified background (an ID) exists. 
       ///
       /// Parameters:
@@ -1174,7 +1178,7 @@ namespace gm {
       /// Returns:
       ///   true if background exists.
       ///
-      static bool Exists( __in const int aBackgroundId );
+      static bool Exists(  const int aBackgroundId );
 
       /// GetCount()
       ///   Returns total number of backgrounds in the game.
@@ -1247,7 +1251,7 @@ namespace gm {
       inline static int GetTextureID();
 
       /// GetTexture()
-      ///  Retrives a pointer to an Direct3DTexture interface
+      ///  Retrieves the pointer to a Direct3DTexture8 interface
       ///  associated with this surface's texture
       ///
       /// Parameters:
@@ -1276,8 +1280,8 @@ namespace gm {
       ///   Provides access to surface resource from ISurface interface,
       ///   setting current surface ID (an element) from int specified in brackets.
       ///
-      /// Throws:
-      ///   EGMAPISurfaceNotExists object in case when surface of ID
+      /// Exceptions:
+      ///   Throws EGMAPISurfaceNotExists object in case when surface of ID
       ///   specified in brackets does not exist.
       ///
       /// Returns:
@@ -1285,7 +1289,7 @@ namespace gm {
       ///
       inline ISurface& operator[]( int aSurfaceId );
 
-      /// Exists( __in const int aSurfaceId )
+      /// Exists( const int aSurfaceId )
       ///   Checks whether specified surface (an ID) exists. 
       ///
       /// Parameters:
@@ -1294,7 +1298,7 @@ namespace gm {
       /// Returns:
       ///   true if surface exists.
       ///
-      inline static bool Exists( __in const int aSurfaceId );
+      inline static bool Exists( const int aSurfaceId );
 
       /// GetCount()
       ///   Returns total number of surfaces in the game.
@@ -1344,21 +1348,21 @@ namespace gm {
       ///
       inline static unsigned long GetScriptLength();
 
-      /// GetScript( __out char* aBuffer )
+      /// GetScript( char* aBuffer )
       ///   Gets code of this script resource.
       ///
       /// Parameters:
       ///   aBuffer: Pointer to an array of char. Buffer must
       ///   be large enough to hold whole code - use method
-      ///   GetScriptLength() to find out length of the script.
+      ///   GetScriptLength() to find length of the script.
       ///
       /// Returns:
       ///   Pointer specified in aBuffer parameter.
       ///
-      static char* GetScript( __out char* aBuffer );
+      static char* GetScript( char* aBuffer );
 
       /// GetName()
-      ///   Gets name of this script.
+      ///   Gets the name of this script.
       ///
       /// Parameters:
       ///   None
@@ -1385,8 +1389,8 @@ namespace gm {
       ///   Provides access to script resource from IScript interface,
       ///   setting current sprite ID (an element).
       ///
-      /// Throws:
-      ///   EGMAPIScriptNotExists object in case when script of ID
+      /// Exceptions:
+      ///   Throws EGMAPIScriptNotExists object in case when script of ID
       ///   specified in brackets does not exist.
       ///
       /// Returns:
@@ -1416,8 +1420,8 @@ namespace gm {
       ///
       inline static int GetArraySize();
 
-      /// Exists( __in const int aScriptId )
-      ///   Checks whether specified script (an ID) exists. 
+      /// Exists( const int aScriptId )
+      ///   Checks whether specified script exists (by ID). 
       ///
       /// Parameters:
       ///   aScriptId: ID of the script
@@ -1425,26 +1429,26 @@ namespace gm {
       /// Returns:
       ///   true if script exists.
       ///
-      inline static bool Exists( __in const int aScriptId );
+      inline static bool Exists( const int aScriptId );
 
-      /// GetID( __in const char* aScriptName )
-      ///   Gets ID of given script (by name).
+      /// GetID( const char* aScriptName )
+      ///   Gets ID of given script by name.
       ///
       /// Parameters:
       ///   aScriptName: Name of the script
       /// 
       /// Returns:
       ///   Given script's ID. If script with specified name doesn't
-      ///   exists, then return valuie will be -1.
+      ///   exists, then return value will be -1.
       ///
-      inline static int GetID( __in const char* aScriptName );
+      static int GetID( const char* aScriptName );
       
     private:
       IScript m_iScript;
   };
 
   /// ISound
-  /// Class that provides easy access to sounds from the game
+  /// Class that provides easy access to the sounds from the game
   ///
   /// You should access this class only from an instance of
   /// CGMAPI class
@@ -1454,7 +1458,7 @@ namespace gm {
 
     public:
       /// GetType()
-      ///   Gets type of the sound
+      ///   Gets the type of the sound
       ///
       /// Parameters:
       ///   None
@@ -1475,7 +1479,7 @@ namespace gm {
       ///
       inline static const char* GetExtension();
 
-      /// GetFilename()
+      /// GetFileName()
       ///   Gets sound's filename
       ///
       /// Parameters:
@@ -1484,33 +1488,33 @@ namespace gm {
       /// Returns:
       ///   Sound's filename or NULL if no file was selected for this sound
       ///
-      inline static const char* GetFilename();
+      inline static const char* GetFileName();
 
-      /// GetFilepath()
+      /// GetFilePath()
       ///   Gets path to sound's temporary file.
       ///
       /// Parameters:
       ///   None
       ///
       /// Returns:
-      ///   Path to sound file if using multimedia player
-      ///   to play the sound & it is preloaded, otherwise NULL.
+      ///   Path to the sound file if using multimedia player to play the
+      ///   sound & it is preloaded, otherwise NULL.
       ///
       inline static const char* GetFilePath();
 
       /// GetName()
-      ///   Gets name of this sound.
+      ///   Gets the name of this sound.
       ///
       /// Parameters:
       ///   None
       ///
       /// Returns
-      ///   Pointer to name of this sound
+      ///   Pointer to the name of this sound
       ///
       inline static const char* GetName();
 
       /// GetVolume()
-      ///   Gets
+      ///   Gets the volume of the sound.
       ///
       /// Parameters:
       ///   None
@@ -1521,7 +1525,7 @@ namespace gm {
       inline static double GetVolume();
 
       /// GetPanning()
-      ///   Gets
+      ///   Gets the panning of the sound.
       ///
       /// Parameters:
       ///   None
@@ -1605,7 +1609,7 @@ namespace gm {
       ///
       /// Returns:
       ///   Pointer to memory block that contains whole sound file.
-      ///   Use GetDataSize() method to check out size of the file.
+      ///   Use GetDataSize() method to check size of the file.
       ///   Returns NULL, if sound has no file selected or using multimedia
       ///   player (sound type SND_MULTIMEDIA) to play this sound AND it is preloaded 
       ///   (when it is not preloaded - method returns valid pointer to file)
@@ -1640,8 +1644,8 @@ namespace gm {
       ///   Provides access to sound resource from ISound interface,
       ///   setting current sprite ID (an element).
       ///
-      /// Throws:
-      ///   EGMAPISoundNotExists object in case when sound of ID
+      /// Exceptions:
+      ///   Throws EGMAPISoundNotExists object in case when sound of ID
       ///   specified in brackets does not exist.
       ///
       /// Returns:
@@ -1650,19 +1654,19 @@ namespace gm {
       inline ISound& operator[]( int aSoundId );
 
       /// GetCount()
-      ///   Returns total number of sounds in the game.
+      ///   Returns total number of the sounds in the game.
       ///
       /// Parameters:
       ///   None
       /// 
       ///  Returns:
-      ///    Total number of sounds.
+      ///    Total number of the sounds.
       ///
       static int GetCount();
 
       /// GetArraySize()
       ///   Returns size of dynamic arrays that holds pointers
-      ///   to sound resource data. (highest resource ID + 1)
+      ///   to the sound resource data. (highest resource ID + 1)
       ///
       /// Parameters:
       ///   None
@@ -1672,7 +1676,7 @@ namespace gm {
       ///
       inline static int GetArraySize();
 
-      /// Exists( __in const int aSoundId )
+      /// Exists( const int aSoundId )
       ///   Checks whether specified sound (an ID) exists. 
       ///
       /// Parameters:
@@ -1681,19 +1685,19 @@ namespace gm {
       /// Returns:
       ///   true if sound exists.
       ///
-      inline static bool Exists( __in const int aSoundId );
+      inline static bool Exists( const int aSoundId );
 
-      /// GetID( __in const char* aSoundName )
-      ///   Gets ID of given sound (by name).
+      /// GetID( const char* aSoundName )
+      ///   Gets ID of the given sound (by name).
       ///
       /// Parameters:
       ///   aSoundName: Name of the sound
       /// 
       /// Returns:
-      ///   Given sound's ID. If sound with specified name doesn't
-      ///   exists, then return value will be -1.
+      ///   Given sound's ID. If the sound with specified name
+      ///   doesn't exists, then return value will be -1.
       ///
-      static int GetID( __in const char* aSoundName );
+      static int GetID(  const char* aSoundName );
       
     private:
       ISound m_iSound;
@@ -1710,23 +1714,23 @@ namespace gm {
   class CGMAPI {
     public:
       /// Create( int* aResult )
-      ///   Creates an instance of CGMAPI class and initializes GMAPI engine.
+      ///   Creates an instance of CGMAPI class and initializes the GMAPI engine.
       ///   Only one instance of this class is allowed at a runtime.
       ///
       /// Parameters:
-      ///   aResult: pointer to a variable of type int which will receive one of
+      ///   aResult: pointer to a variable of type int which will be set to one of
       ///   the following values:
-      ///     GMAPI_INITIALIZATION_SUCCESS - GMAPI has been initialized properly
+      ///     GMAPI_INITIALIZATION_SUCCESS - GMAPI has been initialized successfully
       ///     GMAPI_INITIALIZATION_FAILED - failed to initialize GMAPI
-      ///     GMAPI_ALREADY_INITIALIZED - an instance of CGMAPI class already exists
+      ///     GMAPI_ALREADY_INITIALIZED - an instance of the CGMAPI class already exists
       /// 
       /// Returns:
-      ///   Pointer to CGMAPI class instance, or NULL if method fails to initialize.
+      ///   Pointer to the CGMAPI class instance, or NULL if failed to initialize.
       /// 
       static CGMAPI* Create( unsigned long* aResult );
 
       /// Destroy()
-      ///   Destroys an instance of CGMAPI class and deinitializes GMAPI engine
+      ///   Destroys the instance of CGMAPI class and deinitializes GMAPI engine
       ///
       /// Parameters:
       ///   None
@@ -1749,7 +1753,7 @@ namespace gm {
       ISounds Sounds;
 
       /// GetGMVersion()
-      ///   Gets Game Maker version in which the game is created
+      ///   Gets the Game Maker version in which the game was created
       ///
       /// Parameters:
       ///   None
@@ -1764,23 +1768,23 @@ namespace gm {
         return m_gmVersion;
       }
 
-      /// GetGMFunctionAddress( __in const char* aFunctionName )
+      /// GetGMFunctionAddress( const char* aFunctionName )
       ///   Gets address of specified GM function.
       ///
       /// Parameters:
-      ///   aFunctionName: name of GM function
+      ///   aFunctionName: name of the GM function
       ///
       /// Returns:
       ///   Address of GM function. If function cannot be found
       ///   then the return value will be NULL.
       /// 
-      static void* GetGMFunctionAddress( __in const char* aFunctionName );
+      static void* GetGMFunctionAddress( const char* aFunctionName );
 
       /// GetD3DTexture( int aTextureId )
       ///   Retrieves pointer to Direct3D texture interface.
       ///
       /// Parameters:
-      ///   aTextureId: specifies to which texture pointer should be retrieved
+      ///   aTextureId: ID of the GM texture
       /// 
       /// Returns:
       ///   If texture ID is valid then pointer to IDirect3DTexture8 will be
@@ -1960,7 +1964,7 @@ namespace gm {
       }
 
       /// SurfaceArraySizePtr()
-      ///   Returns an pointer to variable that holds the size
+      ///   Returns a pointer to variable that holds the size
       ///   of dynamic arrays used to access surface resource.
       ///
       /// Parameters:
@@ -1973,13 +1977,6 @@ namespace gm {
         return m_surfaceArraySize;
       }
 
-      /// GMAPIFunctionArray( const enum GMFunctionPtrID aId )
-      ///   This method is used by wrapped GM functions defined in GMAPI.
-      /// 
-      static const void* GMAPIFunctionArray( const int aId ) {
-        return m_gmFunctions[aId];
-      }
-
       /// GetMainWindowHandle()
       ///   Returns main game window handle.
       ///
@@ -1987,7 +1984,7 @@ namespace gm {
       ///   None
       /// 
       /// Returns:
-      ///   Main window handle
+      ///   Handle of the game's main window
       ///
       HWND GetMainWindowHandle() {
         return m_mainHwnd;
@@ -2027,7 +2024,7 @@ namespace gm {
       }
 
       /// GetCurrentInstancePtr()
-      ///   Gets the pointer to current instance, that is,
+      ///   Gets a pointer to the current instance, that is,
       ///   to instance with which the GM functions are called.
       ///   ("self" instance)
       ///
@@ -2069,7 +2066,7 @@ namespace gm {
       ///   aInstance: Pointer to instance that You want to set as current.
       /// 
       void SetCurrentInstance( PGMINSTANCE aInstance ) {
-        PGMINSTANCE& instance = (PGMINSTANCE) *GMAPI_CURRENT_INSTANCE_PTR;
+        PGMINSTANCE& instance = *const_cast<PGMINSTANCE*>( GMAPI_CURRENT_INSTANCE_PTR );
         instance = aInstance;
       }
 
@@ -2182,10 +2179,11 @@ namespace gm {
       PGMVARIABLE GetLocalVariablePtr( PGMINSTANCE aInstancePtr, int aSymbolId );
 
       /// GetGlobalVariablePtr( int aSymbolId )
-      ///   Gets pointer to specified global variable.
+      ///   Gets the pointer to specified global variable.
       ///
       /// Parameters:
-      ///   aSymbolId: Variable's symbol ID to which pointer is to be retrieved.
+      ///   aSymbolId: Variable's symbol ID (check GetSymbolID method) to which
+      ///              pointer is to be retrieved.
       ///
       /// Returns:
       ///   Pointer to the variable (GMVARIABLE structure). If variable doesn't
@@ -2198,6 +2196,73 @@ namespace gm {
 
       /// Used internally
       static int ResourceGetCount( void** aResourceInstances, int aArraySize );
+
+      /// GMAPIGMFunctionTable( const int aId )
+      ///   Returns the pointer to the specified GM function.
+      ///   This method is used internally by wrapped GM functions
+      ///   defined in GMAPI.
+      ///
+      static const void* GMAPIGMFunctionTable( const int aId ) {
+        return m_gmFunctions[aId];
+      }
+
+      /// SetGMFunctionAddress( const char* aFunctionName, GMFunction aNewFunction )
+      ///   Changes the address of the specified GM function. This can be
+      ///   used to replace built-in functions to new ones. 
+      ///   Note: Changes does not affect GMAPI's wrapped GM functions.
+      ///
+      ///  Parameters:
+      ///    aFunctionName: name of the GM function to replace
+      ///    aNewFunction: Address of new GM function. Functions of type "GMFunction"
+      ///    should be defined as follows:
+      ///
+      ///    void __fastcall FunctionExample( int aNumberOfArgs,
+      ///                                     PGMINSTANCE aInstance,
+      ///                                     PGMVALUE aResult,
+      ///                                     int aMaxArgs,
+      ///                                     GMVALUE* aArguments );
+      ///
+      ///    aNumberOfArgs specifies how many arguments has been passed to function in aArguments
+      ///    parameter (which is an array of values in GM's "format"). aInstance parameter
+      ///    holds a pointer to instance which called the function. aResult is a pointer
+      ///    to GMVALUE structure, which is used to determine result of the function.
+      ///    Important: Use CGMAPI::SetGMFunctionResult to safely change the result of the function.
+      ///    Also, notice the calling convention (fastcall).
+      ///
+      ///  Returns:
+      ///    True if address has been changed successfully, otherwise false.
+      ///   
+      bool SetGMFunctionAddress( const char* aFunctionName, GMFunction aNewFunction );
+
+      /// SetGMFunctionResult( PGMVALUE aResultPtr, const CGMVariable& aValue )
+      ///   Safely changes the result value passed to user-defined GM function by a runner.
+      ///
+      ///  Parameters:
+      ///    aResultPtr: Pointer to GMVALUE structure that holds a result of the function
+      ///    aValue: New value of the result (can be set to either string or real value)
+      ///
+      static void SetGMFunctionResult( PGMVALUE aResultPtr, const CGMVariable& aValue ) {
+        *aResultPtr = CGMVariable( false ) = aValue;
+      }
+
+      /// PreserveFunctionData();
+      ///   Preserves data of the GM function table. Useful while replacing
+      ///   GM functions with new ones.
+      ///
+      /// Returns:
+      ///   Pointer to block of data that holds GM function table. It is
+      ///   used in CGMAPI::RestoreFunctionData function to restore
+      ///   the table.
+      ///
+      GMFUNCTIONINFO* PreserveFunctionData();
+
+      /// RestoreFunctionData( GMFUNCTIONINFO* aData );
+      ///   Restores the GM's function table by using specified data.
+      ///
+      /// Returns:
+      ///   aData: Pointer to block of data that holds GM function table.
+      ///
+      void RestoreFunctionData( GMFUNCTIONINFO* aData );
 
     private:
       CGMAPI( bool* aSuccess );
@@ -2447,8 +2512,7 @@ namespace gm {
   }
 
   inline bool IScripts::Exists( const int aScriptId ) {
-    if ( aScriptId >= GetArraySize() || aScriptId < 0 ||
-         !CGMAPI::ScriptData()->scripts )
+    if ( aScriptId >= GetArraySize() || aScriptId < 0 || !CGMAPI::ScriptData()->scripts )
       return false;
     else
       return ( CGMAPI::ScriptData()->scripts[aScriptId] != NULL );
@@ -2484,8 +2548,7 @@ namespace gm {
   }
 
   inline bool ISounds::Exists( const int aSoundId ) {
-    if ( aSoundId >= GetArraySize() || aSoundId < 0 ||
-         !CGMAPI::SoundData()->sounds )
+    if ( aSoundId >= GetArraySize() || aSoundId < 0 || !CGMAPI::SoundData()->sounds )
       return false;
     else
       return ( CGMAPI::SoundData()->sounds[aSoundId] != NULL );
@@ -2507,7 +2570,7 @@ namespace gm {
     return CGMAPI::SoundData()->sounds[m_soundId]->fileExt;
   }
 
-  const char* ISound::GetFilename() {
+  const char* ISound::GetFileName() {
     return CGMAPI::SoundData()->sounds[m_soundId]->filename;
   }
 

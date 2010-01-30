@@ -36,15 +36,15 @@ namespace gm {
     GM_VAR_RESULT;
     GM_PRESERVE_INSTANCE_DATA;
 
-    GMVALUE* argument = new GMVALUE[aArgCount + 1];
-    ZeroMemory( argument, sizeof( GMVALUE ) * (aArgCount + 1) );
+    GMVALUE* argument = new GMVALUE[aArgCount + 2];
+    ZeroMemory( argument, sizeof( GMVALUE ) * (aArgCount + 2) );
 
     argument[0] = ind;
 
     for ( int i = 0; i < aArgCount; i++ )
       argument[i + 1] = aArguments[i];
 
-    GMCallFunction( CGMAPI::GMAPIFunctionArray( id_script_execute ), argument, aArgCount + 1,
+    GMCallFunction( CGMAPI::GMAPIGMFunctionTable( id_script_execute ), argument, aArgCount + 1,
                     &result );
 
     delete [] argument;
@@ -56,15 +56,15 @@ namespace gm {
     GM_VAR_RESULT;
     GM_PRESERVE_INSTANCE_DATA;
 
-    GMVALUE* argument = new GMVALUE[aArgCount + 1];
-    ZeroMemory( argument, sizeof( GMVALUE ) * (aArgCount + 1) );
+    GMVALUE* argument = new GMVALUE[aArgCount + 2];
+    ZeroMemory( argument, sizeof( GMVALUE ) * (aArgCount + 2) );
 
     argument[0] = str;
 
     for ( int i = 0; i < aArgCount; i++ )
       argument[i + 1] = aArguments[i];
 
-    GMCallFunction( CGMAPI::GMAPIFunctionArray( id_execute_string ), argument, aArgCount + 1,
+    GMCallFunction( CGMAPI::GMAPIGMFunctionTable( id_execute_string ), argument, aArgCount + 1,
                     &result );
 
     delete [] argument;
@@ -76,15 +76,15 @@ namespace gm {
     GM_VAR_RESULT;
     GM_PRESERVE_INSTANCE_DATA;
 
-    GMVALUE* argument = new GMVALUE[aArgCount + 1];
-    ZeroMemory( argument, sizeof( GMVALUE ) * (aArgCount + 1) );
+    GMVALUE* argument = new GMVALUE[aArgCount + 2];
+    ZeroMemory( argument, sizeof( GMVALUE ) * (aArgCount + 2) );
 
     argument[0] = fname;
 
     for ( int i = 0; i < aArgCount; i++ )
       argument[i + 1] = aArguments[i];
 
-    GMCallFunction( CGMAPI::GMAPIFunctionArray( id_execute_file ), argument, aArgCount + 1,
+    GMCallFunction( CGMAPI::GMAPIGMFunctionTable( id_execute_file ), argument, aArgCount + 1,
                     &result );
 
     delete [] argument;
@@ -109,7 +109,7 @@ namespace gm {
     for ( int i = 0; i < argnumb; i++ )
       argument[i + 5] = aArgTypes[i];
 
-    GMCallFunction( CGMAPI::GMAPIFunctionArray( id_external_call ), argument, argnumb + 5,
+    GMCallFunction( CGMAPI::GMAPIGMFunctionTable( id_external_call ), argument, argnumb + 5,
                     &result );
 
     delete [] argument;
@@ -129,7 +129,7 @@ namespace gm {
     for ( int i = 0; i < aArgCount; i++ )
       argument[i + 1] = aArguments[i];
 
-    GMCallFunction( CGMAPI::GMAPIFunctionArray( id_external_call ), argument, aArgCount + 1,
+    GMCallFunction( CGMAPI::GMAPIGMFunctionTable( id_external_call ), argument, aArgCount + 1,
                     &result );
 
     delete [] argument;
