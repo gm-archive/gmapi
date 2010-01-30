@@ -74,7 +74,11 @@ RUNNER_FUNCTION_ARRAY    dd 00589E64h
 
 .data?
 
+ptrWithInstance          dd ?
+ptrThisInstance          dd ?
+
 gmVersion                dd ?
+processHandle            dd ?
 
 .code
 
@@ -255,7 +259,7 @@ GMAPIHookInstall proc uses ecx esi edi
   mov    ecx, 09h
   rep movsb
   
-  ; Modify external_call function prologue - jump to hook
+  ; Modify external_call function prologue - jump to GMAPIHook
   add    ecx, 09h
   lea    edi, dword ptr ds:[esi-09h]
   mov    esi, HookDetour

@@ -35,6 +35,9 @@
 namespace gm {
 
   enum BoundingBoxType { BBOX_UNKNOWN = -1, BBOX_AUTOMATIC, BBOX_FULLIMAGE, BBOX_MANUAL };
+  enum SoundType { SND_UNKNOWN = -1, SND_NORMAL, SND_BGMUSIC, SND_3DSOUND, SND_MULTIMEDIA };
+
+// 0 = normal snd; 1 = bg music; 2 = 3d sound; 3 = mmedia snd
 
   typedef struct __GMDIRECT3DINFO {
     IDirect3D8* d3dInterface;
@@ -187,5 +190,41 @@ namespace gm {
     int arraySize;
   } GMSCRIPTSTORAGE, *LPGMSCRIPTSTORAGE;
 
+  typedef struct __GMSOUNDDATA {
+    void* rttiData;
+
+    unsigned char* file;
+    unsigned long fileSize;
+  } GMSOUNDDATA, *LPGMSOUNDDATA;
+
+  typedef struct __GMSOUND {
+    void* rttiData;
+
+    SoundType type;
+
+    char* fileExt;
+    char* filename;
+
+    GMSOUNDDATA* sndData;
+
+    BOOL preload;
+    unsigned long effectsBitmask;
+
+    unsigned long unknown;
+
+    double volume;
+    double pan;
+
+    int sndId;
+
+    char* filePath;
+  } GMSOUND, *LPGMSOUND;
+
+  typedef struct __GMSOUNDSTORAGE {
+    LPGMSOUND* sounds;
+    char** names;
+
+    int arraySize;
+  } GMSOUNDSTORAGE, *LPGMSOUNDSTORAGE;
 
 }

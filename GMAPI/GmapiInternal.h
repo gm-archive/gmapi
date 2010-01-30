@@ -443,6 +443,18 @@ namespace gm {
       virtual void ShowError() const;
   };
 
+  class EGMAPISoundNotExist: public EGMAPIResourceException {
+    public:
+      explicit EGMAPISoundNotExist( const int aSound ) {
+        m_resourceId = aSound;
+      }
+
+      /// ShowError()
+      ///   Shows message box with error message
+      ///
+      virtual void ShowError() const;
+  };
+
   class EGMAPISurfaceNotExist: public EGMAPIResourceException {
     public:
       explicit EGMAPISurfaceNotExist( const int aSurface ) {
@@ -1347,6 +1359,262 @@ namespace gm {
       IScript m_iScript;
   };
 
+  /// ISound
+  /// Class that provides easy access to sounds from game
+  ///
+  /// You should access this class only from an instance of
+  /// CGMAPI class
+  ///
+  class ISound {
+    friend class ISounds;
+
+    public:
+      /// GetType()
+      ///   Gets type of the sound
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns:
+      ///   Type of this sound (Normal/Background music/3D sound/MM player)
+      ///
+      inline static SoundType GetType();
+
+      /// GetExtension()
+      ///   Gets extension of this sound's file (.wav/.mid/.mp3 etc.)
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns:
+      ///   File extension as string or NULL if no file was selected for this sound
+      ///
+      inline static const char* GetExtension();
+
+      /// GetFilename()
+      ///   Gets sound's filename
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns:
+      ///   Sound's filename or NULL if no file was selected for this sound
+      ///
+      inline static const char* GetFilename();
+
+      /// GetFilepath()
+      ///   Gets path to sound's temporary file.
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns:
+      ///   Path to sound file if using multimedia player
+      ///   to play the sound & it is preloaded, otherwise NULL.
+      ///
+      inline static const char* GetFilePath();
+
+      /// GetName()
+      ///   Gets name of this sound.
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns
+      ///   Pointer to name of this sound
+      ///
+      inline static const char* GetName();
+
+      /// GetVolume()
+      ///   Gets
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns
+      ///   Sound volume (0.00 = muted, 1.00 = full volume)
+      ///
+      inline static double GetVolume();
+
+      /// GetPanning()
+      ///   Gets
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns
+      ///   Sound panning (-1.00 = left, 0 = center, 1.00 = right)
+      ///
+      inline static double GetPanning();
+
+      /// GetPreload()
+      ///   Check whether preload option is set
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns:
+      ///   Preload option state
+      ///
+      inline static bool GetPreload();
+
+      /// GetEffectChorus()
+      ///   Check whether chorus effect is set
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns:
+      ///   Chorus effect option state
+      ///
+      inline static bool GetEffectChorus();
+
+      /// GetEffectEcho()
+      ///   Check whether echo effect is set
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns:
+      ///   Echo effect option state
+      ///
+      inline static bool GetEffectEcho();
+
+      /// GetEffectFlanger()
+      ///   Check whether flanger effect is set
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns:
+      ///   Flanger effect option state
+      ///
+      inline static bool GetEffectFlanger();
+
+      /// GetEffectReverb()
+      ///   Check whether reverb effect is set
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns:
+      ///   Reverb effect option state
+      ///
+      inline static bool GetEffectReverb();
+
+      /// GetEffectGargle()
+      ///   Check whether gargle effect is set
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns:
+      ///   Gargle effect option state
+      ///
+      inline static bool GetEffectGargle();
+
+      /// GetData()
+      ///   Returns pointer to sound's file loaded to memory
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns:
+      ///   Pointer to memory block that contains whole sound file.
+      ///   Use GetDataSize() method to check out size of the file.
+      ///   Returns NULL, if sound has no file selected or using multimedia
+      ///   player (sound type SND_MULTIMEDIA) to play this sound AND it is preloaded 
+      ///   (when it is not preloaded - method returns valid pointer to file)
+      ///
+      inline static unsigned char* GetData();
+
+      /// GetDataSize()
+      ///   Gets size of sound's file in loaded to memory
+      ///
+      /// Parameters:
+      ///   None
+      ///
+      /// Returns:
+      ///   Size of this sound's file.
+      ///
+      inline static unsigned long GetDataSize();
+
+    private:
+      static int m_soundId;
+  };
+
+  /// ISounds
+  /// Class that provides easy access to scripts from game
+  ///
+  /// You should access this class only from an instance of
+  /// CGMAPI class
+  ///
+  class ISounds {
+    public:
+
+      /// operator []
+      ///   Provides access to sound resource from ISound interface,
+      ///   setting current sprite ID (an element).
+      ///
+      /// Throws:
+      ///   EGMAPISoundNotExists object in case when sound of ID
+      ///   specified in brackets does not exist.
+      ///
+      /// Returns:
+      ///   Reference to an ISound class instance.
+      ///
+      inline ISound& operator[]( int aSoundId );
+
+      /// GetCount()
+      ///   Returns total number of sounds in the game.
+      ///
+      /// Parameters:
+      ///   None
+      /// 
+      ///  Returns:
+      ///    Total number of sounds.
+      ///
+      static int GetCount();
+
+      /// GetArraySize()
+      ///   Returns size of dynamic arrays that holds pointers
+      ///   to sound resource data. (highest resource ID + 1)
+      ///
+      /// Parameters:
+      ///   None
+      /// 
+      ///  Returns:
+      ///    Number of array elements
+      ///
+      inline static int GetArraySize();
+
+      /// Exists( __in const int aSoundId )
+      ///   Checks whether specified sound (an ID) exists. 
+      ///
+      /// Parameters:
+      ///   aSoundId: ID of the sound
+      /// 
+      /// Returns:
+      ///   true if sound exists.
+      ///
+      inline static bool Exists( __in const int aSoundId );
+
+      /// GetID( __in const char* aSoundName )
+      ///   Gets ID of given sound (by name).
+      ///
+      /// Parameters:
+      ///   aSoundName: Name of the sound
+      /// 
+      /// Returns:
+      ///   Given sound's ID. If sound with specified name doesn't
+      ///   exists, then return value will be -1.
+      ///
+      static int GetID( __in const char* aSoundName );
+      
+    private:
+      ISound m_iSound;
+  };
+
   /// CGMAPI class
   /// Initializes GMAPI engine and provides direct access
   /// to GM's resources.
@@ -1392,6 +1660,9 @@ namespace gm {
 
       /// Script resource accessor interface class instance
       IScripts Scripts;
+
+      /// Sound resource accessor interface class instance
+      ISounds Sounds;
 
       /// GetGMVersion()
       ///   Gets Game Maker version in which the game is created
@@ -1524,6 +1795,19 @@ namespace gm {
       /// 
       static LPGMSCRIPTSTORAGE ScriptData() {
         return m_scriptData;
+      }
+
+      /// SoundData()
+      ///   Returns pointer to runner's GMSOUNDSTORAGE structure.
+      ///
+      /// Parameters:
+      ///   None
+      /// 
+      /// Returns:
+      ///   Pointer to GMSOUNDSTORAGE structure.
+      /// 
+      static LPGMSOUNDSTORAGE SoundData() {
+        return m_soundData;
       }
 
       /// ScriptData()
@@ -1676,6 +1960,7 @@ namespace gm {
       static LPGMTEXTURE*            m_textures;
       static LPGMDIRECT3DINFO        m_d3dInfo;
       static LPGMSCRIPTSTORAGE       m_scriptData;
+      static LPGMSOUNDSTORAGE        m_soundData;
 
       static HWND m_mainHwnd;
       static HWND m_debugHwnd;
@@ -1830,6 +2115,8 @@ namespace gm {
   }
 
   inline bool ISurfaces::Exists( const int aTextureId ) {
+    if ( aTextureId >= GetArraySize() || aTextureId < 0 )
+      return false;
     if ( CGMAPI::GetSurfaceArray() )
       return CGMAPI::GetSurfaceArray()[aTextureId].exists & 1;
 
@@ -1874,11 +2161,11 @@ namespace gm {
   }
 
   inline bool IScripts::Exists( const int aScriptId ) {
-    if ( CGMAPI::ScriptData()->scripts )
-      if ( CGMAPI::ScriptData()->scripts[aScriptId] )
-        return true;
-
-    return false;
+    if ( aScriptId >= GetArraySize() || aScriptId < 0 ||
+         !CGMAPI::ScriptData()->scripts )
+      return false;
+    else
+      return ( CGMAPI::ScriptData()->scripts[aScriptId] != NULL );
   }
 
   inline int IScripts::GetArraySize() {
@@ -1895,6 +2182,98 @@ namespace gm {
 
   const char* IScript::GetName() {
     return CGMAPI::ScriptData()->names[m_scriptId];
+  }
+
+  /********************************************
+   * ISounds inlined methods
+   ********************************************/
+
+  inline ISound& ISounds::operator[]( const int aSoundId ) {
+    if ( !Exists( aSoundId ) )
+      throw EGMAPISoundNotExist( aSoundId );
+
+    m_iSound.m_soundId = aSoundId;
+
+    return m_iSound;
+  }
+
+  inline bool ISounds::Exists( const int aSoundId ) {
+    if ( aSoundId >= GetArraySize() || aSoundId < 0 ||
+         !CGMAPI::SoundData()->sounds )
+      return false;
+    else
+      return ( CGMAPI::SoundData()->sounds[aSoundId] != NULL );
+  }
+
+  inline int ISounds::GetArraySize() {
+    return CGMAPI::SoundData()->arraySize;
+  }
+
+  /********************************************
+   * ISound inlined methods
+   ********************************************/
+
+  const char* ISound::GetName() {
+    return CGMAPI::SoundData()->names[m_soundId];
+  }
+
+  const char* ISound::GetExtension() {
+    return CGMAPI::SoundData()->sounds[m_soundId]->fileExt;
+  }
+
+  const char* ISound::GetFilename() {
+    return CGMAPI::SoundData()->sounds[m_soundId]->filename;
+  }
+
+  const char* ISound::GetFilePath() {
+    return CGMAPI::SoundData()->sounds[m_soundId]->filePath;
+  }
+
+  SoundType ISound::GetType() {
+    return CGMAPI::SoundData()->sounds[m_soundId]->type;
+  }
+
+  double ISound::GetVolume() {
+    return CGMAPI::SoundData()->sounds[m_soundId]->volume;
+  }
+
+  double ISound::GetPanning() {
+    return CGMAPI::SoundData()->sounds[m_soundId]->pan;
+  }
+
+  bool ISound::GetPreload() {
+    return CGMAPI::SoundData()->sounds[m_soundId]->preload & 1;
+  }
+
+  bool ISound::GetEffectChorus() {
+    return CGMAPI::SoundData()->sounds[m_soundId]->effectsBitmask & 1;
+  }
+
+  bool ISound::GetEffectEcho() {
+    return ( CGMAPI::SoundData()->sounds[m_soundId]->effectsBitmask >> 1 ) & 1;
+  }
+
+  bool ISound::GetEffectFlanger() {
+    return ( CGMAPI::SoundData()->sounds[m_soundId]->effectsBitmask >> 2 ) & 1;
+  }
+
+  bool ISound::GetEffectGargle() {
+    return ( CGMAPI::SoundData()->sounds[m_soundId]->effectsBitmask >> 3 ) & 1;
+  }
+
+  bool ISound::GetEffectReverb() {
+    return ( CGMAPI::SoundData()->sounds[m_soundId]->effectsBitmask >> 4 ) & 1;
+  }
+
+  unsigned char* ISound::GetData() {
+    if ( CGMAPI::SoundData()->sounds[m_soundId]->sndData )
+      return CGMAPI::SoundData()->sounds[m_soundId]->sndData->file;
+    else
+      return NULL;
+  }
+
+  unsigned long ISound::GetDataSize() {
+    return CGMAPI::SoundData()->sounds[m_soundId]->sndData->fileSize;
   }
 
 }

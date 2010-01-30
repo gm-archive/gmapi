@@ -53,6 +53,8 @@ namespace gm {
   const LPGMSCRIPTSTORAGE GM70_ADDRESS_STORAGE_SCRIPTS         = (LPGMSCRIPTSTORAGE) 0x00589730;
   const LPGMDIRECT3DINFO GM61_ADDRESS_STORAGE_D3D              = (LPGMDIRECT3DINFO) 0x005379F0;
   const LPGMDIRECT3DINFO GM70_ADDRESS_STORAGE_D3D              = (LPGMDIRECT3DINFO) 0x00587A60;
+  const LPGMSOUNDSTORAGE GM61_ADDRESS_SOUND_STORAGE            = (LPGMSOUNDSTORAGE) 0x00537850;
+  const LPGMSOUNDSTORAGE GM70_ADDRESS_SOUND_STORAGE            = (LPGMSOUNDSTORAGE) 0x005878C0;
 
   const DWORD* GM61_ADDRESS_TRUNNER_INSTANCE                   = (DWORD*) 0x00535414;
   const DWORD* GM61_ADDRESS_TDEBUG_INSTANCE                    = (DWORD*) 0x005678C4;
@@ -68,6 +70,7 @@ namespace gm {
   const char* EXC_SPRITENOTEXISTS = "Trying to access non existing sprite.";
   const char* EXC_BACKGROUNDNOTEXISTS = "Trying to access non existing background.";
   const char* EXC_SCRIPTNOTEXISTS = "Trying to access non existing script.";
+  const char* EXC_SOUNDNOTEXISTS = "Trying to access non existing sound.";
   const char* EXC_SURFACENOTEXISTS = "Trying to access non existing surface.";
   const char* EXC_INVALIDSUBIMAGE = "Trying to access invalid sprite subimage.";
 

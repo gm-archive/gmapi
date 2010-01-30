@@ -38,6 +38,8 @@ namespace gm {
   LPGMTEXTURE*            CGMAPI::m_textures;
   LPGMDIRECT3DINFO        CGMAPI::m_d3dInfo;
   LPGMSCRIPTSTORAGE       CGMAPI::m_scriptData;
+  LPGMSOUNDSTORAGE        CGMAPI::m_soundData;
+
   int*                    CGMAPI::m_surfaceArraySize;
   char*                   CGMAPI::m_scriptSwapTable;
 
@@ -52,6 +54,7 @@ namespace gm {
   int                     IBackground::m_backgroundId;
   int                     ISurface::m_surfaceId;
   int                     IScript::m_scriptId;
+  int                     ISound::m_soundId;
 
   /********************************************
    * CGMAPI class implementation
@@ -113,6 +116,7 @@ namespace gm {
       m_textures =         (LPGMTEXTURE*) GM70_ADDRESS_ARRAY_TEXTURES;
       m_d3dInfo =                         GM70_ADDRESS_STORAGE_D3D;
       m_scriptData =                      GM70_ADDRESS_STORAGE_SCRIPTS;
+      m_soundData =                       GM70_ADDRESS_SOUND_STORAGE;
 
       m_scriptSwapTable =  (char*)        GM70_ADDRESS_ARRAY_SWAP_BYTES;
       m_surfaceArraySize = (int*)         GM70_ADDRESS_ARRAYSIZE_SURFACES;
@@ -134,6 +138,7 @@ namespace gm {
       m_textures =        (LPGMTEXTURE*) GM61_ADDRESS_ARRAY_TEXTURES;
       m_d3dInfo =                        GM61_ADDRESS_STORAGE_D3D;
       m_scriptData =                     GM61_ADDRESS_STORAGE_SCRIPTS;
+      m_soundData =                      GM61_ADDRESS_SOUND_STORAGE;
 
       m_surfaceArraySize = (int*) GM61_ADDRESS_ARRAYSIZE_SURFACES;
 
@@ -191,6 +196,7 @@ namespace gm {
     char buffer[0x200];
     const char* spriteName = STR_NO_ACCESS;
 
+
     if ( CGMAPI::Ptr() )
       if ( CGMAPI::Ptr()->Sprites.Exists( m_resourceId ) )
         spriteName = CGMAPI::Ptr()->Sprites[m_resourceId].GetName();
@@ -221,6 +227,17 @@ namespace gm {
     sprintf_s( buffer, sizeof( buffer ),
               "%s:\n%s\n\n%s:\nScript ID: %d",
               STR_GMAPI_ERROR, EXC_SCRIPTNOTEXISTS, STR_GMAPI_DEBUG, m_resourceId );
+    
+    MessageBox( hwnd, buffer, 0, MB_SYSTEMMODAL | MB_ICONERROR );
+  }
+
+  void EGMAPISoundNotExist::ShowError() const {
+    HWND hwnd = ( CGMAPI::Ptr() ? CGMAPI::Ptr()->GetMainWindowHandle() : NULL );
+    char buffer[0x200];
+
+    sprintf_s( buffer, sizeof( buffer ),
+              "%s:\n%s\n\n%s:\nSound ID: %d",
+              STR_GMAPI_ERROR, EXC_SOUNDNOTEXISTS, STR_GMAPI_DEBUG, m_resourceId );
     
     MessageBox( hwnd, buffer, 0, MB_SYSTEMMODAL | MB_ICONERROR );
   }
@@ -321,10 +338,8 @@ namespace gm {
     if ( aSpriteId >= GetArraySize() || aSpriteId < 0 ||
          !CGMAPI::SpriteData()->sprites )
       return false;
-    else if ( !CGMAPI::SpriteData()->sprites[aSpriteId] )
-      return false;
     else
-      return true;
+      return ( CGMAPI::SpriteData()->sprites[aSpriteId] != NULL );
   }
 
   int ISprites::GetID( const char* aSpriteName ) {
@@ -367,14 +382,11 @@ namespace gm {
    ********************************************/
 
   bool IBackgrounds::Exists( const int aBackgroundId ) {
-    if ( aBackgroundId > CGMAPI::BackgroundData()->arraySize )
-      return false;
-    else if ( !CGMAPI::BackgroundData()->backgrounds )
-      return false;
-    else if ( !CGMAPI::BackgroundData()->backgrounds[aBackgroundId] )
+    if ( aBackgroundId >= GetArraySize() || aBackgroundId < 0 ||
+         !CGMAPI::BackgroundData()->backgrounds )
       return false;
     else
-      return true;
+      return ( CGMAPI::BackgroundData()->backgrounds[aBackgroundId] != NULL );
   }
 
   int IBackgrounds::GetID( const char* aBackgroundName ) {
@@ -487,5 +499,43 @@ namespace gm {
     return aBuffer;
   }
 
+  /********************************************
+   * ISounds interface implementation
+   ********************************************/
+
+  int ISounds::GetCount() {
+    if ( !CGMAPI::SoundData()->sounds )
+      return 0;
+
+    int count = 0;
+
+    for ( int i = 0; i < GetArraySize(); i++ )
+      if ( CGMAPI::SoundData()->sounds[i] )
+        count++;
+
+    return count;
+  }
+
+  int ISounds::GetID( const char* aSoundName ) {
+    int id = -1;
+    DWORD strLength = strlen( aSoundName );
+
+    if ( CGMAPI::SoundData()->names ) {
+      for ( int i = 0; i < CGMAPI::SoundData()->arraySize; i++ ) {
+        if ( !CGMAPI::SoundData()->names[i] )
+          continue;
+
+        if ( strLength != *((DWORD*) CGMAPI::SoundData()->names[i] - 1) )
+          continue;
+
+        if ( strcmp( aSoundName, CGMAPI::SoundData()->names[i] ) == 0 ) {
+          id = i;
+          break;
+        }
+      }
+    }
+
+    return id;
+  }
 
 }

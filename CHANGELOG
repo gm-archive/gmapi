@@ -1,0 +1,3 @@
+V0.2 (4, Apr 2009)
+  - Added ISounds (CGMAPI::Sounds) & ISound classes, which gives access to sound resources
+  - Several small fixes in resource accessors classes (IBackgrounds, IScripts...)
