@@ -21,7 +21,7 @@
   GmapiInteraction.cpp
   - Wrapped GM functions; Parser-generated code
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #include "GmapiInteraction.h"
@@ -30,14 +30,14 @@
 
 namespace gm {
 
-  void keyboard_set_map( const int key1, const int key2 ) {
+  void keyboard_set_map( int key1, int key2 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ key1, key2 };
 
     GM_NORMAL_CALL( id_keyboard_set_map );
   }
 
-  int keyboard_get_map( const int key ) {
+  int keyboard_get_map( int key ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ key };
 
@@ -51,7 +51,7 @@ namespace gm {
     GM_VOID_CALL( id_keyboard_unset_map );
   }
 
-  bool keyboard_check( const int key ) {
+  bool keyboard_check( int key ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ key };
 
@@ -59,7 +59,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool keyboard_check_pressed( const int key ) {
+  bool keyboard_check_pressed( int key ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ key };
 
@@ -67,7 +67,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool keyboard_check_released( const int key ) {
+  bool keyboard_check_released( int key ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ key };
 
@@ -75,7 +75,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool keyboard_check_direct( const int key ) {
+  bool keyboard_check_direct( int key ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ key };
 
@@ -90,28 +90,28 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void keyboard_set_numlock( const bool on ) {
+  void keyboard_set_numlock( bool on ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ on };
 
     GM_NORMAL_CALL( id_keyboard_set_numlock );
   }
 
-  void keyboard_key_press( const int key ) {
+  void keyboard_key_press( int key ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ key };
 
     GM_NORMAL_CALL( id_keyboard_key_press );
   }
 
-  void keyboard_key_release( const int key ) {
+  void keyboard_key_release( int key ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ key };
 
     GM_NORMAL_CALL( id_keyboard_key_release );
   }
 
-  void keyboard_clear( const int key ) {
+  void keyboard_clear( int key ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ key };
 
@@ -136,7 +136,7 @@ namespace gm {
     GM_VOID_CALL( id_keyboard_wait );
   }
 
-  bool mouse_check_button( const int numb ) {
+  bool mouse_check_button( int numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ numb };
 
@@ -144,7 +144,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool mouse_check_button_pressed( const int numb ) {
+  bool mouse_check_button_pressed( int numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ numb };
 
@@ -152,7 +152,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool mouse_check_button_released( const int numb ) {
+  bool mouse_check_button_released( int numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ numb };
 
@@ -160,7 +160,21 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void mouse_clear( const int button ) {
+  bool mouse_wheel_up() {
+    GM_NORMAL_RESULT;
+
+    GM_VOID_CALL( id_mouse_wheel_up );
+    GM_RETURN_BOOL;
+  }
+
+  bool mouse_wheel_down() {
+    GM_NORMAL_RESULT;
+
+    GM_VOID_CALL( id_mouse_wheel_down );
+    GM_RETURN_BOOL;
+  }
+
+  void mouse_clear( int button ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ button };
 
@@ -173,7 +187,7 @@ namespace gm {
     GM_VOID_CALL( id_mouse_wait );
   }
 
-  bool joystick_exists( const int id ) {
+  bool joystick_exists( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -181,7 +195,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  CGMVariable joystick_name( const int id ) {
+  CGMVariable joystick_name( int id ) {
     GM_VAR_RESULT;
     GM_ARGS{ id };
 
@@ -189,7 +203,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  int joystick_axes( const int id ) {
+  int joystick_axes( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -197,7 +211,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int joystick_buttons( const int id ) {
+  int joystick_buttons( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -205,7 +219,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  bool joystick_has_pov( const int id ) {
+  bool joystick_has_pov( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -213,7 +227,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  int joystick_direction( const int id ) {
+  int joystick_direction( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -221,7 +235,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  bool joystick_check_button( const int id, const int numb ) {
+  bool joystick_check_button( int id, int numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, numb };
 
@@ -229,7 +243,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  int joystick_xpos( const int id ) {
+  int joystick_xpos( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -237,7 +251,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int joystick_ypos( const int id ) {
+  int joystick_ypos( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -245,7 +259,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int joystick_zpos( const int id ) {
+  int joystick_zpos( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -253,7 +267,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int joystick_rpos( const int id ) {
+  int joystick_rpos( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -261,7 +275,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int joystick_upos( const int id ) {
+  int joystick_upos( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -269,7 +283,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int joystick_vpos( const int id ) {
+  int joystick_vpos( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -277,7 +291,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int joystick_pov( const int id ) {
+  int joystick_pov( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 

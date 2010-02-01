@@ -21,7 +21,7 @@
   GmapiMultiplayer.cpp
   - Wrapped GM functions; Parser-generated code
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #include "GmapiMultiplayer.h"
@@ -50,7 +50,7 @@ namespace gm {
     GM_NORMAL_CALL( id_mplay_init_modem );
   }
 
-  void mplay_init_serial( const int portno, const double baudrate, const double stopbits, const int parity, const int flow ) {
+  void mplay_init_serial( int portno, double baudrate, double stopbits, int parity, int flow ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ portno, baudrate, stopbits, parity, flow };
 
@@ -77,7 +77,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  bool mplay_session_create( const CGMVariable& sesname, const int playnumb, const CGMVariable& playername ) {
+  bool mplay_session_create( const CGMVariable& sesname, int playnumb, const CGMVariable& playername ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ sesname, playnumb, playername };
 
@@ -92,7 +92,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  CGMVariable mplay_session_name( const int numb ) {
+  CGMVariable mplay_session_name( int numb ) {
     GM_VAR_RESULT;
     GM_ARGS{ numb };
 
@@ -100,7 +100,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  bool mplay_session_join( const int numb, const CGMVariable& playername ) {
+  bool mplay_session_join( int numb, const CGMVariable& playername ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ numb, playername };
 
@@ -108,7 +108,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void mplay_session_mode( const bool move ) {
+  void mplay_session_mode( bool move ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ move };
 
@@ -135,7 +135,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  CGMVariable mplay_player_name( const int numb ) {
+  CGMVariable mplay_player_name( int numb ) {
     GM_VAR_RESULT;
     GM_ARGS{ numb };
 
@@ -143,7 +143,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  int mplay_player_id( const int numb ) {
+  int mplay_player_id( int numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ numb };
 
@@ -151,14 +151,14 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void mplay_data_write( const int ind, const CGMVariable& val ) {
+  void mplay_data_write( int ind, const CGMVariable& val ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, val };
 
     GM_NORMAL_CALL( id_mplay_data_write );
   }
 
-  CGMVariable mplay_data_read( const int ind ) {
+  CGMVariable mplay_data_read( int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ ind };
 
@@ -166,21 +166,21 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  void mplay_data_mode( const bool guar ) {
+  void mplay_data_mode( bool guar ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ guar };
 
     GM_NORMAL_CALL( id_mplay_data_mode );
   }
 
-  void mplay_message_send( const CGMVariable& player, const int id, const CGMVariable& val ) {
+  void mplay_message_send( const CGMVariable& player, int id, const CGMVariable& val ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ player, id, val };
 
     GM_NORMAL_CALL( id_mplay_message_send );
   }
 
-  void mplay_message_send_guaranteed( const CGMVariable& player, const int id, const CGMVariable& val ) {
+  void mplay_message_send_guaranteed( const CGMVariable& player, int id, const CGMVariable& val ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ player, id, val };
 

@@ -21,30 +21,30 @@
   GmapiCore.h
   - GMAPICore library header
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #pragma once
 
 namespace gm {
   namespace core {
-    extern "C" char** __stdcall GMAllocateString();
-    extern "C" void __stdcall GMDeallocateString( char** aPtrString );
-    extern "C" void __stdcall GMDeallocateResult( void* aPtrResult );
-    extern "C" void __stdcall GMDeallocateBitmap( void* aPtrBitmap );
+    extern "C" const char** __stdcall DelphiStringAllocate();
+    extern "C" void __stdcall DelphiStringDeallocate( const char** aPtrString );
+    extern "C" void __stdcall DelphiStringSetFromPChar( const char* aString, const char** aPtrString );
+    extern "C" void __stdcall DelphiStringSet( const char* aSrcString, const char** aDestString );
+    extern "C" void __stdcall DelphiStringClear( const char** aPtrString );
 
-    extern "C" void __stdcall GMCallFunction( const void* aPtrFunction,
-                                              void* aArgArray,
-                                              const int aArgCount,
-                                              void* aPtrResult );
-
-    extern "C" void __stdcall GMSetString( const char* aString, char** aPtrString );
-    extern "C" void __stdcall GMClearString( char** aPtrString );
-
-    extern "C" int __stdcall GMFindSymbolID( const char* aString );
+    extern "C" void __stdcall RunnerDeallocateResult( void* aPtrResult );
+    extern "C" int __stdcall RunnerFindSymbolID( const char* aDelphiString );
+    extern "C" void __stdcall RunnerGMFunctionAdd( const char* aDelphiString, 
+                                                   int aNumberOfArgs,
+                                                   void* aFunctionAddress );
+    extern "C" void __stdcall RunnerCallFunction( const void* aPtrFunction,
+                                                  void* aArgArray,
+                                                  int aArgCount,
+                                                  void* aPtrResult );
 
     extern "C" unsigned long __stdcall GMAPIInitialize();
-
     extern "C" void __stdcall GMAPIHookInstall();
     extern "C" void __stdcall GMAPIHookUninstall();
   }

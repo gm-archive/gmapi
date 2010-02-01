@@ -21,7 +21,7 @@
   GmapiGameGraphics.h
   - Wrapped GM functions; Parser-generated code
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #pragma once
@@ -29,295 +29,295 @@
 
 namespace gm {
 
-  void draw_sprite( const int sprite, const int subimg, const double x, const double y );
-  void draw_sprite_stretched( const int sprite, const int subimg, const double x,
-                              const double y, const double w, const double h );
-  void draw_sprite_tiled( const int sprite, const int subimg, const double x, const double y );
-  void draw_sprite_part( const int sprite, const int subimg, const int left, const int top,
-                         const int width, const int height, const double x, const double y );
-  void draw_background( const int back, const double x, const double y );
-  void draw_background_stretched( const int back, const double x, const double y, 
-                                  const double w, const double h );
-  void draw_background_tiled( const int back, const double x, const double y );
-  void draw_background_part( const int back, const int left, const int top, const int width,
-                             const int height, const double x, const double y );
-  void draw_sprite_ext( const int sprite, const int subimg, const double x, const double y,
-                        const double xscale, const double yscale, const double rot,
-                        const int color, const double alpha );
-  void draw_sprite_stretched_ext( const int sprite, const int subimg, const double x,
-                                  const double y, const double w, const double h,
-                                  const int color, const double alpha );
-  void draw_sprite_tiled_ext( const int sprite, const int subimg, const double x,
-                              const double y, const double xscale, const double yscale,
-                              const int color, const double alpha );
-  void draw_sprite_part_ext( const int sprite, const int subimg, const int left, const int top,
-                             const int width, const int height, const double x, const double y,
-                             const double xscale, const double yscale, const int color,
-                             const double alpha );
-  void draw_sprite_general( const int sprite, const int subimg, const int left, const int top,
-                            const int width, const int height, const double x, const double y,
-                            const double xscale, const double yscale, const double rot,
-                            const int c1, const int c2, const int c3, const int c4,
-                            const double alpha );
+  void draw_sprite( int sprite, int subimg, double x, double y );
+  void draw_sprite_stretched( int sprite, int subimg, double x,
+                              double y, double w, double h );
+  void draw_sprite_tiled( int sprite, int subimg, double x, double y );
+  void draw_sprite_part( int sprite, int subimg, int left, int top,
+                         int width, int height, double x, double y );
+  void draw_background( int back, double x, double y );
+  void draw_background_stretched( int back, double x, double y, 
+                                  double w, double h );
+  void draw_background_tiled( int back, double x, double y );
+  void draw_background_part( int back, int left, int top, int width,
+                             int height, double x, double y );
+  void draw_sprite_ext( int sprite, int subimg, double x, double y,
+                        double xscale, double yscale, double rot,
+                        int color, double alpha );
+  void draw_sprite_stretched_ext( int sprite, int subimg, double x,
+                                  double y, double w, double h,
+                                  int color, double alpha );
+  void draw_sprite_tiled_ext( int sprite, int subimg, double x,
+                              double y, double xscale, double yscale,
+                              int color, double alpha );
+  void draw_sprite_part_ext( int sprite, int subimg, int left, int top,
+                             int width, int height, double x, double y,
+                             double xscale, double yscale, int color,
+                             double alpha );
+  void draw_sprite_general( int sprite, int subimg, int left, int top,
+                            int width, int height, double x, double y,
+                            double xscale, double yscale, double rot,
+                            int c1, int c2, int c3, int c4,
+                            double alpha );
   
-  void draw_background_ext( const int back, const double x, const double y, const double xscale,
-                            const double yscale, const double rot, const int color,
-                            const double alpha );
-  void draw_background_stretched_ext( const int back, const double x, const double y,
-                                      const double w, const double h, const int color,
-                                      const double alpha );
-  void draw_background_tiled_ext( const int back, const double x, const double y,
-                                  const double xscale, const double yscale, const int color,
-                                  const double alpha );
-  void draw_background_part_ext( const int back, const int left, const int top, const int width,
-                                 const int height, const double x, const double y,
-                                 const double xscale, const double yscale, const int color,
-                                 const double alpha );
-  void draw_background_general( const int back, const int left, const int top, const int width,
-                                const int height, const double x, const double y,
-                                const double xscale, const double yscale, const double rot,
-                                const int c1, const int c2, const int c3, const int c4,
-                                const double alpha );
-  void draw_clear( const int col );
-  void draw_clear_alpha( const int col, const double alpha );
+  void draw_background_ext( int back, double x, double y, double xscale,
+                            double yscale, double rot, int color,
+                            double alpha );
+  void draw_background_stretched_ext( int back, double x, double y,
+                                      double w, double h, int color,
+                                      double alpha );
+  void draw_background_tiled_ext( int back, double x, double y,
+                                  double xscale, double yscale, int color,
+                                  double alpha );
+  void draw_background_part_ext( int back, int left, int top, int width,
+                                 int height, double x, double y,
+                                 double xscale, double yscale, int color,
+                                 double alpha );
+  void draw_background_general( int back, int left, int top, int width,
+                                int height, double x, double y,
+                                double xscale, double yscale, double rot,
+                                int c1, int c2, int c3, int c4,
+                                double alpha );
+  void draw_clear( int col );
+  void draw_clear_alpha( int col, double alpha );
   
-  void draw_point( const double x, const double y );
-  void draw_line( const double x1, const double y1, const double x2, const double y2 );
-  void draw_line_width( const double x1, const double y1, const double x2, const double y2,
-                        const double w );
-  void draw_rectangle( const double x1, const double y1, const double x2, const double y2,
-                       const bool outline );
-  void draw_roundrect( const double x1, const double y1, const double x2, const double y2,
-                       const bool outline );
-  void draw_triangle( const double x1, const double y1, const double x2, const double y2,
-                      const double x3, const double y3, const bool outline );
-  void draw_circle( const double x, const double y, const double r, const bool outline );
-  void draw_ellipse( const double x1, const double y1, const double x2, const double y2,
-                     const bool outline );
-  void draw_set_circle_precision( const int precision );
-  void draw_arrow( const double x1, const double y1, const double x2, const double y2,
-                   const int size );
+  void draw_point( double x, double y );
+  void draw_line( double x1, double y1, double x2, double y2 );
+  void draw_line_width( double x1, double y1, double x2, double y2,
+                        double w );
+  void draw_rectangle( double x1, double y1, double x2, double y2,
+                       bool outline );
+  void draw_roundrect( double x1, double y1, double x2, double y2,
+                       bool outline );
+  void draw_triangle( double x1, double y1, double x2, double y2,
+                      double x3, double y3, bool outline );
+  void draw_circle( double x, double y, double r, bool outline );
+  void draw_ellipse( double x1, double y1, double x2, double y2,
+                     bool outline );
+  void draw_set_circle_precision( int precision );
+  void draw_arrow( double x1, double y1, double x2, double y2,
+                   int size );
   
-  void draw_button( const double x1, const double y1, const double x2, const double y2,
-                    const bool up );
-  void draw_path( const int path, const double x, const double y, const bool absolute );
-  void draw_healthbar( const double x1, const double y1, const double x2, const double y2,
-                       const double amount, const int backcol, const int mincol,
-                       const int maxcol, const double direction, const bool showback,
-                       const bool showborder );
+  void draw_button( double x1, double y1, double x2, double y2,
+                    bool up );
+  void draw_path( int path, double x, double y, bool absolute );
+  void draw_healthbar( double x1, double y1, double x2, double y2,
+                       double amount, int backcol, int mincol,
+                       int maxcol, double direction, bool showback,
+                       bool showborder );
   
-  void draw_set_color( const int col );
-  void draw_set_alpha( const double alpha );
+  void draw_set_color( int col );
+  void draw_set_alpha( double alpha );
   int draw_get_color();
   double draw_get_alpha();
 
-  int make_color_rgb( const int red, const int green, const int blue );
-  int make_color_hsv( const int hue, const int saturation, const int value );
-  int color_get_red( const int col );
-  int color_get_green( const int col );
-  int color_get_blue( const int col );
-  int color_get_hue( const int col );
-  int color_get_saturation( const int col );
-  int color_get_value( const int col );
-  int merge_color( const int col1, const int col2, const double amount );
+  int make_color_rgb( int red, int green, int blue );
+  int make_color_hsv( int hue, int saturation, int value );
+  int color_get_red( int col );
+  int color_get_green( int col );
+  int color_get_blue( int col );
+  int color_get_hue( int col );
+  int color_get_saturation( int col );
+  int color_get_value( int col );
+  int merge_color( int col1, int col2, double amount );
 
-  int draw_getpixel( const double x, const double y );
+  int draw_getpixel( double x, double y );
 
   void screen_save( const CGMVariable& fname );
-  void screen_save_part( const CGMVariable& fname, const int x, const int y,
-                         const int w, const int h );
+  void screen_save_part( const CGMVariable& fname, int x, int y,
+                         int w, int h );
 
-  void draw_set_font( const int font );
-  void draw_set_halign( const int halign );
-  void draw_set_valign( const int valign );
+  void draw_set_font( int font );
+  void draw_set_halign( int halign );
+  void draw_set_valign( int valign );
 
-  void draw_text( const double x, const double y, const CGMVariable& string );
-  void draw_text_ext( const double x, const double y, const CGMVariable& string,
-                      const double sep, const int w );
+  void draw_text( double x, double y, const CGMVariable& string );
+  void draw_text_ext( double x, double y, const CGMVariable& string,
+                      double sep, int w );
 
   double string_width( const CGMVariable& string );
   double string_height( const CGMVariable& string );
-  double string_width_ext( const CGMVariable& string, const double sep, const double w );
-  double string_height_ext( const CGMVariable& string, const double sep, const double w );
+  double string_width_ext( const CGMVariable& string, double sep, double w );
+  double string_height_ext( const CGMVariable& string, double sep, double w );
 
-  void draw_text_transformed( const double x, const double y, const CGMVariable& string, 
-                              const double xscale, const double yscale, const double angle );
-  void draw_text_ext_transformed( const double x, const double y, const CGMVariable& string,
-                                  const double sep, const double w, const double xscale,
-                                  const double yscale, const double angle );
-  void draw_text_color( const double x, const double y, const CGMVariable& string,
-                        const int c1, const int c2, const int c3, const int c4, 
-                        const double alpha );
-  void draw_text_ext_color( const double x, const double y, const CGMVariable& string,
-                            const double sep, const double w, const int c1, const int c2,
-                            const int c3, const int c4, const double alpha );
-  void draw_text_transformed_color( const double x, const double y, const CGMVariable& string,
-                                    const double xscale, const double yscale, const double angle,
-                                    const int c1, const int c2, const int c3, const int c4,
-                                    const double alpha );
-  void draw_text_ext_transformed_color( const double x, const double y, 
-                                        const CGMVariable& string, const double sep,
-                                        const double w, const double xscale,
-                                        const double yscale, const double angle, const int c1,
-                                        const int c2, const int c3, const int c4,
-                                        const double alpha );
+  void draw_text_transformed( double x, double y, const CGMVariable& string, 
+                              double xscale, double yscale, double angle );
+  void draw_text_ext_transformed( double x, double y, const CGMVariable& string,
+                                  double sep, double w, double xscale,
+                                  double yscale, double angle );
+  void draw_text_color( double x, double y, const CGMVariable& string,
+                        int c1, int c2, int c3, int c4, 
+                        double alpha );
+  void draw_text_ext_color( double x, double y, const CGMVariable& string,
+                            double sep, double w, int c1, int c2,
+                            int c3, int c4, double alpha );
+  void draw_text_transformed_color( double x, double y, const CGMVariable& string,
+                                    double xscale, double yscale, double angle,
+                                    int c1, int c2, int c3, int c4,
+                                    double alpha );
+  void draw_text_ext_transformed_color( double x, double y, 
+                                        const CGMVariable& string, double sep,
+                                        double w, double xscale,
+                                        double yscale, double angle, int c1,
+                                        int c2, int c3, int c4,
+                                        double alpha );
   
-  void draw_point_color( const double x, const double y, const int col1 );
-  void draw_line_color( const double x1, const double y1, const double x2, const double y2,
-                        const int col1, const int col2 );
-  void draw_line_width_color( const double x1, const double y1, const double x2,
-                              const double y2, const double w, const int col1, const int col2 );
-  void draw_rectangle_color( const double x1, const double y1, const double x2, const double y2,
-                             const int col1, const int col2, const int col3, const int col4,
-                             const bool outline );
-  void draw_roundrect_color( const double x1, const double y1, const double x2, const double y2,
-                             const int col1, const int col2, const bool outline );
-  void draw_triangle_color( const double x1, const double y1, const double x2, const double y2,
-                            const double x3, const double y3, const int col1, const int col2,
-                            const int col3, const bool outline );
-  void draw_circle_color( const double x, const double y, const double r, const int col1,
-                          const int col2, const bool outline );
-  void draw_ellipse_color( const double x1, const double y1, const double x2, const double y2,
-                           const int col1, const int col2, const bool outline );
+  void draw_point_color( double x, double y, int col1 );
+  void draw_line_color( double x1, double y1, double x2, double y2,
+                        int col1, int col2 );
+  void draw_line_width_color( double x1, double y1, double x2,
+                              double y2, double w, int col1, int col2 );
+  void draw_rectangle_color( double x1, double y1, double x2, double y2,
+                             int col1, int col2, int col3, int col4,
+                             bool outline );
+  void draw_roundrect_color( double x1, double y1, double x2, double y2,
+                             int col1, int col2, bool outline );
+  void draw_triangle_color( double x1, double y1, double x2, double y2,
+                            double x3, double y3, int col1, int col2,
+                            int col3, bool outline );
+  void draw_circle_color( double x, double y, double r, int col1,
+                          int col2, bool outline );
+  void draw_ellipse_color( double x1, double y1, double x2, double y2,
+                           int col1, int col2, bool outline );
   
-  void draw_primitive_begin( const int kind );
-  void draw_vertex( const double x, const double y );
-  void draw_vertex_color( const double x, const double y, const int col, const double alpha );
+  void draw_primitive_begin( int kind );
+  void draw_vertex( double x, double y );
+  void draw_vertex_color( double x, double y, int col, double alpha );
   void draw_primitive_end();
 
-  int sprite_get_texture( const int spr, const int subimg );
-  int background_get_texture( const int back );
+  int sprite_get_texture( int spr, int subimg );
+  int background_get_texture( int back );
   
-  void texture_preload( const int texid );
-  void texture_set_priority( const int texid, const int prio );
-  int texture_get_width( const int texid );
-  double texture_get_height( const int texid );
-  void draw_primitive_begin_texture( const int kind, const int texid );
-  void draw_vertex_texture( const double x, const double y, const double xtex,
-                            const double ytex );
-  void draw_vertex_texture_color( const double x, const double y, const double xtex,
-                                  const double ytex, const int col, const double alpha );
+  void texture_preload( int texid );
+  void texture_set_priority( int texid, int prio );
+  int texture_get_width( int texid );
+  double texture_get_height( int texid );
+  void draw_primitive_begin_texture( int kind, int texid );
+  void draw_vertex_texture( double x, double y, double xtex,
+                            double ytex );
+  void draw_vertex_texture_color( double x, double y, double xtex,
+                                  double ytex, int col, double alpha );
   void draw_primitive_end();
-  void texture_set_interpolation( const bool linear );
-  void texture_set_blending( const bool blend );
-  void texture_set_repeat( const double repeat );
-  void draw_set_blend_mode( const int mode );
-  void draw_set_blend_mode_ext( const int src, const int dest );
+  void texture_set_interpolation( bool linear );
+  void texture_set_blending( bool blend );
+  void texture_set_repeat( double repeat );
+  void draw_set_blend_mode( int mode );
+  void draw_set_blend_mode_ext( int src, int dest );
   
-  int surface_create( const int w, const int h );
-  void surface_free( const int id );
-  bool surface_exists( const int id );
-  int surface_get_width( const int id );
-  int surface_get_height( const int id );
-  int surface_get_texture( const int id );
-  void surface_set_target( const int id );
+  int surface_create( int w, int h );
+  void surface_free( int id );
+  bool surface_exists( int id );
+  int surface_get_width( int id );
+  int surface_get_height( int id );
+  int surface_get_texture( int id );
+  void surface_set_target( int id );
   void surface_reset_target();
-  int surface_getpixel( const int id, const int x, const int y );
-  void surface_save( const int id, const CGMVariable& fname );
-  void surface_save_part( const int id, const CGMVariable& fname, const int x, const int y,
-                          const int w, const int h );
+  int surface_getpixel( int id, int x, int y );
+  void surface_save( int id, const CGMVariable& fname );
+  void surface_save_part( int id, const CGMVariable& fname, int x, int y,
+                          int w, int h );
   
-  void draw_surface( const int id, const double x, const double y );
-  void draw_surface_stretched( const int id, const double x, const double y, const double w,
-                               const double h );
-  void draw_surface_tiled( const int id, const double x, const double y );
-  void draw_surface_part( const int id, const int left, const int top, const int width,
-                          const int height, const double x, const double y );
-  void draw_surface_ext( const int id, const double x, const double y, const double xscale,
-                         const double yscale, const double rot, const int color,
-                         const double alpha );
-  void draw_surface_stretched_ext( const int id, const double x, const double y, const double w,
-                                   const double h, const int color, const double alpha );
-  void draw_surface_tiled_ext( const int id, const double x, const double y, const double xscale,
-                               const double yscale, const int color, const double alpha );
-  void draw_surface_part_ext( const int id, const int left, const int top, const int width,
-                              const int height, const double x, const double y, 
-                              const double xscale, const double yscale, const int color,
-                              const double alpha );
-  void draw_surface_general( const int id, const int left, const int top, const int width,
-                             const int height, const double x, const double y, 
-                             const double xscale, const double yscale, const double rot,
-                             const int c1, const int c2, const int c3, const int c4,
-                             const double alpha );
+  void draw_surface( int id, double x, double y );
+  void draw_surface_stretched( int id, double x, double y, double w,
+                               double h );
+  void draw_surface_tiled( int id, double x, double y );
+  void draw_surface_part( int id, int left, int top, int width,
+                          int height, double x, double y );
+  void draw_surface_ext( int id, double x, double y, double xscale,
+                         double yscale, double rot, int color,
+                         double alpha );
+  void draw_surface_stretched_ext( int id, double x, double y, double w,
+                                   double h, int color, double alpha );
+  void draw_surface_tiled_ext( int id, double x, double y, double xscale,
+                               double yscale, int color, double alpha );
+  void draw_surface_part_ext( int id, int left, int top, int width,
+                              int height, double x, double y, 
+                              double xscale, double yscale, int color,
+                              double alpha );
+  void draw_surface_general( int id, int left, int top, int width,
+                             int height, double x, double y, 
+                             double xscale, double yscale, double rot,
+                             int c1, int c2, int c3, int c4,
+                             double alpha );
   
-  void surface_copy( const int destination, const double x, const double y, const int source );
-  void surface_copy_part( const int destination, const double x, const double y, 
-                          const int source, const double xs, const double ys, const double ws,
-                          const double hs );
+  void surface_copy( int destination, double x, double y, int source );
+  void surface_copy_part( int destination, double x, double y, 
+                          int source, double xs, double ys, double ws,
+                          double hs );
   
-  int tile_add( const int background, const int left, const int top, const int width,
-                const int height, const double x, const double y, const int depth );
-  void tile_delete( const int id );
-  bool tile_exists( const int id );
-  double tile_get_x( const int id );
-  double tile_get_y( const int id );
-  int tile_get_left( const int id );
-  int tile_get_top( const int id );
-  int tile_get_width( const int id );
-  int tile_get_height( const int id );
-  int tile_get_depth( const int id );
-  bool tile_get_visible( const int id );
-  double tile_get_xscale( const int id );
-  double tile_get_yscale( const int id );
-  int tile_get_background( const int id );
-  int tile_get_blend( const int id );
-  double tile_get_alpha( const int id );
-  void tile_set_position( const int id, const double x, const double y );
-  void tile_set_region( const int id, const double left, const double right, const double width,
-                        const double height );
-  void tile_set_background( const int id, const int background );
-  void tile_set_visible( const int id, const bool visible );
-  void tile_set_depth( const int id, const int depth );
-  void tile_set_scale( const int id, const double xscale, const double yscale );
-  void tile_set_blend( const int id, const int color );
-  void tile_set_alpha( const int id, const double alpha );
+  int tile_add( int background, int left, int top, int width,
+                int height, double x, double y, int depth );
+  void tile_delete( int id );
+  bool tile_exists( int id );
+  double tile_get_x( int id );
+  double tile_get_y( int id );
+  int tile_get_left( int id );
+  int tile_get_top( int id );
+  int tile_get_width( int id );
+  int tile_get_height( int id );
+  int tile_get_depth( int id );
+  bool tile_get_visible( int id );
+  double tile_get_xscale( int id );
+  double tile_get_yscale( int id );
+  int tile_get_background( int id );
+  int tile_get_blend( int id );
+  double tile_get_alpha( int id );
+  void tile_set_position( int id, double x, double y );
+  void tile_set_region( int id, double left, double top, double width,
+                        double height );
+  void tile_set_background( int id, int background );
+  void tile_set_visible( int id, bool visible );
+  void tile_set_depth( int id, int depth );
+  void tile_set_scale( int id, double xscale, double yscale );
+  void tile_set_blend( int id, int color );
+  void tile_set_alpha( int id, double alpha );
 
-  void tile_layer_hide( const int depth );
-  void tile_layer_show( const int depth );
-  void tile_layer_delete( const int depth );
-  void tile_layer_shift( const int depth, const double x, const double y );
-  int tile_layer_find( const int depth, const double x, const double y );
-  void tile_layer_delete_at( const int depth, const double x, const double y );
-  void tile_layer_depth( const int depth, const int newdepth );
+  void tile_layer_hide( int depth );
+  void tile_layer_show( int depth );
+  void tile_layer_delete( int depth );
+  void tile_layer_shift( int depth, double x, double y );
+  int tile_layer_find( int depth, double x, double y );
+  void tile_layer_delete_at( int depth, double x, double y );
+  void tile_layer_depth( int depth, int newdepth );
 
   int display_get_width();
   int display_get_height();
   int display_get_colordepth();
   int display_get_frequency();
-  void display_set_size( const int w, const int h );
-  void display_set_colordepth( const int coldepth );
-  void display_set_frequency( const int frequency );
-  void display_set_all( const int w, const int h, const int frequency, const int coldepth );
-  bool display_test_all( const int w, const int h, const int frequency, const int coldepth );
+  void display_set_size( int w, int h );
+  void display_set_colordepth( int coldepth );
+  void display_set_frequency( int frequency );
+  void display_set_all( int w, int h, int frequency, int coldepth );
+  bool display_test_all( int w, int h, int frequency, int coldepth );
   void display_reset();
 
   int display_mouse_get_x();
   int display_mouse_get_y();
-  void display_mouse_set( const int x, const int y );
+  void display_mouse_set( int x, int y );
 
-  void window_set_visible( const bool visible );
+  void window_set_visible( bool visible );
   bool window_get_visible();
-  void window_set_fullscreen( const bool full );
+  void window_set_fullscreen( bool full );
   bool window_get_fullscreen();
-  void window_set_showborder( const bool show );
+  void window_set_showborder( bool show );
   bool window_get_showborder();
-  void window_set_showicons( const bool show );
+  void window_set_showicons( bool show );
   bool window_get_showicons();
-  void window_set_stayontop( const bool stay );
+  void window_set_stayontop( bool stay );
   bool window_get_stayontop();
-  void window_set_sizeable( const bool sizeable );
+  void window_set_sizeable( bool sizeable );
   bool window_get_sizeable();
   void window_set_caption( const CGMVariable& caption );
   CGMVariable window_get_caption();
-  void window_set_cursor( const int curs );
+  void window_set_cursor( int curs );
   int window_get_cursor();
-  void window_set_color( const int color );
+  void window_set_color( int color );
   int window_get_color();
-  void window_set_region_scale( const double scale, const bool adaptwindow );
+  void window_set_region_scale( double scale, bool adaptwindow );
   double window_get_region_scale();
-  void window_set_position( const int x, const int y );
-  void window_set_size( const int w, const int h );
-  void window_set_rectangle( const int x, const int y, const int w, const int h );
+  void window_set_position( int x, int y );
+  void window_set_size( int w, int h );
+  void window_set_rectangle( int x, int y, int w, int h );
   void window_center();
   void window_default();
   int window_get_x();
@@ -326,22 +326,22 @@ namespace gm {
   int window_get_height();
   int window_mouse_get_x();
   int window_mouse_get_y();
-  void window_mouse_set( const int x, const int y );
-  void window_set_region_size( const int w, const int h, const bool adaptwindow );
+  void window_mouse_set( int x, int y );
+  void window_set_region_size( int w, int h, bool adaptwindow );
   int window_get_region_width();
   int window_get_region_height();
-  int window_view_mouse_get_x( const int id );
-  int window_view_mouse_get_y( const int id );
-  void window_view_mouse_set( const int id, const int x, const int y );
+  int window_view_mouse_get_x( int id );
+  int window_view_mouse_get_y( int id );
+  void window_view_mouse_set( int id, int x, int y );
   int window_views_mouse_get_x();
   int window_views_mouse_get_y();
-  void window_views_mouse_set( const int x, const int y );
+  void window_views_mouse_set( int x, int y );
 
   void screen_redraw();
   void screen_refresh();
 
-  void set_automatic_draw( const bool value );
-  void set_synchronization( const bool value );
+  void set_automatic_draw( bool value );
+  void set_synchronization( bool value );
   void screen_wait_vsync();
 
   HWND window_handle();

@@ -21,7 +21,7 @@
   GmapiGameplay.cpp
   - Wrapped GM functions; Parser-generated code
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #include "GmapiGameplay.h"
@@ -30,7 +30,7 @@
 
 namespace gm {
 
-  bool place_free( const double x, const double y ) {
+  bool place_free( double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
@@ -38,7 +38,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool place_empty( const double x, const double y ) {
+  bool place_empty( double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
@@ -46,7 +46,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool place_meeting( const double x, const double y, const int obj ) {
+  bool place_meeting( double x, double y, int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, obj };
 
@@ -54,7 +54,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool place_snapped( const double hsnap, const double vsnap ) {
+  bool place_snapped( double hsnap, double vsnap ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ hsnap, vsnap };
 
@@ -62,91 +62,91 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void move_random( const double hsnap, const double vsnap ) {
+  void move_random( double hsnap, double vsnap ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ hsnap, vsnap };
 
     GM_NORMAL_CALL( id_move_random );
   }
 
-  void move_snap( const double hsnap, const double vsnap ) {
+  void move_snap( double hsnap, double vsnap ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ hsnap, vsnap };
 
     GM_NORMAL_CALL( id_move_snap );
   }
 
-  void move_wrap( const double hor, const double vert, const double margin ) {
+  void move_wrap( double hor, double vert, double margin ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ hor, vert, margin };
 
     GM_NORMAL_CALL( id_move_wrap );
   }
 
-  void move_towards_point( const double x, const double y, const double sp ) {
+  void move_towards_point( double x, double y, double sp ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, sp };
 
     GM_NORMAL_CALL( id_move_towards_point );
   }
 
-  void move_bounce_solid( const bool adv ) {
+  void move_bounce_solid( bool adv ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ adv };
 
     GM_NORMAL_CALL( id_move_bounce_solid );
   }
 
-  void move_bounce_all( const bool adv ) {
+  void move_bounce_all( bool adv ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ adv };
 
     GM_NORMAL_CALL( id_move_bounce_all );
   }
 
-  void move_contact_solid( const double dir, const double maxdist ) {
+  void move_contact_solid( double dir, double maxdist ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ dir, maxdist };
 
     GM_NORMAL_CALL( id_move_contact_solid );
   }
 
-  void move_contact_all( const double dir, const double maxdist ) {
+  void move_contact_all( double dir, double maxdist ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ dir, maxdist };
 
     GM_NORMAL_CALL( id_move_contact_all );
   }
 
-  void move_outside_solid( const double dir, const double maxdist ) {
+  void move_outside_solid( double dir, double maxdist ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ dir, maxdist };
 
     GM_NORMAL_CALL( id_move_outside_solid );
   }
 
-  void move_outside_all( const double dir, const double maxdist ) {
+  void move_outside_all( double dir, double maxdist ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ dir, maxdist };
 
     GM_NORMAL_CALL( id_move_outside_all );
   }
 
-  void distance_to_point( const double x, const double y ) {
+  void distance_to_point( double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
     GM_NORMAL_CALL( id_distance_to_point );
   }
 
-  void distance_to_object( const int obj ) {
+  void distance_to_object( int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ obj };
 
     GM_NORMAL_CALL( id_distance_to_point );
   }
 
-  bool position_empty( const double x, const double y ) {
+  bool position_empty( double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
@@ -154,7 +154,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool position_meeting( const double x, const double y, const int obj ) {
+  bool position_meeting( double x, double y, int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, obj };
 
@@ -162,8 +162,8 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void path_start( const int path, const double speed, const int endaction, 
-                   const bool absolute ) {
+  void path_start( int path, double speed, int endaction, 
+                   bool absolute ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ path, speed, endaction, absolute };
 
@@ -176,8 +176,8 @@ namespace gm {
     GM_VOID_CALL( id_path_end );
   }
 
-  bool mp_linear_step( const double x, const double y, const double stepsize,
-                       const bool checkall ) {
+  bool mp_linear_step( double x, double y, double stepsize,
+                       bool checkall ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, stepsize, checkall };
 
@@ -185,8 +185,8 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool mp_linear_step_object( const double x, const double y, const double stepsize,
-                              const int obj ) {
+  bool mp_linear_step_object( double x, double y, double stepsize,
+                              int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, stepsize, obj };
 
@@ -194,8 +194,8 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool mp_potential_step( const double x, const double y, const double stepsize,
-                          const bool checkall ) {
+  bool mp_potential_step( double x, double y, double stepsize,
+                          bool checkall ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, stepsize, checkall };
 
@@ -203,8 +203,8 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool mp_potential_step_object( const double x, const double y, const double stepsize,
-                                 const int obj ) {
+  bool mp_potential_step_object( double x, double y, double stepsize,
+                                 int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, stepsize, obj };
 
@@ -212,16 +212,16 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void mp_potential_settings( const double maxrot, const double rotstep,
-                              const int ahead, const bool onspot ) {
+  void mp_potential_settings( double maxrot, double rotstep,
+                              int ahead, bool onspot ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ maxrot, rotstep, ahead, onspot };
 
     GM_NORMAL_CALL( id_mp_potential_settings );
   }
 
-  bool mp_linear_path( const int path, const double xg, const double yg,
-                       const double stepsize, const bool checkall ) {
+  bool mp_linear_path( int path, double xg, double yg,
+                       double stepsize, bool checkall ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ path, xg, yg, stepsize, checkall };
 
@@ -229,8 +229,8 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool mp_linear_path_object( const int path, const double xg, const double yg,
-                              const double stepsize, const int obj ) {
+  bool mp_linear_path_object( int path, double xg, double yg,
+                              double stepsize, int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ path, xg, yg, stepsize, obj };
 
@@ -238,9 +238,9 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool mp_potential_path( const int path, const double xg, const double yg,
-                          const double stepsize, const int factor,
-                          const bool checkall ) {
+  bool mp_potential_path( int path, double xg, double yg,
+                          double stepsize, int factor,
+                          bool checkall ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ path, xg, yg, stepsize, factor, checkall };
 
@@ -248,9 +248,9 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool mp_potential_path_object( const int path, const double xg, const double yg,
-                                 const double stepsize, const int factor,
-                                 const int obj ) {
+  bool mp_potential_path_object( int path, double xg, double yg,
+                                 double stepsize, int factor,
+                                 int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ path, xg, yg, stepsize, factor, obj };
 
@@ -258,8 +258,8 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  int mp_grid_create( const double left, const double top, const int hcells,
-                      const int vcells, const double cellwidth, const double cellheight ) {
+  int mp_grid_create( double left, double top, int hcells,
+                      int vcells, double cellwidth, double cellheight ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ left, top, hcells, vcells, cellwidth, cellheight };
 
@@ -267,60 +267,60 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void mp_grid_destroy( const int id ) {
+  void mp_grid_destroy( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
     GM_NORMAL_CALL( id_mp_grid_destroy );
   }
 
-  void mp_grid_clear_all( const int id ) {
+  void mp_grid_clear_all( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
     GM_NORMAL_CALL( id_mp_grid_clear_all );
   }
 
-  void mp_grid_clear_cell( const int id, const int h, const int v ) {
+  void mp_grid_clear_cell( int id, int h, int v ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, h, v };
 
     GM_NORMAL_CALL( id_mp_grid_clear_cell );
   }
 
-  void mp_grid_clear_rectangle( const int id, const double left, const double top,
-                                const double right, const double bottom ) {
+  void mp_grid_clear_rectangle( int id, double left, double top,
+                                double right, double bottom ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, left, top, right, bottom };
 
     GM_NORMAL_CALL( id_mp_grid_clear_rectangle );
   }
 
-  void mp_grid_add_cell( const int id, const int h, const int v ) {
+  void mp_grid_add_cell( int id, int h, int v ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, h, v };
 
     GM_NORMAL_CALL( id_mp_grid_add_cell );
   }
 
-  void mp_grid_add_rectangle( const int id, const double left, const double top,
-                              const double right, const double bottom ) {
+  void mp_grid_add_rectangle( int id, double left, double top,
+                              double right, double bottom ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, left, top, right, bottom };
 
     GM_NORMAL_CALL( id_mp_grid_add_rectangle );
   }
 
-  void mp_grid_add_instances( const int id, const int obj, const bool prec ) {
+  void mp_grid_add_instances( int id, int obj, bool prec ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, obj, prec };
 
     GM_NORMAL_CALL( id_mp_grid_add_instances );
   }
 
-  bool mp_grid_path( const int id, const int path, const double xstart,
-                     const double ystart, const double xgoal, const double ygoal,
-                     const bool allowdiag ) {
+  bool mp_grid_path( int id, int path, double xstart,
+                     double ystart, double xgoal, double ygoal,
+                     bool allowdiag ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, path, xstart, ystart, xgoal, ygoal, allowdiag };
 
@@ -328,15 +328,15 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void mp_grid_draw( const int id ) {
+  void mp_grid_draw( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
     GM_NORMAL_CALL( id_mp_grid_draw );
   }
 
-  bool collision_point( const double x, const double y, const int obj,
-                        const bool prec, const bool notme ) {
+  bool collision_point( double x, double y, int obj,
+                        bool prec, bool notme ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, obj, prec, notme };
 
@@ -344,9 +344,9 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool collision_rectangle( const double x1, const double y1, const double x2,
-                            const double y2, const int obj,
-                            const bool prec, const bool notme ) {
+  bool collision_rectangle( double x1, double y1, double x2,
+                            double y2, int obj,
+                            bool prec, bool notme ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, obj, prec, notme };
 
@@ -354,8 +354,8 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool collision_circle( const double xc, const double yc, const double radius,
-                         const int obj, const bool prec, const bool notme ) {
+  bool collision_circle( double xc, double yc, double radius,
+                         int obj, bool prec, bool notme ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ xc, yc, radius, obj, prec, notme };
 
@@ -363,9 +363,9 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool collision_ellipse( const double x1, const double y1, const double x2,
-                          const double y2, const int obj,
-                          const bool prec, const bool notme ) {
+  bool collision_ellipse( double x1, double y1, double x2,
+                          double y2, int obj,
+                          bool prec, bool notme ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, obj, prec, notme };
 
@@ -373,9 +373,9 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool collision_line( const double x1, const double y1, const double x2,
-                       const double y2, const int obj,
-                       const bool prec, const bool notme ) {
+  bool collision_line( double x1, double y1, double x2,
+                       double y2, int obj,
+                       bool prec, bool notme ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, obj, prec, notme };
 
@@ -383,7 +383,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  int instance_find( const int obj, const int n ) {
+  int instance_find( int obj, int n ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ obj, n };
 
@@ -391,21 +391,23 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void instance_exists( const int obj ) {
+  bool instance_exists( int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ obj };
 
     GM_NORMAL_CALL( id_instance_exists );
+    GM_RETURN_BOOL;
   }
 
-  void instance_number( const int obj ) {
+  int instance_number( int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ obj };
 
     GM_NORMAL_CALL( id_instance_number );
+    GM_RETURN_INT;
   }
 
-  int instance_position( const double x, const double y, const int obj ) {
+  int instance_position( double x, double y, int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, obj };
 
@@ -413,7 +415,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int instance_nearest( const double x, const double y, const int obj ) {
+  int instance_nearest( double x, double y, int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, obj };
 
@@ -421,7 +423,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int instance_furthest( const double x, const double y, const int obj ) {
+  int instance_furthest( double x, double y, int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, obj };
 
@@ -429,7 +431,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int instance_place( const double x, const double y, const int obj ) {
+  int instance_place( double x, double y, int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, obj };
 
@@ -437,7 +439,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int instance_create( const double x, const double y, const int obj ) {
+  int instance_create( double x, double y, int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, obj };
 
@@ -445,7 +447,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int instance_copy( const bool performevent ) {
+  int instance_copy( bool performevent ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ performevent };
 
@@ -459,44 +461,44 @@ namespace gm {
     GM_VOID_CALL( id_instance_destroy );
   }
 
-  void instance_change( const int obj, const bool perf ) {
+  void instance_change( int obj, bool perf ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ obj, perf };
 
     GM_NORMAL_CALL( id_instance_change );
   }
 
-  void position_destroy( const double x, const double y ) {
+  void position_destroy( double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
     GM_NORMAL_CALL( id_position_destroy );
   }
 
-  void position_change( const double x, const double y, const int obj, const bool perf ) {
+  void position_change( double x, double y, int obj, bool perf ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, obj, perf };
 
     GM_NORMAL_CALL( id_position_change );
   }
 
-  void instance_deactivate_all( const bool notme ) {
+  void instance_deactivate_all( bool notme ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ notme };
 
     GM_NORMAL_CALL( id_instance_deactivate_all );
   }
 
-  void instance_deactivate_object( const int obj ) {
+  void instance_deactivate_object( int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ obj };
 
     GM_NORMAL_CALL( id_instance_deactivate_object );
   }
 
-  void instance_deactivate_region( const double left, const double top,
-                                   const double width, const double height,
-                                   const bool inside, const bool notme ) {
+  void instance_deactivate_region( double left, double top,
+                                   double width, double height,
+                                   bool inside, bool notme ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ left, top, width, height, inside, notme };
 
@@ -509,23 +511,23 @@ namespace gm {
     GM_VOID_CALL( id_instance_activate_all );
   }
 
-  void instance_activate_object( const int obj ) {
+  void instance_activate_object( int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ obj };
 
     GM_NORMAL_CALL( id_instance_activate_object );
   }
 
-  void instance_activate_region( const double left, const double top,
-                                 const double width, const double height,
-                                 const bool inside ) {
+  void instance_activate_region( double left, double top,
+                                 double width, double height,
+                                 bool inside ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ left, top, width, height, inside };
 
     GM_NORMAL_CALL( id_instance_activate_region );
   }
 
-  void room_goto( const int numb ) {
+  void room_goto( int numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ numb };
 
@@ -550,7 +552,7 @@ namespace gm {
     GM_VOID_CALL( id_room_restart );
   }
 
-  int room_previous( const int numb ) {
+  int room_previous( int numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ numb };
 
@@ -558,7 +560,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int room_next( const int numb ) {
+  int room_next( int numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ numb };
 
@@ -592,14 +594,14 @@ namespace gm {
     GM_NORMAL_CALL( id_game_load );
   }
 
-  void transition_define( const int kind, const CGMVariable& name ) {
+  void transition_define( int kind, const CGMVariable& name ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ kind, name };
 
     GM_NORMAL_CALL( id_transition_define );
   }
 
-  bool transition_exists( const int kind ) {
+  bool transition_exists( int kind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ kind };
 
@@ -607,21 +609,21 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void event_perform( const int type, const int numb ) {
+  void event_perform( int type, int numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ type, numb };
 
     GM_NORMAL_CALL( id_event_perform );
   }
 
-  void event_perform_object( const int obj, const int type, const int numb ) {
+  void event_perform_object( int obj, int type, int numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ obj, type, numb };
 
     GM_NORMAL_CALL( id_event_perform_object );
   }
 
-  void event_user( const int numb ) {
+  void event_user( int numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ numb };
 
@@ -665,7 +667,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  CGMVariable variable_global_array_get( const CGMVariable& name, const int ind ) {
+  CGMVariable variable_global_array_get( const CGMVariable& name, int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ name, ind };
 
@@ -673,8 +675,8 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  CGMVariable variable_global_array2_get( const CGMVariable& name, const int ind1,
-                                          const int ind2 ) {
+  CGMVariable variable_global_array2_get( const CGMVariable& name, int ind1,
+                                          int ind2 ) {
     GM_VAR_RESULT;
     GM_ARGS{ name, ind1, ind2 };
 
@@ -690,7 +692,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  CGMVariable variable_local_array_get( const CGMVariable& name, const int ind ) {
+  CGMVariable variable_local_array_get( const CGMVariable& name, int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ name, ind };
 
@@ -698,8 +700,8 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  CGMVariable variable_local_array2_get( const CGMVariable& name, const int ind1,
-                                         const int ind2 ) {
+  CGMVariable variable_local_array2_get( const CGMVariable& name, int ind1,
+                                         int ind2 ) {
     GM_VAR_RESULT;
     GM_ARGS{ name, ind1, ind2 };
 
@@ -714,7 +716,7 @@ namespace gm {
     GM_NORMAL_CALL( id_variable_global_set );
   }
 
-  void variable_global_array_set( const CGMVariable& name, const int ind, 
+  void variable_global_array_set( const CGMVariable& name, int ind, 
                                   const CGMVariable& value ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ name, ind, value };
@@ -722,8 +724,8 @@ namespace gm {
     GM_NORMAL_CALL( id_variable_global_array_set );
   }
 
-  void variable_global_array2_set( const CGMVariable& name, const int ind1, 
-                                   const int ind2, const CGMVariable& value ) {
+  void variable_global_array2_set( const CGMVariable& name, int ind1, 
+                                   int ind2, const CGMVariable& value ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ name, ind1, ind2, value };
 
@@ -737,7 +739,7 @@ namespace gm {
     GM_NORMAL_CALL( id_variable_local_set );
   }
 
-  void variable_local_array_set( const CGMVariable& name, const int ind, 
+  void variable_local_array_set( const CGMVariable& name, int ind, 
                                  const CGMVariable& value ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ name, ind, value };
@@ -745,19 +747,26 @@ namespace gm {
     GM_NORMAL_CALL( id_variable_local_array_set );
   }
 
-  void variable_local_array2_set( const CGMVariable& name, const int ind1, 
-                                  const int ind2, const CGMVariable& value ) {
+  void variable_local_array2_set( const CGMVariable& name, int ind1, 
+                                  int ind2, const CGMVariable& value ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ name, ind1, ind2, value };
 
     GM_NORMAL_CALL( id_variable_local_array2_set );
   }
 
-  void set_program_priority( const int priority ) {
+  void set_program_priority( int priority ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ priority };
 
     GM_NORMAL_CALL( id_set_program_priority );
+  }
+
+  void set_application_title( const CGMVariable& title ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ title };
+
+    GM_NORMAL_CALL( id_set_application_title );
   }
 
 }

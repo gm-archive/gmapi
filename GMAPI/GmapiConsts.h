@@ -1,88 +1,205 @@
 /************************************************************************** 
-  LICENSE:
+LICENSE:
 
-    GMAPI is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
+GMAPI is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
 
-    GMAPI is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
+GMAPI is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public
-    License along with GMAPI; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-    02110-1301 USA
+You should have received a copy of the GNU Lesser General Public
+License along with GMAPI; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+02110-1301 USA
 ***************************************************************************/
 
 /*************************************************************************
-  GmapiConsts.h
-  - Constants used by GMAPI
+GmapiConsts.h
+- Constants used by GMAPI
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #pragma once
 #include "GmapiDefs.h"
 
 namespace gm {
-  extern const unsigned long GM_VERSION_INCOMPATIBLE;
-  extern const unsigned long GM_VERSION_61;
-  extern const unsigned long GM_VERSION_70;
+  extern unsigned long const GM_VERSION_INCOMPATIBLE;
+  extern unsigned long const GM_VERSION_61;
+  extern unsigned long const GM_VERSION_70;
+  extern unsigned long const GM_VERSION_80;
 
-  extern const unsigned long GMAPI_INITIALIZATION_SUCCESS;
-  extern const unsigned long GMAPI_INITIALIZATION_FAILED;
-  extern const unsigned long GMAPI_ALREADY_INITIALIZED;
+  extern unsigned const long GMAPI_INITIALIZATION_SUCCESS;
+  extern unsigned const long GMAPI_INITIALIZATION_FAILED;
+  extern unsigned const long GMAPI_ALREADY_INITIALIZED;
 
-  extern const char* STR_GMAPI_ERROR;
-  extern const char* STR_GMAPI_DEBUG;
-  extern const char* STR_NO_ACCESS;
+  extern const char* const STR_GMAPI_ERROR;
+  extern const char* const STR_GMAPI_DEBUG;
+  extern const char* const STR_GMAPI_NOACCESS;
 
-  extern const char* EXC_UNKNOWN;
-  extern const char* EXC_SPRITENOTEXISTS;
-  extern const char* EXC_BACKGROUNDNOTEXISTS;
-  extern const char* EXC_SCRIPTNOTEXISTS;
-  extern const char* EXC_SOUNDNOTEXISTS;
-  extern const char* EXC_SURFACENOTEXISTS;
-  extern const char* EXC_INVALIDSUBIMAGE;
+  extern const char* const STR_EXC_UNKNOWN;
+  extern const char* const STR_EXC_SPRITENOTEXISTS;
+  extern const char* const STR_EXC_BACKGROUNDNOTEXISTS;
+  extern const char* const STR_EXC_SCRIPTNOTEXISTS;
+  extern const char* const STR_EXC_SOUNDNOTEXISTS;
+  extern const char* const STR_EXC_SURFACENOTEXISTS;
+  extern const char* const STR_EXC_INVALIDSUBIMAGE;
+  extern const char* const STR_EXC_FONTNOTEXISTS;
+  extern const char* const STR_EXC_PARTICLETYPENOTEXISTS;
+  extern const char* const STR_EXC_PARTICLESYSTEMNOTEXISTS;
+  extern const char* const STR_EXC_DEFLECTORNOTEXISTS;
+  extern const char* const STR_EXC_CHANGERNOTEXISTS;
+  extern const char* const STR_EXC_DESTROYERNOTEXISTS;
+  extern const char* const STR_EXC_EMITTERNOTEXISTS;
+  extern const char* const STR_EXC_ATTRACTORNOTEXISTS;
 
-  extern const char* GM70_ADDRESS_ARRAY_SWAP_BYTES;
-  extern const void* GM61_ADDRESS_CURRENT_ROOM_PTR;
-  extern const void* GM70_ADDRESS_CURRENT_ROOM_PTR;
-  extern const PGMVARIABLELIST* GM61_ADDRESS_GLOBAL_VARIABLE_LIST_PTR;
-  extern const PGMVARIABLELIST* GM70_ADDRESS_GLOBAL_VARIABLE_LIST_PTR;
-  extern const PGMFUNCTIONINFOSTORAGE GM61_ADDRESS_ARRAY_GMFUNCTIONS;
-  extern const PGMFUNCTIONINFOSTORAGE GM70_ADDRESS_ARRAY_GMFUNCTIONS;
-  extern const PGMSURFACE* GM61_ADDRESS_ARRAY_SURFACES;
-  extern const PGMSURFACE* GM70_ADDRESS_ARRAY_SURFACES;
-  extern const PGMTEXTURE* GM61_ADDRESS_ARRAY_TEXTURES;
-  extern const PGMTEXTURE* GM70_ADDRESS_ARRAY_TEXTURES;
-  extern const int* GM61_ADDRESS_ARRAYSIZE_SURFACES;
-  extern const int* GM70_ADDRESS_ARRAYSIZE_SURFACES;
-  extern const PGMSPRITESTORAGE GM61_ADDRESS_STORAGE_SPRITES;
-  extern const PGMSPRITESTORAGE GM70_ADDRESS_STORAGE_SPRITES;
-  extern const PGMBACKGROUNDSTORAGE GM61_ADDRESS_STORAGE_BACKGROUNDS;
-  extern const PGMBACKGROUNDSTORAGE GM70_ADDRESS_STORAGE_BACKGROUNDS;
-  extern const PGMSCRIPTSTORAGE GM61_ADDRESS_STORAGE_SCRIPTS;
-  extern const PGMSCRIPTSTORAGE GM70_ADDRESS_STORAGE_SCRIPTS;
-  extern const PGMDIRECT3DINFO GM61_ADDRESS_STORAGE_D3D;
-  extern const PGMDIRECT3DINFO GM70_ADDRESS_STORAGE_D3D;
+  extern const char* const GM70_ADDRESS_PTR_SWAPTABLE;
+  extern const char* const GM80_ADDRESS_PTR_SWAPTABLE;
+  extern void** const GM61_ADDRESS_PTR_CURRENTROOM;
+  extern void** const GM70_ADDRESS_PTR_CURRENTROOM;
+  extern void** const GM80_ADDRESS_PTR_CURRENTROOM;
+  extern int* const GM61_ADDRESS_PTR_ROOMCOUNT;
+  extern int* const GM70_ADDRESS_PTR_ROOMCOUNT;
+  extern int* const GM80_ADDRESS_PTR_ROOMCOUNT;
+  extern PGMVARIABLELIST* const GM61_ADDRESS_PTR_GLOBALVARLIST;
+  extern PGMVARIABLELIST* const GM70_ADDRESS_PTR_GLOBALVARLIST;
+  extern PGMVARIABLELIST* const GM80_ADDRESS_PTR_GLOBALVARLIST;
 
-  extern const PGMSOUNDSTORAGE GM61_ADDRESS_SOUND_STORAGE; 
-  extern const PGMSOUNDSTORAGE GM70_ADDRESS_SOUND_STORAGE;
+  extern int* const GM61_ADDRESS_ARRAY_ROOMIDS;
+  extern int* const GM70_ADDRESS_ARRAY_ROOMIDS;
+  extern int* const GM80_ADDRESS_ARRAY_ROOMIDS;
+  extern PGMFUNCTIONINFOSTORAGE const GM61_ADDRESS_ARRAY_GMFUNCTIONS;
+  extern PGMFUNCTIONINFOSTORAGE const GM70_ADDRESS_ARRAY_GMFUNCTIONS;
+  extern PGMFUNCTIONINFOSTORAGE const GM80_ADDRESS_ARRAY_GMFUNCTIONS;
+  extern PGMSURFACE* const GM61_ADDRESS_ARRAY_SURFACES;
+  extern PGMSURFACE* const GM70_ADDRESS_ARRAY_SURFACES;
+  extern PGMSURFACE* const GM80_ADDRESS_ARRAY_SURFACES;
+  extern PGMTEXTURE* const GM61_ADDRESS_ARRAY_TEXTURES;
+  extern PGMTEXTURE* const GM70_ADDRESS_ARRAY_TEXTURES;
+  extern PGMTEXTURE* const GM80_ADDRESS_ARRAY_TEXTURES;
+  extern int* const GM61_ADDRESS_ARRAYSIZE_SURFACES;
+  extern int* const GM70_ADDRESS_ARRAYSIZE_SURFACES;
+  extern int* const GM80_ADDRESS_ARRAYSIZE_SURFACES;
 
-  extern const DWORD* GM61_ADDRESS_TRUNNER_INSTANCE;
-  extern const DWORD* GM61_ADDRESS_TDEBUG_INSTANCE;
-  extern const DWORD* GM70_ADDRESS_TRUNNER_INSTANCE;
-  extern const DWORD* GM70_ADDRESS_TDEBUG_INSTANCE;
-  extern const DWORD* GM70_ADDRESS_TSCORE_INSTANCE;
+  extern PGMSPRITESTORAGE const GM61_ADDRESS_STORAGE_SPRITES;
+  extern PGMSPRITESTORAGE const GM70_ADDRESS_STORAGE_SPRITES;
+  extern PGMSPRITESTORAGE const GM80_ADDRESS_STORAGE_SPRITES;
+  extern PGMBACKGROUNDSTORAGE const GM61_ADDRESS_STORAGE_BACKGROUNDS;
+  extern PGMBACKGROUNDSTORAGE const GM70_ADDRESS_STORAGE_BACKGROUNDS;
+  extern PGMBACKGROUNDSTORAGE const GM80_ADDRESS_STORAGE_BACKGROUNDS;
+  extern PGMSCRIPTSTORAGE const GM61_ADDRESS_STORAGE_SCRIPTS;
+  extern PGMSCRIPTSTORAGE const GM70_ADDRESS_STORAGE_SCRIPTS;
+  extern PGMSCRIPTSTORAGE const GM80_ADDRESS_STORAGE_SCRIPTS;
+  extern PGMDIRECT3DDATA const GM61_ADDRESS_STORAGE_DIRECTX;
+  extern PGMDIRECT3DDATA const GM70_ADDRESS_STORAGE_DIRECTX;
+  extern PGMDIRECT3DDATA const GM80_ADDRESS_STORAGE_DIRECTX;
+  extern PGMSOUNDSTORAGE const GM61_ADDRESS_STORAGE_SOUNDS;
+  extern PGMSOUNDSTORAGE const GM70_ADDRESS_STORAGE_SOUNDS;
+  extern PGMSOUNDSTORAGE const GM80_ADDRESS_STORAGE_SOUNDS;
+  extern PGMFONTSTORAGE const GM61_ADDRESS_STORAGE_FONTS;
+  extern PGMFONTSTORAGE const GM70_ADDRESS_STORAGE_FONTS;
+  extern PGMFONTSTORAGE const GM80_ADDRESS_STORAGE_FONTS;
+  extern PGMPARTICLESTORAGE const GM61_ADDRESS_STORAGE_PARTICLES;
+  extern PGMPARTICLESTORAGE const GM70_ADDRESS_STORAGE_PARTICLES;
+  extern PGMPARTICLESTORAGE const GM80_ADDRESS_STORAGE_PARTICLES;
 
-  extern const PGMINSTANCE* GMAPI_CURRENT_INSTANCE_PTR;
+  extern HWND** const GM61_ADDRESS_FORM_TRUNNER;
+  extern HWND** const GM61_ADDRESS_FORM_TDEBUG;
+  extern HWND** const GM70_ADDRESS_FORM_TRUNNER;
+  extern HWND** const GM70_ADDRESS_FORM_TDEBUG;
+  extern HWND** const GM70_ADDRESS_FORM_TSCORE;
+  extern HWND** const GM80_ADDRESS_FORM_TRUNNER;
+  extern HWND** const GM80_ADDRESS_FORM_TDEBUG;
+  extern HWND** const GM80_ADDRESS_FORM_TSCORE;
 
-  extern const char* GM_FUNCTION_NAMES[];
-  extern const int GM_FUNCTION_COUNT;
+  extern int* const GM61_ADDRESS_PROPERTY_GAMEID;
+  extern int* const GM70_ADDRESS_PROPERTY_GAMEID;
+  extern int* const GM80_ADDRESS_PROPERTY_GAMEID;
+  extern const char** const GM61_ADDRESS_PROPERTY_TEMPDIRECTORY;
+  extern const char** const GM70_ADDRESS_PROPERTY_TEMPDIRECTORY;
+  extern const char** const GM80_ADDRESS_PROPERTY_TEMPDIRECTORY;
+  extern int* const GM61_ADDRESS_PROPERTY_FPS;
+  extern int* const GM70_ADDRESS_PROPERTY_FPS;
+  extern int* const GM80_ADDRESS_PROPERTY_FPS;
+  extern int* const GM61_ADDRESS_PROPERTY_ROOM;
+  extern int* const GM70_ADDRESS_PROPERTY_ROOM;
+  extern int* const GM80_ADDRESS_PROPERTY_ROOM;
+  extern int* const GM61_ADDRESS_PROPERTY_SCORE;
+  extern int* const GM70_ADDRESS_PROPERTY_SCORE;
+  extern int* const GM80_ADDRESS_PROPERTY_SCORE;
+  extern int* const GM61_ADDRESS_PROPERTY_LIVES;
+  extern int* const GM70_ADDRESS_PROPERTY_LIVES;
+  extern int* const GM80_ADDRESS_PROPERTY_LIVES;
+  extern double* const GM61_ADDRESS_PROPERTY_HEALTH;
+  extern double* const GM70_ADDRESS_PROPERTY_HEALTH;
+  extern double* const GM80_ADDRESS_PROPERTY_HEALTH;
+  extern bool* const GM61_ADDRESS_PROPERTY_SHOWSCORE;
+  extern bool* const GM70_ADDRESS_PROPERTY_SHOWSCORE;
+  extern bool* const GM80_ADDRESS_PROPERTY_SHOWSCORE;
+  extern bool* const GM61_ADDRESS_PROPERTY_SHOWLIVES;
+  extern bool* const GM70_ADDRESS_PROPERTY_SHOWLIVES;
+  extern bool* const GM80_ADDRESS_PROPERTY_SHOWLIVES;
+  extern bool* const GM61_ADDRESS_PROPERTY_SHOWHEALTH;
+  extern bool* const GM70_ADDRESS_PROPERTY_SHOWHEALTH;
+  extern bool* const GM80_ADDRESS_PROPERTY_SHOWHEALTH;
+  extern int* const GM61_ADDRESS_PROPERTY_EVENTTYPE;
+  extern int* const GM70_ADDRESS_PROPERTY_EVENTTYPE;
+  extern int* const GM80_ADDRESS_PROPERTY_EVENTTYPE;
+  extern int* const GM61_ADDRESS_PROPERTY_EVENTNUMBER;
+  extern int* const GM70_ADDRESS_PROPERTY_EVENTNUMBER;
+  extern int* const GM80_ADDRESS_PROPERTY_EVENTNUMBER;
+  extern int* const GM61_ADDRESS_PROPERTY_EVENTOBJECT;
+  extern int* const GM70_ADDRESS_PROPERTY_EVENTOBJECT;
+  extern int* const GM80_ADDRESS_PROPERTY_EVENTOBJECT;
+  extern int* const GM61_ADDRESS_PROPERTY_EVENTACTION;
+  extern int* const GM70_ADDRESS_PROPERTY_EVENTACTION;
+  extern int* const GM80_ADDRESS_PROPERTY_EVENTACTION;
+  extern const char** const GM61_ADDRESS_PROPERTY_ERRORLAST;
+  extern const char** const GM70_ADDRESS_PROPERTY_ERRORLAST;
+  extern const char** const GM80_ADDRESS_PROPERTY_ERRORLAST;
+  extern bool* const GM61_ADDRESS_PROPERTY_ERROROCCURED;
+  extern bool* const GM70_ADDRESS_PROPERTY_ERROROCCURED;
+  extern bool* const GM80_ADDRESS_PROPERTY_ERROROCCURED;
+  extern int* const GM61_ADDRESS_PROPERTY_KEYBOARDKEY;
+  extern int* const GM70_ADDRESS_PROPERTY_KEYBOARDKEY;
+  extern int* const GM80_ADDRESS_PROPERTY_KEYBOARDKEY;
+  extern int* const GM61_ADDRESS_PROPERTY_KEYBOARDLASTKEY;
+  extern int* const GM70_ADDRESS_PROPERTY_KEYBOARDLASTKEY;
+  extern int* const GM80_ADDRESS_PROPERTY_KEYBOARDLASTKEY;
+  extern const char** const GM61_ADDRESS_PROPERTY_KEYBOARDSTRING;
+  extern const char** const GM70_ADDRESS_PROPERTY_KEYBOARDSTRING;
+  extern const char** const GM80_ADDRESS_PROPERTY_KEYBOARDSTRING;
+  extern int* const GM61_ADDRESS_PROPERTY_MOUSEBUTTON;
+  extern int* const GM70_ADDRESS_PROPERTY_MOUSEBUTTON;
+  extern int* const GM80_ADDRESS_PROPERTY_MOUSEBUTTON;
+  extern int* const GM61_ADDRESS_PROPERTY_MOUSELASTBUTTON;
+  extern int* const GM70_ADDRESS_PROPERTY_MOUSELASTBUTTON;
+  extern int* const GM80_ADDRESS_PROPERTY_MOUSELASTBUTTON;
+  extern int* const GM61_ADDRESS_PROPERTY_VIEWCURRENT;
+  extern int* const GM70_ADDRESS_PROPERTY_VIEWCURRENT;
+  extern int* const GM80_ADDRESS_PROPERTY_VIEWCURRENT;
+  extern int* const GM70_ADDRESS_PROPERTY_TRANSITIONKIND;
+  extern int* const GM80_ADDRESS_PROPERTY_TRANSITIONKIND;
+  extern int* const GM70_ADDRESS_PROPERTY_TRANSITIONSTEPS;
+  extern int* const GM80_ADDRESS_PROPERTY_TRANSITIONSTEPS;
+  extern int* const GM70_ADDRESS_PROPERTY_CURSORSPRITE;
+  extern int* const GM80_ADDRESS_PROPERTY_CURSORSPRITE;
+
+  extern PGMINSTANCE* const GMAPI_ADDRESS_PTR_CURRENTINSTANCE;
+  extern PGMINSTANCE* const GMAPI_ADDRESS_PTR_OTHERINSTANCE;
+
+  extern void* const GM70_ADDRESS_PATCH_IDENTIFIERTYPECHECKING;
+  extern void* const GM80_ADDRESS_PATCH_IDENTIFIERTYPECHECKING;
+  extern BYTE const GM70_PATCH_IDENTIFIERTYPECHECKING[];
+  extern BYTE const GM80_PATCH_IDENTIFIERTYPECHECKING[];
+  extern int const GM_PATCHSIZE_IDENTIFIERTYPECHECKING;
+
+  extern const char* const GM_FUNCTION_NAMES[];
+  extern int const GM_FUNCTION_COUNT;
 
   enum GMFunctionPtrID {
     id_show_message,
@@ -111,6 +228,7 @@ namespace gm {
     id_splash_show_video,
     id_splash_show_text,
     id_splash_show_image,
+    id_splash_show_web,
     id_splash_set_main,
     id_splash_set_scale,
     id_splash_set_cursor,
@@ -124,6 +242,8 @@ namespace gm {
     id_splash_set_interrupt,
     id_splash_set_stop_key,
     id_splash_set_stop_mouse,
+    id_splash_set_position,
+    id_splash_set_close_button,
     id_show_info,
     id_load_info,
     id_show_error,
@@ -243,6 +363,7 @@ namespace gm {
     id_ds_priority_write,
     id_ds_priority_read,
     id_ds_grid_create,
+    id_ds_grid_destroy,
     id_ds_grid_delete,
     id_ds_grid_copy,
     id_ds_grid_resize,
@@ -374,6 +495,7 @@ namespace gm {
     id_variable_local_array_set,
     id_variable_local_array2_set,
     id_set_program_priority,
+    id_set_application_title,
     id_sound_play,
     id_sound_loop,
     id_sound_stop,
@@ -430,8 +552,10 @@ namespace gm {
     id_sprite_assign,
     id_sprite_merge,
     id_sprite_add,
+    id_sprite_add_sprite,
     id_sprite_add_alpha,
     id_sprite_replace,
+    id_sprite_replace_sprite,
     id_sprite_replace_alpha,
     id_sprite_create_from_screen,
     id_sprite_add_from_screen,
@@ -439,14 +563,17 @@ namespace gm {
     id_sprite_add_from_surface,
     id_sprite_delete,
     id_sprite_set_alpha_from_sprite,
+    id_sprite_collision_mask,
     id_sound_add,
     id_sound_replace,
     id_sound_delete,
     id_background_duplicate,
     id_background_assign,
     id_background_add,
+    id_background_add_background,
     id_background_add_alpha,
     id_background_replace,
+    id_background_replace_background,
     id_background_replace_alpha,
     id_background_create_color,
     id_background_create_gradient,
@@ -482,6 +609,7 @@ namespace gm {
     id_timeline_delete,
     id_timeline_moment_add,
     id_timeline_moment_clear,
+    id_timeline_clear,
     id_object_set_sprite,
     id_object_set_solid,
     id_object_set_visible,
@@ -527,6 +655,7 @@ namespace gm {
     id_sprite_get_bbox_mode,
     id_sprite_get_precise,
     id_sprite_save,
+    id_sprite_save_strip,
     id_sound_exists,
     id_sound_get_name,
     id_sound_get_kind,
@@ -799,6 +928,8 @@ namespace gm {
     id_mouse_check_button,
     id_mouse_check_button_pressed,
     id_mouse_check_button_released,
+    id_mouse_wheel_up,
+    id_mouse_wheel_down,
     id_mouse_clear,
     id_mouse_wait,
     id_joystick_exists,
@@ -826,6 +957,7 @@ namespace gm {
     id_file_text_read_real,
     id_file_text_readln,
     id_file_text_eof,
+    id_file_text_eoln,
     id_file_exists,
     id_file_delete,
     id_file_rename,
@@ -856,6 +988,8 @@ namespace gm {
     id_parameter_count,
     id_parameter_string,
     id_environment_get_variable,
+    id_disk_free,
+    id_disk_size,
     id_registry_write_string,
     id_registry_write_real,
     id_registry_read_string,
@@ -1030,287 +1164,289 @@ namespace gm {
     id_d3d_model_floor
   };
 
-  extern const int self;
-  extern const int other;
-  extern const int all;
-  extern const int noone;
-  extern const int global;
-  extern const int local;
-  extern const double pi;
-  extern const int ev_create;
-  extern const int ev_destroy;
-  extern const int ev_step;
-  extern const int ev_alarm;
-  extern const int ev_keyboard;
-  extern const int ev_mouse;
-  extern const int ev_collision;
-  extern const int ev_other;
-  extern const int ev_draw;
-  extern const int ev_keypress;
-  extern const int ev_keyrelease;
-  extern const int ev_left_button;
-  extern const int ev_right_button;
-  extern const int ev_middle_button;
-  extern const int ev_no_button;
-  extern const int ev_left_press;
-  extern const int ev_right_press;
-  extern const int ev_middle_press;
-  extern const int ev_left_release;
-  extern const int ev_right_release;
-  extern const int ev_middle_release;
-  extern const int ev_mouse_enter;
-  extern const int ev_mouse_leave;
-  extern const int ev_mouse_wheel_up;
-  extern const int ev_mouse_wheel_down;
-  extern const int ev_global_left_button;
-  extern const int ev_global_right_button;
-  extern const int ev_global_middle_button;
-  extern const int ev_global_left_press;
-  extern const int ev_global_right_press;
-  extern const int ev_global_middle_press;
-  extern const int ev_global_left_release;
-  extern const int ev_global_right_release;
-  extern const int ev_global_middle_release;
-  extern const int ev_joystick1_left;
-  extern const int ev_joystick1_right;
-  extern const int ev_joystick1_up;
-  extern const int ev_joystick1_down;
-  extern const int ev_joystick1_button1;
-  extern const int ev_joystick1_button2;
-  extern const int ev_joystick1_button3;
-  extern const int ev_joystick1_button4;
-  extern const int ev_joystick1_button5;
-  extern const int ev_joystick1_button6;
-  extern const int ev_joystick1_button7;
-  extern const int ev_joystick1_button8;
-  extern const int ev_joystick2_left;
-  extern const int ev_joystick2_right;
-  extern const int ev_joystick2_up;
-  extern const int ev_joystick2_down;
-  extern const int ev_joystick2_button1;
-  extern const int ev_joystick2_button2;
-  extern const int ev_joystick2_button3;
-  extern const int ev_joystick2_button4;
-  extern const int ev_joystick2_button5;
-  extern const int ev_joystick2_button6;
-  extern const int ev_joystick2_button7;
-  extern const int ev_joystick2_button8;
-  extern const int ev_outside;
-  extern const int ev_boundary;
-  extern const int ev_game_start;
-  extern const int ev_game_end;
-  extern const int ev_room_start;
-  extern const int ev_room_end;
-  extern const int ev_no_more_lives;
-  extern const int ev_animation_end;
-  extern const int ev_end_of_path;
-  extern const int ev_no_more_health;
-  extern const int ev_close_button;
-  extern const int ev_user0;
-  extern const int ev_user1;
-  extern const int ev_user2;
-  extern const int ev_user3;
-  extern const int ev_user4;
-  extern const int ev_user5;
-  extern const int ev_user6;
-  extern const int ev_user7;
-  extern const int ev_user8;
-  extern const int ev_user9;
-  extern const int ev_user10;
-  extern const int ev_user11;
-  extern const int ev_user12;
-  extern const int ev_user13;
-  extern const int ev_user14;
-  extern const int ev_user15;
-  extern const int ev_step_normal;
-  extern const int ev_step_begin;
-  extern const int ev_step_end;
-  extern const int vk_nokey;
-  extern const int vk_anykey;
-  extern const int vk_enter;
-  extern const int vk_return;
-  extern const int vk_shift;
-  extern const int vk_control;
-  extern const int vk_alt;
-  extern const int vk_escape;
-  extern const int vk_space;
-  extern const int vk_backspace;
-  extern const int vk_tab;
-  extern const int vk_pause;
-  extern const int vk_printscreen;
-  extern const int vk_left;
-  extern const int vk_right;
-  extern const int vk_up;
-  extern const int vk_down;
-  extern const int vk_home;
-  extern const int vk_end;
-  extern const int vk_delete;
-  extern const int vk_insert;
-  extern const int vk_pageup;
-  extern const int vk_pagedown;
-  extern const int vk_f1;
-  extern const int vk_f2;
-  extern const int vk_f3;
-  extern const int vk_f4;
-  extern const int vk_f5;
-  extern const int vk_f6;
-  extern const int vk_f7;
-  extern const int vk_f8;
-  extern const int vk_f9;
-  extern const int vk_f10;
-  extern const int vk_f11;
-  extern const int vk_f12;
-  extern const int vk_numpad0;
-  extern const int vk_numpad1;
-  extern const int vk_numpad2;
-  extern const int vk_numpad3;
-  extern const int vk_numpad4;
-  extern const int vk_numpad5;
-  extern const int vk_numpad6;
-  extern const int vk_numpad7;
-  extern const int vk_numpad8;
-  extern const int vk_numpad9;
-  extern const int vk_divide;
-  extern const int vk_multiply;
-  extern const int vk_subtract;
-  extern const int vk_add;
-  extern const int vk_decimal;
-  extern const int vk_lshift;
-  extern const int vk_lcontrol;
-  extern const int vk_lalt;
-  extern const int vk_rshift;
-  extern const int vk_rcontrol;
-  extern const int vk_ralt;
-  extern const int mb_any;
-  extern const int mb_none;
-  extern const int mb_left;
-  extern const int mb_right;
-  extern const int mb_middle;
-  extern const int c_aqua;
-  extern const int c_black;
-  extern const int c_blue;
-  extern const int c_dkgray;
-  extern const int c_fuchsia;
-  extern const int c_gray;
-  extern const int c_green;
-  extern const int c_lime;
-  extern const int c_ltgray;
-  extern const int c_maroon;
-  extern const int c_navy;
-  extern const int c_olive;
-  extern const int c_purple;
-  extern const int c_red;
-  extern const int c_silver;
-  extern const int c_teal;
-  extern const int c_white;
-  extern const int c_yellow;
-  extern const int c_orange;
-  extern const int fa_left;
-  extern const int fa_center;
-  extern const int fa_right;
-  extern const int fa_top;
-  extern const int fa_middle;
-  extern const int fa_bottom;
-  extern const int pr_pointlist;
-  extern const int pr_linelist;
-  extern const int pr_linestrip;
-  extern const int pr_trianglelist;
-  extern const int pr_trianglestrip;
-  extern const int pr_trianglefan;
-  extern const int bm_normal;
-  extern const int bm_add;
-  extern const int bm_max;
-  extern const int bm_subtract;
-  extern const int bm_zero;
-  extern const int bm_one;
-  extern const int bm_src_color;
-  extern const int bm_inv_src_color;
-  extern const int bm_src_alpha;
-  extern const int bm_inv_src_alpha;
-  extern const int bm_dest_alpha;
-  extern const int bm_inv_dest_alpha;
-  extern const int bm_dest_color;
-  extern const int bm_inv_dest_color;
-  extern const int bm_src_alpha_sat;
-  extern const int cr_default;
-  extern const int cr_none;
-  extern const int cr_arrrow;
-  extern const int cr_cross;
-  extern const int cr_beam;
-  extern const int cr_size_nesw;
-  extern const int cr_size_ns;
-  extern const int cr_size_nwse;
-  extern const int cr_size_we;
-  extern const int cr_uparrow;
-  extern const int cr_hourglass;
-  extern const int cr_drag;
-  extern const int cr_nodrop;
-  extern const int cr_hsplit;
-  extern const int cr_vsplit;
-  extern const int cr_multidrag;
-  extern const int cr_sqlwait;
-  extern const int cr_no;
-  extern const int cr_appstart;
-  extern const int cr_help;
-  extern const int cr_handpoint;
-  extern const int cr_size_all;
-  extern const int se_none;
-  extern const int se_chorus;
-  extern const int se_echo;
-  extern const int se_flanger;
-  extern const int se_gargle;
-  extern const int se_reverb;
-  extern const int se_compressor;
-  extern const int se_equalizer;
-  extern const int fa_readonly;
-  extern const int fa_hidden;
-  extern const int fa_sysfile;
-  extern const int fa_volumeid;
-  extern const int fa_directory;
-  extern const int fa_archive;
-  extern const int ef_explosion;
-  extern const int ef_ring;
-  extern const int ef_ellipse;
-  extern const int ef_firework;
-  extern const int ef_smoke;
-  extern const int ef_smokeup;
-  extern const int ef_star;
-  extern const int ef_spark;
-  extern const int ef_flare;
-  extern const int ef_cloud;
-  extern const int ef_rain;
-  extern const int ef_snow;
-  extern const int pt_shape_pixel;
-  extern const int pt_shape_disk;
-  extern const int pt_shape_square;
-  extern const int pt_shape_line;
-  extern const int pt_shape_star;
-  extern const int pt_shape_circle;
-  extern const int pt_shape_ring;
-  extern const int pt_shape_sphere;
-  extern const int pt_shape_flare;
-  extern const int pt_shape_spark;
-  extern const int pt_shape_explosion;
-  extern const int pt_shape_cloud;
-  extern const int pt_shape_smoke;
-  extern const int ps_distr_linear;
-  extern const int ps_distr_gaussian;
-  extern const int ps_distr_invgaussian;
-  extern const int ps_shape_rectangle;
-  extern const int ps_shape_ellipse;
-  extern const int ps_shape_diamond;
-  extern const int ps_shape_line;
-  extern const int ps_force_constant;
-  extern const int ps_force_linear;
-  extern const int ps_force_quadratic;
-  extern const int ps_deflect_vertical;
-  extern const int ps_deflect_horizontal;
-  extern const int ps_change_all;
-  extern const int ps_change_shape;
-  extern const int ps_change_motion;
-  extern const int ty_real;
-  extern const int ty_string;
-  extern const int dll_cdecl;
-  extern const int dll_stdcall;
+  extern int const self;
+  extern int const other;
+  extern int const all;
+  extern int const noone;
+  extern int const global;
+  extern int const local;
+  extern double const pi;
+  extern int const ev_create;
+  extern int const ev_destroy;
+  extern int const ev_step;
+  extern int const ev_alarm;
+  extern int const ev_keyboard;
+  extern int const ev_mouse;
+  extern int const ev_collision;
+  extern int const ev_other;
+  extern int const ev_draw;
+  extern int const ev_keypress;
+  extern int const ev_keyrelease;
+  extern int const ev_trigger;
+  extern int const ev_left_button;
+  extern int const ev_right_button;
+  extern int const ev_middle_button;
+  extern int const ev_no_button;
+  extern int const ev_left_press;
+  extern int const ev_right_press;
+  extern int const ev_middle_press;
+  extern int const ev_left_release;
+  extern int const ev_right_release;
+  extern int const ev_middle_release;
+  extern int const ev_mouse_enter;
+  extern int const ev_mouse_leave;
+  extern int const ev_mouse_wheel_up;
+  extern int const ev_mouse_wheel_down;
+  extern int const ev_global_left_button;
+  extern int const ev_global_right_button;
+  extern int const ev_global_middle_button;
+  extern int const ev_global_left_press;
+  extern int const ev_global_right_press;
+  extern int const ev_global_middle_press;
+  extern int const ev_global_left_release;
+  extern int const ev_global_right_release;
+  extern int const ev_global_middle_release;
+  extern int const ev_joystick1_left;
+  extern int const ev_joystick1_right;
+  extern int const ev_joystick1_up;
+  extern int const ev_joystick1_down;
+  extern int const ev_joystick1_button1;
+  extern int const ev_joystick1_button2;
+  extern int const ev_joystick1_button3;
+  extern int const ev_joystick1_button4;
+  extern int const ev_joystick1_button5;
+  extern int const ev_joystick1_button6;
+  extern int const ev_joystick1_button7;
+  extern int const ev_joystick1_button8;
+  extern int const ev_joystick2_left;
+  extern int const ev_joystick2_right;
+  extern int const ev_joystick2_up;
+  extern int const ev_joystick2_down;
+  extern int const ev_joystick2_button1;
+  extern int const ev_joystick2_button2;
+  extern int const ev_joystick2_button3;
+  extern int const ev_joystick2_button4;
+  extern int const ev_joystick2_button5;
+  extern int const ev_joystick2_button6;
+  extern int const ev_joystick2_button7;
+  extern int const ev_joystick2_button8;
+  extern int const ev_outside;
+  extern int const ev_boundary;
+  extern int const ev_game_start;
+  extern int const ev_game_end;
+  extern int const ev_room_start;
+  extern int const ev_room_end;
+  extern int const ev_no_more_lives;
+  extern int const ev_animation_end;
+  extern int const ev_end_of_path;
+  extern int const ev_no_more_health;
+  extern int const ev_close_button;
+  extern int const ev_user0;
+  extern int const ev_user1;
+  extern int const ev_user2;
+  extern int const ev_user3;
+  extern int const ev_user4;
+  extern int const ev_user5;
+  extern int const ev_user6;
+  extern int const ev_user7;
+  extern int const ev_user8;
+  extern int const ev_user9;
+  extern int const ev_user10;
+  extern int const ev_user11;
+  extern int const ev_user12;
+  extern int const ev_user13;
+  extern int const ev_user14;
+  extern int const ev_user15;
+  extern int const ev_step_normal;
+  extern int const ev_step_begin;
+  extern int const ev_step_end;
+  extern int const vk_nokey;
+  extern int const vk_anykey;
+  extern int const vk_enter;
+  extern int const vk_return;
+  extern int const vk_shift;
+  extern int const vk_control;
+  extern int const vk_alt;
+  extern int const vk_escape;
+  extern int const vk_space;
+  extern int const vk_backspace;
+  extern int const vk_tab;
+  extern int const vk_pause;
+  extern int const vk_printscreen;
+  extern int const vk_left;
+  extern int const vk_right;
+  extern int const vk_up;
+  extern int const vk_down;
+  extern int const vk_home;
+  extern int const vk_end;
+  extern int const vk_delete;
+  extern int const vk_insert;
+  extern int const vk_pageup;
+  extern int const vk_pagedown;
+  extern int const vk_f1;
+  extern int const vk_f2;
+  extern int const vk_f3;
+  extern int const vk_f4;
+  extern int const vk_f5;
+  extern int const vk_f6;
+  extern int const vk_f7;
+  extern int const vk_f8;
+  extern int const vk_f9;
+  extern int const vk_f10;
+  extern int const vk_f11;
+  extern int const vk_f12;
+  extern int const vk_numpad0;
+  extern int const vk_numpad1;
+  extern int const vk_numpad2;
+  extern int const vk_numpad3;
+  extern int const vk_numpad4;
+  extern int const vk_numpad5;
+  extern int const vk_numpad6;
+  extern int const vk_numpad7;
+  extern int const vk_numpad8;
+  extern int const vk_numpad9;
+  extern int const vk_divide;
+  extern int const vk_multiply;
+  extern int const vk_subtract;
+  extern int const vk_add;
+  extern int const vk_decimal;
+  extern int const vk_lshift;
+  extern int const vk_lcontrol;
+  extern int const vk_lalt;
+  extern int const vk_rshift;
+  extern int const vk_rcontrol;
+  extern int const vk_ralt;
+  extern int const mb_any;
+  extern int const mb_none;
+  extern int const mb_left;
+  extern int const mb_right;
+  extern int const mb_middle;
+  extern int const c_aqua;
+  extern int const c_black;
+  extern int const c_blue;
+  extern int const c_dkgray;
+  extern int const c_fuchsia;
+  extern int const c_gray;
+  extern int const c_green;
+  extern int const c_lime;
+  extern int const c_ltgray;
+  extern int const c_maroon;
+  extern int const c_navy;
+  extern int const c_olive;
+  extern int const c_purple;
+  extern int const c_red;
+  extern int const c_silver;
+  extern int const c_teal;
+  extern int const c_white;
+  extern int const c_yellow;
+  extern int const c_orange;
+  extern int const fa_left;
+  extern int const fa_center;
+  extern int const fa_right;
+  extern int const fa_top;
+  extern int const fa_middle;
+  extern int const fa_bottom;
+  extern int const pr_pointlist;
+  extern int const pr_linelist;
+  extern int const pr_linestrip;
+  extern int const pr_trianglelist;
+  extern int const pr_trianglestrip;
+  extern int const pr_trianglefan;
+  extern int const bm_normal;
+  extern int const bm_add;
+  extern int const bm_max;
+  extern int const bm_subtract;
+  extern int const bm_zero;
+  extern int const bm_one;
+  extern int const bm_src_color;
+  extern int const bm_inv_src_color;
+  extern int const bm_src_alpha;
+  extern int const bm_inv_src_alpha;
+  extern int const bm_dest_alpha;
+  extern int const bm_inv_dest_alpha;
+  extern int const bm_dest_color;
+  extern int const bm_inv_dest_color;
+  extern int const bm_src_alpha_sat;
+  extern int const cr_default;
+  extern int const cr_none;
+  extern int const cr_arrrow;
+  extern int const cr_cross;
+  extern int const cr_beam;
+  extern int const cr_size_nesw;
+  extern int const cr_size_ns;
+  extern int const cr_size_nwse;
+  extern int const cr_size_we;
+  extern int const cr_uparrow;
+  extern int const cr_hourglass;
+  extern int const cr_drag;
+  extern int const cr_nodrop;
+  extern int const cr_hsplit;
+  extern int const cr_vsplit;
+  extern int const cr_multidrag;
+  extern int const cr_sqlwait;
+  extern int const cr_no;
+  extern int const cr_appstart;
+  extern int const cr_help;
+  extern int const cr_handpoint;
+  extern int const cr_size_all;
+  extern int const se_none;
+  extern int const se_chorus;
+  extern int const se_echo;
+  extern int const se_flanger;
+  extern int const se_gargle;
+  extern int const se_reverb;
+  extern int const se_compressor;
+  extern int const se_equalizer;
+  extern int const fa_readonly;
+  extern int const fa_hidden;
+  extern int const fa_sysfile;
+  extern int const fa_volumeid;
+  extern int const fa_directory;
+  extern int const fa_archive;
+  extern int const ef_explosion;
+  extern int const ef_ring;
+  extern int const ef_ellipse;
+  extern int const ef_firework;
+  extern int const ef_smoke;
+  extern int const ef_smokeup;
+  extern int const ef_star;
+  extern int const ef_spark;
+  extern int const ef_flare;
+  extern int const ef_cloud;
+  extern int const ef_rain;
+  extern int const ef_snow;
+  extern int const pt_shape_pixel;
+  extern int const pt_shape_disk;
+  extern int const pt_shape_square;
+  extern int const pt_shape_line;
+  extern int const pt_shape_star;
+  extern int const pt_shape_circle;
+  extern int const pt_shape_ring;
+  extern int const pt_shape_sphere;
+  extern int const pt_shape_flare;
+  extern int const pt_shape_spark;
+  extern int const pt_shape_explosion;
+  extern int const pt_shape_cloud;
+  extern int const pt_shape_smoke;
+  extern int const pt_shape_snow;
+  extern int const ps_distr_linear;
+  extern int const ps_distr_gaussian;
+  extern int const ps_distr_invgaussian;
+  extern int const ps_shape_rectangle;
+  extern int const ps_shape_ellipse;
+  extern int const ps_shape_diamond;
+  extern int const ps_shape_line;
+  extern int const ps_force_constant;
+  extern int const ps_force_linear;
+  extern int const ps_force_quadratic;
+  extern int const ps_deflect_vertical;
+  extern int const ps_deflect_horizontal;
+  extern int const ps_change_all;
+  extern int const ps_change_shape;
+  extern int const ps_change_motion;
+  extern int const ty_real;
+  extern int const ty_string;
+  extern int const dll_cdecl;
+  extern int const dll_stdcall;
 
 }

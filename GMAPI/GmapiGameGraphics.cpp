@@ -21,7 +21,7 @@
   GmapiGameGraphics.cpp
   - Wrapped GM functions; Parser-generated code
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #include "GmapiGameGraphics.h"
@@ -30,108 +30,108 @@
 
 namespace gm {
 
-  void draw_sprite( const int sprite, const int subimg, const double x, const double y ) {
+  void draw_sprite( int sprite, int subimg, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ sprite, subimg, x, y };
 
     GM_NORMAL_CALL( id_draw_sprite );
   }
 
-  void draw_sprite_stretched( const int sprite, const int subimg, const double x, const double y,
-                              const double w, const double h ) {
+  void draw_sprite_stretched( int sprite, int subimg, double x, double y,
+                              double w, double h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ sprite, subimg, x, y, w, h };
 
     GM_NORMAL_CALL( id_draw_sprite_stretched );
   }
 
-  void draw_sprite_tiled( const int sprite, const int subimg, const double x, const double y ) {
+  void draw_sprite_tiled( int sprite, int subimg, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ sprite, subimg, x, y };
 
     GM_NORMAL_CALL( id_draw_sprite_tiled );
   }
 
-  void draw_sprite_part( const int sprite, const int subimg, const int left, const int top,
-                         const int width, const int height, const double x, const double y ) {
+  void draw_sprite_part( int sprite, int subimg, int left, int top,
+                         int width, int height, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ sprite, subimg, left, top, width, height, x, y };
 
     GM_NORMAL_CALL( id_draw_sprite_part );
   }
 
-  void draw_background( const int back, const double x, const double y ) {
+  void draw_background( int back, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back, x, y };
 
     GM_NORMAL_CALL( id_draw_background );
   }
 
-  void draw_background_stretched( const int back, const double x, const double y,
-                                  const double w, const double h ) {
+  void draw_background_stretched( int back, double x, double y,
+                                  double w, double h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back, x, y, w, h };
 
     GM_NORMAL_CALL( id_draw_background_stretched );
   }
 
-  void draw_background_tiled( const int back, const double x, const double y ) {
+  void draw_background_tiled( int back, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back, x, y };
 
     GM_NORMAL_CALL( id_draw_background_tiled );
   }
 
-  void draw_background_part( const int back, const int left, const int top, const int width,
-                             const int height, const double x, const double y ) {
+  void draw_background_part( int back, int left, int top, int width,
+                             int height, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back, left, top, width, height, x, y };
 
     GM_NORMAL_CALL( id_draw_background_part );
   }
 
-  void draw_sprite_ext( const int sprite, const int subimg, const double x, const double y,
-                        const double xscale, const double yscale, const double rot,
-                        const int color, const double alpha ) {
+  void draw_sprite_ext( int sprite, int subimg, double x, double y,
+                        double xscale, double yscale, double rot,
+                        int color, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ sprite, subimg, x, y, xscale, yscale, rot, color, alpha };
 
     GM_NORMAL_CALL( id_draw_sprite_ext );
   }
 
-  void draw_sprite_stretched_ext( const int sprite, const int subimg, const double x,
-                                  const double y, const double w, const double h,
-                                  const int color, const double alpha ) {
+  void draw_sprite_stretched_ext( int sprite, int subimg, double x,
+                                  double y, double w, double h,
+                                  int color, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ sprite, subimg, x, y, w, h, color, alpha };
 
     GM_NORMAL_CALL( id_draw_sprite_stretched_ext );
   }
 
-  void draw_sprite_tiled_ext( const int sprite, const int subimg, const double x, const double y,
-                              const double xscale, const double yscale, const int color,
-                              const double alpha ) {
+  void draw_sprite_tiled_ext( int sprite, int subimg, double x, double y,
+                              double xscale, double yscale, int color,
+                              double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ sprite, subimg, x, y, xscale, yscale, color, alpha };
 
     GM_NORMAL_CALL( id_draw_sprite_tiled_ext );
   }
 
-  void draw_sprite_part_ext( const int sprite, const int subimg, const int left, const int top,
-                             const int width, const int height, const double x, const double y,
-                             const double xscale, const double yscale, const int color,
-                             const double alpha ) {
+  void draw_sprite_part_ext( int sprite, int subimg, int left, int top,
+                             int width, int height, double x, double y,
+                             double xscale, double yscale, int color,
+                             double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ sprite, subimg, left, top, width, height, x, y, xscale, yscale, color, alpha };
 
     GM_NORMAL_CALL( id_draw_sprite_part_ext );
   }
 
-  void draw_sprite_general( const int sprite, const int subimg, const int left, const int top,
-                            const int width, const int height, const double x, const double y,
-                            const double xscale, const double yscale, const double rot,
-                            const int c1, const int c2, const int c3, const int c4,
-                            const double alpha ) {
+  void draw_sprite_general( int sprite, int subimg, int left, int top,
+                            int width, int height, double x, double y,
+                            double xscale, double yscale, double rot,
+                            int c1, int c2, int c3, int c4,
+                            double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ sprite, subimg, left, top, width, height, x, y, xscale, yscale, rot, c1, c2, c3,
                 c4, alpha };
@@ -139,48 +139,48 @@ namespace gm {
     GM_NORMAL_CALL( id_draw_sprite_general );
   }
 
-  void draw_background_ext( const int back, const double x, const double y, const double xscale,
-                            const double yscale, const double rot, const int color,
-                            const double alpha ) {
+  void draw_background_ext( int back, double x, double y, double xscale,
+                            double yscale, double rot, int color,
+                            double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back, x, y, xscale, yscale, rot, color, alpha };
 
     GM_NORMAL_CALL( id_draw_background_ext );
   }
 
-  void draw_background_stretched_ext( const int back, const double x, const double y,
-                                      const double w, const double h, const int color,
-                                      const double alpha ) {
+  void draw_background_stretched_ext( int back, double x, double y,
+                                      double w, double h, int color,
+                                      double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back, x, y, w, h, color, alpha };
 
     GM_NORMAL_CALL( id_draw_background_stretched_ext );
   }
 
-  void draw_background_tiled_ext( const int back, const double x, const double y,
-                                  const double xscale, const double yscale, const int color,
-                                  const double alpha ) {
+  void draw_background_tiled_ext( int back, double x, double y,
+                                  double xscale, double yscale, int color,
+                                  double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back, x, y, xscale, yscale, color, alpha };
 
     GM_NORMAL_CALL( id_draw_background_tiled_ext );
   }
 
-  void draw_background_part_ext( const int back, const int left, const int top, const int width,
-                                 const int height, const double x, const double y, 
-                                 const double xscale, const double yscale, const int color, 
-                                 const double alpha ) {
+  void draw_background_part_ext( int back, int left, int top, int width,
+                                 int height, double x, double y, 
+                                 double xscale, double yscale, int color, 
+                                 double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back, left, top, width, height, x, y, xscale, yscale, color, alpha };
 
     GM_NORMAL_CALL( id_draw_background_part_ext );
   }
 
-  void draw_background_general( const int back, const int left, const int top, const int width,
-                                const int height, const double x, const double y,
-                                const double xscale, const double yscale, const double rot,
-                                const int c1, const int c2, const int c3, const int c4,
-                                const double alpha ) {
+  void draw_background_general( int back, int left, int top, int width,
+                                int height, double x, double y,
+                                double xscale, double yscale, double rot,
+                                int c1, int c2, int c3, int c4,
+                                double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back, left, top, width, height, x, y, xscale, yscale, rot, c1, c2, c3, c4,
                 alpha };
@@ -188,115 +188,115 @@ namespace gm {
     GM_NORMAL_CALL( id_draw_background_general );
   }
 
-  void draw_clear( const int col ) {
+  void draw_clear( int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col };
 
     GM_NORMAL_CALL( id_draw_clear );
   }
 
-  void draw_clear_alpha( const int col, const double alpha ) {
+  void draw_clear_alpha( int col, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col, alpha };
 
     GM_NORMAL_CALL( id_draw_clear_alpha );
   }
 
-  void draw_point( const double x, const double y ) {
+  void draw_point( double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
     GM_NORMAL_CALL( id_draw_point );
   }
 
-  void draw_line( const double x1, const double y1, const double x2, const double y2 ) {
+  void draw_line( double x1, double y1, double x2, double y2 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2 };
 
     GM_NORMAL_CALL( id_draw_line );
   }
 
-  void draw_line_width( const double x1, const double y1, const double x2, const double y2,
-                        const double w ) {
+  void draw_line_width( double x1, double y1, double x2, double y2,
+                        double w ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, w };
 
     GM_NORMAL_CALL( id_draw_line_width );
   }
 
-  void draw_rectangle( const double x1, const double y1, const double x2, const double y2,
-                       const bool outline ) {
+  void draw_rectangle( double x1, double y1, double x2, double y2,
+                       bool outline ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, outline };
 
     GM_NORMAL_CALL( id_draw_rectangle );
   }
 
-  void draw_roundrect( const double x1, const double y1, const double x2, const double y2,
-                       const bool outline ) {
+  void draw_roundrect( double x1, double y1, double x2, double y2,
+                       bool outline ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, outline };
 
     GM_NORMAL_CALL( id_draw_roundrect );
   }
 
-  void draw_triangle( const double x1, const double y1, const double x2, const double y2,
-                      const double x3, const double y3, const bool outline ) {
+  void draw_triangle( double x1, double y1, double x2, double y2,
+                      double x3, double y3, bool outline ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, x3, y3, outline };
 
     GM_NORMAL_CALL( id_draw_triangle );
   }
 
-  void draw_circle( const double x, const double y, const double r, const bool outline ) {
+  void draw_circle( double x, double y, double r, bool outline ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, r, outline };
 
     GM_NORMAL_CALL( id_draw_circle );
   }
 
-  void draw_ellipse( const double x1, const double y1, const double x2, const double y2,
-                     const bool outline ) {
+  void draw_ellipse( double x1, double y1, double x2, double y2,
+                     bool outline ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, outline };
 
     GM_NORMAL_CALL( id_draw_ellipse );
   }
 
-  void draw_set_circle_precision( const int precision ) {
+  void draw_set_circle_precision( int precision ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ precision };
 
     GM_NORMAL_CALL( id_draw_set_circle_precision );
   }
 
-  void draw_arrow( const double x1, const double y1, const double x2, const double y2,
-                   const int size ) {
+  void draw_arrow( double x1, double y1, double x2, double y2,
+                   int size ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, size };
 
     GM_NORMAL_CALL( id_draw_arrow );
   }
 
-  void draw_button( const double x1, const double y1, const double x2, const double y2,
-                    const bool up ) {
+  void draw_button( double x1, double y1, double x2, double y2,
+                    bool up ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, up };
 
     GM_NORMAL_CALL( id_draw_button );
   }
 
-  void draw_path( const int path, const double x, const double y, const bool absolute ) {
+  void draw_path( int path, double x, double y, bool absolute ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ path, x, y, absolute };
 
     GM_NORMAL_CALL( id_draw_path );
   }
 
-  void draw_healthbar( const double x1, const double y1, const double x2, const double y2,
-                       const double amount, const int backcol, const int mincol,
-                       const int maxcol, const double direction, const bool showback,
-                       const bool showborder ) {
+  void draw_healthbar( double x1, double y1, double x2, double y2,
+                       double amount, int backcol, int mincol,
+                       int maxcol, double direction, bool showback,
+                       bool showborder ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, amount, backcol, mincol, maxcol, direction, showback,
                 showborder };
@@ -304,14 +304,14 @@ namespace gm {
     GM_NORMAL_CALL( id_draw_healthbar );
   }
 
-  void draw_set_color( const int col ) {
+  void draw_set_color( int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col };
 
     GM_NORMAL_CALL( id_draw_set_color );
   }
 
-  void draw_set_alpha( const double alpha ) {
+  void draw_set_alpha( double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ alpha };
 
@@ -332,7 +332,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  int make_color_rgb( const int red, const int green, const int blue ) {
+  int make_color_rgb( int red, int green, int blue ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ red, green, blue };
 
@@ -340,7 +340,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int make_color_hsv( const int hue, const int saturation, const int value ) {
+  int make_color_hsv( int hue, int saturation, int value ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ hue, saturation, value };
 
@@ -348,7 +348,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int color_get_red( const int col ) {
+  int color_get_red( int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col };
 
@@ -356,7 +356,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int color_get_green( const int col ) {
+  int color_get_green( int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col };
 
@@ -364,7 +364,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int color_get_blue( const int col ) {
+  int color_get_blue( int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col };
 
@@ -372,7 +372,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int color_get_hue( const int col ) {
+  int color_get_hue( int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col };
 
@@ -380,7 +380,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int color_get_saturation( const int col ) {
+  int color_get_saturation( int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col };
 
@@ -388,7 +388,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int color_get_value( const int col ) {
+  int color_get_value( int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col };
 
@@ -396,7 +396,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int merge_color( const int col1, const int col2, const double amount ) {
+  int merge_color( int col1, int col2, double amount ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col1, col2, amount };
 
@@ -404,7 +404,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int draw_getpixel( const double x, const double y ) {
+  int draw_getpixel( double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
@@ -419,44 +419,44 @@ namespace gm {
     GM_NORMAL_CALL( id_screen_save );
   }
 
-  void screen_save_part( const CGMVariable& fname, const int x, const int y, const int w,
-                         const int h ) {
+  void screen_save_part( const CGMVariable& fname, int x, int y, int w,
+                         int h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fname, x, y, w, h };
 
     GM_NORMAL_CALL( id_screen_save_part );
   }
 
-  void draw_set_font( const int font ) {
+  void draw_set_font( int font ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ font };
 
     GM_NORMAL_CALL( id_draw_set_font );
   }
 
-  void draw_set_halign( const int halign ) {
+  void draw_set_halign( int halign ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ halign };
 
     GM_NORMAL_CALL( id_draw_set_halign );
   }
 
-  void draw_set_valign( const int valign ) {
+  void draw_set_valign( int valign ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ valign };
 
     GM_NORMAL_CALL( id_draw_set_valign );
   }
 
-  void draw_text( const double x, const double y, const CGMVariable& string ) {
+  void draw_text( double x, double y, const CGMVariable& string ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, string };
 
     GM_NORMAL_CALL( id_draw_text );
   }
 
-  void draw_text_ext( const double x, const double y, const CGMVariable& string,
-                      const double sep, const int w ) {
+  void draw_text_ext( double x, double y, const CGMVariable& string,
+                      double sep, int w ) {
     GM_NORMAL_RESULT;   
     GM_ARGS{ x, y, string, sep, w };
 
@@ -479,7 +479,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  double string_width_ext( const CGMVariable& string, const double sep, const double w ) {
+  double string_width_ext( const CGMVariable& string, double sep, double w ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ string, sep, w };
 
@@ -487,7 +487,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  double string_height_ext( const CGMVariable& string, const double sep, const double w ) {
+  double string_height_ext( const CGMVariable& string, double sep, double w ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ string, sep, w };
 
@@ -495,143 +495,143 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  void draw_text_transformed( const double x, const double y, const CGMVariable& string,
-                              const double xscale, const double yscale, const double angle ) {
+  void draw_text_transformed( double x, double y, const CGMVariable& string,
+                              double xscale, double yscale, double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, string, xscale, yscale, angle };
 
     GM_NORMAL_CALL( id_draw_text_transformed );
   }
 
-  void draw_text_ext_transformed( const double x, const double y, const CGMVariable& string,
-                                  const double sep, const double w, const double xscale,
-                                  const double yscale, const double angle ) {
+  void draw_text_ext_transformed( double x, double y, const CGMVariable& string,
+                                  double sep, double w, double xscale,
+                                  double yscale, double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, string, sep, w, xscale, yscale, angle };
 
     GM_NORMAL_CALL( id_draw_text_ext_transformed );
   }
 
-  void draw_text_color( const double x, const double y, const CGMVariable& string,
-                        const int c1, const int c2, const int c3, const int c4,
-                        const double alpha ) {
+  void draw_text_color( double x, double y, const CGMVariable& string,
+                        int c1, int c2, int c3, int c4,
+                        double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, string, c1, c2, c3, c4, alpha };
 
     GM_NORMAL_CALL( id_draw_text_color );
   }
 
-  void draw_text_ext_color( const double x, const double y, const CGMVariable& string,
-                            const double sep, const double w, const int c1, const int c2, 
-                            const int c3, const int c4, const double alpha ) {
+  void draw_text_ext_color( double x, double y, const CGMVariable& string,
+                            double sep, double w, int c1, int c2, 
+                            int c3, int c4, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, string, sep, w, c1, c2, c3, c4, alpha };
 
     GM_NORMAL_CALL( id_draw_text_ext_color );
   }
 
-  void draw_text_transformed_color( const double x, const double y, const CGMVariable& string,
-                                    const double xscale, const double yscale, const double angle,
-                                    const int c1, const int c2, const int c3, const int c4,
-                                    const double alpha ) {
+  void draw_text_transformed_color( double x, double y, const CGMVariable& string,
+                                    double xscale, double yscale, double angle,
+                                    int c1, int c2, int c3, int c4,
+                                    double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, string, xscale, yscale, angle, c1, c2, c3, c4, alpha };
 
     GM_NORMAL_CALL( id_draw_text_transformed_color );
   }
 
-  void draw_text_ext_transformed_color( const double x, const double y,
-                                        const CGMVariable& string, const double sep,
-                                        const double w, const double xscale,
-                                        const double yscale, const double angle,
-                                        const int c1, const int c2, const int c3, const int c4,
-                                        const double alpha ) {
+  void draw_text_ext_transformed_color( double x, double y,
+                                        const CGMVariable& string, double sep,
+                                        double w, double xscale,
+                                        double yscale, double angle,
+                                        int c1, int c2, int c3, int c4,
+                                        double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, string, sep, w, xscale, yscale, angle, c1, c2, c3, c4, alpha };
 
     GM_NORMAL_CALL( id_draw_text_ext_transformed_color );
   }
 
-  void draw_point_color( const double x, const double y, const int col1 ) {
+  void draw_point_color( double x, double y, int col1 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, col1 };
 
     GM_NORMAL_CALL( id_draw_point_color );
   }
 
-  void draw_line_color( const double x1, const double y1, const double x2, const double y2,
-                        const int col1, const int col2 ) {
+  void draw_line_color( double x1, double y1, double x2, double y2,
+                        int col1, int col2 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, col1, col2 };
 
     GM_NORMAL_CALL( id_draw_line_color );
   }
 
-  void draw_line_width_color( const double x1, const double y1, const double x2, const double y2,
-                              const double w, const int col1, const int col2 ) {
+  void draw_line_width_color( double x1, double y1, double x2, double y2,
+                              double w, int col1, int col2 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, w, col1, col2 };
 
     GM_NORMAL_CALL( id_draw_line_width_color );
   }
 
-  void draw_rectangle_color( const double x1, const double y1, const double x2, const double y2,
-                             const int col1, const int col2, const int col3, const int col4,
-                             const bool outline ) {
+  void draw_rectangle_color( double x1, double y1, double x2, double y2,
+                             int col1, int col2, int col3, int col4,
+                             bool outline ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, col1, col2, col3, col4, outline };
 
     GM_NORMAL_CALL( id_draw_rectangle_color );
   }
 
-  void draw_roundrect_color( const double x1, const double y1, const double x2, const double y2,
-                             const int col1, const int col2, const bool outline ) {
+  void draw_roundrect_color( double x1, double y1, double x2, double y2,
+                             int col1, int col2, bool outline ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, col1, col2, outline };
 
     GM_NORMAL_CALL( id_draw_roundrect_color );
   }
 
-  void draw_triangle_color( const double x1, const double y1, const double x2, const double y2,
-                            const double x3, const double y3, const int col1, const int col2,
-                            const int col3, const bool outline ) {
+  void draw_triangle_color( double x1, double y1, double x2, double y2,
+                            double x3, double y3, int col1, int col2,
+                            int col3, bool outline ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, x3, y3, col1, col2, col3, outline };
 
     GM_NORMAL_CALL( id_draw_triangle_color );
   }
 
-  void draw_circle_color( const double x, const double y, const double r, const int col1, 
-                          const int col2, const bool outline ) {
+  void draw_circle_color( double x, double y, double r, int col1, 
+                          int col2, bool outline ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, r, col1, col2, outline };
 
     GM_NORMAL_CALL( id_draw_circle_color );
   }
 
-  void draw_ellipse_color( const double x1, const double y1, const double x2, const double y2,
-                           const int col1, const int col2, const bool outline ) {
+  void draw_ellipse_color( double x1, double y1, double x2, double y2,
+                           int col1, int col2, bool outline ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2, col1, col2, outline };
 
     GM_NORMAL_CALL( id_draw_ellipse_color );
   }
 
-  void draw_primitive_begin( const int kind ) {
+  void draw_primitive_begin( int kind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ kind };
 
     GM_NORMAL_CALL( id_draw_primitive_begin );
   }
 
-  void draw_vertex( const double x, const double y ) {
+  void draw_vertex( double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
     GM_NORMAL_CALL( id_draw_vertex );
   }
 
-  void draw_vertex_color( const double x, const double y, const int col, const double alpha ) {
+  void draw_vertex_color( double x, double y, int col, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, col, alpha };
 
@@ -644,7 +644,7 @@ namespace gm {
     GM_VOID_CALL( id_draw_primitive_end );
   }
 
-  int sprite_get_texture( const int spr, const int subimg ) {
+  int sprite_get_texture( int spr, int subimg ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ spr, subimg };
 
@@ -652,7 +652,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int background_get_texture( const int back ) {
+  int background_get_texture( int back ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back };
 
@@ -660,21 +660,21 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void texture_preload( const int texid ) {
+  void texture_preload( int texid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ texid };
 
     GM_NORMAL_CALL( id_texture_preload );
   }
 
-  void texture_set_priority( const int texid, const int prio ) {
+  void texture_set_priority( int texid, int prio ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ texid, prio };
 
     GM_NORMAL_CALL( id_texture_set_priority );
   }
 
-  int texture_get_width( const int texid ) {
+  int texture_get_width( int texid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ texid };
 
@@ -682,7 +682,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  double texture_get_height( const int texid ) {
+  double texture_get_height( int texid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ texid };
 
@@ -690,65 +690,65 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  void draw_primitive_begin_texture( const int kind, const int texid ) {
+  void draw_primitive_begin_texture( int kind, int texid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ kind, texid };
 
     GM_NORMAL_CALL( id_draw_primitive_begin_texture );
   }
 
-  void draw_vertex_texture( const double x, const double y, const double xtex,
-                            const double ytex ) {
+  void draw_vertex_texture( double x, double y, double xtex,
+                            double ytex ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, xtex, ytex };
 
     GM_NORMAL_CALL( id_draw_vertex_texture );
   }
 
-  void draw_vertex_texture_color( const double x, const double y, const double xtex, 
-                                  const double ytex, const int col, const double alpha ) {
+  void draw_vertex_texture_color( double x, double y, double xtex, 
+                                  double ytex, int col, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, xtex, ytex, col, alpha };
 
     GM_NORMAL_CALL( id_draw_vertex_texture_color );
   }
 
-  void texture_set_interpolation( const bool linear ) {
+  void texture_set_interpolation( bool linear ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ linear };
 
     GM_NORMAL_CALL( id_texture_set_interpolation );
   }
 
-  void texture_set_blending( const bool blend ) {
+  void texture_set_blending( bool blend ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ blend };
 
     GM_NORMAL_CALL( id_texture_set_blending );
   }
 
-  void texture_set_repeat( const double repeat ) {
+  void texture_set_repeat( double repeat ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ repeat };
 
     GM_NORMAL_CALL( id_texture_set_repeat );
   }
 
-  void draw_set_blend_mode( const int mode ) {
+  void draw_set_blend_mode( int mode ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ mode };
 
     GM_NORMAL_CALL( id_draw_set_blend_mode );
   }
 
-  void draw_set_blend_mode_ext( const int src, const int dest ) {
+  void draw_set_blend_mode_ext( int src, int dest ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ src, dest };
 
     GM_NORMAL_CALL( id_draw_set_blend_mode_ext );
   }
 
-  int surface_create( const int w, const int h ) {
+  int surface_create( int w, int h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ w, h };
 
@@ -756,14 +756,14 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void surface_free( const int id ) {
+  void surface_free( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
     GM_NORMAL_CALL( id_surface_free );
   }
 
-  bool surface_exists( const int id ) {
+  bool surface_exists( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -771,7 +771,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  int surface_get_width( const int id ) {
+  int surface_get_width( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -779,7 +779,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int surface_get_height( const int id ) {
+  int surface_get_height( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -787,7 +787,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int surface_get_texture( const int id ) {
+  int surface_get_texture( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -795,7 +795,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void surface_set_target( const int id ) {
+  void surface_set_target( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -808,7 +808,7 @@ namespace gm {
     GM_VOID_CALL( id_surface_reset_target );
   }
 
-  int surface_getpixel( const int id, const int x, const int y ) {
+  int surface_getpixel( int id, int x, int y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, x, y };
 
@@ -816,115 +816,115 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void surface_save( const int id, const CGMVariable& fname ) {
+  void surface_save( int id, const CGMVariable& fname ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, fname };
 
     GM_NORMAL_CALL( id_surface_save );
   }
 
-  void surface_save_part( const int id, const CGMVariable& fname, const int x, const int y,
-                          const int w, const int h ) {
+  void surface_save_part( int id, const CGMVariable& fname, int x, int y,
+                          int w, int h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, fname, x, y, w, h };
 
     GM_NORMAL_CALL( id_surface_save_part );
   }
 
-  void draw_surface( const int id, const double x, const double y ) {
+  void draw_surface( int id, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, x, y };
 
     GM_NORMAL_CALL( id_draw_surface );
   }
 
-  void draw_surface_stretched( const int id, const double x, const double y, const double w,
-                               const double h ) {
+  void draw_surface_stretched( int id, double x, double y, double w,
+                               double h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, x, y, w, h };
 
     GM_NORMAL_CALL( id_draw_surface_stretched );
   }
 
-  void draw_surface_tiled( const int id, const double x, const double y ) {
+  void draw_surface_tiled( int id, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, x, y };
 
     GM_NORMAL_CALL( id_draw_surface_tiled );
   }
 
-  void draw_surface_part( const int id, const int left, const int top, const int width,
-                          const int height, const double x, const double y ) {
+  void draw_surface_part( int id, int left, int top, int width,
+                          int height, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, left, top, width, height, x, y };
 
     GM_NORMAL_CALL( id_draw_surface_part );
   }
 
-  void draw_surface_ext( const int id, const double x, const double y, const double xscale,
-                         const double yscale, const double rot, const int color,
-                         const double alpha ) {
+  void draw_surface_ext( int id, double x, double y, double xscale,
+                         double yscale, double rot, int color,
+                         double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, x, y, xscale, yscale, rot, color, alpha };
 
     GM_NORMAL_CALL( id_draw_surface_ext );
   }
 
-  void draw_surface_stretched_ext( const int id, const double x, const double y, const double w,
-                                   const double h, const int color, const double alpha ) {
+  void draw_surface_stretched_ext( int id, double x, double y, double w,
+                                   double h, int color, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, x, y, w, h, color, alpha };
 
     GM_NORMAL_CALL( id_draw_surface_stretched_ext );
   }
 
-  void draw_surface_tiled_ext( const int id, const double x, const double y, const double xscale,
-                               const double yscale, const int color, const double alpha ) {
+  void draw_surface_tiled_ext( int id, double x, double y, double xscale,
+                               double yscale, int color, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, x, y, xscale, yscale, color, alpha };
 
     GM_NORMAL_CALL( id_draw_surface_tiled_ext );
   }
 
-  void draw_surface_part_ext( const int id, const int left, const int top, const int width, 
-                              const int height, const double x, const double y,
-                              const double xscale, const double yscale, const int color, 
-                              const double alpha ) {
+  void draw_surface_part_ext( int id, int left, int top, int width, 
+                              int height, double x, double y,
+                              double xscale, double yscale, int color, 
+                              double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, left, top, width, height, x, y, xscale, yscale, color, alpha };
 
     GM_NORMAL_CALL( id_draw_surface_part_ext );
   }
 
-  void draw_surface_general( const int id, const int left, const int top, const int width,
-                             const int height, const double x, const double y,
-                             const double xscale, const double yscale, const double rot,
-                             const int c1, const int c2, const int c3, const int c4, 
-                             const double alpha ) {
+  void draw_surface_general( int id, int left, int top, int width,
+                             int height, double x, double y,
+                             double xscale, double yscale, double rot,
+                             int c1, int c2, int c3, int c4, 
+                             double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, left, top, width, height, x, y, xscale, yscale, rot, c1, c2, c3, c4, alpha };
 
     GM_NORMAL_CALL( id_draw_surface_general );
   }
 
-  void surface_copy( const int destination, const double x, const double y, const int source ) {
+  void surface_copy( int destination, double x, double y, int source ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ destination, x, y, source };
 
     GM_NORMAL_CALL( id_surface_copy );
   }
 
-  void surface_copy_part( const int destination, const double x, const double y, 
-                          const int source, const double xs, const double ys, const double ws,
-                          const double hs ) {
+  void surface_copy_part( int destination, double x, double y, 
+                          int source, double xs, double ys, double ws,
+                          double hs ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ destination, x, y, source, xs, ys, ws, hs };
 
     GM_NORMAL_CALL( id_surface_copy_part );
   }
 
-  int tile_add( const int background, const int left, const int top, const int width,
-                const int height, const double x, const double y, const int depth ) {
+  int tile_add( int background, int left, int top, int width,
+                int height, double x, double y, int depth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ background, left, top, width, height, x, y, depth };
 
@@ -932,14 +932,14 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void tile_delete( const int id ) {
+  void tile_delete( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
     GM_NORMAL_CALL( id_tile_delete );
   }
 
-  bool tile_exists( const int id ) {
+  bool tile_exists( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -947,7 +947,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  double tile_get_x( const int id ) {
+  double tile_get_x( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -955,7 +955,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  double tile_get_y( const int id ) {
+  double tile_get_y( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -963,7 +963,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  int tile_get_left( const int id ) {
+  int tile_get_left( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -971,7 +971,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int tile_get_top( const int id ) {
+  int tile_get_top( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -979,7 +979,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int tile_get_width( const int id ) {
+  int tile_get_width( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -987,7 +987,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int tile_get_height( const int id ) {
+  int tile_get_height( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -995,7 +995,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int tile_get_depth( const int id ) {
+  int tile_get_depth( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -1003,7 +1003,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  bool tile_get_visible( const int id ) {
+  bool tile_get_visible( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -1011,7 +1011,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  double tile_get_xscale( const int id ) {
+  double tile_get_xscale( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -1019,7 +1019,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  double tile_get_yscale( const int id ) {
+  double tile_get_yscale( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -1027,7 +1027,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  int tile_get_background( const int id ) {
+  int tile_get_background( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -1035,7 +1035,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int tile_get_blend( const int id ) {
+  int tile_get_blend( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -1043,7 +1043,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  double tile_get_alpha( const int id ) {
+  double tile_get_alpha( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -1051,92 +1051,92 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  void tile_set_position( const int id, const double x, const double y ) {
+  void tile_set_position( int id, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, x, y };
 
     GM_NORMAL_CALL( id_tile_set_position );
   }
 
-  void tile_set_region( const int id, const double left, const double right,
-                        const double width, const double height ) {
+  void tile_set_region( int id, double left, double top,
+                        double width, double height ) {
     GM_NORMAL_RESULT;
-    GM_ARGS{ id, left, right, width, height };
+    GM_ARGS{ id, left, top, width, height };
 
     GM_NORMAL_CALL( id_tile_set_region );
   }
 
-  void tile_set_background( const int id, const int background ) {
+  void tile_set_background( int id, int background ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, background };
 
     GM_NORMAL_CALL( id_tile_set_background );
   }
 
-  void tile_set_visible( const int id, const bool visible ) {
+  void tile_set_visible( int id, bool visible ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, visible };
 
     GM_NORMAL_CALL( id_tile_set_visible );
   }
 
-  void tile_set_depth( const int id, const int depth ) {
+  void tile_set_depth( int id, int depth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, depth };
 
     GM_NORMAL_CALL( id_tile_set_depth );
   }
 
-  void tile_set_scale( const int id, const double xscale, const double yscale ) {
+  void tile_set_scale( int id, double xscale, double yscale ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, xscale, yscale };
 
     GM_NORMAL_CALL( id_tile_set_scale );
   }
 
-  void tile_set_blend( const int id, const int color ) {
+  void tile_set_blend( int id, int color ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, color };
 
     GM_NORMAL_CALL( id_tile_set_blend );
   }
 
-  void tile_set_alpha( const int id, const double alpha ) {
+  void tile_set_alpha( int id, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, alpha };
 
     GM_NORMAL_CALL( id_tile_set_alpha );
   }
 
-  void tile_layer_hide( const int depth ) {
+  void tile_layer_hide( int depth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ depth };
 
     GM_NORMAL_CALL( id_tile_layer_hide );
   }
 
-  void tile_layer_show( const int depth ) {
+  void tile_layer_show( int depth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ depth };
 
     GM_NORMAL_CALL( id_tile_layer_show );
   }
 
-  void tile_layer_delete( const int depth ) {
+  void tile_layer_delete( int depth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ depth };
 
     GM_NORMAL_CALL( id_tile_layer_delete );
   }
 
-  void tile_layer_shift( const int depth, const double x, const double y ) {
+  void tile_layer_shift( int depth, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ depth, x, y };
 
     GM_NORMAL_CALL( id_tile_layer_shift );
   }
 
-  int tile_layer_find( const int depth, const double x, const double y ) {
+  int tile_layer_find( int depth, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ depth, x, y };
 
@@ -1144,14 +1144,14 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void tile_layer_delete_at( const int depth, const double x, const double y ) {
+  void tile_layer_delete_at( int depth, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ depth, x, y };
 
     GM_NORMAL_CALL( id_tile_layer_delete_at );
   }
 
-  void tile_layer_depth( const int depth, const int newdepth ) {
+  void tile_layer_depth( int depth, int newdepth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ depth, newdepth };
 
@@ -1186,35 +1186,35 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void display_set_size( const int w, const int h ) {
+  void display_set_size( int w, int h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ w, h };
 
     GM_NORMAL_CALL( id_display_set_size );
   }
 
-  void display_set_colordepth( const int coldepth ) {
+  void display_set_colordepth( int coldepth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ coldepth };
 
     GM_NORMAL_CALL( id_display_set_colordepth );
   }
 
-  void display_set_frequency( const int frequency ) {
+  void display_set_frequency( int frequency ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ frequency };
 
     GM_NORMAL_CALL( id_display_set_frequency );
   }
 
-  void display_set_all( const int w, const int h, const int frequency, const int coldepth ) {
+  void display_set_all( int w, int h, int frequency, int coldepth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ w, h, frequency, coldepth };
 
     GM_NORMAL_CALL( id_display_set_all );
   }
 
-  bool display_test_all( const int w, const int h, const int frequency, const int coldepth ) {
+  bool display_test_all( int w, int h, int frequency, int coldepth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ w, h, frequency, coldepth };
 
@@ -1242,14 +1242,14 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void display_mouse_set( const int x, const int y ) {
+  void display_mouse_set( int x, int y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
     GM_NORMAL_CALL( id_display_mouse_set );
   }
 
-  void window_set_visible( const bool visible ) {
+  void window_set_visible( bool visible ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ visible };
 
@@ -1263,7 +1263,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void window_set_fullscreen( const bool full ) {
+  void window_set_fullscreen( bool full ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ full };
 
@@ -1277,7 +1277,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void window_set_showborder( const bool show ) {
+  void window_set_showborder( bool show ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ show };
 
@@ -1291,7 +1291,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void window_set_showicons( const bool show ) {
+  void window_set_showicons( bool show ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ show };
 
@@ -1305,7 +1305,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void window_set_stayontop( const bool stay ) {
+  void window_set_stayontop( bool stay ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ stay };
 
@@ -1319,7 +1319,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void window_set_sizeable( const bool sizeable ) {
+  void window_set_sizeable( bool sizeable ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ sizeable };
 
@@ -1347,7 +1347,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  void window_set_cursor( const int curs ) {
+  void window_set_cursor( int curs ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ curs };
 
@@ -1361,7 +1361,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void window_set_color( const int color ) {
+  void window_set_color( int color ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ color };
 
@@ -1375,7 +1375,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void window_set_region_scale( const double scale, const bool adaptwindow ) {
+  void window_set_region_scale( double scale, bool adaptwindow ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ scale, adaptwindow };
 
@@ -1389,21 +1389,21 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  void window_set_position( const int x, const int y ) {
+  void window_set_position( int x, int y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
     GM_NORMAL_CALL( id_window_set_position );
   }
 
-  void window_set_size( const int w, const int h ) {
+  void window_set_size( int w, int h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ w, h };
 
     GM_NORMAL_CALL( id_window_set_size );
   }
 
-  void window_set_rectangle( const int x, const int y, const int w, const int h ) {
+  void window_set_rectangle( int x, int y, int w, int h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, w, h };
 
@@ -1464,14 +1464,14 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void window_mouse_set( const int x, const int y ) {
+  void window_mouse_set( int x, int y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
     GM_NORMAL_CALL( id_window_mouse_set );
   }
 
-  void window_set_region_size( const int w, const int h, const bool adaptwindow ) {
+  void window_set_region_size( int w, int h, bool adaptwindow ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ w, h, adaptwindow };
 
@@ -1492,7 +1492,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int window_view_mouse_get_x( const int id ) {
+  int window_view_mouse_get_x( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -1500,7 +1500,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int window_view_mouse_get_y( const int id ) {
+  int window_view_mouse_get_y( int id ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id };
 
@@ -1508,7 +1508,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void window_view_mouse_set( const int id, const int x, const int y ) {
+  void window_view_mouse_set( int id, int x, int y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, x, y };
 
@@ -1529,7 +1529,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void window_views_mouse_set( const int x, const int y ) {
+  void window_views_mouse_set( int x, int y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
@@ -1548,14 +1548,14 @@ namespace gm {
     GM_VOID_CALL( id_screen_refresh );
   }
 
-  void set_automatic_draw( const bool value ) {
+  void set_automatic_draw( bool value ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ value };
 
     GM_NORMAL_CALL( id_set_automatic_draw );
   }
 
-  void set_synchronization( const bool value ) {
+  void set_synchronization( bool value ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ value };
 

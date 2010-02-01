@@ -21,7 +21,7 @@
   GmapiMultiplayer.h
   - Wrapped GM functions; Parser-generated code
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #pragma once
@@ -32,31 +32,31 @@ namespace gm {
   void mplay_init_ipx();
   void mplay_init_tcpip( const CGMVariable& addr );
   void mplay_init_modem( const CGMVariable& initstr, const CGMVariable& phonenr );
-  void mplay_init_serial( const int portno, const double baudrate, const double stopbits,
-                          const int parity, const int flow );
+  void mplay_init_serial( int portno, double baudrate, double stopbits,
+                          int parity, int flow );
   int mplay_connect_status();
   void mplay_end();
   CGMVariable mplay_ipaddress();
 
-  bool mplay_session_create( const CGMVariable& sesname, const int playnumb, 
+  bool mplay_session_create( const CGMVariable& sesname, int playnumb, 
                              const CGMVariable& playername );
   int mplay_session_find();
-  CGMVariable mplay_session_name( const int numb );
-  bool mplay_session_join( const int numb, const CGMVariable& playername );
-  void mplay_session_mode( const bool move );
+  CGMVariable mplay_session_name( int numb );
+  bool mplay_session_join( int numb, const CGMVariable& playername );
+  void mplay_session_mode( bool move );
   int mplay_session_status();
   void mplay_session_end();
 
   int mplay_player_find();
-  CGMVariable mplay_player_name( const int numb );
-  int mplay_player_id( const int numb );
+  CGMVariable mplay_player_name( int numb );
+  int mplay_player_id( int numb );
 
-  void mplay_data_write( const int ind, const CGMVariable& val );
-  CGMVariable mplay_data_read( const int ind );
-  void mplay_data_mode( const bool guar );
+  void mplay_data_write( int ind, const CGMVariable& val );
+  CGMVariable mplay_data_read( int ind );
+  void mplay_data_mode( bool guar );
 
-  void mplay_message_send( const CGMVariable& player, const int id, const CGMVariable& val );
-  void mplay_message_send_guaranteed( const CGMVariable& player, const int id,
+  void mplay_message_send( const CGMVariable& player, int id, const CGMVariable& val );
+  void mplay_message_send_guaranteed( const CGMVariable& player, int id,
                                       const CGMVariable& val );
   bool mplay_message_receive( const CGMVariable& player );
   int mplay_message_id();

@@ -21,7 +21,7 @@
   GmapiParticles.cpp
   - Wrapped GM functions; Parser-generated code
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #include "GmapiParticles.h"
@@ -30,16 +30,16 @@
 
 namespace gm {
 
-  void effect_create_below( const int kind, const double x, const double y, const int size,
-                            const int color ) {
+  void effect_create_below( int kind, double x, double y, int size,
+                            int color ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ kind, x, y, size, color };
 
     GM_NORMAL_CALL( id_effect_create_below );
   }
 
-  void effect_create_above( const int kind, const double x, const double y, const int size,
-                            const int color ) {
+  void effect_create_above( int kind, double x, double y, int size,
+                            int color ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ kind, x, y, size, color };
 
@@ -59,14 +59,14 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void part_type_destroy( const int ind ) {
+  void part_type_destroy( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_part_type_destroy );
   }
 
-  bool part_type_exists( const int ind ) {
+  bool part_type_exists( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -74,163 +74,163 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void part_type_clear( const int ind ) {
+  void part_type_clear( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_part_type_clear );
   }
 
-  void part_type_shape( const int ind, const int shape ) {
+  void part_type_shape( int ind, int shape ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, shape };
 
     GM_NORMAL_CALL( id_part_type_shape );
   }
 
-  void part_type_sprite( const int ind, const int sprite, const bool animat, const bool stretch,
-                         const bool random ) {
+  void part_type_sprite( int ind, int sprite, bool animat, bool stretch,
+                         bool random ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, sprite, animat, stretch, random };
 
     GM_NORMAL_CALL( id_part_type_sprite );
   }
 
-  void part_type_size( const int ind, const double size_min, const double size_max,
-                       const double size_incr, const double size_wiggle ) {
+  void part_type_size( int ind, double size_min, double size_max,
+                       double size_incr, double size_wiggle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, size_min, size_max, size_incr, size_wiggle };
 
     GM_NORMAL_CALL( id_part_type_size );
   }
 
-  void part_type_scale( const int ind, const double xscale, const double yscale ) {
+  void part_type_scale( int ind, double xscale, double yscale ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, xscale, yscale };
 
     GM_NORMAL_CALL( id_part_type_scale );
   }
 
-  void part_type_orientation( const int ind, const double ang_min, const double ang_max,
-                              const double ang_incr, const double ang_wiggle,
-                              const bool ang_relative ) {
+  void part_type_orientation( int ind, double ang_min, double ang_max,
+                              double ang_incr, double ang_wiggle,
+                              bool ang_relative ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, ang_min, ang_max, ang_incr, ang_wiggle, ang_relative };
 
     GM_NORMAL_CALL( id_part_type_orientation );
   }
 
-  void part_type_color1( const int ind, const int color1 ) {
+  void part_type_color1( int ind, int color1 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, color1 };
 
     GM_NORMAL_CALL( id_part_type_color1 );
   }
 
-  void part_type_color2( const int ind, const int color1, const int color2 ) {
+  void part_type_color2( int ind, int color1, int color2 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, color1, color2 };
 
     GM_NORMAL_CALL( id_part_type_color2 );
   }
 
-  void part_type_color3( const int ind, const int color1, const int color2, const int color3 ) {
+  void part_type_color3( int ind, int color1, int color2, int color3 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, color1, color2, color3 };
 
     GM_NORMAL_CALL( id_part_type_color3 );
   }
 
-  void part_type_color_mix( const int ind, const int color1, const int color2 ) {
+  void part_type_color_mix( int ind, int color1, int color2 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, color1, color2 };
 
     GM_NORMAL_CALL( id_part_type_color_mix );
   }
 
-  void part_type_color_rgb( const int ind, const int rmin, const int rmax, const int gmin,
-                            const int gmax, const int bmin, const int bmax ) {
+  void part_type_color_rgb( int ind, int rmin, int rmax, int gmin,
+                            int gmax, int bmin, int bmax ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, rmin, rmax, gmin, gmax, bmin, bmax };
 
     GM_NORMAL_CALL( id_part_type_color_rgb );
   }
 
-  void part_type_color_hsv( const int ind, const int hmin, const int hmax, const int smin,
-                            const int smax, const int vmin, const int vmax ) {
+  void part_type_color_hsv( int ind, int hmin, int hmax, int smin,
+                            int smax, int vmin, int vmax ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, hmin, hmax, smin, smax, vmin, vmax };
 
     GM_NORMAL_CALL( id_part_type_color_hsv );
   }
 
-  void part_type_alpha1( const int ind, const double alpha1 ) {
+  void part_type_alpha1( int ind, double alpha1 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, alpha1 };
 
     GM_NORMAL_CALL( id_part_type_alpha1 );
   }
 
-  void part_type_alpha2( const int ind, const double alpha1, const double alpha2 ) {
+  void part_type_alpha2( int ind, double alpha1, double alpha2 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, alpha1, alpha2 };
 
     GM_NORMAL_CALL( id_part_type_alpha2 );
   }
 
-  void part_type_alpha3( const int ind, const double alpha1, const double alpha2,
-                         const double alpha3 ) {
+  void part_type_alpha3( int ind, double alpha1, double alpha2,
+                         double alpha3 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, alpha1, alpha2, alpha3 };
 
     GM_NORMAL_CALL( id_part_type_alpha3 );
   }
 
-  void part_type_blend( const int ind, const bool additive ) {
+  void part_type_blend( int ind, bool additive ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, additive };
 
     GM_NORMAL_CALL( id_part_type_blend );
   }
 
-  void part_type_life( const int ind, const double life_min, const double life_max ) {
+  void part_type_life( int ind, double life_min, double life_max ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, life_min, life_max };
 
     GM_NORMAL_CALL( id_part_type_life );
   }
 
-  void part_type_step( const int ind, const int step_number, const int step_type ) {
+  void part_type_step( int ind, int step_number, int step_type ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, step_number, step_type };
 
     GM_NORMAL_CALL( id_part_type_step );
   }
 
-  void part_type_death( const int ind, const int death_number, const int death_type ) {
+  void part_type_death( int ind, int death_number, int death_type ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, death_number, death_type };
 
     GM_NORMAL_CALL( id_part_type_death );
   }
 
-  void part_type_speed( const int ind, const double speed_min, const double speed_max,
-                        const double speed_incr, const double speed_wiggle ) {
+  void part_type_speed( int ind, double speed_min, double speed_max,
+                        double speed_incr, double speed_wiggle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, speed_min, speed_max, speed_incr, speed_wiggle };
 
     GM_NORMAL_CALL( id_part_type_speed );
   }
 
-  void part_type_direction( const int ind, const double dir_min, const double dir_max,
-                            const double dir_incr, const double dir_wiggle ) {
+  void part_type_direction( int ind, double dir_min, double dir_max,
+                            double dir_incr, double dir_wiggle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, dir_min, dir_max, dir_incr, dir_wiggle };
 
     GM_NORMAL_CALL( id_part_type_direction );
   }
 
-  void part_type_gravity( const int ind, const double grav_amount, const double grav_dir ) {
+  void part_type_gravity( int ind, double grav_amount, double grav_dir ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, grav_amount, grav_dir };
 
@@ -244,14 +244,14 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void part_system_destroy( const int ind ) {
+  void part_system_destroy( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_part_system_destroy );
   }
 
-  bool part_system_exists( const int ind ) {
+  bool part_system_exists( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -259,86 +259,86 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void part_system_clear( const int ind ) {
+  void part_system_clear( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_part_system_clear );
   }
 
-  void part_system_draw_order( const int ind, const bool oldtonew ) {
+  void part_system_draw_order( int ind, bool oldtonew ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, oldtonew };
 
     GM_NORMAL_CALL( id_part_system_draw_order );
   }
 
-  void part_system_depth( const int ind, const int depth ) {
+  void part_system_depth( int ind, int depth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, depth };
 
     GM_NORMAL_CALL( id_part_system_depth );
   }
 
-  void part_system_position( const int ind, const double x, const double y ) {
+  void part_system_position( int ind, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y };
 
     GM_NORMAL_CALL( id_part_system_position );
   }
 
-  void part_system_automatic_update( const int ind, const bool automatic ) {
+  void part_system_automatic_update( int ind, bool automatic ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, automatic };
 
     GM_NORMAL_CALL( id_part_system_automatic_update );
   }
 
-  void part_system_automatic_draw( const int ind, const bool automatic ) {
+  void part_system_automatic_draw( int ind, bool automatic ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, automatic };
 
     GM_NORMAL_CALL( id_part_system_automatic_draw );
   }
 
-  void part_system_update( const int ind ) {
+  void part_system_update( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_part_system_update );
   }
 
-  void part_system_drawit( const int ind ) {
+  void part_system_drawit( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_part_system_drawit );
   }
 
-  void part_particles_create( const int ind, const double x, const double y, const int parttype,
-                              const int number ) {
+  void part_particles_create( int ind, double x, double y, int parttype,
+                              int number ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, parttype, number };
 
     GM_NORMAL_CALL( id_part_particles_create );
   }
 
-  void part_particles_create_color( const int ind, const double x, const double y,
-                                    const int parttype, const int color, const int number ) {
+  void part_particles_create_color( int ind, double x, double y,
+                                    int parttype, int color, int number ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, parttype, color, number };
 
     GM_NORMAL_CALL( id_part_particles_create_color );
   }
 
-  void part_particles_clear( const int ind ) {
+  void part_particles_clear( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_part_particles_clear );
   }
 
-  int part_particles_count( const int ind ) {
+  int part_particles_count( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -346,7 +346,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int part_emitter_create( const int ps ) {
+  int part_emitter_create( int ps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps };
 
@@ -354,21 +354,21 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void part_emitter_destroy( const int ps, const int ind ) {
+  void part_emitter_destroy( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
     GM_NORMAL_CALL( id_part_emitter_destroy );
   }
 
-  void part_emitter_destroy_all( const int ps ) {
+  void part_emitter_destroy_all( int ps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps };
 
     GM_NORMAL_CALL( id_part_emitter_destroy_all );
   }
 
-  bool part_emitter_exists( const int ps, const int ind ) {
+  bool part_emitter_exists( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
@@ -376,37 +376,37 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void part_emitter_clear( const int ps, const int ind ) {
+  void part_emitter_clear( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
     GM_NORMAL_CALL( id_part_emitter_clear );
   }
 
-  void part_emitter_region( const int ps, const int ind, const double xmin, const double xmax,
-                            const double ymin, const double ymax, const int shape,
-                            const int distribution ) {
+  void part_emitter_region( int ps, int ind, double xmin, double xmax,
+                            double ymin, double ymax, int shape,
+                            int distribution ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind, xmin, xmax, ymin, ymax, shape, distribution };
 
     GM_NORMAL_CALL( id_part_emitter_region );
   }
 
-  void part_emitter_burst( const int ps, const int ind, const int parttype, const int number ) {
+  void part_emitter_burst( int ps, int ind, int parttype, int number ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind, parttype, number };
 
     GM_NORMAL_CALL( id_part_emitter_burst );
   }
 
-  void part_emitter_stream( const int ps, const int ind, const int parttype, const int number ) {
+  void part_emitter_stream( int ps, int ind, int parttype, int number ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind, parttype, number };
 
     GM_NORMAL_CALL( id_part_emitter_stream );
   }
 
-  int part_attractor_create( const int ps ) {
+  int part_attractor_create( int ps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps };
 
@@ -414,21 +414,21 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void part_attractor_destroy( const int ps, const int ind ) {
+  void part_attractor_destroy( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
     GM_NORMAL_CALL( id_part_attractor_destroy );
   }
 
-  void part_attractor_destroy_all( const int ps ) {
+  void part_attractor_destroy_all( int ps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps };
 
     GM_NORMAL_CALL( id_part_attractor_destroy_all );
   }
 
-  bool part_attractor_exists( const int ps, const int ind ) {
+  bool part_attractor_exists( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
@@ -436,29 +436,29 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void part_attractor_clear( const int ps, const int ind ) {
+  void part_attractor_clear( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
     GM_NORMAL_CALL( id_part_attractor_clear );
   }
 
-  void part_attractor_position( const int ps, const int ind, const double x, const double y ) {
+  void part_attractor_position( int ps, int ind, double x, double y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind, x, y };
 
     GM_NORMAL_CALL( id_part_attractor_position );
   }
 
-  void part_attractor_force( const int ps, const int ind, const double force, const int dist,
-                             const int kind, const bool aditive ) {
+  void part_attractor_force( int ps, int ind, double force, int dist,
+                             int kind, bool aditive ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind, force, dist, kind, aditive };
 
     GM_NORMAL_CALL( id_part_attractor_force );
   }
 
-  int part_destroyer_create( const int ps ) {
+  int part_destroyer_create( int ps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps };
 
@@ -466,21 +466,21 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void part_destroyer_destroy( const int ps, const int ind ) {
+  void part_destroyer_destroy( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
     GM_NORMAL_CALL( id_part_destroyer_destroy );
   }
 
-  void part_destroyer_destroy_all( const int ps ) {
+  void part_destroyer_destroy_all( int ps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps };
 
     GM_NORMAL_CALL( id_part_destroyer_destroy_all );
   }
 
-  bool part_destroyer_exists( const int ps, const int ind ) {
+  bool part_destroyer_exists( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
@@ -488,15 +488,15 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void part_destroyer_clear( const int ps, const int ind ) {
+  void part_destroyer_clear( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
     GM_NORMAL_CALL( id_part_destroyer_clear );
   }
 
-  int part_destroyer_region( const int ps, const int ind, const double xmin, const double xmax,
-                             const double ymin, const double ymax, const int shape ) {
+  int part_destroyer_region( int ps, int ind, double xmin, double xmax,
+                             double ymin, double ymax, int shape ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind, xmin, xmax, ymin, ymax, shape };
 
@@ -504,21 +504,21 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void part_deflector_destroy( const int ps, const int ind ) {
+  void part_deflector_destroy( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
     GM_NORMAL_CALL( id_part_deflector_destroy );
   }
 
-  void part_deflector_destroy_all( const int ps ) {
+  void part_deflector_destroy_all( int ps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps };
 
     GM_NORMAL_CALL( id_part_deflector_destroy_all );
   }
 
-  bool part_deflector_exists( const int ps, const int ind ) {
+  bool part_deflector_exists( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
@@ -526,36 +526,36 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void part_deflector_clear( const int ps, const int ind ) {
+  void part_deflector_clear( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
     GM_NORMAL_CALL( id_part_deflector_clear );
   }
 
-  void part_deflector_region( const int ps, const int ind, const double xmin, const double xmax,
-                              const double ymin, const double ymax ) {
+  void part_deflector_region( int ps, int ind, double xmin, double xmax,
+                              double ymin, double ymax ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind, xmin, xmax, ymin, ymax };
 
     GM_NORMAL_CALL( id_part_deflector_region );
   }
 
-  void part_deflector_kind( const int ps, const int ind, const int kind ) {
+  void part_deflector_kind( int ps, int ind, int kind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind, kind };
 
     GM_NORMAL_CALL( id_part_deflector_kind );
   }
 
-  void part_deflector_friction( const int ps, const int ind, const double friction ) {
+  void part_deflector_friction( int ps, int ind, double friction ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind, friction };
 
     GM_NORMAL_CALL( id_part_deflector_friction );
   }
 
-  int part_changer_create( const int ps ) {
+  int part_changer_create( int ps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps };
 
@@ -563,21 +563,21 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void part_changer_destroy( const int ps, const int ind ) {
+  void part_changer_destroy( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
     GM_NORMAL_CALL( id_part_changer_destroy );
   }
 
-  void part_changer_destroy_all( const int ps ) {
+  void part_changer_destroy_all( int ps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps };
 
     GM_NORMAL_CALL( id_part_changer_destroy_all );
   }
 
-  bool part_changer_exists( const int ps, const int ind ) {
+  bool part_changer_exists( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
@@ -585,31 +585,31 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void part_changer_clear( const int ps, const int ind ) {
+  void part_changer_clear( int ps, int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind };
 
     GM_NORMAL_CALL( id_part_changer_clear );
   }
 
-  void part_changer_region( const int ps, const int ind, const double xmin, 
-                            const double xmax, const double ymin, const double ymax, 
-                            const int shape ) {
+  void part_changer_region( int ps, int ind, double xmin, 
+                            double xmax, double ymin, double ymax, 
+                            int shape ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind, xmin, xmax, ymin, ymax, shape };
 
     GM_NORMAL_CALL( id_part_changer_region );
   }
 
-  void part_changer_types( const int ps, const int ind, const int parttype1,
-                           const int parttype2 ) {
+  void part_changer_types( int ps, int ind, int parttype1,
+                           int parttype2 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind, parttype1, parttype2 };
 
     GM_NORMAL_CALL( id_part_changer_types );
   }
 
-  void part_changer_kind( const int ps, const int ind, const int kind ) {
+  void part_changer_kind( int ps, int ind, int kind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ps, ind, kind };
 

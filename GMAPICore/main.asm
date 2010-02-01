@@ -18,11 +18,10 @@
 ;***************************************************************************
 ; main.asm
 ;
-; Copyright 2009 (C) Snake (http://sgames.ovh.org/)
+; Copyright 2009-2010 (C) Snake (http://sgames.ovh.org/)
 ;***************************************************************************
 
 .386
-
 .model flat, stdcall
 
 option casemap:none
@@ -30,212 +29,276 @@ option casemap:none
 include kernel32.inc
 includelib kernel32.lib
 
-GMAPI_DATA struct ; GMAPI_HOOK_DATA_BASE points to that structure, it is embedded
+GMAPI_DATA struct ; GMAPI_HOOK_DATA_BASE constant points to that structure, it is embedded
                   ; in PE header (in process memory)
-                  
+
   referenceCount DWORD ?
-  thisInstance   DWORD ?
-  withInstance   DWORD ?
+  selfInstance   DWORD ?
+  otherInstance  DWORD ?
   returnAddress  DWORD ?
 GMAPI_DATA ends
 
-GM61_RUNNER_STRING_CLASS      equ 00401098h
-GM61_RUNNER_RVALUE_CLASS      equ 004F6BF8h
-GM61_RUNNER_ALLOCATE          equ 00405E7Ch
-GM61_RUNNER_SET_STRING        equ 00405150h
-GM61_RUNNER_CLEAR_STRING      equ 00404F58h
-GM61_RUNNER_DEALLOCATE        equ 00405E90h
-GM61_RUNNER_DEALLOCATE_RESULT equ 00405A08h
-GM61_RUNNER_DEALLOCATE_BITMAP equ 0040274Ch
-GM61_RUNNER_EXTERNAL_CALL     equ 0051C3A0h
-GM61_RUNNER_EXTERNAL_CALL_RET equ 0051C3A9h
-GM61_RUNNER_FIND_SYMBOL_ID    equ 004D4E88h
+GMAPI_HOOK_DATA_BASE                 equ 00400800h
+GMAPI_HOOK_DATA_CODE                 equ 00400900h
+GMAPI_HOOK_DATA_PREVCODE             equ 00400A00h
 
-GMAPI_HOOK_DATA_BASE          equ 00400800h
-GMAPI_HOOK_DATA_CODE          equ 00400900h
-GMAPI_HOOK_DATA_PREVCODE      equ 00400A00h
+GM_SIGNATURE                         equ 00500000h
 
-GM_SIGNATURE                  equ 00500000h
-GM70_ID                       equ 00589A24h
-GM61_ID                       equ 0E8005386h
+GM80_ID                              equ 0E982754Fh
+GM70_ID                              equ 00589A24h
+GM61_ID                              equ 0E8005386h
+
+GM61_RUNNER_CLASS_STRING             equ 00401098h
+GM61_RUNNER_CLASS_RVALUE             equ 004F6BF8h
+GM61_RUNNER_STRING_ALLOCATE          equ 00405E7Ch
+GM61_RUNNER_STRING_SET               equ 00404FACh
+GM61_RUNNER_STRING_SETFROMPCHAR      equ 00405150h
+GM61_RUNNER_STRING_CLEAR             equ 00404F58h
+GM61_RUNNER_STRING_DEALLOCATE        equ 00405E90h
+GM61_RUNNER_RESULT_DEALLOCATE        equ 00405A08h
+GM61_RUNNER_ADDR_EXTERNALCALL        equ 0051C3A0h
+GM61_RUNNER_ADDR_EXTERNALCALL_RETURN equ 0051C3ACh
+GM61_RUNNER_UTILITY_FINDSYMBOLID     equ 004D4E88h
+GM61_RUNNER_UTILITY_GMFUNCTIONADDER  equ 004D7CACh
+
+GM70_RUNNER_CLASS_STRING             equ 004010D0h
+GM70_RUNNER_CLASS_RVALUE             equ 005457F8h
+GM70_RUNNER_STRING_ALLOCATE          equ 00405ECCh
+GM70_RUNNER_STRING_SET               equ 00404FFCh
+GM70_RUNNER_STRING_SETFROMPCHAR      equ 004051A0h
+GM70_RUNNER_STRING_CLEAR             equ 00404FA8h
+GM70_RUNNER_STRING_DEALLOCATE        equ 00405EE0h
+GM70_RUNNER_RESULT_DEALLOCATE        equ 00405A58h
+GM70_RUNNER_ADDR_EXTERNALCALL        equ 00569328h
+GM70_RUNNER_ADDR_EXTERNALCALL_RETURN equ 00569334h
+GM70_RUNNER_UTILITY_FINDSYMBOLID     equ 0052A310h
+GM70_RUNNER_UTILITY_GMFUNCTIONADDER  equ 0052D204h
 
 .data
+; Initialized to GM8
+RUNNER_CLASS_STRING             dd 004010D0h
+RUNNER_CLASS_RVALUE             dd 005436F4h
+RUNNER_STRING_ALLOCATE          dd 0040695Ch
+RUNNER_STRING_SET               dd 00405988h
+RUNNER_STRING_SETFROMPCHAR      dd 00405B2Ch
+RUNNER_STRING_CLEAR             dd 00405934h
+RUNNER_STRING_DEALLOCATE        dd 00406970h
+RUNNER_RESULT_DEALLOCATE        dd 004064E8h
+RUNNER_ADDR_EXTERNALCALL        dd 00568AF0h
+RUNNER_ADDR_EXTERNALCALL_RETURN dd 00568AFCh
+RUNNER_UTILITY_FINDSYMBOLID     dd 005263D8h
+RUNNER_UTILITY_GMFUNCTIONADDER  dd 0052939Ch
 
-RUNNER_STRING_CLASS      dd 004010D0h
-RUNNER_RVALUE_CLASS      dd 005457F8h
-
-RUNNER_ALLOCATE_STRING   dd 00405ECCh
-RUNNER_SET_STRING        dd 004051A0h
-RUNNER_CLEAR_STRING      dd 00404FA8h
-RUNNER_DEALLOCATE_STRING dd 00405EE0h
-RUNNER_DEALLOCATE_RESULT dd 00405A58h
-RUNNER_DEALLOCATE_BITMAP dd 00402794h
-RUNNER_EXTERNAL_CALL     dd 00569328h
-RUNNER_EXTERNAL_CALL_RET dd 00569331h
-RUNNER_FIND_SYMBOL_ID    dd 0052A310h
+EXTERNAL_CALL_LOCALSPACE        dd 19Ch
 
 .code
+
+;**********************************************************************
+; GMAPIInitialize
+; - Initializes pointers and determines runner version
+;**********************************************************************
 
 GMAPIInitialize proc
   xor    eax, eax
   mov    edx, dword ptr ds:[GM_SIGNATURE]
   
+  ; Check GM8 signature
+  cmp    edx, GM80_ID
+  jne    CheckGM70
+    ; All contants are already initialized to GM8 so set return value only
+    mov    eax, 80
+    
+  jmp    ProcExit
+ 
+CheckGM70:
   ; Check GM7 signature
   cmp    edx, GM70_ID
   jne    CheckGM61
+    ; Modify addresses
+    mov    eax, offset RUNNER_CLASS_STRING
+    mov    dword ptr ds:[eax],       GM70_RUNNER_CLASS_STRING
+    mov    dword ptr ds:[eax + 04h], GM70_RUNNER_CLASS_RVALUE
+    mov    dword ptr ds:[eax + 08h], GM70_RUNNER_STRING_ALLOCATE
+    mov    dword ptr ds:[eax + 0Ch], GM70_RUNNER_STRING_SET
+    mov    dword ptr ds:[eax + 10h], GM70_RUNNER_STRING_SETFROMPCHAR
+    mov    dword ptr ds:[eax + 14h], GM70_RUNNER_STRING_CLEAR
+    mov    dword ptr ds:[eax + 18h], GM70_RUNNER_STRING_DEALLOCATE
+    mov    dword ptr ds:[eax + 1Ch], GM70_RUNNER_RESULT_DEALLOCATE
+    mov    dword ptr ds:[eax + 20h], GM70_RUNNER_ADDR_EXTERNALCALL
+    mov    dword ptr ds:[eax + 24h], GM70_RUNNER_ADDR_EXTERNALCALL_RETURN
+    mov    dword ptr ds:[eax + 28h], GM70_RUNNER_UTILITY_FINDSYMBOLID
+    mov    dword ptr ds:[eax + 2Ch], GM70_RUNNER_UTILITY_GMFUNCTIONADDER
   
-  ; All contants are already initialized to GM7 so set return value only
-  
-  mov    eax, 70
-  jmp    ProcExit
+    mov    EXTERNAL_CALL_LOCALSPACE, 1A0h
+    mov    eax, 70
+    jmp    ProcExit
 
 CheckGM61:
 
   cmp    edx, GM61_ID
   jne    ProcExit
+    ; Modify addresses
+    mov    eax, offset RUNNER_CLASS_STRING
+    mov    dword ptr ds:[eax],       GM61_RUNNER_CLASS_STRING
+    mov    dword ptr ds:[eax + 04h], GM61_RUNNER_CLASS_RVALUE
+    mov    dword ptr ds:[eax + 08h], GM61_RUNNER_STRING_ALLOCATE
+    mov    dword ptr ds:[eax + 0Ch], GM61_RUNNER_STRING_SET
+    mov    dword ptr ds:[eax + 10h], GM61_RUNNER_STRING_SETFROMPCHAR
+    mov    dword ptr ds:[eax + 14h], GM61_RUNNER_STRING_CLEAR
+    mov    dword ptr ds:[eax + 18h], GM61_RUNNER_STRING_DEALLOCATE
+    mov    dword ptr ds:[eax + 1Ch], GM61_RUNNER_RESULT_DEALLOCATE
+    mov    dword ptr ds:[eax + 20h], GM61_RUNNER_ADDR_EXTERNALCALL
+    mov    dword ptr ds:[eax + 24h], GM61_RUNNER_ADDR_EXTERNALCALL_RETURN
+    mov    dword ptr ds:[eax + 28h], GM61_RUNNER_UTILITY_FINDSYMBOLID
+    mov    dword ptr ds:[eax + 2Ch], GM61_RUNNER_UTILITY_GMFUNCTIONADDER
   
-  ; Modify addresses
-  mov    eax, offset RUNNER_STRING_CLASS
-  mov    dword ptr ds:[eax],     GM61_RUNNER_STRING_CLASS
-  mov    dword ptr ds:[eax+4h],  GM61_RUNNER_RVALUE_CLASS
-  mov    dword ptr ds:[eax+8h],  GM61_RUNNER_ALLOCATE
-  mov    dword ptr ds:[eax+0Ch], GM61_RUNNER_SET_STRING
-  mov    dword ptr ds:[eax+10h], GM61_RUNNER_CLEAR_STRING
-  mov    dword ptr ds:[eax+14h], GM61_RUNNER_DEALLOCATE
-  mov    dword ptr ds:[eax+18h], GM61_RUNNER_DEALLOCATE_RESULT
-  mov    dword ptr ds:[eax+1Ch], GM61_RUNNER_DEALLOCATE_BITMAP  
-  mov    dword ptr ds:[eax+20h], GM61_RUNNER_EXTERNAL_CALL
-  mov    dword ptr ds:[eax+24h], GM61_RUNNER_EXTERNAL_CALL_RET
-  mov    dword ptr ds:[eax+28h], GM61_RUNNER_FIND_SYMBOL_ID
-
-  mov    eax, 61
+    mov    EXTERNAL_CALL_LOCALSPACE, 140h
+    mov    eax, 61
 
 ProcExit:
 
   ret
 GMAPIInitialize endp
 
-;******************************************
-; GMAllocateString
-; - Allocates delphi string from GM runner
-;******************************************
+;**********************************************************************
+; DelphiStringAllocate
+; - Allocates delphi string using GM runner
+;**********************************************************************
 
-GMAllocateString proc uses edx ebx
-  mov     edx, RUNNER_STRING_CLASS
-  mov     eax, 4h
-  call    RUNNER_ALLOCATE_STRING
+DelphiStringAllocate proc uses edx ebx
+  mov     edx, RUNNER_CLASS_STRING
+  mov     eax, 04h
+  call    [RUNNER_STRING_ALLOCATE]
 
   ret
-GMAllocateString endp
+DelphiStringAllocate endp
 
-;******************************************
-; GMDeallocateString
-; - Frees delphi string
-;******************************************
+;**********************************************************************
+; DelphiStringDeallocate
+; - Frees specifed delphi string
+;**********************************************************************
 
-GMDeallocateString proc uses edx aPtrString:DWORD 
-  mov     edx, RUNNER_STRING_CLASS
+DelphiStringDeallocate proc uses edx aPtrString:DWORD 
+  mov     edx, RUNNER_CLASS_STRING
   mov     eax, aPtrString
-  call    RUNNER_DEALLOCATE_STRING
+  call    [RUNNER_STRING_DEALLOCATE]
 
   ret
-GMDeallocateString endp
+DelphiStringDeallocate endp
 
-;******************************************
-; GMDeallocateResult
-; - Frees GM result structure
-;******************************************
+;**********************************************************************
+; DelphiStringSetFromPChar
+; - Sets contents of specifed delphi string using c-string
+;**********************************************************************
 
-GMDeallocateResult proc uses edx aPtrResultStruct:DWORD 
-  mov     eax, aPtrResultStruct
-  mov     edx, RUNNER_RVALUE_CLASS
-  call    RUNNER_DEALLOCATE_RESULT
-
-  ret
-GMDeallocateResult endp
-
-;******************************************
-; GMDeallocateBitmap
-; - Releases GM bitmap from memory
-;******************************************
-
-GMDeallocateBitmap proc uses ecx edx aPtrBitmap:DWORD
-  mov     eax, aPtrBitmap
-  call    RUNNER_DEALLOCATE_BITMAP
-  ret
-GMDeallocateBitmap EndP
-
-;******************************************
-; GMSetString
-; - Sets delphi string
-;******************************************
-
-GMSetString proc uses edx ebx aString:DWORD, aPtrString:DWORD
+DelphiStringSetFromPChar proc uses edx ebx aString:DWORD, aPtrString:DWORD
   mov     eax, aPtrString
   mov     ebx, eax
   mov     edx, aString
-  call    RUNNER_SET_STRING
+  call    [RUNNER_STRING_SETFROMPCHAR]
 
   ret
-GMSetString endp
+DelphiStringSetFromPChar endp
 
-;******************************************
-; GMClearString
-; - Clears delphi string
-;******************************************
+;**********************************************************************
+; DelphiStringSet
+; - Sets contents of specifed delphi string using delphi string
+;**********************************************************************
 
-GMClearString proc aPtrString:DWORD
+DelphiStringSet proc uses edx ebx aSrcString:DWORD, aDestString:DWORD
+  mov     eax, aDestString
+  mov     ebx, eax
+  mov     edx, aSrcString
+  call    [RUNNER_STRING_SET]
+
+  ret
+DelphiStringSet endp
+
+;**********************************************************************
+; DelphiStringClear
+; - Clears specified delphi string
+;**********************************************************************
+
+DelphiStringClear proc aPtrString:DWORD
   mov     eax, aPtrString
-  call    RUNNER_CLEAR_STRING
+  call    RUNNER_STRING_CLEAR
 
   ret
-GMClearString endp
+DelphiStringClear endp
 
-;******************************************
+;**********************************************************************
+; RunnerDeallocateResult
+; - Frees GM result value
+;**********************************************************************
+
+RunnerDeallocateResult proc uses edx aPtrResultStruct:DWORD 
+  mov     eax, aPtrResultStruct
+  mov     edx, RUNNER_CLASS_RVALUE
+  call    [RUNNER_RESULT_DEALLOCATE]
+
+  ret
+RunnerDeallocateResult endp
+
+;**********************************************************************
 ; GMCallFunction
-; - Calls GM function from runner
-;******************************************
+; - Calls GM function from GM runner
+;**********************************************************************
 
-GMCallFunction proc uses ecx aFunctionPtr:DWORD, aArgArr:DWORD, aArgCount:DWORD, aPtrResult:DWORD 
+RunnerCallFunction proc uses ecx aFunctionPtr:DWORD, aArgArr:DWORD, aArgCount:DWORD, aPtrResult:DWORD 
   assume  eax: ptr GMAPI_DATA
 
   mov     eax, GMAPI_HOOK_DATA_BASE
-  mov     edx, [eax].thisInstance    ; Get instance from which dll function was called
-  mov     eax, [eax].withInstance    ; Get instance with which the code will be executed
+  mov     edx, [eax].selfInstance    ; Get "self" instance
+  mov     eax, [eax].otherInstance   ; Get "other" instance
   mov     ecx, aArgCount             ; Number of arguments passed to the function
   push    aArgArr                    ; Pointer to array which stores parameters for called function
   push    0Fh                        ; Maximal allowed number of arguments for a function - always set to 15
   push    aPtrResult                 ; Pointer to structure that'll receive function result
-  call    aFunctionPtr               ; Call GM function
+  call    [aFunctionPtr]             ; Call GM function
 
   ret
-GMCallFunction endp
+RunnerCallFunction endp
 
-;******************************************
+;**********************************************************************
 ; GMFindSymbolID
 ; - Finds symbol identifier by which the variables are identified
-;******************************************
+;**********************************************************************
 
-GMFindSymbolID proc uses ecx edx aVariableName:DWORD
+RunnerFindSymbolID proc uses ecx edx aVariableName:DWORD
   mov     eax, aVariableName
-  call    RUNNER_FIND_SYMBOL_ID
+  call    [RUNNER_UTILITY_FINDSYMBOLID]
 
   ret
-GMFindSymbolID EndP
+RunnerFindSymbolID endp
 
-;******************************************
+;**********************************************************************
+; RunnerGMFunctionAdd
+; - Finds symbol identifier by which the variables are identified
+;**********************************************************************
+
+RunnerGMFunctionAdd proc uses ecx edx aFunctionName:DWORD, aNumberOfArguments:DWORD, aFunctionAddress:DWORD
+  push   1
+  mov    eax, aFunctionName
+  mov    edx, aFunctionAddress
+  mov    ecx, aNumberOfArguments
+  call   [RUNNER_UTILITY_GMFUNCTIONADDER]
+
+  ret
+RunnerGMFunctionAdd endp
+
+;**********************************************************************
 ; FlushCache
 ; - Flushes instruction cache after modifying runner's code
-;******************************************
+;**********************************************************************
 
 FlushCache proc
   push   09h
-  push   RUNNER_EXTERNAL_CALL
+  push   RUNNER_ADDR_EXTERNALCALL
   call   [GetCurrentProcess]
   push   eax
   call   [FlushInstructionCache]
 
-  push   100h
+  push   20h
   push   GMAPI_HOOK_DATA_CODE
   call   [GetCurrentProcess]
   push   eax
@@ -244,21 +307,22 @@ FlushCache proc
   ret
 FlushCache endp
 
-;******************************************
+;**********************************************************************
 ; GMAPIHookInstall
-; - extends external_call function, by adding code that retrieves current instance pointers
-;******************************************
+; - extends external_call function by adding code that retrieves
+;   self & other instance pointers
+;**********************************************************************
 
 GMAPIHookInstall proc uses ecx esi edi
   cmp    dword ptr ds:[GMAPI_HOOK_DATA_BASE], 0 ; Check reference count
   jne    ProcExit ; if it's equal to zero then install the hook
 
   ; Gain write access to external_call code
-  push   0                      ; For oldProtect
-  push   esp                    ; Arg4 - oldProtect; (push address of oldProtect variable)
-  push   40h                    ; Arg3 - newProtect; (PAGE_EXECUTE_READWRITE)
-  push   09h                    ; Arg2 - memory block size
-  push   RUNNER_EXTERNAL_CALL   ; Arg1 - address; (external_call address)
+  sub    esp, 4                   ; For oldProtect
+  push   esp                      ; Arg4 - oldProtect; (push address of oldProtect variable)
+  push   40h                      ; Arg3 - newProtect; (PAGE_EXECUTE_READWRITE)
+  push   09h                      ; Arg2 - memory block size
+  push   RUNNER_ADDR_EXTERNALCALL ; Arg1 - address; (external_call address)
   call   [VirtualProtect]
   
   ; to cave in PE header
@@ -272,26 +336,30 @@ GMAPIHookInstall proc uses ecx esi edi
 
   ; Save original external_call code
   cld
-  mov    esi, RUNNER_EXTERNAL_CALL
+  mov    esi, RUNNER_ADDR_EXTERNALCALL
   mov    edi, GMAPI_HOOK_DATA_PREVCODE
   mov    ecx, 09h
   rep movsb
   
   ; Modify external_call function prologue - jump to GMAPIHook
-  add    ecx, 09h
-  lea    edi, dword ptr ds:[esi-09h]
+  mov    ecx, 09h
+  mov    edi, RUNNER_ADDR_EXTERNALCALL
   mov    esi, HookDetour
   rep movsb
   
   ; Inject hook code into codecave
-  mov    ecx, 100h
+  mov    ecx, 20h
   mov    esi, HookCode
   mov    edi, GMAPI_HOOK_DATA_CODE
   rep movsb
   
+  ; Modify "sub esp, BAADC0DE" opcode
+  push   EXTERNAL_CALL_LOCALSPACE
+  pop    dword ptr ds:[GMAPI_HOOK_DATA_CODE + 08h]
+  
   ; Set return address
-  push   RUNNER_EXTERNAL_CALL_RET
-  pop    dword ptr ds:[GMAPI_HOOK_DATA_BASE+0Ch]
+  push   RUNNER_ADDR_EXTERNALCALL_RETURN
+  pop    dword ptr ds:[GMAPI_HOOK_DATA_BASE + 0Ch]
   
   call   FlushCache
   
@@ -300,75 +368,65 @@ ProcExit:
   
   ret
   
-  ;******************************************
+  ;**********************************************************************
   ; Hook codes, detour and injection
-  ; those couldn't be in seperate subroutines - code compiled
-  ; in "DEBUG" mode modifies references to proc. addresses
+  ;  - those couldn't be defined in seperate subroutines - code compiled
+  ;    in "DEBUG" mode modifies references to proc. addresses
+  ; *********************************************************************
   
   HookDetour:
     push  GMAPI_HOOK_DATA_CODE
     jmp   dword ptr ds:[esp]   ; jump to absolute address :F
-    nop
-    nop
-    nop
-  
+
   HookCode:
     add    esp, 4
   
-    ; Create stack frame
+    ; Stack frame
     push   ebp
     mov    ebp, esp
-    add    esp, -1A0h ; GM7 local data storage
-
-    ; Check if it's GM6
-    cmp    dword ptr ds:[GM_SIGNATURE], GM61_ID
-    jne    Skip
-  
-    add    esp, 60    ; GM6.1 local variable space == 140h
-    ; ---------------------------------------------------
-  
-  Skip:
-  
+    sub    esp, 0BAADC0DEh
+    
+    push   ebx
+    push   esi
+    push   edi
+    
     ; Save current instance pointers
-    mov    dword ptr ds:[GMAPI_HOOK_DATA_BASE+08h], eax ; Instance set by "with" statement or sth
-    mov    dword ptr ds:[GMAPI_HOOK_DATA_BASE+04h], edx ; "This" instance
-    jmp    dword ptr ds:[GMAPI_HOOK_DATA_BASE+0Ch]      ; jmp to returnAddress
+    mov    dword ptr ds:[GMAPI_HOOK_DATA_BASE + 04h], edx ; "Self" instance
+    mov    dword ptr ds:[GMAPI_HOOK_DATA_BASE + 08h], eax ; "Other" instance
+    jmp    dword ptr ds:[GMAPI_HOOK_DATA_BASE + 0Ch]      ; jmp to returnAddress
     
   ;******************************************
 
 GMAPIHookInstall endp
 
-;******************************************
+;**********************************************************************
 ; GMAPIHookUninstall
 ; - undo changes made with GMAPIHookInstall function
-;******************************************
+;**********************************************************************
 
 GMAPIHookUninstall proc uses ecx
   dec    dword ptr ds:[GMAPI_HOOK_DATA_BASE]
-  jnz    ProcExit ; if there's still references then exit. Otherwise, restore modified data in runner.
+  jnz    ProcExit ; if there are still references then exit. Otherwise, restore modified data in the runner.
+    push   esi
+    push   edi
 
-  push   esi
-  push   edi
-
-  ; Restore external_call code
-  cld
-  mov    esi, GMAPI_HOOK_DATA_PREVCODE
-  mov    edi, RUNNER_EXTERNAL_CALL
-  mov    ecx, 09h
-  rep movsb
+    ; Restore external_call code
+    cld
+    mov    esi, GMAPI_HOOK_DATA_PREVCODE
+    mov    edi, RUNNER_ADDR_EXTERNALCALL
+    mov    ecx, 09h
+    rep movsb
   
-  pop    edi
-  pop    esi
+    pop    edi
+    pop    esi
 
-  call   FlushCache
-  
+    call   FlushCache
+
 ProcExit:
-  jns    Return   ; if ref count is negative
+  jns    Return   ; if reference count is negative
+    inc    dword ptr ds:[GMAPI_HOOK_DATA_BASE]
   
-  inc    dword ptr ds:[GMAPI_HOOK_DATA_BASE]
-  
-Return:  
-
+Return:
   ret
 GMAPIHookUninstall endp
 

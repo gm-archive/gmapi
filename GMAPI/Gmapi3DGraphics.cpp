@@ -21,7 +21,7 @@
   Gmapi3DGraphics.cpp
   - Wrapped GM functions; Parser-generated code
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #include "Gmapi3DGraphics.h"
@@ -44,43 +44,43 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void d3d_set_hidden( const bool enable ) {
+  void d3d_set_hidden( bool enable ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ enable };
 
     GM_NORMAL_CALL( id_d3d_set_hidden );
   }
 
-  void d3d_set_perspective( const bool enable ) {
+  void d3d_set_perspective( bool enable ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ enable };
 
     GM_NORMAL_CALL( id_d3d_set_perspective );
   }
 
-  void d3d_set_depth( const int depth ) {
+  void d3d_set_depth( int depth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ depth };
 
     GM_NORMAL_CALL( id_d3d_set_depth );
   }
 
-  void d3d_primitive_begin( const int kind ) {
+  void d3d_primitive_begin( int kind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ kind };
 
     GM_NORMAL_CALL( id_d3d_primitive_begin );
   }
 
-  void d3d_vertex( const double x, const double y, const double z ) {
+  void d3d_vertex( double x, double y, double z ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, z };
 
     GM_NORMAL_CALL( id_d3d_vertex );
   }
 
-  void d3d_vertex_color( const double x, const double y, const double z, const int col,
-                         const double alpha ) {
+  void d3d_vertex_color( double x, double y, double z, int col,
+                         double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, z, col, alpha };
 
@@ -93,91 +93,91 @@ namespace gm {
     GM_VOID_CALL( id_d3d_primitive_end );
   }
 
-  void d3d_draw_block( const double x1, const double y1, const double z1, const double x2,
-                       const double y2, const double z2, const int texid, const double hrepeat,
-                       const double vrepeat ) {
+  void d3d_draw_block( double x1, double y1, double z1, double x2,
+                       double y2, double z2, int texid, double hrepeat,
+                       double vrepeat ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, z1, x2, y2, z2, texid, hrepeat, vrepeat };
 
     GM_NORMAL_CALL( id_d3d_draw_block );
   }
 
-  void d3d_draw_cylinder( const double x1, const double y1, const double z1, const double x2,
-                          const double y2, const double z2, const int texid,
-                          const double hrepeat, const double vrepeat, const bool closed, 
-                          const int steps ) {
+  void d3d_draw_cylinder( double x1, double y1, double z1, double x2,
+                          double y2, double z2, int texid,
+                          double hrepeat, double vrepeat, bool closed, 
+                          int steps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, z1, x2, y2, z2, texid, hrepeat, vrepeat, closed, steps };
 
     GM_NORMAL_CALL( id_d3d_draw_cylinder );
   }
 
-  void d3d_draw_cone( const double x1, const double y1, const double z1, const double x2,
-                      const double y2, const double z2, const int texid, const double hrepeat,
-                      const double vrepeat, const bool closed, const int steps ) {
+  void d3d_draw_cone( double x1, double y1, double z1, double x2,
+                      double y2, double z2, int texid, double hrepeat,
+                      double vrepeat, bool closed, int steps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, z1, x2, y2, z2, texid, hrepeat, vrepeat, closed, steps };
 
     GM_NORMAL_CALL( id_d3d_draw_cone );
   }
 
-  void d3d_draw_ellipsoid( const double x1, const double y1, const double z1, const double x2,
-                           const double y2, const double z2, const int texid,
-                           const double hrepeat, const double vrepeat, const int steps ) {
+  void d3d_draw_ellipsoid( double x1, double y1, double z1, double x2,
+                           double y2, double z2, int texid,
+                           double hrepeat, double vrepeat, int steps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, z1, x2, y2, z2, texid, hrepeat, vrepeat, steps };
 
     GM_NORMAL_CALL( id_d3d_draw_ellipsoid );
   }
 
-  void d3d_draw_wall( const double x1, const double y1, const double z1, const double x2,
-                      const double y2, const double z2, const int texid, const double hrepeat,
-                      const double vrepeat ) {
+  void d3d_draw_wall( double x1, double y1, double z1, double x2,
+                      double y2, double z2, int texid, double hrepeat,
+                      double vrepeat ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, z1, x2, y2, z2, texid, hrepeat, vrepeat };
 
     GM_NORMAL_CALL( id_d3d_draw_wall );
   }
 
-  void d3d_draw_floor( const double x1, const double y1, const double z1, const double x2,
-                       const double y2, const double z2, const int texid, const double hrepeat,
-                       const double vrepeat ) {
+  void d3d_draw_floor( double x1, double y1, double z1, double x2,
+                       double y2, double z2, int texid, double hrepeat,
+                       double vrepeat ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, z1, x2, y2, z2, texid, hrepeat, vrepeat };
 
     GM_NORMAL_CALL( id_d3d_draw_floor );
   }
 
-  void d3d_set_projection( const double xfrom, const double yfrom, const double zfrom,
-                           const double xto, const double yto, const double zto, 
-                           const double xup, const double yup, const double zup ) {
+  void d3d_set_projection( double xfrom, double yfrom, double zfrom,
+                           double xto, double yto, double zto, 
+                           double xup, double yup, double zup ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ xfrom, yfrom, zfrom, xto, yto, zto, xup, yup, zup };
 
     GM_NORMAL_CALL( id_d3d_set_projection );
   }
 
-  void d3d_set_projection_ext( const double xfrom, const double yfrom, const double zfrom,
-                               const double xto, const double yto, const double zto,
-                               const double xup, const double yup, const double zup,
-                               const double angle, const double aspect, const double znear, 
-                               const double zfar ) {
+  void d3d_set_projection_ext( double xfrom, double yfrom, double zfrom,
+                               double xto, double yto, double zto,
+                               double xup, double yup, double zup,
+                               double angle, double aspect, double znear, 
+                               double zfar ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ xfrom, yfrom, zfrom, xto, yto, zto, xup, yup, zup, angle, aspect, znear, zfar };
 
     GM_NORMAL_CALL( id_d3d_set_projection_ext );
   }
 
-  void d3d_set_projection_ortho( const double x, const double y, const double w, const double h,
-                                 const double angle ) {
+  void d3d_set_projection_ortho( double x, double y, double w, double h,
+                                 double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, w, h, angle };
 
     GM_NORMAL_CALL( id_d3d_set_projection_ortho );
   }
 
-  void d3d_set_projection_perspective( const double x, const double y, const double w, 
-                                       const double h, const double angle ) {
+  void d3d_set_projection_perspective( double x, double y, double w, 
+                                       double h, double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, w, h, angle };
 
@@ -190,86 +190,86 @@ namespace gm {
     GM_VOID_CALL( id_d3d_transform_set_identity );
   }
 
-  void d3d_transform_set_translation( const double xt, const double yt, const double zt ) {
+  void d3d_transform_set_translation( double xt, double yt, double zt ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ xt, yt, zt };
 
     GM_NORMAL_CALL( id_d3d_transform_set_translation );
   }
 
-  void d3d_transform_set_scaling( const double xs, const double ys, const double zs ) {
+  void d3d_transform_set_scaling( double xs, double ys, double zs ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ xs, ys, zs };
 
     GM_NORMAL_CALL( id_d3d_transform_set_scaling );
   }
 
-  void d3d_transform_set_rotation_x( const double angle ) {
+  void d3d_transform_set_rotation_x( double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ angle };
 
     GM_NORMAL_CALL( id_d3d_transform_set_rotation_x );
   }
 
-  void d3d_transform_set_rotation_y( const double angle ) {
+  void d3d_transform_set_rotation_y( double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ angle };
 
     GM_NORMAL_CALL( id_d3d_transform_set_rotation_y );
   }
 
-  void d3d_transform_set_rotation_z( const double angle ) {
+  void d3d_transform_set_rotation_z( double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ angle };
 
     GM_NORMAL_CALL( id_d3d_transform_set_rotation_z );
   }
 
-  void d3d_transform_set_rotation_axis( const double xa, const double ya, const double za,
-                                        const double angle ) {
+  void d3d_transform_set_rotation_axis( double xa, double ya, double za,
+                                        double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ xa, ya, za, angle };
 
     GM_NORMAL_CALL( id_d3d_transform_set_rotation_axis );
   }
 
-  void d3d_transform_add_translation( const double xt, const double yt, const double zt ) {
+  void d3d_transform_add_translation( double xt, double yt, double zt ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ xt, yt, zt };
 
     GM_NORMAL_CALL( id_d3d_transform_add_translation );
   }
 
-  void d3d_transform_add_scaling( const double xs, const double ys, const double zs ) {
+  void d3d_transform_add_scaling( double xs, double ys, double zs ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ xs, ys, zs };
 
     GM_NORMAL_CALL( id_d3d_transform_add_scaling );
   }
 
-  void d3d_transform_add_rotation_x( const double angle ) {
+  void d3d_transform_add_rotation_x( double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ angle };
 
     GM_NORMAL_CALL( id_d3d_transform_add_rotation_x );
   }
 
-  void d3d_transform_add_rotation_y( const double angle ) {
+  void d3d_transform_add_rotation_y( double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ angle };
 
     GM_NORMAL_CALL( id_d3d_transform_add_rotation_y );
   }
 
-  void d3d_transform_add_rotation_z( const double angle ) {
+  void d3d_transform_add_rotation_z( double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ angle };
 
     GM_NORMAL_CALL( id_d3d_transform_add_rotation_z );
   }
 
-  void d3d_transform_add_rotation_axis( const double xa, const double ya, const double za, 
-                                        const double angle ) {
+  void d3d_transform_add_rotation_axis( double xa, double ya, double za, 
+                                        double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ xa, ya, za, angle };
 
@@ -317,80 +317,80 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void d3d_set_fog( const bool enable, const int color, const double start, const double end ) {
+  void d3d_set_fog( bool enable, int color, double start, double end ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ enable, color, start, end };
 
     GM_NORMAL_CALL( id_d3d_set_fog );
   }
 
-  void d3d_set_lighting( const bool enable ) {
+  void d3d_set_lighting( bool enable ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ enable };
 
     GM_NORMAL_CALL( id_d3d_set_lighting );
   }
 
-  void d3d_set_shading( const bool smooth ) {
+  void d3d_set_shading( bool smooth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ smooth };
 
     GM_NORMAL_CALL( id_d3d_set_shading );
   }
 
-  void d3d_light_define_direction( const int ind, const double dx, const double dy,
-                                   const double dz, const int col ) {
+  void d3d_light_define_direction( int ind, double dx, double dy,
+                                   double dz, int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, dx, dy, dz, col };
 
     GM_NORMAL_CALL( id_d3d_light_define_direction );
   }
 
-  void d3d_light_define_point( const int ind, const double x, const double y, const double z,
-                               const double range, const int col ) {
+  void d3d_light_define_point( int ind, double x, double y, double z,
+                               double range, int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, z, range, col };
 
     GM_NORMAL_CALL( id_d3d_light_define_point );
   }
 
-  void d3d_light_enable( const int ind, const bool enable ) {
+  void d3d_light_enable( int ind, bool enable ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, enable };
 
     GM_NORMAL_CALL( id_d3d_light_enable );
   }
 
-  void d3d_vertex_normal( const double x, const double y, const double z, const double nx,
-                          const double ny, const double nz ) {
+  void d3d_vertex_normal( double x, double y, double z, double nx,
+                          double ny, double nz ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, z, nx, ny, nz };
 
     GM_NORMAL_CALL( id_d3d_vertex_normal );
   }
 
-  void d3d_vertex_normal_color( const double x, const double y, const double z, 
-                                const double nx, const double ny, const double nz, 
-                                const int col, const double alpha ) {
+  void d3d_vertex_normal_color( double x, double y, double z, 
+                                double nx, double ny, double nz, 
+                                int col, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, z, nx, ny, nz, col, alpha };
 
     GM_NORMAL_CALL( id_d3d_vertex_normal_color );
   }
 
-  void d3d_vertex_normal_texture( const double x, const double y, const double z,
-                                  const double nx, const double ny, const double nz, 
-                                  const double xtex, const double ytex ) {
+  void d3d_vertex_normal_texture( double x, double y, double z,
+                                  double nx, double ny, double nz, 
+                                  double xtex, double ytex ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, z, nx, ny, nz, xtex, ytex };
 
     GM_NORMAL_CALL( id_d3d_vertex_normal_texture );
   }
 
-  void d3d_vertex_normal_texture_color( const double x, const double y, const double z,
-                                        const double nx, const double ny, const double nz, 
-                                        const double xtex, const double ytex, const int col, 
-                                        const double alpha ) {
+  void d3d_vertex_normal_texture_color( double x, double y, double z,
+                                        double nx, double ny, double nz, 
+                                        double xtex, double ytex, int col, 
+                                        double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, z, nx, ny, nz, xtex, ytex, col, alpha };
 
@@ -404,174 +404,174 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void d3d_model_destroy( const int ind ) {
+  void d3d_model_destroy( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_d3d_model_destroy );
   }
 
-  void d3d_model_clear( const int ind ) {
+  void d3d_model_clear( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_d3d_model_clear );
   }
 
-  void d3d_model_save( const int ind, const CGMVariable& fname ) {
+  void d3d_model_save( int ind, const CGMVariable& fname ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, fname };
 
     GM_NORMAL_CALL( id_d3d_model_save );
   }
 
-  void d3d_model_load( const int ind, const CGMVariable& fname ) {
+  void d3d_model_load( int ind, const CGMVariable& fname ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, fname };
 
     GM_NORMAL_CALL( id_d3d_model_load );
   }
 
-  void d3d_model_draw( const int ind, const double x, const double y, const double z,
-                       const int texid ) {
+  void d3d_model_draw( int ind, double x, double y, double z,
+                       int texid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, z, texid };
 
     GM_NORMAL_CALL( id_d3d_model_draw );
   }
 
-  void d3d_model_primitive_begin( const int ind, const int kind ) {
+  void d3d_model_primitive_begin( int ind, int kind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, kind };
 
     GM_NORMAL_CALL( id_d3d_model_primitive_begin );
   }
 
-  void d3d_model_vertex( const int ind, const double x, const double y, const double z ) {
+  void d3d_model_vertex( int ind, double x, double y, double z ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, z };
 
     GM_NORMAL_CALL( id_d3d_model_vertex );
   }
 
-  void d3d_model_vertex_color( const int ind, const double x, const double y, const double z,
-                               const int col, const double alpha ) {
+  void d3d_model_vertex_color( int ind, double x, double y, double z,
+                               int col, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, z, col, alpha };
 
     GM_NORMAL_CALL( id_d3d_model_vertex_color );
   }
 
-  void d3d_model_vertex_texture( const int ind, const double x, const double y, const double z,
-                                 const double xtex, const double ytex ) {
+  void d3d_model_vertex_texture( int ind, double x, double y, double z,
+                                 double xtex, double ytex ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, z, xtex, ytex };
 
     GM_NORMAL_CALL( id_d3d_model_vertex_texture );
   }
 
-  void d3d_model_vertex_texture_color( const int ind, const double x, const double y,
-                                       const double z, const double xtex, const double ytex, 
-                                       const int col, const double alpha ) {
+  void d3d_model_vertex_texture_color( int ind, double x, double y,
+                                       double z, double xtex, double ytex, 
+                                       int col, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, z, xtex, ytex, col, alpha };
 
     GM_NORMAL_CALL( id_d3d_model_vertex_texture_color );
   }
 
-  void d3d_model_vertex_normal( const int ind, const double x, const double y, const double z, 
-                                const double nx, const double ny, const double nz ) {
+  void d3d_model_vertex_normal( int ind, double x, double y, double z, 
+                                double nx, double ny, double nz ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, z, nx, ny, nz };
 
     GM_NORMAL_CALL( id_d3d_model_vertex_normal );
   }
 
-  void d3d_model_vertex_normal_color( const int ind, const double x, const double y, 
-                                      const double z, const double nx, const double ny, 
-                                      const double nz, const int col, const double alpha ) {
+  void d3d_model_vertex_normal_color( int ind, double x, double y, 
+                                      double z, double nx, double ny, 
+                                      double nz, int col, double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, z, nx, ny, nz, col, alpha };
 
     GM_NORMAL_CALL( id_d3d_model_vertex_normal_color );
   }
 
-  void d3d_model_vertex_normal_texture( const int ind, const double x, const double y, 
-                                        const double z, const double nx, const double ny,
-                                        const double nz, const double xtex, const double ytex ) {
+  void d3d_model_vertex_normal_texture( int ind, double x, double y, 
+                                        double z, double nx, double ny,
+                                        double nz, double xtex, double ytex ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, z, nx, ny, nz, xtex, ytex };
 
     GM_NORMAL_CALL( id_d3d_model_vertex_normal_texture );
   }
 
-  void d3d_model_vertex_normal_texture_color( const int ind, const double x, const double y,
-                                              const double z, const double nx, const double ny,
-                                              const double nz, const double xtex,
-                                              const double ytex, const int col, 
-                                              const double alpha ) {
+  void d3d_model_vertex_normal_texture_color( int ind, double x, double y,
+                                              double z, double nx, double ny,
+                                              double nz, double xtex,
+                                              double ytex, int col, 
+                                              double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, z, nx, ny, nz, xtex, ytex, col, alpha };
 
     GM_NORMAL_CALL( id_d3d_model_vertex_normal_texture_color );
   }
 
-  void d3d_model_primitive_end( const int ind ) {
+  void d3d_model_primitive_end( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_d3d_model_primitive_end );
   }
 
-  void d3d_model_block( const int ind, const double x1, const double y1, const double z1,
-                        const double x2, const double y2, const double z2, const double hrepeat,
-                        const double vrepeat ) {
+  void d3d_model_block( int ind, double x1, double y1, double z1,
+                        double x2, double y2, double z2, double hrepeat,
+                        double vrepeat ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x1, y1, z1, x2, y2, z2, hrepeat, vrepeat };
 
     GM_NORMAL_CALL( id_d3d_model_block );
   }
 
-  void d3d_model_cylinder( const int ind, const double x1, const double y1, const double z1,
-                           const double x2, const double y2, const double z2, 
-                           const double hrepeat, const double vrepeat, const bool closed,
-                           const int steps ) {
+  void d3d_model_cylinder( int ind, double x1, double y1, double z1,
+                           double x2, double y2, double z2, 
+                           double hrepeat, double vrepeat, bool closed,
+                           int steps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x1, y1, z1, x2, y2, z2, hrepeat, vrepeat, closed, steps };
 
     GM_NORMAL_CALL( id_d3d_model_cylinder );
   }
 
-  void d3d_model_cone( const int ind, const double x1, const double y1, const double z1, 
-                       const double x2, const double y2, const double z2, const double hrepeat,
-                       const double vrepeat, const bool closed, const int steps ) {
+  void d3d_model_cone( int ind, double x1, double y1, double z1, 
+                       double x2, double y2, double z2, double hrepeat,
+                       double vrepeat, bool closed, int steps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x1, y1, z1, x2, y2, z2, hrepeat, vrepeat, closed, steps };
 
     GM_NORMAL_CALL( id_d3d_model_cone );
   }
 
-  void d3d_model_ellipsoid( const int ind, const double x1, const double y1, const double z1, 
-                            const double x2, const double y2, const double z2,
-                            const double hrepeat, const double vrepeat, const int steps ) {
+  void d3d_model_ellipsoid( int ind, double x1, double y1, double z1, 
+                            double x2, double y2, double z2,
+                            double hrepeat, double vrepeat, int steps ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x1, y1, z1, x2, y2, z2, hrepeat, vrepeat, steps };
 
     GM_NORMAL_CALL( id_d3d_model_ellipsoid );
   }
 
-  void d3d_model_wall( const int ind, const double x1, const double y1, const double z1,
-                       const double x2, const double y2, const double z2, const double hrepeat,
-                       const double vrepeat ) {
+  void d3d_model_wall( int ind, double x1, double y1, double z1,
+                       double x2, double y2, double z2, double hrepeat,
+                       double vrepeat ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x1, y1, z1, x2, y2, z2, hrepeat, vrepeat };
 
     GM_NORMAL_CALL( id_d3d_model_wall );
   }
 
-  void d3d_model_floor( const int ind, const double x1, const double y1, const double z1,
-                        const double x2, const double y2, const double z2, const double hrepeat,
-                        const double vrepeat ) {
+  void d3d_model_floor( int ind, double x1, double y1, double z1,
+                        double x2, double y2, double z2, double hrepeat,
+                        double vrepeat ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x1, y1, z1, x2, y2, z2, hrepeat, vrepeat };
 

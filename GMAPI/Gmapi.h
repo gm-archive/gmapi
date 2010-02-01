@@ -21,11 +21,12 @@
   Gmapi.h
   - Includes all GMAPI components to project
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #pragma once
 
+#include "GmapiMacros.h"
 #include "GmapiInternal.h"
 #include "Gmapi3DGraphics.h"
 #include "GmapiDataStructures.h"

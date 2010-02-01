@@ -21,7 +21,7 @@
   GmapiInteraction.h
   - Wrapped GM functions; Parser-generated code
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #pragma once
@@ -29,40 +29,42 @@
 
 namespace gm {
 
-  void keyboard_set_map( const int key1, const int key2 );
-  int keyboard_get_map( const int key );
+  void keyboard_set_map( int key1, int key2 );
+  int keyboard_get_map( int key );
   void keyboard_unset_map();
-  bool keyboard_check( const int key );
-  bool keyboard_check_pressed( const int key );
-  bool keyboard_check_released( const int key );
-  bool keyboard_check_direct( const int key );
+  bool keyboard_check( int key );
+  bool keyboard_check_pressed( int key );
+  bool keyboard_check_released( int key );
+  bool keyboard_check_direct( int key );
   bool keyboard_get_numlock();
-  void keyboard_set_numlock( const bool on );
-  void keyboard_key_press( const int key );
-  void keyboard_key_release( const int key );
-  void keyboard_clear( const int key );
+  void keyboard_set_numlock( bool on );
+  void keyboard_key_press( int key );
+  void keyboard_key_release( int key );
+  void keyboard_clear( int key );
   void io_clear();
   void keyboard_wait();
-  bool mouse_check_button( const int numb );
-  bool mouse_check_button_pressed( const int numb );
-  bool mouse_check_button_released( const int numb );
-  void mouse_clear( const int button );
+  bool mouse_check_button( int numb );
+  bool mouse_check_button_pressed( int numb );
+  bool mouse_check_button_released( int numb );
+  bool mouse_wheel_up();
+  bool mouse_wheel_down();
+  void mouse_clear( int button );
   void io_clear();
   void io_handle();
   void mouse_wait();
-  bool joystick_exists( const int id );
-  CGMVariable joystick_name( const int id );
-  int joystick_axes( const int id );
-  int joystick_buttons( const int id );
-  bool joystick_has_pov( const int id );
-  int joystick_direction( const int id );
-  bool joystick_check_button( const int id, const int numb );
-  int joystick_xpos( const int id );
-  int joystick_ypos( const int id );
-  int joystick_zpos( const int id );
-  int joystick_rpos( const int id );
-  int joystick_upos( const int id );
-  int joystick_vpos( const int id );
-  int joystick_pov( const int id );
+  bool joystick_exists( int id );
+  CGMVariable joystick_name( int id );
+  int joystick_axes( int id );
+  int joystick_buttons( int id );
+  bool joystick_has_pov( int id );
+  int joystick_direction( int id );
+  bool joystick_check_button( int id, int numb );
+  int joystick_xpos( int id );
+  int joystick_ypos( int id );
+  int joystick_zpos( int id );
+  int joystick_rpos( int id );
+  int joystick_upos( int id );
+  int joystick_vpos( int id );
+  int joystick_pov( int id );
 
 }

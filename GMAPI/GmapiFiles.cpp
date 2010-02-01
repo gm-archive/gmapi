@@ -21,7 +21,7 @@
   GmapiFiles.cpp
   - Wrapped GM functions; Parser-generated code
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #include "GmapiFiles.h"
@@ -54,35 +54,35 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void file_text_close( const int fileid ) {
+  void file_text_close( int fileid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid };
 
     GM_NORMAL_CALL( id_file_text_close );
   }
 
-  void file_text_write_string( const int fileid, const CGMVariable& str ) {
+  void file_text_write_string( int fileid, const CGMVariable& str ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid, str };
 
     GM_NORMAL_CALL( id_file_text_write_string );
   }
 
-  void file_text_write_real( const int fileid, const double x ) {
+  void file_text_write_real( int fileid, double x ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid, x };
 
     GM_NORMAL_CALL( id_file_text_write_real );
   }
 
-  void file_text_writeln( const int fileid ) {
+  void file_text_writeln( int fileid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid };
 
     GM_NORMAL_CALL( id_file_text_writeln );
   }
 
-  CGMVariable file_text_read_string( const int fileid ) {
+  CGMVariable file_text_read_string( int fileid ) {
     GM_VAR_RESULT;
     GM_ARGS{ fileid };
 
@@ -90,7 +90,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  double file_text_read_real( const int fileid ) {
+  double file_text_read_real( int fileid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid };
 
@@ -98,18 +98,26 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  void file_text_readln( const int fileid ) {
+  void file_text_readln( int fileid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid };
 
     GM_NORMAL_CALL( id_file_text_readln );
   }
 
-  bool file_text_eof( const int fileid ) {
+  bool file_text_eof( int fileid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid };
 
     GM_NORMAL_CALL( id_file_text_eof );
+    GM_RETURN_BOOL;
+  }
+
+  bool file_text_eoln( int file ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ file };
+
+    GM_NORMAL_CALL( id_file_text_eoln );
     GM_RETURN_BOOL;
   }
 
@@ -157,7 +165,7 @@ namespace gm {
     GM_NORMAL_CALL( id_directory_create );
   }
 
-  CGMVariable file_find_first( const CGMVariable& mask, const int attr ) {
+  CGMVariable file_find_first( const CGMVariable& mask, int attr ) {
     GM_VAR_RESULT;
     GM_ARGS{ mask, attr };
 
@@ -178,7 +186,7 @@ namespace gm {
     GM_VOID_CALL( id_file_find_close );
   }
 
-  bool file_attributes( const CGMVariable& fname, const int attr ) {
+  bool file_attributes( const CGMVariable& fname, int attr ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fname, attr };
 
@@ -234,7 +242,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  int file_bin_open( const CGMVariable& fname, const int mod ) {
+  int file_bin_open( const CGMVariable& fname, int mod ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fname, mod };
 
@@ -242,21 +250,21 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void file_bin_rewrite( const int fileid ) {
+  void file_bin_rewrite( int fileid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid };
 
     GM_NORMAL_CALL( id_file_bin_rewrite );
   }
 
-  void file_bin_close( const int fileid ) {
+  void file_bin_close( int fileid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid };
 
     GM_NORMAL_CALL( id_file_bin_close );
   }
 
-  int file_bin_size( const int fileid ) {
+  int file_bin_size( int fileid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid };
 
@@ -264,7 +272,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int file_bin_position( const int fileid ) {
+  int file_bin_position( int fileid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid };
 
@@ -272,21 +280,21 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void file_bin_seek( const int fileid, const int pos ) {
+  void file_bin_seek( int fileid, int pos ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid, pos };
 
     GM_NORMAL_CALL( id_file_bin_seek );
   }
 
-  void file_bin_write_byte( const int fileid, const int byte ) {
+  void file_bin_write_byte( int fileid, int byte ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid, byte };
 
     GM_NORMAL_CALL( id_file_bin_write_byte );
   }
 
-  int file_bin_read_byte( const int fileid ) {
+  int file_bin_read_byte( int fileid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fileid };
 
@@ -322,7 +330,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  CGMVariable parameter_string( const int n ) {
+  CGMVariable parameter_string( int n ) {
     GM_VAR_RESULT;
     GM_ARGS{ n };
 
@@ -338,6 +346,22 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
+  double disk_size( const CGMVariable& drive ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ drive };
+
+    GM_NORMAL_CALL( id_disk_size );
+    GM_RETURN_REAL;
+  }
+
+  double disk_free( const CGMVariable& drive ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ drive };
+
+    GM_NORMAL_CALL( id_disk_free );
+    GM_RETURN_REAL;
+  }
+
   void registry_write_string( const CGMVariable& name, const CGMVariable& str ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ name, str };
@@ -345,7 +369,7 @@ namespace gm {
     GM_NORMAL_CALL( id_registry_write_string );
   }
 
-  void registry_write_real( const CGMVariable& name, const double x ) {
+  void registry_write_real( const CGMVariable& name, double x ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ name, x };
 
@@ -384,7 +408,7 @@ namespace gm {
     GM_NORMAL_CALL( id_registry_write_string_ext );
   }
 
-  void registry_write_real_ext( const CGMVariable& key, const CGMVariable& name, const double x ) {
+  void registry_write_real_ext( const CGMVariable& key, const CGMVariable& name, double x ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ key, name, x };
 
@@ -415,7 +439,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void registry_set_root( const int root ) {
+  void registry_set_root( int root ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ root };
 
@@ -445,7 +469,7 @@ namespace gm {
   }
 
   double ini_read_real( const CGMVariable& section, const CGMVariable& key,
-                        const double default_ ) {
+                        double default_ ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ section, key, default_ };
 
@@ -461,7 +485,7 @@ namespace gm {
     GM_NORMAL_CALL( id_ini_write_string );
   }
 
-  void ini_write_real( const CGMVariable& section, const CGMVariable& key, const double value ) {
+  void ini_write_real( const CGMVariable& section, const CGMVariable& key, double value ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ section, key, value };
 
@@ -498,7 +522,7 @@ namespace gm {
     GM_NORMAL_CALL( id_ini_section_delete );
   }
 
-  void execute_program( const CGMVariable& prog, const CGMVariable& arg, const bool wait ) {
+  void execute_program( const CGMVariable& prog, const CGMVariable& arg, bool wait ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ prog, arg, wait };
 

@@ -1,85 +1,237 @@
 /************************************************************************** 
   LICENSE:
 
-    GMAPI is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
+  GMAPI is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
 
-    GMAPI is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
+  GMAPI is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public
-    License along with GMAPI; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-    02110-1301 USA
+  You should have received a copy of the GNU Lesser General Public
+  License along with GMAPI; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301 USA
 ***************************************************************************/
 
 /*************************************************************************
   GmapiConsts.cpp
   - Constants used by GMAPI
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #include "GmapiConsts.h"
 
 namespace gm {
-  const unsigned long GM_VERSION_INCOMPATIBLE = 0;
-  const unsigned long GM_VERSION_61           = 61;
-  const unsigned long GM_VERSION_70           = 70;
+  unsigned long const GM_VERSION_INCOMPATIBLE = 0;
+  unsigned long const GM_VERSION_61           = 61;
+  unsigned long const GM_VERSION_70           = 70;
+  unsigned long const GM_VERSION_80           = 80;
 
-  const unsigned long GMAPI_INITIALIZATION_SUCCESS = 0;
-  const unsigned long GMAPI_INITIALIZATION_FAILED  = 1;
-  const unsigned long GMAPI_ALREADY_INITIALIZED    = 2;
+  unsigned long const GMAPI_INITIALIZATION_SUCCESS = 0;
+  unsigned long const GMAPI_INITIALIZATION_FAILED  = 1;
+  unsigned long const GMAPI_ALREADY_INITIALIZED    = 2;
 
-  const char* GM70_ADDRESS_ARRAY_SWAP_BYTES                     = (char*) 0x005CA768;
-  const void* GM61_ADDRESS_CURRENT_ROOM_PTR                     = (void*) 0x0055D2F0;
-  const void* GM70_ADDRESS_CURRENT_ROOM_PTR                     = (void*) 0x005AF2F4;
-  const PGMVARIABLELIST* GM61_ADDRESS_GLOBAL_VARIABLE_LIST_PTR = (PGMVARIABLELIST*) 0x0055DBF8;
-  const PGMVARIABLELIST* GM70_ADDRESS_GLOBAL_VARIABLE_LIST_PTR = (PGMVARIABLELIST*) 0x00589720;
-  const PGMFUNCTIONINFOSTORAGE GM61_ADDRESS_ARRAY_GMFUNCTIONS  = (PGMFUNCTIONINFOSTORAGE) 0x00538550;
-  const PGMFUNCTIONINFOSTORAGE GM70_ADDRESS_ARRAY_GMFUNCTIONS  = (PGMFUNCTIONINFOSTORAGE) 0x00589744;
-  const PGMSURFACE* GM61_ADDRESS_ARRAY_SURFACES                = (PGMSURFACE*) 0x0055D148;
-  const PGMSURFACE* GM70_ADDRESS_ARRAY_SURFACES                = (PGMSURFACE*) 0x005AF14C;
-  const PGMTEXTURE* GM61_ADDRESS_ARRAY_TEXTURES                = (PGMTEXTURE*) 0x0055D228;
-  const PGMTEXTURE* GM70_ADDRESS_ARRAY_TEXTURES                = (PGMTEXTURE*) 0x005AF22C;
-  const int* GM61_ADDRESS_ARRAYSIZE_SURFACES                    = (int*) 0x005379E4;
-  const int* GM70_ADDRESS_ARRAYSIZE_SURFACES                    = (int*) 0x00587A54;
-  const PGMSPRITESTORAGE GM61_ADDRESS_STORAGE_SPRITES          = (PGMSPRITESTORAGE) 0x00537A40;
-  const PGMSPRITESTORAGE GM70_ADDRESS_STORAGE_SPRITES          = (PGMSPRITESTORAGE) 0x00587AB0;
-  const PGMBACKGROUNDSTORAGE GM61_ADDRESS_STORAGE_BACKGROUNDS  = (PGMBACKGROUNDSTORAGE) 0x00537A4C;
-  const PGMBACKGROUNDSTORAGE GM70_ADDRESS_STORAGE_BACKGROUNDS  = (PGMBACKGROUNDSTORAGE) 0x00587ABC;
-  const PGMSCRIPTSTORAGE GM61_ADDRESS_STORAGE_SCRIPTS          = (PGMSCRIPTSTORAGE) 0x0053853C;
-  const PGMSCRIPTSTORAGE GM70_ADDRESS_STORAGE_SCRIPTS          = (PGMSCRIPTSTORAGE) 0x00589730;
-  const PGMDIRECT3DINFO GM61_ADDRESS_STORAGE_D3D               = (PGMDIRECT3DINFO) 0x005379F0;
-  const PGMDIRECT3DINFO GM70_ADDRESS_STORAGE_D3D               = (PGMDIRECT3DINFO) 0x00587A60;
-  const PGMSOUNDSTORAGE GM61_ADDRESS_SOUND_STORAGE             = (PGMSOUNDSTORAGE) 0x00537850;
-  const PGMSOUNDSTORAGE GM70_ADDRESS_SOUND_STORAGE             = (PGMSOUNDSTORAGE) 0x005878C0;
+  const char* const GM70_ADDRESS_PTR_SWAPTABLE                 = (const char*) 0x005CA768;
+  const char* const GM80_ADDRESS_PTR_SWAPTABLE                 = (const char*) 0x006DCF28;
+  void** const GM61_ADDRESS_PTR_CURRENTROOM                    = (void**) 0x0055D2F0;
+  void** const GM70_ADDRESS_PTR_CURRENTROOM                    = (void**) 0x005AF2F4;
+  void** const GM80_ADDRESS_PTR_CURRENTROOM                    = (void**) 0x006C73C4;
+  int* const GM61_ADDRESS_PTR_ROOMCOUNT                        = (int*) 0x00537B3C;
+  int* const GM70_ADDRESS_PTR_ROOMCOUNT                        = (int*) 0x00587BB4;
+  int* const GM80_ADDRESS_PTR_ROOMCOUNT                        = (int*) 0x0058D4D8;
 
-  const DWORD* GM61_ADDRESS_TRUNNER_INSTANCE                    = (DWORD*) 0x00535414;
-  const DWORD* GM61_ADDRESS_TDEBUG_INSTANCE                     = (DWORD*) 0x005678C4;
-  const DWORD* GM70_ADDRESS_TRUNNER_INSTANCE                    = (DWORD*) 0x00585414;
-  const DWORD* GM70_ADDRESS_TDEBUG_INSTANCE                     = (DWORD*) 0x005BAB04;
-  const DWORD* GM70_ADDRESS_TSCORE_INSTANCE                     = (DWORD*) 0x005AF49C;
+  PGMVARIABLELIST* const GM61_ADDRESS_PTR_GLOBALVARLIST        = (PGMVARIABLELIST*) 0x0055DBF8;
+  PGMVARIABLELIST* const GM70_ADDRESS_PTR_GLOBALVARLIST        = (PGMVARIABLELIST*) 0x00589720;
+  PGMVARIABLELIST* const GM80_ADDRESS_PTR_GLOBALVARLIST        = (PGMVARIABLELIST*) 0x0058F124;
 
-  const PGMINSTANCE* GMAPI_CURRENT_INSTANCE_PTR                = (PGMINSTANCE*) 0x00400804;
+  int* const GM61_ADDRESS_ARRAY_ROOMIDS                        = (int*) 0x0055D2F0;
+  int* const GM70_ADDRESS_ARRAY_ROOMIDS                        = (int*) 0x005AF330;
+  int* const GM80_ADDRESS_ARRAY_ROOMIDS                        = (int*) 0x006C73F4;
+  PGMFUNCTIONINFOSTORAGE const GM61_ADDRESS_ARRAY_GMFUNCTIONS  = (PGMFUNCTIONINFOSTORAGE) 0x00538550;
+  PGMFUNCTIONINFOSTORAGE const GM70_ADDRESS_ARRAY_GMFUNCTIONS  = (PGMFUNCTIONINFOSTORAGE) 0x00589744;
+  PGMFUNCTIONINFOSTORAGE const GM80_ADDRESS_ARRAY_GMFUNCTIONS  = (PGMFUNCTIONINFOSTORAGE) 0x0058F148;
+  PGMSURFACE* const GM61_ADDRESS_ARRAY_SURFACES                = (PGMSURFACE*) 0x0055D148;
+  PGMSURFACE* const GM70_ADDRESS_ARRAY_SURFACES                = (PGMSURFACE*) 0x005AF14C;
+  PGMSURFACE* const GM80_ADDRESS_ARRAY_SURFACES                = (PGMSURFACE*) 0x006C7240;
+  PGMTEXTURE* const GM61_ADDRESS_ARRAY_TEXTURES                = (PGMTEXTURE*) 0x0055D228;
+  PGMTEXTURE* const GM70_ADDRESS_ARRAY_TEXTURES                = (PGMTEXTURE*) 0x005AF22C;
+  PGMTEXTURE* const GM80_ADDRESS_ARRAY_TEXTURES                = (PGMTEXTURE*) 0x006C7320;
+  int* const GM61_ADDRESS_ARRAYSIZE_SURFACES                   = (int*) 0x005379E4;
+  int* const GM70_ADDRESS_ARRAYSIZE_SURFACES                   = (int*) 0x00587A54;
+  int* const GM80_ADDRESS_ARRAYSIZE_SURFACES                   = (int*) 0x0058D378;
 
-  const char* STR_GMAPI_ERROR = "GMAPI error";
-  const char* STR_GMAPI_DEBUG = "Debug info";
-  const char* STR_NO_ACCESS = "<Unable to access resource>";
+  PGMSPRITESTORAGE const GM61_ADDRESS_STORAGE_SPRITES          = (PGMSPRITESTORAGE) 0x00537A40;
+  PGMSPRITESTORAGE const GM70_ADDRESS_STORAGE_SPRITES          = (PGMSPRITESTORAGE) 0x00587AB0;
+  PGMSPRITESTORAGE const GM80_ADDRESS_STORAGE_SPRITES          = (PGMSPRITESTORAGE) 0x0058D3D4;  
+  PGMBACKGROUNDSTORAGE const GM61_ADDRESS_STORAGE_BACKGROUNDS  = (PGMBACKGROUNDSTORAGE) 0x00537A4C;
+  PGMBACKGROUNDSTORAGE const GM70_ADDRESS_STORAGE_BACKGROUNDS  = (PGMBACKGROUNDSTORAGE) 0x00587ABC;
+  PGMBACKGROUNDSTORAGE const GM80_ADDRESS_STORAGE_BACKGROUNDS  = (PGMBACKGROUNDSTORAGE) 0x0058D3E0;
+  PGMSCRIPTSTORAGE const GM61_ADDRESS_STORAGE_SCRIPTS          = (PGMSCRIPTSTORAGE) 0x0053853C;
+  PGMSCRIPTSTORAGE const GM70_ADDRESS_STORAGE_SCRIPTS          = (PGMSCRIPTSTORAGE) 0x00589730;
+  PGMSCRIPTSTORAGE const GM80_ADDRESS_STORAGE_SCRIPTS          = (PGMSCRIPTSTORAGE) 0x0058F134;
+  PGMDIRECT3DDATA const GM61_ADDRESS_STORAGE_DIRECTX           = (PGMDIRECT3DDATA) 0x005379F0;
+  PGMDIRECT3DDATA const GM70_ADDRESS_STORAGE_DIRECTX           = (PGMDIRECT3DDATA) 0x00587A60;
+  PGMDIRECT3DDATA const GM80_ADDRESS_STORAGE_DIRECTX           = (PGMDIRECT3DDATA) 0x0058D384;
+  PGMSOUNDSTORAGE const GM61_ADDRESS_STORAGE_SOUNDS            = (PGMSOUNDSTORAGE) 0x00537850;
+  PGMSOUNDSTORAGE const GM70_ADDRESS_STORAGE_SOUNDS            = (PGMSOUNDSTORAGE) 0x005878C0;
+  PGMSOUNDSTORAGE const GM80_ADDRESS_STORAGE_SOUNDS            = (PGMSOUNDSTORAGE) 0x0058CDE0;
+  PGMFONTSTORAGE const GM61_ADDRESS_STORAGE_FONTS              = (PGMFONTSTORAGE) 0x005385B0;
+  PGMFONTSTORAGE const GM70_ADDRESS_STORAGE_FONTS              = (PGMFONTSTORAGE) 0x005896F8;
+  PGMFONTSTORAGE const GM80_ADDRESS_STORAGE_FONTS              = (PGMFONTSTORAGE) 0x0058F0F0;
+  PGMPARTICLESTORAGE const GM61_ADDRESS_STORAGE_PARTICLES      = (PGMPARTICLESTORAGE) 0x00537BB8;
+  PGMPARTICLESTORAGE const GM70_ADDRESS_STORAGE_PARTICLES      = (PGMPARTICLESTORAGE) 0x00587C30;
+  PGMPARTICLESTORAGE const GM80_ADDRESS_STORAGE_PARTICLES      = (PGMPARTICLESTORAGE) 0x0058D5A4;
 
-  const char* EXC_UNKNOWN = "Unexpected error occured.";
-  const char* EXC_SPRITENOTEXISTS = "Trying to access non existing sprite.";
-  const char* EXC_BACKGROUNDNOTEXISTS = "Trying to access non existing background.";
-  const char* EXC_SCRIPTNOTEXISTS = "Trying to access non existing script.";
-  const char* EXC_SOUNDNOTEXISTS = "Trying to access non existing sound.";
-  const char* EXC_SURFACENOTEXISTS = "Trying to access non existing surface.";
-  const char* EXC_INVALIDSUBIMAGE = "Trying to access invalid sprite subimage.";
+  HWND** const GM61_ADDRESS_FORM_TRUNNER                       = (HWND**) 0x00535414;
+  HWND** const GM70_ADDRESS_FORM_TRUNNER                       = (HWND**) 0x00585414;
+  HWND** const GM80_ADDRESS_FORM_TRUNNER                       = (HWND**) 0x0058D2FC;
+  HWND** const GM61_ADDRESS_FORM_TDEBUG                        = (HWND**) 0x005678C4;
+  HWND** const GM70_ADDRESS_FORM_TDEBUG                        = (HWND**) 0x005BAB04;
+  HWND** const GM80_ADDRESS_FORM_TDEBUG                        = (HWND**) 0x006D2A84;
+  HWND** const GM70_ADDRESS_FORM_TSCORE                        = (HWND**) 0x005AF49C;
+  HWND** const GM80_ADDRESS_FORM_TSCORE                        = (HWND**) 0x006C74C0;
 
-  const char* GM_FUNCTION_NAMES[] = {
+  int* const GM61_ADDRESS_PROPERTY_GAMEID                      = (int*) 0x0055D2D0;
+  int* const GM70_ADDRESS_PROPERTY_GAMEID                      = (int*) 0x005AF2D4;
+  int* const GM80_ADDRESS_PROPERTY_GAMEID                      = (int*) 0x006C73A4;
+  const char** const GM61_ADDRESS_PROPERTY_TEMPDIRECTORY       = (const char**) 0x00539E44;
+  const char** const GM70_ADDRESS_PROPERTY_TEMPDIRECTORY       = (const char**) 0x0058BE48;
+  const char** const GM80_ADDRESS_PROPERTY_TEMPDIRECTORY       = (const char**) 0x00593814;
+  int* const GM61_ADDRESS_PROPERTY_FPS                         = (int*) 0x0055D310;
+  int* const GM70_ADDRESS_PROPERTY_FPS                         = (int*) 0x005AF314;
+  int* const GM80_ADDRESS_PROPERTY_FPS                         = (int*) 0x006C73E4;
+  int* const GM61_ADDRESS_PROPERTY_ROOM                        = (int*) 0x0055D2F4;
+  int* const GM70_ADDRESS_PROPERTY_ROOM                        = (int*) 0x005AF2F8;
+  int* const GM80_ADDRESS_PROPERTY_ROOM                        = (int*) 0x006C73C8;
+  int* const GM61_ADDRESS_PROPERTY_SCORE                       = (int*) 0x00537AE4;
+  int* const GM70_ADDRESS_PROPERTY_SCORE                       = (int*) 0x00587B5C;
+  int* const GM80_ADDRESS_PROPERTY_SCORE                       = (int*) 0x0058D480;
+  int* const GM61_ADDRESS_PROPERTY_LIVES                       = (int*) 0x00537AF4;
+  int* const GM70_ADDRESS_PROPERTY_LIVES                       = (int*) 0x00587B6C;
+  int* const GM80_ADDRESS_PROPERTY_LIVES                       = (int*) 0x0058D490;
+  double* const GM61_ADDRESS_PROPERTY_HEALTH                   = (double*) 0x00537B00;
+  double* const GM70_ADDRESS_PROPERTY_HEALTH                   = (double*) 0x00587B78;
+  double* const GM80_ADDRESS_PROPERTY_HEALTH                   = (double*) 0x0058D49C;
+  bool* const GM61_ADDRESS_PROPERTY_SHOWSCORE                  = (bool*) 0x00537AE8;
+  bool* const GM70_ADDRESS_PROPERTY_SHOWSCORE                  = (bool*) 0x00587B60;
+  bool* const GM80_ADDRESS_PROPERTY_SHOWSCORE                  = (bool*) 0x0058D484;
+  bool* const GM61_ADDRESS_PROPERTY_SHOWLIVES                  = (bool*) 0x00537AF8;
+  bool* const GM70_ADDRESS_PROPERTY_SHOWLIVES                  = (bool*) 0x00587B70;
+  bool* const GM80_ADDRESS_PROPERTY_SHOWLIVES                  = (bool*) 0x0058D494;
+  bool* const GM61_ADDRESS_PROPERTY_SHOWHEALTH                 = (bool*) 0x00537B08;
+  bool* const GM70_ADDRESS_PROPERTY_SHOWHEALTH                 = (bool*) 0x00587B80;
+  bool* const GM80_ADDRESS_PROPERTY_SHOWHEALTH                 = (bool*) 0x0058D4A4;
+  int* const GM61_ADDRESS_PROPERTY_EVENTTYPE                   = (int*) 0x0055D304;
+  int* const GM70_ADDRESS_PROPERTY_EVENTTYPE                   = (int*) 0x005AF308;
+  int* const GM80_ADDRESS_PROPERTY_EVENTTYPE                   = (int*) 0x006C73D8;
+  int* const GM61_ADDRESS_PROPERTY_EVENTNUMBER                 = (int*) 0x0055D308;
+  int* const GM70_ADDRESS_PROPERTY_EVENTNUMBER                 = (int*) 0x005AF30C;
+  int* const GM80_ADDRESS_PROPERTY_EVENTNUMBER                 = (int*) 0x006C73DC;
+  int* const GM61_ADDRESS_PROPERTY_EVENTOBJECT                 = (int*) 0x0055D300;
+  int* const GM70_ADDRESS_PROPERTY_EVENTOBJECT                 = (int*) 0x005AF304;
+  int* const GM80_ADDRESS_PROPERTY_EVENTOBJECT                 = (int*) 0x006C73D4;
+  int* const GM61_ADDRESS_PROPERTY_EVENTACTION                 = (int*) 0x0055D30C;
+  int* const GM70_ADDRESS_PROPERTY_EVENTACTION                 = (int*) 0x005AF310;
+  int* const GM80_ADDRESS_PROPERTY_EVENTACTION                 = (int*) 0x006C73E0;
+  const char** const GM61_ADDRESS_PROPERTY_ERRORLAST           = (const char**) 0x005385A0;
+  const char** const GM70_ADDRESS_PROPERTY_ERRORLAST           = (const char**) 0x00589784;
+  const char** const GM80_ADDRESS_PROPERTY_ERRORLAST           = (const char**) 0x0058F198;
+  bool* const GM61_ADDRESS_PROPERTY_ERROROCCURED               = (bool*) 0x005385A4;
+  bool* const GM70_ADDRESS_PROPERTY_ERROROCCURED               = (bool*) 0x00589788;
+  bool* const GM80_ADDRESS_PROPERTY_ERROROCCURED               = (bool*) 0x0058F19C;
+  int* const GM61_ADDRESS_PROPERTY_KEYBOARDKEY                 = (int*) 0x0055D4DC;
+  int* const GM70_ADDRESS_PROPERTY_KEYBOARDKEY                 = (int*) 0x005B06E4;
+  int* const GM80_ADDRESS_PROPERTY_KEYBOARDKEY                 = (int*) 0x006C8670;
+  int* const GM61_ADDRESS_PROPERTY_KEYBOARDLASTKEY             = (int*) 0x0055D4D8;
+  int* const GM70_ADDRESS_PROPERTY_KEYBOARDLASTKEY             = (int*) 0x005B06E0;
+  int* const GM80_ADDRESS_PROPERTY_KEYBOARDLASTKEY             = (int*) 0x006C866C;
+  const char** const GM61_ADDRESS_PROPERTY_KEYBOARDSTRING      = (const char**) 0x0055D4D4;
+  const char** const GM70_ADDRESS_PROPERTY_KEYBOARDSTRING      = (const char**) 0x005B06DC;
+  const char** const GM80_ADDRESS_PROPERTY_KEYBOARDSTRING      = (const char**) 0x006C8668;
+  int* const GM61_ADDRESS_PROPERTY_MOUSEBUTTON                 = (int*) 0x0055D7E4;
+  int* const GM70_ADDRESS_PROPERTY_MOUSEBUTTON                 = (int*) 0x005B09EC;
+  int* const GM80_ADDRESS_PROPERTY_MOUSEBUTTON                 = (int*) 0x006C8978;
+  int* const GM61_ADDRESS_PROPERTY_MOUSELASTBUTTON             = (int*) 0x0055D7E0;
+  int* const GM70_ADDRESS_PROPERTY_MOUSELASTBUTTON             = (int*) 0x005B09E8;
+  int* const GM80_ADDRESS_PROPERTY_MOUSELASTBUTTON             = (int*) 0x006C8974;
+  int* const GM61_ADDRESS_PROPERTY_VIEWCURRENT                 = (int*) 0x00537B10;
+  int* const GM70_ADDRESS_PROPERTY_VIEWCURRENT                 = (int*) 0x00587B88;
+  int* const GM80_ADDRESS_PROPERTY_VIEWCURRENT                 = (int*) 0x0058D4AC;
+  int* const GM70_ADDRESS_PROPERTY_TRANSITIONKIND              = (int*) 0x00587B58;
+  int* const GM80_ADDRESS_PROPERTY_TRANSITIONKIND              = (int*) 0x0058D47C;
+  int* const GM70_ADDRESS_PROPERTY_TRANSITIONSTEPS             = (int*) 0x0058971C;
+  int* const GM80_ADDRESS_PROPERTY_TRANSITIONSTEPS             = (int*) 0x0058F120;
+  int* const GM70_ADDRESS_PROPERTY_CURSORSPRITE                = (int*) 0x00587B90;
+  int* const GM80_ADDRESS_PROPERTY_CURSORSPRITE                = (int*) 0x0058D4B4;
+
+  PGMINSTANCE* const GMAPI_ADDRESS_PTR_CURRENTINSTANCE         = (PGMINSTANCE*) 0x00400804;
+  PGMINSTANCE* const GMAPI_ADDRESS_PTR_OTHERINSTANCE           = (PGMINSTANCE*) 0x00400808;
+
+  void* const GM70_ADDRESS_PATCH_IDENTIFIERTYPECHECKING        = (void*) 0x0052D361;
+  void* const GM80_ADDRESS_PATCH_IDENTIFIERTYPECHECKING        = (void*) 0x005294F9;
+
+  BYTE const GM70_PATCH_IDENTIFIERTYPECHECKING[] = {
+    0xC7, 0x07, 0xFF, 0xFF, 0xFF, 0xFF, 0x8B, 0x35,
+    0x48, 0x97, 0x58, 0x00, 0x4E, 0x85, 0xF6, 0x7C, 
+    0x62, 0x46, 0x33, 0xDB, 0x8D, 0x45, 0xF4, 0x8B,
+    0xD3, 0x03, 0xD2, 0x8D, 0x14, 0x92, 0x8B, 0x0D,
+    0x44, 0x97, 0x58, 0x00, 0x8D, 0x14, 0xD1, 0xE8,
+    0x7F, 0x7E, 0xED, 0xFF, 0x8B, 0x45, 0xF4, 0x8B,
+    0x55, 0xFC, 0xE8, 0x1C, 0x80, 0xED, 0xFF, 0x75,
+    0x04, 0x89, 0x1F, 0xEB, 0x36, 0x43, 0x4E, 0x75,
+    0xD3, 0x8B, 0x45, 0xFC, 0xE8, 0x5A, 0xFB, 0xFF,
+    0xFF, 0x05, 0xA0, 0x86, 0x01, 0x00, 0x89, 0x07,
+    0x81, 0x3F, 0xA0, 0x86, 0x01, 0x00, 0x7D, 0x1B,
+    0x8B, 0x45, 0xFC, 0xE8, 0x93, 0x47, 0xFF, 0xFF, 
+    0x05, 0x20, 0xA1, 0x07, 0x00, 0x89, 0x07, 0x81,
+    0x3F, 0x20, 0xA1, 0x07, 0x00, 0x7D, 0x04
+  };
+
+  BYTE const GM80_PATCH_IDENTIFIERTYPECHECKING[] = {
+    0xC7, 0x07, 0xFF, 0xFF, 0xFF, 0xFF, 0x8B, 0x35,
+    0x4C, 0xF1, 0x58, 0x00, 0x4E, 0x85, 0xF6, 0x7C,
+    0x5E, 0x46, 0x33, 0xDB, 0x8D, 0x45, 0xF4, 0x8B,
+    0xD3, 0x03, 0xD2, 0x8D, 0x14, 0x92, 0x8B, 0x0D,
+    0x48, 0xF1, 0x58, 0x00, 0x8D, 0x14, 0xD1, 0xE8,
+    0x73, 0xC6, 0xED, 0xFF, 0x8B, 0x45, 0xF4, 0x8B,
+    0x55, 0xFC, 0xE8, 0x14, 0xC8, 0xED, 0xFF, 0x75,
+    0x04, 0x89, 0x1F, 0xEB, 0x36, 0x43, 0x4E, 0x75,
+    0xD3, 0x8B, 0x45, 0xFC, 0xE8, 0x22, 0xFB, 0xFF,
+    0xFF, 0x05, 0xA0, 0x86, 0x01, 0x00, 0x89, 0x07,
+    0x81, 0x3F, 0xA0, 0x86, 0x01, 0x00, 0x7D, 0x1B,
+    0x8B, 0x45, 0xFC, 0xE8, 0xE7, 0x43, 0xFF, 0xFF,
+    0x05, 0x20, 0xA1, 0x07, 0x00, 0x89, 0x07, 0x81,
+    0x3F, 0x20, 0xA1, 0x07, 0x00, 0x7D, 0x04
+  };
+
+  int const GM_PATCHSIZE_IDENTIFIERTYPECHECKING = sizeof( GM70_PATCH_IDENTIFIERTYPECHECKING );
+
+  const char* const STR_GMAPI_ERROR =    "GMAPI error";
+  const char* const STR_GMAPI_DEBUG =    "Debug info";
+  const char* const STR_GMAPI_NOACCESS = "<Unable to access resource>";
+
+  const char* const STR_EXC_UNKNOWN =                 "Unexpected error occured.";
+  const char* const STR_EXC_SPRITENOTEXISTS =         "Trying to access non existing sprite.";
+  const char* const STR_EXC_BACKGROUNDNOTEXISTS =     "Trying to access non existing background.";
+  const char* const STR_EXC_SCRIPTNOTEXISTS =         "Trying to access non existing script.";
+  const char* const STR_EXC_SOUNDNOTEXISTS =          "Trying to access non existing sound.";
+  const char* const STR_EXC_SURFACENOTEXISTS =        "Trying to access non existing surface.";
+  const char* const STR_EXC_INVALIDSUBIMAGE =         "Trying to access invalid sprite subimage.";
+  const char* const STR_EXC_PARTICLESYSTEMNOTEXISTS = "Trying to access non existing particle system.";
+  const char* const STR_EXC_PARTICLETYPENOTEXISTS =   "Trying to access non existing particle type.";
+  const char* const STR_EXC_FONTNOTEXISTS =           "Trying to access non existing font.";
+  const char* const STR_EXC_DEFLECTORNOTEXISTS =      "Trying to access non existing particle deflector.";
+  const char* const STR_EXC_CHANGERNOTEXISTS =        "Trying to access non existing particle changer.";
+  const char* const STR_EXC_DESTROYERNOTEXISTS =      "Trying to access non existing particle destroyer.";
+  const char* const STR_EXC_EMITTERNOTEXISTS =        "Trying to access non existing particle emitter.";
+  const char* const STR_EXC_ATTRACTORNOTEXISTS =      "Trying to access non existing particle attractor.";
+
+  const char* const GM_FUNCTION_NAMES[] = {
     "show_message",
     "show_message_ext",
     "show_question",
@@ -106,6 +258,7 @@ namespace gm {
     "splash_show_video",
     "splash_show_text",
     "splash_show_image",
+    "splash_show_web",
     "splash_set_main",
     "splash_set_scale",
     "splash_set_cursor",
@@ -119,6 +272,8 @@ namespace gm {
     "splash_set_interrupt",
     "splash_set_stop_key",
     "splash_set_stop_mouse",
+    "splash_set_position",
+    "splash_set_close_button",
     "show_info",
     "load_info",
     "show_error",
@@ -238,6 +393,7 @@ namespace gm {
     "ds_priority_write",
     "ds_priority_read",
     "ds_grid_create",
+    "ds_grid_destroy",
     "ds_grid_delete",
     "ds_grid_copy",
     "ds_grid_resize",
@@ -369,6 +525,7 @@ namespace gm {
     "variable_local_array_set",
     "variable_local_array2_set",
     "set_program_priority",
+    "set_application_title",
     "sound_play",
     "sound_loop",
     "sound_stop",
@@ -425,8 +582,10 @@ namespace gm {
     "sprite_assign",
     "sprite_merge",
     "sprite_add",
+    "sprite_add_sprite",
     "sprite_add_alpha",
     "sprite_replace",
+    "sprite_replace_sprite",
     "sprite_replace_alpha",
     "sprite_create_from_screen",
     "sprite_add_from_screen",
@@ -434,14 +593,17 @@ namespace gm {
     "sprite_add_from_surface",
     "sprite_delete",
     "sprite_set_alpha_from_sprite",
+    "sprite_collision_mask",
     "sound_add",
     "sound_replace",
     "sound_delete",
     "background_duplicate",
     "background_assign",
     "background_add",
+    "background_add_background",
     "background_add_alpha",
     "background_replace",
+    "background_replace_background",
     "background_replace_alpha",
     "background_create_color",
     "background_create_gradient",
@@ -477,6 +639,7 @@ namespace gm {
     "timeline_delete",
     "timeline_moment_add",
     "timeline_moment_clear",
+    "timeline_clear",
     "object_set_sprite",
     "object_set_solid",
     "object_set_visible",
@@ -522,6 +685,7 @@ namespace gm {
     "sprite_get_bbox_mode",
     "sprite_get_precise",
     "sprite_save",
+    "sprite_save_strip",
     "sound_exists",
     "sound_get_name",
     "sound_get_kind",
@@ -794,6 +958,8 @@ namespace gm {
     "mouse_check_button",
     "mouse_check_button_pressed",
     "mouse_check_button_released",
+    "mouse_wheel_up",
+    "mouse_wheel_down",
     "mouse_clear",
     "mouse_wait",
     "joystick_exists",
@@ -821,6 +987,7 @@ namespace gm {
     "file_text_read_real",
     "file_text_readln",
     "file_text_eof",
+    "file_text_eoln",
     "file_exists",
     "file_delete",
     "file_rename",
@@ -851,6 +1018,8 @@ namespace gm {
     "parameter_count",
     "parameter_string",
     "environment_get_variable",
+    "disk_free",
+    "disk_size",
     "registry_write_string",
     "registry_write_real",
     "registry_read_string",
@@ -1025,289 +1194,291 @@ namespace gm {
     "d3d_model_floor"
   };
 
-  const int GM_FUNCTION_COUNT = sizeof( GM_FUNCTION_NAMES ) / sizeof( char* );
+  int const GM_FUNCTION_COUNT = sizeof( GM_FUNCTION_NAMES ) / sizeof( char* );
 
-  const int self = -1;
-  const int other = -2;
-  const int all = -3;
-  const int noone = -4;
-  const int global = -5;
-  const int local = -7;
-  const double pi = 3.14159265;
-  const int ev_create = 0;
-  const int ev_destroy = 1;
-  const int ev_step = 3;
-  const int ev_alarm = 2;
-  const int ev_keyboard = 5;
-  const int ev_mouse = 6;
-  const int ev_collision = 4;
-  const int ev_other = 7;
-  const int ev_draw = 8;
-  const int ev_keypress = 9;
-  const int ev_keyrelease = 10;
-  const int ev_left_button = 0;
-  const int ev_right_button = 1;
-  const int ev_middle_button = 2;
-  const int ev_no_button = 3;
-  const int ev_left_press = 4;
-  const int ev_right_press = 5;
-  const int ev_middle_press = 6;
-  const int ev_left_release = 7;
-  const int ev_right_release = 8;
-  const int ev_middle_release = 9;
-  const int ev_mouse_enter = 10;
-  const int ev_mouse_leave = 11;
-  const int ev_mouse_wheel_up = 60;
-  const int ev_mouse_wheel_down = 61;
-  const int ev_global_left_button = 50;
-  const int ev_global_right_button = 51;
-  const int ev_global_middle_button = 52;
-  const int ev_global_left_press = 53;
-  const int ev_global_right_press = 54;
-  const int ev_global_middle_press = 55;
-  const int ev_global_left_release = 56;
-  const int ev_global_right_release = 57;
-  const int ev_global_middle_release = 58;
-  const int ev_joystick1_left = 16;
-  const int ev_joystick1_right = 17;
-  const int ev_joystick1_up = 18;
-  const int ev_joystick1_down = 19;
-  const int ev_joystick1_button1 = 21;
-  const int ev_joystick1_button2 = 22;
-  const int ev_joystick1_button3 = 23;
-  const int ev_joystick1_button4 = 24;
-  const int ev_joystick1_button5 = 25;
-  const int ev_joystick1_button6 = 26;
-  const int ev_joystick1_button7 = 27;
-  const int ev_joystick1_button8 = 28;
-  const int ev_joystick2_left = 31;
-  const int ev_joystick2_right = 32;
-  const int ev_joystick2_up = 33;
-  const int ev_joystick2_down = 34;
-  const int ev_joystick2_button1 = 36;
-  const int ev_joystick2_button2 = 37;
-  const int ev_joystick2_button3 = 38;
-  const int ev_joystick2_button4 = 39;
-  const int ev_joystick2_button5 = 40;
-  const int ev_joystick2_button6 = 41;
-  const int ev_joystick2_button7 = 42;
-  const int ev_joystick2_button8 = 43;
-  const int ev_outside = 0;
-  const int ev_boundary = 1;
-  const int ev_game_start = 2;
-  const int ev_game_end = 3;
-  const int ev_room_start = 4;
-  const int ev_room_end = 5;
-  const int ev_no_more_lives = 6;
-  const int ev_animation_end = 7;
-  const int ev_end_of_path = 8;
-  const int ev_no_more_health = 9;
-  const int ev_close_button = 30;
-  const int ev_user0 = 10;
-  const int ev_user1 = 11;
-  const int ev_user2 = 12;
-  const int ev_user3 = 13;
-  const int ev_user4 = 14;
-  const int ev_user5 = 15;
-  const int ev_user6 = 16;
-  const int ev_user7 = 17;
-  const int ev_user8 = 18;
-  const int ev_user9 = 19;
-  const int ev_user10 = 20;
-  const int ev_user11 = 21;
-  const int ev_user12 = 22;
-  const int ev_user13 = 23;
-  const int ev_user14 = 24;
-  const int ev_user15 = 25;
-  const int ev_step_normal = 0;
-  const int ev_step_begin = 1;
-  const int ev_step_end = 2;
-  const int vk_nokey = 0;
-  const int vk_anykey = 1;
-  const int vk_enter = 13;
-  const int vk_return = 13;
-  const int vk_shift = 16;
-  const int vk_control = 17;
-  const int vk_alt = 18;
-  const int vk_escape = 27;
-  const int vk_space = 32;
-  const int vk_backspace = 8;
-  const int vk_tab = 9;
-  const int vk_pause = 19;
-  const int vk_printscreen = 44;
-  const int vk_left = 37;
-  const int vk_right = 39;
-  const int vk_up = 38;
-  const int vk_down = 40;
-  const int vk_home = 36;
-  const int vk_end = 35;
-  const int vk_delete = 46;
-  const int vk_insert = 45;
-  const int vk_pageup = 33;
-  const int vk_pagedown = 34;
-  const int vk_f1 = 112;
-  const int vk_f2 = 113;
-  const int vk_f3 = 114;
-  const int vk_f4 = 115;
-  const int vk_f5 = 116;
-  const int vk_f6 = 117;
-  const int vk_f7 = 118;
-  const int vk_f8 = 119;
-  const int vk_f9 = 120;
-  const int vk_f10 = 121;
-  const int vk_f11 = 122;
-  const int vk_f12 = 123;
-  const int vk_numpad0 = 96;
-  const int vk_numpad1 = 97;
-  const int vk_numpad2 = 98;
-  const int vk_numpad3 = 99;
-  const int vk_numpad4 = 100;
-  const int vk_numpad5 = 101;
-  const int vk_numpad6 = 102;
-  const int vk_numpad7 = 103;
-  const int vk_numpad8 = 104;
-  const int vk_numpad9 = 105;
-  const int vk_divide = 111;
-  const int vk_multiply = 106;
-  const int vk_subtract = 109;
-  const int vk_add = 107;
-  const int vk_decimal = 110;
-  const int vk_lshift = 160;
-  const int vk_lcontrol = 162;
-  const int vk_lalt = 164;
-  const int vk_rshift = 161;
-  const int vk_rcontrol = 163;
-  const int vk_ralt = 165;
-  const int mb_any = -1;
-  const int mb_none = 0;
-  const int mb_left = 1;
-  const int mb_right = 2;
-  const int mb_middle = 3;
-  const int c_aqua = 16776960;
-  const int c_black = 0;
-  const int c_blue = 16711680;
-  const int c_dkgray = 4210752;
-  const int c_fuchsia = 16711935;
-  const int c_gray = 8421504;
-  const int c_green = 32768;
-  const int c_lime = 65280;
-  const int c_ltgray = 12632256;
-  const int c_maroon = 128;
-  const int c_navy = 8388608;
-  const int c_olive = 32896;
-  const int c_purple = 8388736;
-  const int c_red = 255;
-  const int c_silver = 12632256;
-  const int c_teal = 8421376;
-  const int c_white = 16777215;
-  const int c_yellow = 65535;
-  const int c_orange = 4235519;
-  const int fa_left = 0;
-  const int fa_center = 1;
-  const int fa_right = 2;
-  const int fa_top = 0;
-  const int fa_middle = 1;
-  const int fa_bottom = 2;
-  const int pr_pointlist = 1;
-  const int pr_linelist = 2;
-  const int pr_linestrip = 3;
-  const int pr_trianglelist = 4;
-  const int pr_trianglestrip = 5;
-  const int pr_trianglefan = 6;
-  const int bm_normal = 0;
-  const int bm_add = 1;
-  const int bm_max = 2;
-  const int bm_subtract = 3;
-  const int bm_zero = 1;
-  const int bm_one = 2;
-  const int bm_src_color = 3;
-  const int bm_inv_src_color = 4;
-  const int bm_src_alpha = 5;
-  const int bm_inv_src_alpha = 6;
-  const int bm_dest_alpha = 7;
-  const int bm_inv_dest_alpha = 8;
-  const int bm_dest_color = 9;
-  const int bm_inv_dest_color = 10;
-  const int bm_src_alpha_sat = 11;
-  const int cr_default = 0;
-  const int cr_none = -1;
-  const int cr_arrrow = -2;
-  const int cr_cross = -3;
-  const int cr_beam = -4;
-  const int cr_size_nesw = -6;
-  const int cr_size_ns = -7;
-  const int cr_size_nwse = -8;
-  const int cr_size_we = -9;
-  const int cr_uparrow = -10;
-  const int cr_hourglass = -11;
-  const int cr_drag = -12;
-  const int cr_nodrop = -13;
-  const int cr_hsplit = -14;
-  const int cr_vsplit = -15;
-  const int cr_multidrag = -16;
-  const int cr_sqlwait = -17;
-  const int cr_no = -18;
-  const int cr_appstart = -19;
-  const int cr_help = -20;
-  const int cr_handpoint = -21;
-  const int cr_size_all = -22;
-  const int se_none = 0;
-  const int se_chorus = 1;
-  const int se_echo = 2;
-  const int se_flanger = 4;
-  const int se_gargle = 8;
-  const int se_reverb = 16;
-  const int se_compressor = 32;
-  const int se_equalizer = 64;
-  const int fa_readonly = 1;
-  const int fa_hidden = 2;
-  const int fa_sysfile = 4;
-  const int fa_volumeid = 8;
-  const int fa_directory = 16;
-  const int fa_archive = 32;
-  const int ef_explosion = 0;
-  const int ef_ring = 1;
-  const int ef_ellipse = 2;
-  const int ef_firework = 3;
-  const int ef_smoke = 4;
-  const int ef_smokeup = 5;
-  const int ef_star = 6;
-  const int ef_spark = 7;
-  const int ef_flare = 8;
-  const int ef_cloud = 9;
-  const int ef_rain = 10;
-  const int ef_snow = 11;
-  const int pt_shape_pixel = 0;
-  const int pt_shape_disk = 1;
-  const int pt_shape_square = 2;
-  const int pt_shape_line = 3;
-  const int pt_shape_star = 4;
-  const int pt_shape_circle = 5;
-  const int pt_shape_ring = 6;
-  const int pt_shape_sphere = 7;
-  const int pt_shape_flare = 8;
-  const int pt_shape_spark = 9;
-  const int pt_shape_explosion = 10;
-  const int pt_shape_cloud = 11;
-  const int pt_shape_smoke = 12;
-  const int ps_distr_linear = 0;
-  const int ps_distr_gaussian = 1;
-  const int ps_distr_invgaussian = 2;
-  const int ps_shape_rectangle = 0;
-  const int ps_shape_ellipse = 1;
-  const int ps_shape_diamond = 2;
-  const int ps_shape_line = 3;
-  const int ps_force_constant = 0;
-  const int ps_force_linear = 1;
-  const int ps_force_quadratic = 2;
-  const int ps_deflect_vertical = 0;
-  const int ps_deflect_horizontal = 1;
-  const int ps_change_all = 0;
-  const int ps_change_shape = 1;
-  const int ps_change_motion = 2;
-  const int ty_real = 0;
-  const int ty_string = 1;
-  const int dll_cdecl = 0;
-  const int dll_stdcall = 1;
+  int const self = -1;
+  int const other = -2;
+  int const all = -3;
+  int const noone = -4;
+  int const global = -5;
+  int const local = -7;
+  double const pi = 3.1415926535897932384626433832795;
+  int const ev_create = 0;
+  int const ev_destroy = 1;
+  int const ev_step = 3;
+  int const ev_alarm = 2;
+  int const ev_keyboard = 5;
+  int const ev_mouse = 6;
+  int const ev_collision = 4;
+  int const ev_other = 7;
+  int const ev_draw = 8;
+  int const ev_keypress = 9;
+  int const ev_keyrelease = 10;
+  int const ev_trigger = 11;
+  int const ev_left_button = 0;
+  int const ev_right_button = 1;
+  int const ev_middle_button = 2;
+  int const ev_no_button = 3;
+  int const ev_left_press = 4;
+  int const ev_right_press = 5;
+  int const ev_middle_press = 6;
+  int const ev_left_release = 7;
+  int const ev_right_release = 8;
+  int const ev_middle_release = 9;
+  int const ev_mouse_enter = 10;
+  int const ev_mouse_leave = 11;
+  int const ev_mouse_wheel_up = 60;
+  int const ev_mouse_wheel_down = 61;
+  int const ev_global_left_button = 50;
+  int const ev_global_right_button = 51;
+  int const ev_global_middle_button = 52;
+  int const ev_global_left_press = 53;
+  int const ev_global_right_press = 54;
+  int const ev_global_middle_press = 55;
+  int const ev_global_left_release = 56;
+  int const ev_global_right_release = 57;
+  int const ev_global_middle_release = 58;
+  int const ev_joystick1_left = 16;
+  int const ev_joystick1_right = 17;
+  int const ev_joystick1_up = 18;
+  int const ev_joystick1_down = 19;
+  int const ev_joystick1_button1 = 21;
+  int const ev_joystick1_button2 = 22;
+  int const ev_joystick1_button3 = 23;
+  int const ev_joystick1_button4 = 24;
+  int const ev_joystick1_button5 = 25;
+  int const ev_joystick1_button6 = 26;
+  int const ev_joystick1_button7 = 27;
+  int const ev_joystick1_button8 = 28;
+  int const ev_joystick2_left = 31;
+  int const ev_joystick2_right = 32;
+  int const ev_joystick2_up = 33;
+  int const ev_joystick2_down = 34;
+  int const ev_joystick2_button1 = 36;
+  int const ev_joystick2_button2 = 37;
+  int const ev_joystick2_button3 = 38;
+  int const ev_joystick2_button4 = 39;
+  int const ev_joystick2_button5 = 40;
+  int const ev_joystick2_button6 = 41;
+  int const ev_joystick2_button7 = 42;
+  int const ev_joystick2_button8 = 43;
+  int const ev_outside = 0;
+  int const ev_boundary = 1;
+  int const ev_game_start = 2;
+  int const ev_game_end = 3;
+  int const ev_room_start = 4;
+  int const ev_room_end = 5;
+  int const ev_no_more_lives = 6;
+  int const ev_animation_end = 7;
+  int const ev_end_of_path = 8;
+  int const ev_no_more_health = 9;
+  int const ev_close_button = 30;
+  int const ev_user0 = 10;
+  int const ev_user1 = 11;
+  int const ev_user2 = 12;
+  int const ev_user3 = 13;
+  int const ev_user4 = 14;
+  int const ev_user5 = 15;
+  int const ev_user6 = 16;
+  int const ev_user7 = 17;
+  int const ev_user8 = 18;
+  int const ev_user9 = 19;
+  int const ev_user10 = 20;
+  int const ev_user11 = 21;
+  int const ev_user12 = 22;
+  int const ev_user13 = 23;
+  int const ev_user14 = 24;
+  int const ev_user15 = 25;
+  int const ev_step_normal = 0;
+  int const ev_step_begin = 1;
+  int const ev_step_end = 2;
+  int const vk_nokey = 0;
+  int const vk_anykey = 1;
+  int const vk_enter = 13;
+  int const vk_return = 13;
+  int const vk_shift = 16;
+  int const vk_control = 17;
+  int const vk_alt = 18;
+  int const vk_escape = 27;
+  int const vk_space = 32;
+  int const vk_backspace = 8;
+  int const vk_tab = 9;
+  int const vk_pause = 19;
+  int const vk_printscreen = 44;
+  int const vk_left = 37;
+  int const vk_right = 39;
+  int const vk_up = 38;
+  int const vk_down = 40;
+  int const vk_home = 36;
+  int const vk_end = 35;
+  int const vk_delete = 46;
+  int const vk_insert = 45;
+  int const vk_pageup = 33;
+  int const vk_pagedown = 34;
+  int const vk_f1 = 112;
+  int const vk_f2 = 113;
+  int const vk_f3 = 114;
+  int const vk_f4 = 115;
+  int const vk_f5 = 116;
+  int const vk_f6 = 117;
+  int const vk_f7 = 118;
+  int const vk_f8 = 119;
+  int const vk_f9 = 120;
+  int const vk_f10 = 121;
+  int const vk_f11 = 122;
+  int const vk_f12 = 123;
+  int const vk_numpad0 = 96;
+  int const vk_numpad1 = 97;
+  int const vk_numpad2 = 98;
+  int const vk_numpad3 = 99;
+  int const vk_numpad4 = 100;
+  int const vk_numpad5 = 101;
+  int const vk_numpad6 = 102;
+  int const vk_numpad7 = 103;
+  int const vk_numpad8 = 104;
+  int const vk_numpad9 = 105;
+  int const vk_divide = 111;
+  int const vk_multiply = 106;
+  int const vk_subtract = 109;
+  int const vk_add = 107;
+  int const vk_decimal = 110;
+  int const vk_lshift = 160;
+  int const vk_lcontrol = 162;
+  int const vk_lalt = 164;
+  int const vk_rshift = 161;
+  int const vk_rcontrol = 163;
+  int const vk_ralt = 165;
+  int const mb_any = -1;
+  int const mb_none = 0;
+  int const mb_left = 1;
+  int const mb_right = 2;
+  int const mb_middle = 3;
+  int const c_aqua = 16776960;
+  int const c_black = 0;
+  int const c_blue = 16711680;
+  int const c_dkgray = 4210752;
+  int const c_fuchsia = 16711935;
+  int const c_gray = 8421504;
+  int const c_green = 32768;
+  int const c_lime = 65280;
+  int const c_ltgray = 12632256;
+  int const c_maroon = 128;
+  int const c_navy = 8388608;
+  int const c_olive = 32896;
+  int const c_purple = 8388736;
+  int const c_red = 255;
+  int const c_silver = 12632256;
+  int const c_teal = 8421376;
+  int const c_white = 16777215;
+  int const c_yellow = 65535;
+  int const c_orange = 4235519;
+  int const fa_left = 0;
+  int const fa_center = 1;
+  int const fa_right = 2;
+  int const fa_top = 0;
+  int const fa_middle = 1;
+  int const fa_bottom = 2;
+  int const pr_pointlist = 1;
+  int const pr_linelist = 2;
+  int const pr_linestrip = 3;
+  int const pr_trianglelist = 4;
+  int const pr_trianglestrip = 5;
+  int const pr_trianglefan = 6;
+  int const bm_normal = 0;
+  int const bm_add = 1;
+  int const bm_max = 2;
+  int const bm_subtract = 3;
+  int const bm_zero = 1;
+  int const bm_one = 2;
+  int const bm_src_color = 3;
+  int const bm_inv_src_color = 4;
+  int const bm_src_alpha = 5;
+  int const bm_inv_src_alpha = 6;
+  int const bm_dest_alpha = 7;
+  int const bm_inv_dest_alpha = 8;
+  int const bm_dest_color = 9;
+  int const bm_inv_dest_color = 10;
+  int const bm_src_alpha_sat = 11;
+  int const cr_default = 0;
+  int const cr_none = -1;
+  int const cr_arrrow = -2;
+  int const cr_cross = -3;
+  int const cr_beam = -4;
+  int const cr_size_nesw = -6;
+  int const cr_size_ns = -7;
+  int const cr_size_nwse = -8;
+  int const cr_size_we = -9;
+  int const cr_uparrow = -10;
+  int const cr_hourglass = -11;
+  int const cr_drag = -12;
+  int const cr_nodrop = -13;
+  int const cr_hsplit = -14;
+  int const cr_vsplit = -15;
+  int const cr_multidrag = -16;
+  int const cr_sqlwait = -17;
+  int const cr_no = -18;
+  int const cr_appstart = -19;
+  int const cr_help = -20;
+  int const cr_handpoint = -21;
+  int const cr_size_all = -22;
+  int const se_none = 0;
+  int const se_chorus = 1;
+  int const se_echo = 2;
+  int const se_flanger = 4;
+  int const se_gargle = 8;
+  int const se_reverb = 16;
+  int const se_compressor = 32;
+  int const se_equalizer = 64;
+  int const fa_readonly = 1;
+  int const fa_hidden = 2;
+  int const fa_sysfile = 4;
+  int const fa_volumeid = 8;
+  int const fa_directory = 16;
+  int const fa_archive = 32;
+  int const ef_explosion = 0;
+  int const ef_ring = 1;
+  int const ef_ellipse = 2;
+  int const ef_firework = 3;
+  int const ef_smoke = 4;
+  int const ef_smokeup = 5;
+  int const ef_star = 6;
+  int const ef_spark = 7;
+  int const ef_flare = 8;
+  int const ef_cloud = 9;
+  int const ef_rain = 10;
+  int const ef_snow = 11;
+  int const pt_shape_pixel = 0;
+  int const pt_shape_disk = 1;
+  int const pt_shape_square = 2;
+  int const pt_shape_line = 3;
+  int const pt_shape_star = 4;
+  int const pt_shape_circle = 5;
+  int const pt_shape_ring = 6;
+  int const pt_shape_sphere = 7;
+  int const pt_shape_flare = 8;
+  int const pt_shape_spark = 9;
+  int const pt_shape_explosion = 10;
+  int const pt_shape_cloud = 11;
+  int const pt_shape_smoke = 12;
+  int const pt_shape_snow = 13;
+  int const ps_distr_linear = 0;
+  int const ps_distr_gaussian = 1;
+  int const ps_distr_invgaussian = 2;
+  int const ps_shape_rectangle = 0;
+  int const ps_shape_ellipse = 1;
+  int const ps_shape_diamond = 2;
+  int const ps_shape_line = 3;
+  int const ps_force_constant = 0;
+  int const ps_force_linear = 1;
+  int const ps_force_quadratic = 2;
+  int const ps_deflect_vertical = 0;
+  int const ps_deflect_horizontal = 1;
+  int const ps_change_all = 0;
+  int const ps_change_shape = 1;
+  int const ps_change_motion = 2;
+  int const ty_real = 0;
+  int const ty_string = 1;
+  int const dll_cdecl = 0;
+  int const dll_stdcall = 1;
 
 }

@@ -21,7 +21,7 @@
   GmapiResources.cpp
   - Wrapped GM functions; Parser-generated code
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #include "GmapiResources.h"
@@ -32,7 +32,7 @@ using namespace gm::core;
 
 namespace gm {
 
-  CGMVariable script_execute( const int ind, const CGMVariable* aArguments, int aArgCount ) {
+  CGMVariable script_execute( int ind, const CGMVariable* aArguments, int aArgCount ) {
     GM_VAR_RESULT;
     GM_PRESERVE_INSTANCE_DATA;
 
@@ -44,8 +44,8 @@ namespace gm {
     for ( int i = 0; i < aArgCount; i++ )
       argument[i + 1] = aArguments[i];
 
-    GMCallFunction( CGMAPI::GMAPIGMFunctionTable( id_script_execute ), argument, aArgCount + 1,
-                    &result );
+    RunnerCallFunction( CGMAPI::GMAPIGMFunctionTable( id_script_execute ), argument, aArgCount + 1,
+                        &result );
 
     delete [] argument;
     GM_RESTORE_INSTANCE_DATA;
@@ -64,8 +64,8 @@ namespace gm {
     for ( int i = 0; i < aArgCount; i++ )
       argument[i + 1] = aArguments[i];
 
-    GMCallFunction( CGMAPI::GMAPIGMFunctionTable( id_execute_string ), argument, aArgCount + 1,
-                    &result );
+    RunnerCallFunction( CGMAPI::GMAPIGMFunctionTable( id_execute_string ), argument, aArgCount + 1,
+                        &result );
 
     delete [] argument;
     GM_RESTORE_INSTANCE_DATA;
@@ -84,16 +84,16 @@ namespace gm {
     for ( int i = 0; i < aArgCount; i++ )
       argument[i + 1] = aArguments[i];
 
-    GMCallFunction( CGMAPI::GMAPIGMFunctionTable( id_execute_file ), argument, aArgCount + 1,
-                    &result );
+    RunnerCallFunction( CGMAPI::GMAPIGMFunctionTable( id_execute_file ), argument, aArgCount + 1,
+                        &result );
 
     delete [] argument;
     GM_RESTORE_INSTANCE_DATA;
     GM_RETURN_VAR;
   }
 
-  int external_define( const CGMVariable& dll, const CGMVariable& name, const int calltype,
-                       const int restype, const int argnumb, const int* aArgTypes ) {
+  int external_define( const CGMVariable& dll, const CGMVariable& name, int calltype,
+                       int restype, int argnumb, const int* aArgTypes ) {
     GM_NORMAL_RESULT;
     GM_PRESERVE_INSTANCE_DATA;
 
@@ -109,15 +109,15 @@ namespace gm {
     for ( int i = 0; i < argnumb; i++ )
       argument[i + 5] = aArgTypes[i];
 
-    GMCallFunction( CGMAPI::GMAPIGMFunctionTable( id_external_call ), argument, argnumb + 5,
-                    &result );
+    RunnerCallFunction( CGMAPI::GMAPIGMFunctionTable( id_external_define ), argument, argnumb + 5,
+                        &result );
 
     delete [] argument;
     GM_RESTORE_INSTANCE_DATA;
     GM_RETURN_INT;
   }
 
-  CGMVariable external_call( const int id, const CGMVariable* aArguments, int aArgCount ) {
+  CGMVariable external_call( int id, const CGMVariable* aArguments, int aArgCount ) {
     GM_VAR_RESULT;
     GM_PRESERVE_INSTANCE_DATA;
 
@@ -129,8 +129,8 @@ namespace gm {
     for ( int i = 0; i < aArgCount; i++ )
       argument[i + 1] = aArguments[i];
 
-    GMCallFunction( CGMAPI::GMAPIGMFunctionTable( id_external_call ), argument, aArgCount + 1,
-                    &result );
+    RunnerCallFunction( CGMAPI::GMAPIGMFunctionTable( id_external_call ), argument, aArgCount + 1,
+                        &result );
 
     delete [] argument;
     GM_RESTORE_INSTANCE_DATA;
@@ -144,36 +144,36 @@ namespace gm {
     GM_NORMAL_CALL( id_external_free );
   }
 
-  void sprite_set_offset( const int ind, const int xoff, const int yoff ) {
+  void sprite_set_offset( int ind, int xoff, int yoff ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, xoff, yoff };
 
     GM_NORMAL_CALL( id_sprite_set_offset );
   }
 
-  void sprite_set_bbox_mode( const int ind, const int mode ) {
+  void sprite_set_bbox_mode( int ind, int mode ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, mode };
 
     GM_NORMAL_CALL( id_sprite_set_bbox_mode );
   }
 
-  void sprite_set_bbox( const int ind, const int left, const int top, const int right,
-                        const int bottom ) {
+  void sprite_set_bbox( int ind, int left, int top, int right,
+                        int bottom ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, left, top, right, bottom };
 
     GM_NORMAL_CALL( id_sprite_set_bbox );
   }
 
-  void sprite_set_precise( const int ind, const bool mode ) {
+  void sprite_set_precise( int ind, bool mode ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, mode };
 
     GM_NORMAL_CALL( id_sprite_set_precise );
   }
 
-  int sprite_duplicate( const int ind ) {
+  int sprite_duplicate( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -181,23 +181,23 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void sprite_assign( const int ind, const int spr ) {
+  void sprite_assign( int ind, int spr ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, spr };
 
     GM_NORMAL_CALL( id_sprite_assign );
   }
 
-  void sprite_merge( const int ind1, const int ind2 ) {
+  void sprite_merge( int ind1, int ind2 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind1, ind2 };
 
     GM_NORMAL_CALL( id_sprite_merge );
   }
 
-  int sprite_add( const CGMVariable& fname, const int imgnumb, const bool precise,
-                  const bool transparent, const bool smooth, const bool preload,
-                  const int xorig, const int yorig ) {
+  int sprite_add( const CGMVariable& fname, int imgnumb, bool precise,
+                  bool transparent, bool smooth, bool preload,
+                  int xorig, int yorig ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fname, imgnumb, precise, transparent, smooth, preload, xorig, yorig };
 
@@ -205,8 +205,25 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int sprite_add_alpha( const CGMVariable& fname, const int imgnumb, const bool precise,
-                        const bool preload, const int xorig, const int yorig ) {
+  int sprite_add( const CGMVariable& fname, int imgnumb, bool removeback,
+                  bool smooth, int xorig, int yorig ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ fname, imgnumb, removeback, smooth, xorig, yorig };
+
+    GM_NORMAL_CALL( id_sprite_add );
+    GM_RETURN_INT;
+  }
+
+  int sprite_add_sprite( const CGMVariable& fname ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ fname };
+
+    GM_NORMAL_CALL( id_sprite_add_sprite );
+    GM_RETURN_INT;
+  }
+
+  int sprite_add_alpha( const CGMVariable& fname, int imgnumb, bool precise,
+                        bool preload, int xorig, int yorig ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fname, imgnumb, precise, preload, xorig, yorig };
 
@@ -214,27 +231,43 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void sprite_replace( const int ind, const CGMVariable& fname, const int imgnumb, 
-                       const bool precise, const bool transparent, const bool smooth,
-                       const bool preload, const int xorig, const int yorig ) {
+  void sprite_replace( int ind, const CGMVariable& fname, int imgnumb, 
+                       bool precise, bool transparent, bool smooth,
+                       bool preload, int xorig, int yorig ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, fname, imgnumb, precise, transparent, smooth, preload, xorig, yorig };
 
     GM_NORMAL_CALL( id_sprite_replace );
   }
 
-  void sprite_replace_alpha( const int ind, const CGMVariable& fname, const int imgnumb,
-                             const bool precise, const bool preload, const int xorig,
-                             const int yorig ) {
+  void sprite_replace( int ind, const CGMVariable& fname, int imgnumb,
+                       bool removeback, bool smooth, int xorig,
+                       int yorig ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ ind, fname, imgnumb, removeback, smooth, xorig, yorig };
+
+    GM_NORMAL_CALL( id_sprite_replace );
+  }
+
+  void sprite_replace_sprite( int ind, const CGMVariable& fname ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ ind, fname };
+
+    GM_NORMAL_CALL( id_sprite_replace_sprite );
+  }
+
+  void sprite_replace_alpha( int ind, const CGMVariable& fname, int imgnumb,
+                             bool precise, bool preload, int xorig,
+                             int yorig ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, fname, imgnumb, precise, preload, xorig, yorig };
 
     GM_NORMAL_CALL( id_sprite_replace_alpha );
   }
 
-  int sprite_create_from_screen( const int x, const int y, const int w, const int h,
-                                 const bool precise, const bool transparent, const bool smooth,
-                                 const bool preload, const int xorig, const int yorig ) {
+  int sprite_create_from_screen( int x, int y, int w, int h,
+                                 bool precise, bool transparent, bool smooth,
+                                 bool preload, int xorig, int yorig ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, w, h, precise, transparent, smooth, preload, xorig, yorig };
 
@@ -242,17 +275,35 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void sprite_add_from_screen( const int ind, const int x, const int y, const int w, const int h ) {
+  int sprite_create_from_screen( int x, int y, int w, int h,
+                                 bool removeback, bool smooth, int xorig,
+                                 int yorig ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ x, y, w, h, removeback, smooth, xorig, yorig };
+
+    GM_NORMAL_CALL( id_sprite_create_from_screen );
+    GM_RETURN_INT;
+  }
+
+  void sprite_add_from_screen( int ind, int x, int y, int w, int h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, w, h };
 
     GM_NORMAL_CALL( id_sprite_add_from_screen );
   }
 
-  int sprite_create_from_surface( const int id, const int x, const int y, const int w,
-                                  const int h, const bool precise, const bool transparent,
-                                  const bool smooth, const bool preload, const int xorig,
-                                  const int yorig ) {
+  void sprite_add_from_screen( int ind, int x, int y, int w,
+                               int h, bool removeback, bool smooth ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ ind, x, y, w, h, removeback, smooth };
+
+    GM_NORMAL_CALL( id_sprite_add_from_screen );
+  }
+
+  int sprite_create_from_surface( int id, int x, int y, int w,
+                                  int h, bool precise, bool transparent,
+                                  bool smooth, bool preload, int xorig,
+                                  int yorig ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, x, y, w, h, precise, transparent, smooth, preload, xorig, yorig };
 
@@ -260,29 +311,56 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void sprite_add_from_surface( const int ind, const int id, const int x, const int y,
-                                const int w, const int h ) {
+  int sprite_create_from_surface( int id, int x, int y, int w,
+                                  int h, bool removeback, bool smooth,
+                                  int xorig, int yorig ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ id, x, y, w, h, removeback, smooth, xorig, yorig };
+
+    GM_NORMAL_CALL( id_sprite_create_from_surface );
+    GM_RETURN_INT;
+  }
+
+  void sprite_add_from_surface( int ind, int id, int x, int y,
+                                int w, int h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, id, x, y, w, h };
 
     GM_NORMAL_CALL( id_sprite_add_from_surface );
   }
 
-  void sprite_delete( const int ind ) {
+  void sprite_add_from_surface( int ind, int id, int x, int y,
+                                int w, int h, bool removeback, bool smooth ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ ind, id, x, y, w, h, removeback, smooth };
+
+    GM_NORMAL_CALL( id_sprite_add_from_surface );
+  }
+
+  void sprite_delete( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_sprite_delete );
   }
 
-  void sprite_set_alpha_from_sprite( const int ind, const int spr ) {
+  void sprite_set_alpha_from_sprite( int ind, int spr ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, spr };
 
     GM_NORMAL_CALL( id_sprite_set_alpha_from_sprite );
   }
 
-  int sound_add( const CGMVariable& fname, const int kind, const bool preload ) {
+  void sprite_collision_mask( int ind,  bool sepmasks, int bboxmode,
+                              int bbleft, int bbright, int bbtop,
+                              int bbbottom, int kind, int tolerance ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ ind, sepmasks, bboxmode, bbleft, bbright, bbtop, bbbottom, kind, tolerance };
+
+    GM_NORMAL_CALL( id_sprite_collision_mask );
+  }
+
+  int sound_add( const CGMVariable& fname, int kind, bool preload ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fname, kind, preload };
 
@@ -290,22 +368,22 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void sound_replace( const int index, const CGMVariable& fname, const int kind,
-                      const bool preload ) {
+  void sound_replace( int index, const CGMVariable& fname, int kind,
+                      bool preload ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ index, fname, kind, preload };
 
     GM_NORMAL_CALL( id_sound_replace );
   }
 
-  void sound_delete( const int index ) {
+  void sound_delete( int index ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ index };
 
     GM_NORMAL_CALL( id_sound_delete );
   }
 
-  int background_duplicate( const int ind ) {
+  int background_duplicate( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -313,15 +391,15 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void background_assign( const int ind, const int back ) {
+  void background_assign( int ind, int back ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, back };
 
     GM_NORMAL_CALL( id_background_assign );
   }
 
-  int background_add( const CGMVariable& fname, const bool transparent, const bool smooth,
-                      const bool preload ) {
+  int background_add( const CGMVariable& fname, bool transparent, bool smooth,
+                      bool preload ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fname, transparent, smooth, preload };
 
@@ -329,7 +407,23 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int background_add_alpha( const CGMVariable& fname, const bool preload ) {
+  int background_add( const CGMVariable& fname, bool removeback, bool smooth ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ fname, removeback, smooth };
+
+    GM_NORMAL_CALL( id_background_add );
+    GM_RETURN_INT;
+  }
+
+  int background_add_background( const CGMVariable& fname ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ fname };
+
+    GM_NORMAL_CALL( id_background_add_background );
+    GM_RETURN_INT;
+  }
+
+  int background_add_alpha( const CGMVariable& fname, bool preload ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fname, preload };
 
@@ -337,22 +431,37 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void background_replace( const int ind, const CGMVariable& fname, const bool transparent,
-                           const bool smooth, const bool preload ) {
+  void background_replace( int ind, const CGMVariable& fname, bool transparent,
+                           bool smooth, bool preload ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, fname, transparent, smooth, preload };
 
     GM_NORMAL_CALL( id_background_replace );
   }
 
-  void background_replace_alpha( const int ind, const CGMVariable& fname, const bool preload ) {
+  void background_replace( int ind, const CGMVariable& fname, bool removeback,
+                           bool smooth ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ ind, fname, removeback, smooth };
+
+    GM_NORMAL_CALL( id_background_replace );
+  }
+
+  void background_replace_background( int ind, const CGMVariable& fname ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ ind, fname };
+
+    GM_NORMAL_CALL( id_background_replace_background );
+  }
+
+  void background_replace_alpha( int ind, const CGMVariable& fname, bool preload ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, fname, preload };
 
     GM_NORMAL_CALL( id_background_replace_alpha );
   }
 
-  int background_create_color( const int w, const int h, const int col, const bool preload ) {
+  int background_create_color( int w, int h, int col, bool preload ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ w, h, col, preload };
 
@@ -360,8 +469,16 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int background_create_gradient( const int w, const int h, const int col1, const int col2,
-                                  const int kind, const bool preload ) {
+  int background_create_color( int w, int h, int col ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ w, h, col };
+
+    GM_NORMAL_CALL( id_background_create_color );
+    GM_RETURN_INT;
+  }
+
+  int background_create_gradient( int w, int h, int col1, int col2,
+                                  int kind, bool preload ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ w, h, col1, col2, kind, preload };
 
@@ -369,9 +486,18 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int background_create_from_screen( const int x, const int y, const int w, const int h,
-                                     const bool transparent, const bool smooth, 
-                                     const bool preload ) {
+  int background_create_gradient( int w, int h, int col1, int col2,
+                                  int kind ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ w, h, col1, col2, kind };
+
+    GM_NORMAL_CALL( id_background_create_gradient );
+    GM_RETURN_INT;
+  }
+
+  int background_create_from_screen( int x, int y, int w, int h,
+                                     bool transparent, bool smooth, 
+                                     bool preload ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, w, h, transparent, smooth, preload };
 
@@ -379,9 +505,18 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int background_create_from_surface( const int id, const int x, const int y, const int w,
-                                      const int h, const bool transparent, const bool smooth,
-                                      const bool preload ) {
+  int background_create_from_screen( int x, int y, int w, int h,
+                                     bool removeback, bool smooth ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ x, y, w, h, removeback, smooth };
+
+    GM_NORMAL_CALL( id_background_create_from_screen );
+    GM_RETURN_INT;
+  }
+
+  int background_create_from_surface( int id, int x, int y, int w,
+                                      int h, bool transparent, bool smooth,
+                                      bool preload ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ id, x, y, w, h, transparent, smooth, preload };
 
@@ -389,22 +524,31 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void background_delete( const int ind ) {
+  int background_create_from_surface( int id, int x, int y, int w,
+                                      int h, bool removeback, bool smooth ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ id, x, y, w, h, removeback, smooth };
+
+    GM_NORMAL_CALL( id_background_create_from_surface );
+    GM_RETURN_INT;
+  }
+
+  void background_delete( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_background_delete );
   }
 
-  void background_set_alpha_from_background( const int ind, const int back ) {
+  void background_set_alpha_from_background( int ind, int back ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, back };
 
     GM_NORMAL_CALL( id_background_set_alpha_from_background );
   }
 
-  int font_add( const CGMVariable& name, const int size, const bool bold, const bool italic,
-                const int first, const int last ) {
+  int font_add( const CGMVariable& name, int size, bool bold, bool italic,
+                int first, int last ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ name, size, bold, italic, first, last };
 
@@ -412,7 +556,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int font_add_sprite( const int spr, const int first, const bool prop, const int sep ) {
+  int font_add_sprite( int spr, int first, bool prop, int sep ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ spr, first, prop, sep };
 
@@ -420,44 +564,44 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void font_replace( const int ind, const CGMVariable& name, const int size, const bool bold,
-                     const bool italic, const int first, const int last ) {
+  void font_replace( int ind, const CGMVariable& name, int size, bool bold,
+                     bool italic, int first, int last ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, name, size, bold, italic, first, last };
 
     GM_NORMAL_CALL( id_font_replace );
   }
 
-  void font_replace_sprite( const int ind, const int spr, const int first, const bool prop,
-                            const int sep ) {
+  void font_replace_sprite( int ind, int spr, int first, bool prop,
+                            int sep ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, spr, first, prop, sep };
 
     GM_NORMAL_CALL( id_font_replace_sprite );
   }
 
-  void font_delete( const int ind ) {
+  void font_delete( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_font_delete );
   }
 
-  void path_set_kind( const int ind, const int val ) {
+  void path_set_kind( int ind, int val ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, val };
 
     GM_NORMAL_CALL( id_path_set_kind );
   }
 
-  void path_set_closed( const int ind, const bool closed ) {
+  void path_set_closed( int ind, bool closed ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, closed };
 
     GM_NORMAL_CALL( id_path_set_closed );
   }
 
-  void path_set_precision( const int ind, const int prec ) {
+  void path_set_precision( int ind, int prec ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, prec };
 
@@ -471,14 +615,14 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void path_delete( const int ind ) {
+  void path_delete( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_path_delete );
   }
 
-  int path_duplicate( const int ind ) {
+  int path_duplicate( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -486,93 +630,93 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void path_assign( const int ind, const int path ) {
+  void path_assign( int ind, int path ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, path };
 
     GM_NORMAL_CALL( id_path_assign );
   }
 
-  void path_append( const int ind, const int path ) {
+  void path_append( int ind, int path ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, path };
 
     GM_NORMAL_CALL( id_path_append );
   }
 
-  void path_add_point( const int ind, const double x, const double y, const double speed ) {
+  void path_add_point( int ind, double x, double y, double speed ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, speed };
 
     GM_NORMAL_CALL( id_path_add_point );
   }
 
-  void path_insert_point( const int ind, const int n, const double x, const double y,
-                          const double speed ) {
+  void path_insert_point( int ind, int n, double x, double y,
+                          double speed ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, n, x, y, speed };
 
     GM_NORMAL_CALL( id_path_insert_point );
   }
 
-  void path_change_point( const int ind, const int n, const double x, const double y,
-                          const double speed ) {
+  void path_change_point( int ind, int n, double x, double y,
+                          double speed ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, n, x, y, speed };
 
     GM_NORMAL_CALL( id_path_change_point );
   }
 
-  void path_delete_point( const int ind, const int n ) {
+  void path_delete_point( int ind, int n ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, n };
 
     GM_NORMAL_CALL( id_path_delete_point );
   }
 
-  void path_clear_points( const int ind ) {
+  void path_clear_points( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_path_clear_points );
   }
 
-  void path_reverse( const int ind ) {
+  void path_reverse( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_path_reverse );
   }
 
-  void path_mirror( const int ind ) {
+  void path_mirror( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_path_mirror );
   }
 
-  void path_flip( const int ind ) {
+  void path_flip( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_path_flip );
   }
 
-  void path_rotate( const int ind, const double angle ) {
+  void path_rotate( int ind, double angle ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, angle };
 
     GM_NORMAL_CALL( id_path_rotate );
   }
 
-  void path_scale( const int ind, const double xscale, const double yscale ) {
+  void path_scale( int ind, double xscale, double yscale ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, xscale, yscale };
 
     GM_NORMAL_CALL( id_path_scale );
   }
 
-  void path_shift( const int ind, const double xshift, const double yshift ) {
+  void path_shift( int ind, double xshift, double yshift ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, xshift, yshift };
 
@@ -586,70 +730,77 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void timeline_delete( const int ind ) {
+  void timeline_delete( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_timeline_delete );
   }
 
-  void timeline_moment_add( const int ind, const int step, const CGMVariable& codestr ) {
+  void timeline_moment_add( int ind, int step, const CGMVariable& codestr ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, step, codestr };
 
     GM_NORMAL_CALL( id_timeline_moment_add );
   }
 
-  void timeline_moment_clear( const int ind, const int step ) {
+  void timeline_moment_clear( int ind, int step ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, step };
 
     GM_NORMAL_CALL( id_timeline_moment_clear );
   }
 
-  void object_set_sprite( const int ind, const int spr ) {
+  void timeline_clear( int ind ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ ind };
+
+    GM_NORMAL_CALL( id_timeline_clear );
+  }
+
+  void object_set_sprite( int ind, int spr ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, spr };
 
     GM_NORMAL_CALL( id_object_set_sprite );
   }
 
-  void object_set_solid( const int ind, const bool solid ) {
+  void object_set_solid( int ind, bool solid ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, solid };
 
     GM_NORMAL_CALL( id_object_set_solid );
   }
 
-  void object_set_visible( const int ind, const bool vis ) {
+  void object_set_visible( int ind, bool vis ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, vis };
 
     GM_NORMAL_CALL( id_object_set_visible );
   }
 
-  void object_set_depth( const int ind, const int depth ) {
+  void object_set_depth( int ind, int depth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, depth };
 
     GM_NORMAL_CALL( id_object_set_depth );
   }
 
-  void object_set_persistent( const int ind, const bool pers ) {
+  void object_set_persistent( int ind, bool pers ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, pers };
 
     GM_NORMAL_CALL( id_object_set_persistent );
   }
 
-  void object_set_mask( const int ind, const int spr ) {
+  void object_set_mask( int ind, int spr ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, spr };
 
     GM_NORMAL_CALL( id_object_set_mask );
   }
 
-  void object_set_parent( const int ind, const int obj ) {
+  void object_set_parent( int ind, int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, obj };
 
@@ -663,14 +814,14 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void object_delete( const int ind ) {
+  void object_delete( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_object_delete );
   }
 
-  void object_event_add( const int ind, const int evtype, const int evnumb,
+  void object_event_add( int ind, int evtype, int evnumb,
                          const CGMVariable& codestr ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, evtype, evnumb, codestr };
@@ -678,70 +829,70 @@ namespace gm {
     GM_NORMAL_CALL( id_object_event_add );
   }
 
-  void object_event_clear( const int ind, const int evtype, const int evnumb ) {
+  void object_event_clear( int ind, int evtype, int evnumb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, evtype, evnumb };
 
     GM_NORMAL_CALL( id_object_event_clear );
   }
 
-  void room_set_width( const int ind, const int w ) {
+  void room_set_width( int ind, int w ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, w };
 
     GM_NORMAL_CALL( id_room_set_width );
   }
 
-  void room_set_height( const int ind, const int h ) {
+  void room_set_height( int ind, int h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, h };
 
     GM_NORMAL_CALL( id_room_set_height );
   }
 
-  void room_set_caption( const int ind, const CGMVariable& str ) {
+  void room_set_caption( int ind, const CGMVariable& str ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, str };
 
     GM_NORMAL_CALL( id_room_set_caption );
   }
 
-  void room_set_persistent( const int ind, const bool val ) {
+  void room_set_persistent( int ind, bool val ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, val };
 
     GM_NORMAL_CALL( id_room_set_persistent );
   }
 
-  void room_set_code( const int ind, const CGMVariable& str ) {
+  void room_set_code( int ind, const CGMVariable& str ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, str };
 
     GM_NORMAL_CALL( id_room_set_code );
   }
 
-  void room_set_background_color( const int ind, const int col, const bool show ) {
+  void room_set_background_color( int ind, int col, bool show ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, col, show };
 
     GM_NORMAL_CALL( id_room_set_background_color );
   }
 
-  void room_set_background( const int ind, const int bind, const bool vis, const bool fore,
-                            const int back, const int x, const int y, const bool htiled,
-                            const bool vtiled, const double hspeed, const double vspeed,
-                            const double alpha ) {
+  void room_set_background( int ind, int bind, bool vis, bool fore,
+                            int back, int x, int y, bool htiled,
+                            bool vtiled, double hspeed, double vspeed,
+                            double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, bind, vis, fore, back, x, y, htiled, vtiled, hspeed, vspeed, alpha };
 
     GM_NORMAL_CALL( id_room_set_background );
   }
 
-  void room_set_view( const int ind, const int vind, const bool vis, const int xview,
-                      const int yview, const int wview, const int hview, const int xport,
-                      const int yport, const int wport, const int hport, const int hborder,
-                      const int vborder, const double hspeed, const double vspeed,
-                      const int obj ) {
+  void room_set_view( int ind, int vind, bool vis, int xview,
+                      int yview, int wview, int hview, int xport,
+                      int yport, int wport, int hport, int hborder,
+                      int vborder, double hspeed, double vspeed,
+                      int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, vind, vis, xview, yview, wview, hview, xport, yport, wport, hport,
                 hborder, vborder, hspeed, vspeed, obj };
@@ -749,7 +900,7 @@ namespace gm {
     GM_NORMAL_CALL( id_room_set_view );
   }
 
-  void room_set_view_enabled( const int ind, const int val ) {
+  void room_set_view_enabled( int ind, int val ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, val };
 
@@ -763,21 +914,21 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void room_duplicate( const int ind ) {
+  void room_duplicate( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_room_duplicate );
   }
 
-  void room_assign( const int ind, const int room ) {
+  void room_assign( int ind, int room ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, room };
 
     GM_NORMAL_CALL( id_room_assign );
   }
 
-  int room_instance_add( const int ind, const double x, const double y, const int obj ) {
+  int room_instance_add( int ind, double x, double y, int obj ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, x, y, obj };
 
@@ -785,16 +936,16 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void room_instance_clear( const int ind ) {
+  void room_instance_clear( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_room_instance_clear );
   }
 
-  int room_tile_add( const int ind, const int back, const int left, const int top,
-                     const int width, const int height, const double x, const double y,
-                     const int depth ) {
+  int room_tile_add( int ind, int back, int left, int top,
+                     int width, int height, double x, double y,
+                     int depth ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, back, left, top, width, height, x, y, depth };
 
@@ -802,10 +953,10 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int room_tile_add_ext( const int ind, const int back, const int left, const int top,
-                         const int width, const int height, const double x, const double y,
-                         const int depth, const double xscale, const double yscale,
-                         const double alpha ) {
+  int room_tile_add_ext( int ind, int back, int left, int top,
+                         int width, int height, double x, double y,
+                         int depth, double xscale, double yscale,
+                         double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, back, left, top, width, height, x, y, depth, xscale, yscale, alpha };
 
@@ -813,14 +964,14 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  void room_tile_clear( const int ind ) {
+  void room_tile_clear( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
     GM_NORMAL_CALL( id_room_tile_clear );
   }
 
-  bool sprite_exists( const int ind ) {
+  bool sprite_exists( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -828,7 +979,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  CGMVariable sprite_get_name( const int ind ) {
+  CGMVariable sprite_get_name( int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ ind };
 
@@ -836,7 +987,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  int sprite_get_number( const int ind ) {
+  int sprite_get_number( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -844,7 +995,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int sprite_get_width( const int ind ) {
+  int sprite_get_width( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -852,7 +1003,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int sprite_get_height( const int ind ) {
+  int sprite_get_height( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -860,7 +1011,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  bool sprite_get_transparent( const int ind ) {
+  bool sprite_get_transparent( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -868,7 +1019,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool sprite_get_smooth( const int ind ) {
+  bool sprite_get_smooth( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -876,7 +1027,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool sprite_get_preload( const int ind ) {
+  bool sprite_get_preload( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -884,7 +1035,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  int sprite_get_xoffset( const int ind ) {
+  int sprite_get_xoffset( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -892,7 +1043,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int sprite_get_yoffset( const int ind ) {
+  int sprite_get_yoffset( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -900,7 +1051,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int sprite_get_bbox_left( const int ind ) {
+  int sprite_get_bbox_left( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -908,7 +1059,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int sprite_get_bbox_right( const int ind ) {
+  int sprite_get_bbox_right( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -916,7 +1067,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int sprite_get_bbox_top( const int ind ) {
+  int sprite_get_bbox_top( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -924,7 +1075,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int sprite_get_bbox_bottom( const int ind ) {
+  int sprite_get_bbox_bottom( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -932,7 +1083,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int sprite_get_bbox_mode( const int ind ) {
+  int sprite_get_bbox_mode( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -940,7 +1091,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  bool sprite_get_precise( const int ind ) {
+  bool sprite_get_precise( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -948,14 +1099,21 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void sprite_save( const int ind, const int subimg, const CGMVariable& fname ) {
+  void sprite_save( int ind, int subimg, const CGMVariable& fname ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, subimg, fname };
 
     GM_NORMAL_CALL( id_sprite_save );
   }
 
-  bool sound_exists( const int ind ) {
+  void sprite_save_strip( int ind, const CGMVariable& fname ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ ind, fname };
+
+    GM_NORMAL_CALL( id_sprite_save_strip );
+  }
+
+  bool sound_exists( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -963,7 +1121,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  CGMVariable sound_get_name( const int ind ) {
+  CGMVariable sound_get_name( int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ ind };
 
@@ -971,7 +1129,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  int sound_get_kind( const int ind ) {
+  int sound_get_kind( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -979,7 +1137,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  bool sound_get_preload( const int ind ) {
+  bool sound_get_preload( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -987,21 +1145,21 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void sound_discard( const int index ) {
+  void sound_discard( int index ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ index };
 
     GM_NORMAL_CALL( id_sound_discard );
   }
 
-  void sound_restore( const int index ) {
+  void sound_restore( int index ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ index };
 
     GM_NORMAL_CALL( id_sound_restore );
   }
 
-  bool background_exists( const int ind ) {
+  bool background_exists( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1009,7 +1167,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  CGMVariable background_get_name( const int ind ) {
+  CGMVariable background_get_name( int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ ind };
 
@@ -1017,7 +1175,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  int background_get_width( const int ind ) {
+  int background_get_width( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1025,7 +1183,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int background_get_height( const int ind ) {
+  int background_get_height( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1033,7 +1191,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  bool background_get_transparent( const int ind ) {
+  bool background_get_transparent( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1041,7 +1199,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool background_get_smooth( const int ind ) {
+  bool background_get_smooth( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1049,7 +1207,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool background_get_preload( const int ind ) {
+  bool background_get_preload( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1057,14 +1215,14 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  void background_save( const int ind, const CGMVariable& fname ) {
+  void background_save( int ind, const CGMVariable& fname ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, fname };
 
     GM_NORMAL_CALL( id_background_save );
   }
 
-  bool font_exists( const int ind ) {
+  bool font_exists( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1072,7 +1230,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  CGMVariable font_get_name( const int ind ) {
+  CGMVariable font_get_name( int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ ind };
 
@@ -1080,7 +1238,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  CGMVariable font_get_fontname( const int ind ) {
+  CGMVariable font_get_fontname( int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ ind };
 
@@ -1088,7 +1246,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  bool font_get_bold( const int ind ) {
+  bool font_get_bold( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1096,7 +1254,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool font_get_italic( const int ind ) {
+  bool font_get_italic( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1104,7 +1262,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  int font_get_first( const int ind ) {
+  int font_get_first( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1112,7 +1270,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int font_get_last( const int ind ) {
+  int font_get_last( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1120,7 +1278,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  bool path_exists( const int ind ) {
+  bool path_exists( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1128,7 +1286,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  CGMVariable path_get_name( const int ind ) {
+  CGMVariable path_get_name( int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ ind };
 
@@ -1136,7 +1294,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  int path_get_length( const int ind ) {
+  int path_get_length( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1144,7 +1302,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int path_get_kind( const int ind ) {
+  int path_get_kind( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1152,7 +1310,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  bool path_get_closed( const int ind ) {
+  bool path_get_closed( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1160,7 +1318,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool path_get_precision( const int ind ) {
+  bool path_get_precision( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1168,7 +1326,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  int path_get_number( const int ind ) {
+  int path_get_number( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1176,7 +1334,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  double path_get_point_x( const int ind, const int n ) {
+  double path_get_point_x( int ind, int n ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, n };
 
@@ -1184,7 +1342,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  double path_get_point_y( const int ind, const int n ) {
+  double path_get_point_y( int ind, int n ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, n };
 
@@ -1192,7 +1350,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  double path_get_point_speed( const int ind, const int n ) {
+  double path_get_point_speed( int ind, int n ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, n };
 
@@ -1200,7 +1358,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  double path_get_x( const int ind, const double pos ) {
+  double path_get_x( int ind, double pos ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, pos };
 
@@ -1208,7 +1366,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  double path_get_y( const int ind, const double pos ) {
+  double path_get_y( int ind, double pos ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, pos };
 
@@ -1216,7 +1374,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  double path_get_speed( const int ind, const double pos ) {
+  double path_get_speed( int ind, double pos ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind, pos };
 
@@ -1224,7 +1382,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  bool script_exists( const int ind ) {
+  bool script_exists( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1232,7 +1390,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  CGMVariable script_get_name( const int ind ) {
+  CGMVariable script_get_name( int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ ind };
 
@@ -1240,7 +1398,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  CGMVariable script_get_text( const int ind ) {
+  CGMVariable script_get_text( int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ ind };
 
@@ -1248,7 +1406,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  bool timeline_exists( const int ind ) {
+  bool timeline_exists( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1256,7 +1414,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  CGMVariable timeline_get_name( const int ind ) {
+  CGMVariable timeline_get_name( int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ ind };
 
@@ -1264,7 +1422,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  bool object_exists( const int ind ) {
+  bool object_exists( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1272,7 +1430,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  CGMVariable object_get_name( const int ind ) {
+  CGMVariable object_get_name( int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ ind };
 
@@ -1280,7 +1438,7 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  int object_get_sprite( const int ind ) {
+  int object_get_sprite( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1288,7 +1446,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  bool object_get_solid( const int ind ) {
+  bool object_get_solid( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1296,7 +1454,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool object_get_visible( const int ind ) {
+  bool object_get_visible( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1304,7 +1462,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  int object_get_depth( const int ind ) {
+  int object_get_depth( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1312,7 +1470,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  bool object_get_persistent( const int ind ) {
+  bool object_get_persistent( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1320,7 +1478,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  int object_get_mask( const int ind ) {
+  int object_get_mask( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1328,7 +1486,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int object_get_parent( const int ind ) {
+  int object_get_parent( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1336,7 +1494,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  bool object_is_ancestor( const int ind1, const int ind2 ) {
+  bool object_is_ancestor( int ind1, int ind2 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind1, ind2 };
 
@@ -1344,7 +1502,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  bool room_exists( const int ind ) {
+  bool room_exists( int ind ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ ind };
 
@@ -1352,7 +1510,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  CGMVariable room_get_name( const int ind ) {
+  CGMVariable room_get_name( int ind ) {
     GM_VAR_RESULT;
     GM_ARGS{ ind };
 

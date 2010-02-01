@@ -21,7 +21,7 @@
   GmapiPopups.cpp
   - Wrapped GM functions; Parser-generated code
 
-  Copyright 2009 (C) Snake (http://www.sgames.ovh.org)
+  Copyright 2009-2010 (C) Snake (http://www.sgames.ovh.org)
 ***************************************************************************/
 
 #include "GmapiPopups.h"
@@ -54,7 +54,7 @@ namespace gm {
     GM_RETURN_BOOL;
   }
 
-  double get_integer( const CGMVariable& str, const double def ) {
+  double get_integer( const CGMVariable& str, double def ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ str, def };
 
@@ -70,52 +70,52 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  void message_background( const int back ) {
+  void message_background( int back ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back };
 
     GM_NORMAL_CALL( id_message_background );
   }
 
-  void message_alpha( const double alpha ) {
+  void message_alpha( double alpha ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ alpha };
 
     GM_NORMAL_CALL( id_message_alpha );
   }
 
-  void message_button( const int spr ) {
+  void message_button( int spr ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ spr };
 
     GM_NORMAL_CALL( id_message_button );
   }
 
-  void message_text_font( const CGMVariable& name, const int size,
-                          const int color, const int style ) {
+  void message_text_font( const CGMVariable& name, int size,
+                          int color, int style ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ name, size, color, style };
 
     GM_NORMAL_CALL( id_message_text_font );
   }
 
-  void message_button_font( const CGMVariable& name, const int size,
-                            const int color, const int style ) {
+  void message_button_font( const CGMVariable& name, int size,
+                            int color, int style ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ name, size, color, style };
 
     GM_NORMAL_CALL( id_message_button_font );
   }
 
-  void message_input_font( const CGMVariable& name, const int size,
-                           const int color, const int style ) {
+  void message_input_font( const CGMVariable& name, int size,
+                           int color, int style ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ name, size, color, style };
 
     GM_NORMAL_CALL( id_message_input_font );
   }
 
-  void message_input_color( const int col ) {
+  void message_input_color( int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col };
 
@@ -126,35 +126,35 @@ namespace gm {
   ////////////
 
 
-  void message_mouse_color( const int col ) {
+  void message_mouse_color( int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col };
 
     GM_NORMAL_CALL( id_message_mouse_color );
   }
 
-  void message_caption( const bool show, const CGMVariable& str ) {
+  void message_caption( bool show, const CGMVariable& str ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ show, str };
 
     GM_NORMAL_CALL( id_message_caption );
   }
 
-  void message_position( const int x, const int y ) {
+  void message_position( int x, int y ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y };
 
     GM_NORMAL_CALL( id_message_position );
   }
 
-  void message_size( const int w, const int h ) {
+  void message_size( int w, int h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ w, h };
 
     GM_NORMAL_CALL( id_message_size );
   }
 
-  int show_menu( const CGMVariable& str, const int def ) {
+  int show_menu( const CGMVariable& str, int def ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ str, def };
 
@@ -162,7 +162,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int show_menu_pos( const int x, const int y, const CGMVariable& str, const int def ) {
+  int show_menu_pos( int x, int y, const CGMVariable& str, int def ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x, y, str, def };
 
@@ -170,7 +170,7 @@ namespace gm {
     GM_RETURN_INT;
   }
 
-  int get_color( const int defcol ) {
+  int get_color( int defcol ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ defcol };
 
@@ -210,56 +210,63 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  void show_error( const CGMVariable& str, const bool abort ) {
+  void show_error( const CGMVariable& str, bool abort ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ str, abort };
 
     GM_NORMAL_CALL( id_show_error );
   }
 
-  void splash_show_video( const CGMVariable& fname, const bool loop ) {
+  void splash_show_video( const CGMVariable& fname, bool loop ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fname, loop };
 
     GM_NORMAL_CALL( id_splash_show_video );
   }
 
-  void splash_show_text( const CGMVariable& fname, const int delay ) {
+  void splash_show_text( const CGMVariable& fname, int delay ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fname, delay };
 
     GM_NORMAL_CALL( id_splash_show_text );
   }
 
-  void splash_show_image( const CGMVariable& fname, const int delay ) {
+  void splash_show_image( const CGMVariable& fname, int delay ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ fname, delay };
 
     GM_NORMAL_CALL( id_splash_show_image );
   }
 
-  void splash_set_main( const bool main ) {
+  void splash_show_web( const CGMVariable& url, int delay ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ url, delay };
+
+    GM_NORMAL_CALL( id_splash_show_web );
+  }
+
+  void splash_set_main( bool main ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ main };
 
     GM_NORMAL_CALL( id_splash_set_main );
   }
 
-  void splash_set_scale( const double scale ) {
+  void splash_set_scale( double scale ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ scale };
 
     GM_NORMAL_CALL( id_splash_set_scale );
   }
 
-  void splash_set_cursor( const bool vis ) {
+  void splash_set_cursor( bool vis ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ vis };
 
     GM_NORMAL_CALL( id_splash_set_cursor );
   }
 
-  void splash_set_color( const int col ) {
+  void splash_set_color( int col ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ col };
 
@@ -273,60 +280,74 @@ namespace gm {
     GM_NORMAL_CALL( id_splash_set_caption );
   }
 
-  void splash_set_fullscreen( const bool full ) {
+  void splash_set_fullscreen( bool full ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ full };
 
     GM_NORMAL_CALL( id_splash_set_fullscreen );
   }
 
-  void splash_set_border( const bool border ) {
+  void splash_set_border( bool border ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ border };
 
     GM_NORMAL_CALL( id_splash_set_border );
   }
 
-  void splash_set_size( const int w, const int h ) {
+  void splash_set_size( int w, int h ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ w, h };
 
     GM_NORMAL_CALL( id_splash_set_size );
   }
 
-  void splash_set_adapt( const bool adapt ) {
+  void splash_set_adapt( bool adapt ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ adapt };
 
     GM_NORMAL_CALL( id_splash_set_adapt );
   }
 
-  void splash_set_top( const bool top ) {
+  void splash_set_top( bool top ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ top };
 
     GM_NORMAL_CALL( id_splash_set_top );
   }
 
-  void splash_set_interrupt( const bool interrupt ) {
+  void splash_set_interrupt( bool interrupt ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ interrupt };
 
     GM_NORMAL_CALL( id_splash_set_interrupt );
   }
 
-  void splash_set_stop_key( const bool stop ) {
+  void splash_set_stop_key( bool stop ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ stop };
 
     GM_NORMAL_CALL( id_splash_set_stop_key );
   }
 
-  void splash_set_stop_mouse( const bool stop ) {
+  void splash_set_stop_mouse( bool stop ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ stop };
 
     GM_NORMAL_CALL( id_splash_set_stop_mouse );
+  }
+
+  void splash_set_position( int x, int y ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ x, y };
+
+    GM_NORMAL_CALL( id_splash_set_position );
+  }
+
+  void splash_set_close_button( bool show ) {
+    GM_NORMAL_RESULT;
+    GM_ARGS{ show };
+
+    GM_NORMAL_CALL( id_splash_set_close_button );
   }
 
   void show_info() {
@@ -342,35 +363,35 @@ namespace gm {
     GM_NORMAL_CALL( id_load_info );
   }
 
-  void highscore_show( const double numb ) {
+  void highscore_show( double numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ numb };
 
     GM_NORMAL_CALL( id_highscore_show );
   }
 
-  void highscore_set_background( const int back ) {
+  void highscore_set_background( int back ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back };
 
     GM_NORMAL_CALL( id_highscore_set_background );
   }
 
-  void highscore_set_border( const bool show ) {
+  void highscore_set_border( bool show ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ show };
 
     GM_NORMAL_CALL( id_highscore_set_border );
   }
 
-  void highscore_set_font( const CGMVariable& name, const int size, const int style ) {
+  void highscore_set_font( const CGMVariable& name, int size, int style ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ name, size, style };
 
     GM_NORMAL_CALL( id_highscore_set_font );
   }
 
-  void highscore_set_colors( const int back, const int new_, const int other ) {
+  void highscore_set_colors( int back, int new_, int other ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ back, new_, other };
 
@@ -385,9 +406,9 @@ namespace gm {
     GM_NORMAL_CALL( id_highscore_set_strings );
   }
 
-  void highscore_show_ext( const double numb, const int back, const bool border,
-                           const int col1, const int col2,
-                           const CGMVariable& name, const int size ) {
+  void highscore_show_ext( double numb, int back, bool border,
+                           int col1, int col2,
+                           const CGMVariable& name, int size ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ numb, back, border, col1, col2, name, size };
 
@@ -400,7 +421,7 @@ namespace gm {
     GM_VOID_CALL( id_highscore_clear );
   }
 
-  void highscore_add( const CGMVariable& str, const double numb ) {
+  void highscore_add( const CGMVariable& str, double numb ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ str, numb };
 
@@ -413,7 +434,7 @@ namespace gm {
     GM_VOID_CALL( id_highscore_add_current );
   }
 
-  double highscore_value( const int place ) {
+  double highscore_value( int place ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ place };
 
@@ -421,7 +442,7 @@ namespace gm {
     GM_RETURN_REAL;
   }
 
-  CGMVariable highscore_name( const int place ) {
+  CGMVariable highscore_name( int place ) {
     GM_VAR_RESULT;
     GM_ARGS{ place };
 
@@ -429,8 +450,8 @@ namespace gm {
     GM_RETURN_VAR;
   }
 
-  void draw_highscore( const double x1, const double y1, 
-                       const double x2, const double y2 ) {
+  void draw_highscore( double x1, double y1, 
+                       double x2, double y2 ) {
     GM_NORMAL_RESULT;
     GM_ARGS{ x1, y1, x2, y2 };
 
